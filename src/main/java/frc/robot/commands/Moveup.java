@@ -30,21 +30,13 @@ public class Moveup extends Command {
   @Override
   public void execute() {
     //m_elevator.setHeight(Constants.Elevator.L2);
-    if(m_elevator.getHeightLocation() == 1){
-      m_elevator.setHeight(Constants.Elevator.L1);
-    } else if(m_elevator.getHeightLocation() == 2){
-      m_elevator.setHeight(Constants.Elevator.L2);
-    } else if(m_elevator.getHeightLocation() == 3){
-      m_elevator.setHeight(Constants.Elevator.L3);
-    } else if(m_elevator.getHeightLocation() == 4){
-      m_elevator.setHeight(Constants.Elevator.L4);
-    }
+ 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_elevator.setHeight(Constants.Elevator.stowHeight);
+    m_elevator.setHeight(Constants.Climber.stowHeight);
 
   }
 

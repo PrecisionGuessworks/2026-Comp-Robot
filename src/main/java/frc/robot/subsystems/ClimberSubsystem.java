@@ -36,6 +36,7 @@ public class ClimberSubsystem extends SubsystemBase {
                   Constants.Climber.Expo_kA)
               .setReverseSoftLimit(Constants.Climber.minHeight)
               .setForwardSoftLimit(Constants.Climber.maxHeight));
+              
   private final QuixTalonFX m_follower = new QuixTalonFX(
       Constants.Climber.followerID,
       m_motor,

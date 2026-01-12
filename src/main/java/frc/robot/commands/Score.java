@@ -27,21 +27,15 @@ public class Score extends Command {
   @Override
   public void initialize() {
     m_climber.setHeight(Constants.Climber.stowHeight);
-    m_arm.setArmAngle(Constants.Shooter.armStowAngle);
+    m_arm.setHoodAngle(Constants.Shooter.hoodStowAngle);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_arm.setAmpFeederVelocity(Constants.Arm.ampShootVelocity,Constants.Arm.feederShootVelocity);
+    m_arm.setAmpFeederVelocity(Constants.Shooter.ampShootVelocity,Constants.Shooter.feederShootVelocity);
       m_Timer.restart();
-      if(Constants.SimFuel){
-        ShotVelocity = Constants.Shooter.quickShootVelocity * Constants.Shooter.WheelRadius * Constants.Shotefficiency;  
-            Robot.updateNoteViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),0.4, new Rotation3d(0,-Constants.Arm.armShootAngle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
-            new double[] {RobotContainer.drivetrain.getFieldSpeedsX() + ShotVelocity * Math.cos(Constants.Arm.armShootAngle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
-              RobotContainer.drivetrain.getFieldSpeedsY() + ShotVelocity * Math.cos(Constants.Arm.armShootAngle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
-              ShotVelocity * Math.sin(Constants.Arm.armShootAngle) });
-        }
+      
   }
 
   // Called once the command ends or is interrupted.

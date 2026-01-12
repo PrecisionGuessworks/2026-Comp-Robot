@@ -23,13 +23,13 @@ import frc.robot.RobotContainer;
 public class ShooterSubsystem extends SubsystemBase {
   //public final DigitalInput m_beamBreak = new DigitalInput(Constants.Shooter.beamBreakPort);
 
-  static private final QuixCANCoder m_armCoder = 
-      new QuixCANCoder(Constants.Shooter.armCoderID, Constants.Shooter.armMotorRatio, SensorDirectionValue.Clockwise_Positive);
+  static private final QuixCANCoder m_hoodCoder = 
+      new QuixCANCoder(Constants.Shooter.hoodCoderID, Constants.Shooter.hoodMotorRatio, SensorDirectionValue.Clockwise_Positive);
   
   // static private final QuixAbsoluteEncoder m_armCoder = 
   //     new QuixAbsoluteEncoder(Constants.Shooter.armCoderID, Constants.Shooter.armMotorRatio, SensorDirectionValue.Clockwise_Positive);
 
-      static double ArmStartingAngle = Constants.Shooter.armStartingAngle;
+      static double HoodStartingAngle = Constants.Shooter.hoodStartingAngle;
       public double shooterTargetVelocity = 0.0;
      // : Units.rotationsToRadians(m_armCoder.getAbsPosition()); Constants.isSim ? 
   private final QuixTalonFX m_shooterMotor =
@@ -39,7 +39,7 @@ public class ShooterSubsystem extends SubsystemBase {
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.shooterMotorInvert)
               .setSupplyCurrentLimit(50.0)
-              .setStatorCurrentLimit(80.0)
+              .setStatorCurrentLimit(120.0)
               .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
 
   private final QuixTalonFX m_hoodMotor =
@@ -49,7 +49,7 @@ public class ShooterSubsystem extends SubsystemBase {
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.hoodMotorInvert)
               .setBrakeMode()
-              .setSupplyCurrentLimit(40.0)
+              .setSupplyCurrentLimit(30.0)
               .setStatorCurrentLimit(80.0)
               .setMotionMagicConfig(
                   Constants.Shooter.ArmConstraints.maxVelocity,
@@ -59,15 +59,15 @@ public class ShooterSubsystem extends SubsystemBase {
                   Constants.Shooter.armExpo_kA)
 
               .setPIDConfig(Constants.Shooter.armPositionPIDSlot, Constants.Shooter.armPositionPIDConfig)
-              .setBootPositionOffset(ArmStartingAngle)
+              .setBootPositionOffset(HoodStartingAngle)
               // .setReverseSoftLimit(Constants.Shooter.armMinAngle)
               // .setForwardSoftLimit(Constants.Shooter.armMaxAngle)
               // .setFeedbackConfig(FeedbackSensorSourceValue.FusedCANcoder, 15, 0.0,Constants.Shooter.armMotorRatio,Constants.Shooter.armSensorRatio)
               );
 
 
-  private double m_armTargetAngle = ArmStartingAngle;
-  private double setm_armTargetAngle = ArmStartingAngle;
+  private double m_hoodTargetAngle = HoodStartingAngle;
+  private double setm_hoodTargetAngle = HoodStartingAngle;
   private boolean hasPiece = true;
   private Timer m_lastPieceTimer = new Timer();
 
@@ -97,11 +97,11 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double getHoodCoder(){
-    return Units.rotationsToDegrees(m_armCoder.getAbsPosition());
+    return Units.rotationsToDegrees(m_hoodCoder.getAbsPosition());
   }
 
   public void setHoodAngle(double targetAngle) {
-    setm_armTargetAngle = targetAngle;
+    setm_hoodTargetAngle = targetAngle;
   }
 
   public void setHasPiece(boolean thasPiece) {
@@ -152,8 +152,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
 
 
-    if (getHoodAngle() <= 115 && getArmAngle() >= 92 && Units.radiansToDegrees(setm_armTargetAngle) < 92 && !RobotContainer.elevator.isAtHeight(Constants.Elevator.stowHeight, Units.inchesToMeters(.75))) { // might need check 
-       m_armTargetAngle = Constants.Shooter.armStowIntakeAngle;
+    if (getHoodAngle() <= 115 && getHoodAngle() >= 92) { // might need check 
+       m_hoodTargetAngle = Constants.Shooter.hoodStowAngle;
       //System.out.println("1");
     }
     
@@ -164,21 +164,21 @@ public class ShooterSubsystem extends SubsystemBase {
     //   m_wristMotor.setMotionMagicPositionSetpoint(
     //     Constants.Shooter.wristCoralPositionPIDSlot, m_wristTargetAngle);
     // } else {
-      // m_armMotor.setMotionMagicPositionSetpoint(
-      //   Constants.Shooter.armPositionPIDSlot, m_armTargetAngle);
-      m_armMotor.setMotionMagicPositionSetpointExpo(
-          Constants.Shooter.armPositionPIDSlot, m_armTargetAngle);
+      // m_hoodMotor.setMotionMagicPositionSetpoint(
+      //   Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
+      m_hoodMotor.setMotionMagicPositionSetpointExpo(
+          Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
 
 
    // }
     
     //  Logging
-    DogLog.log("Hood: Current Angle (deg)", Units.radiansToDegrees(m_armMotor.getSensorPosition()),"deg");
+    DogLog.log("Hood: Current Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getSensorPosition()),"deg");
     DogLog.log("Hood: Current CANcoder Angle (deg)", getHoodCoder(),"deg");
     DogLog.log("Hood: Real Current Angle (deg)", getHoodAngle(),"deg");
-    DogLog.log("Hood: Target Angle (deg)", Units.radiansToDegrees(m_armMotor.getClosedLoopReference()),"deg");
-    DogLog.log("Hood: Target set Angle (deg)", Units.radiansToDegrees(m_armTargetAngle),"deg");
-    DogLog.log("Hood: Current Velocity (deg per sec)", Units.radiansToDegrees(m_armMotor.getSensorVelocity()),"deg per sec");
+    DogLog.log("Hood: Target Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getClosedLoopReference()),"deg");
+    DogLog.log("Hood: Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
+    DogLog.log("Hood: Current Velocity (deg per sec)", Units.radiansToDegrees(m_hoodMotor.getSensorVelocity()),"deg per sec");
 
     m_shooterMotor.logMotorState();
     m_hoodMotor.logMotorState();
@@ -198,7 +198,7 @@ public class ShooterSubsystem extends SubsystemBase {
           Constants.Shooter.hoodMinAngle,
           Constants.Shooter.hoodMaxAngle,
           true, // Simulate gravity
-          ArmStartingAngle);
+          HoodStartingAngle);
 
   static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
   private static final FlywheelSim m_shooterSim =
@@ -213,22 +213,22 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    m_armSim.setInput(m_armMotor.getPercentOutput() * RobotContshooter.getBatteryVoltage());
-    m_armSim.update(TimedRobot.kDefaultPeriod);
-    m_armMotor.setSimSensorPositionAndVelocity(
-        m_armSim.getAngleRads() - ArmStartingAngle,
-        // m_armSim.getVelocityRadPerSec(), // TODO: Figure out why this causes jitter
+    m_hoodSim.setInput(m_hoodMotor.getPercentOutput() * RobotController.getBatteryVoltage());
+    m_hoodSim.update(TimedRobot.kDefaultPeriod);
+    m_hoodMotor.setSimSensorPositionAndVelocity(
+        m_hoodSim.getAngleRads() - ArmStartingAngle,
+        // m_hoodSim.getVelocityRadPerSec(), // TODO: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
-        Constants.Shooter.armMotorRatio);
+        Constants.Shooter.hoodMotorRatio);
     
 
-    m_shooterSim.setInput(m_shooterMotor.getPercentOutput() * RobotContshooter.getBatteryVoltage());
+    m_shooterSim.setInput(m_shooterMotor.getPercentOutput() * RobotController.getBatteryVoltage());
     m_shooterSim.update(TimedRobot.kDefaultPeriod);
     m_shooterMotor.setSimSensorVelocity(
         m_shooterSim.getAngularVelocityRadPerSec(),
         TimedRobot.kDefaultPeriod,
-        Constants.Shooter.armMotorRatio);
+        Constants.Shooter.shooterMotorRatio);
 
     // Update arm viz.
    

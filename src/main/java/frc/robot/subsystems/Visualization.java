@@ -9,9 +9,11 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructArrayPublisher;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.quixlib.viz.Link2d;
 import frc.quixlib.viz.Viz2d;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import dev.doglog.DogLog;
 
@@ -80,11 +82,8 @@ private static  final Link2d chassisViz =
 private static final Link2d ArmArmViz =
 elevatorCarriageViz.addLink(
         new Link2d(robotViz, "Arm Arm", Constants.Viz.ArmArmLength, 10, Color.kRed));
-private static final Link2d ArmWristViz =
-ArmArmViz.addLink(
-        new Link2d(robotViz, "Arm Wrist", Constants.Viz.ArmWristLength, 10, Color.kOrange));
 private static final Link2d ArmWheelViz =
-ArmWristViz.addLink(
+ArmArmViz.addLink(
         new Link2d(robotViz, "Arm Wheel", Units.inchesToMeters(2.0), 10, Color.kCoral));
 
 
@@ -94,13 +93,13 @@ ArmWristViz.addLink(
 public static void Update2DVisualization() {
 
         elevatorCarriageViz.setRelativeTransform(
-            new Transform2d(RobotContainer.elevator.getHeight(), 0.0, new Rotation2d()));
+            new Transform2d(RobotContainer.climber.getHeight(), 0.0, new Rotation2d()));
 
          ArmArmViz.setRelativeTransform(
         new Transform2d(
             Constants.Viz.ArmArmPivotX,
             0,
-            Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.arm.getArmAngle()) + Units.degreesToRadians(- Constants.Viz.elevatorAngle.getDegrees()))));
+            Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()) + Units.degreesToRadians(- Constants.Viz.elevatorAngle.getDegrees()))));
 
     ArmWheelViz.setRelativeTransform(
         new Transform2d(
@@ -108,11 +107,9 @@ public static void Update2DVisualization() {
             0.0,
             Rotation2d.fromRadians(
                 ArmWheelViz.getRelativeTransform().getRotation().getRadians()
-                    + RobotContainer.arm.RollerTargetVelocity)));
+                    + RobotContainer.shooter.RollerTargetVelocity)));
 
     }
-
-
 
 
 
@@ -131,18 +128,8 @@ public static void Update2DVisualization() {
         Constants.Viz3d.elevatorBase.transformBy(
             new Transform3d(0, 0, CarrageHeight+ Units.inchesToMeters(0.5), new Rotation3d()));
     final Pose3d armViz = elevatorCarriage.transformBy(
-        new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.arm.getArmAngle()+90),0)));
-    final Pose3d wristViz = armViz.transformBy(
-        new Transform3d(0, 0, Units.inchesToMeters(11), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.arm.getWristAngle()+90),0)));
-    Pose3d coralViz = new Pose3d(0,0,-1, new Rotation3d());
-    if (RobotContainer.arm.getHasPiece()) {
-        Pose3d drive3d = new Pose3d(RobotContainer.drivetrain.getState().Pose);
-        Pose3d temPose3d = wristViz.transformBy(
-            new Transform3d(Units.inchesToMeters(-3), Units.inchesToMeters(2.4), Units.inchesToMeters(8), new Rotation3d(0,Units.degreesToRadians( 90),0)));
-        coralViz = drive3d.transformBy(
-            new Transform3d(temPose3d.getTranslation(), temPose3d.getRotation()));
-    
-    }
+        new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
+
 
     DogLog.log("3DViz: Zeropublisher", new Pose3d());
     DogLog.log("3DViz: 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
@@ -154,18 +141,63 @@ public static void Update2DVisualization() {
     DogLog.log("3DViz: FuelViz", fuelViz[1]);
     }
 
+
+
+
+// ------------------------------------------------------------------------------ Fuel Visualization ------------------------------------------------------------------------------
+
+
+
+
     StructArrayPublisher<Pose3d> fuelpublisher = NetworkTableInstance.getDefault()
         .getStructArrayTopic("fuelViz", Pose3d.struct).publish();
-  public static Pose3d[] fuelViz = {new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0))};
-  public static double fuelVelocity[][] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}}; 
+  public static Pose3d[] fuelViz = {new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d()};
+  public static double fuelVelocity[][] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}}; 
   public static int fuelIndex = 0;
 
-  public static void updateFuelViz(Pose3d fuelStartPose3d, double[] fuelStartVelocity){
+  public static void updateSingleFuelViz(Pose3d fuelStartPose3d, double[] fuelStartVelocity){
     fuelViz[fuelIndex] = fuelStartPose3d;
     fuelVelocity[fuelIndex] = fuelStartVelocity;
     fuelIndex++;
     if (fuelIndex > fuelViz.length - 1) fuelIndex = 0;
   }
+
+  public static void LaunchFuelViz(double velocity,double angle){
+    if(Constants.SimFuel){
+        double ShotVelocity = velocity * Constants.Shooter.WheelRadius * Constants.ShotCalc.SimShotefficiency;  
+            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),0.4, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
+            new double[] {DrivetrainExtra.getFieldSpeedsX() + ShotVelocity * Math.cos(angle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
+              DrivetrainExtra.getFieldSpeedsY() + ShotVelocity * Math.cos(angle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
+              ShotVelocity * Math.sin(angle) });
+    }
+  }
+
+  public static void updateFuelViz(){
+    if(Constants.SimFuel){
+    for (int i = 0; i < fuelViz.length; i++) {
+      if (fuelViz[i].getZ() > 0.1 ){
+        fuelVelocity[i][2] -= (9.81 * Constants.defaultPeriodSecs + (fuelVelocity[i][2] > 0 ? 1 : -1) * Constants.ShotCalc.Drag * (fuelVelocity[i][2]) * (fuelVelocity[i][2]) * Constants.defaultPeriodSecs);
+        fuelVelocity[i][0] -= (fuelVelocity[i][0] > 0 ? 1 : -1) * Constants.ShotCalc.Drag*(fuelVelocity[i][0]) * (fuelVelocity[i][0])* Constants.defaultPeriodSecs; 
+        fuelVelocity[i][1] -= (fuelVelocity[i][1] > 0 ? 1 : -1) * Constants.ShotCalc.Drag*(fuelVelocity[i][1]) * (fuelVelocity[i][1])* Constants.defaultPeriodSecs;  
+      } else {
+        fuelViz[i] = new Pose3d(fuelViz[i].getX(),fuelViz[i].getY(),0.1, new Rotation3d(0,0,0));
+        fuelVelocity[i][0] -= (fuelVelocity[i][0] > 0 ? 1 : -1) * Constants.ShotCalc.Friction*(fuelVelocity[i][0]) * (fuelVelocity[i][0])* Constants.defaultPeriodSecs;
+        fuelVelocity[i][1] -= (fuelVelocity[i][1] > 0 ? 1 : -1) * Constants.ShotCalc.Friction*(fuelVelocity[i][1]) * (fuelVelocity[i][1])* Constants.defaultPeriodSecs;
+        if (Math.abs(fuelVelocity[i][0])+Math.abs(fuelVelocity[i][1])  < 0.5){
+        fuelVelocity[i][0] = 0;
+        fuelVelocity[i][1] = 0;
+        }
+        fuelVelocity[i][2] = 0;
+      }
+      fuelViz[i] = new Pose3d(
+        fuelViz[i].getX() + fuelVelocity[i][0] * Constants.defaultPeriodSecs,
+        fuelViz[i].getY() + fuelVelocity[i][1] * Constants.defaultPeriodSecs,
+        fuelViz[i].getZ() + fuelVelocity[i][2] * Constants.defaultPeriodSecs,
+        new Rotation3d(0,0,0)
+      );
+     }
+    }
+    }
     
 
     

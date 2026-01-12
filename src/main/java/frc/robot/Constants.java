@@ -72,9 +72,23 @@ public class Constants {
         Angle.put(4.0, Units.degreesToRadians(65));
         Angle.put(5.0, Units.degreesToRadians(63));
     }
+    // Used for sotm (Shoot on the move)
+    public static final InterpolatingDoubleTreeMap Time;
+    static {
+        Time = new InterpolatingDoubleTreeMap();
+        Time.put(1.0, 0.2);
+        Time.put(2.0, 0.3);
+        Time.put(3.0, 0.4);
+        Time.put(4.0, 0.5);
+        Time.put(5.0, 0.6);
+    }
 
-    public static final double SimShotefficiency = 0.85; 
-  }
+    public static final double SimShotefficiency = 0.85;
+    public static final double Drag = 0.07; // Drag Coefficient for Simulations
+    public static final double Friction = 4; // Friction Coefficient for Simulations 
+    public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations
+
+    }
     
     
     
@@ -141,14 +155,6 @@ public class Constants {
     public static final double stowTolerance = Units.inchesToMeters(0.1); // m
     public static final double intakeHeight = Units.inchesToMeters(11.75); // m // 
 
-    public static final double L1 = Units.inchesToMeters(1); // m
-    public static final double L2 = Units.inchesToMeters(13.75); // m
-    public static final double L3 = Units.inchesToMeters(29.5); // m
-    public static final double L4 = Units.inchesToMeters(56); // m 56.3 max, 55.8 was a lil too low
-
-    public static final double L2Algae = Units.inchesToMeters(15); // m
-    public static final double L3Algae = Units.inchesToMeters(31.5); // m
-
     public static final double PreStow = Units.inchesToMeters(10); // m
     public static final double SlowmodeHeight = Units.inchesToMeters(25); // m
 
@@ -163,7 +169,7 @@ public class Constants {
     public static final int beamBreakPort = 0;
 
     public static final CANDeviceID hoodMotorID = new CANDeviceID(25, kSuperStructureCanivoreName);
-    // public static final CANDeviceID armCoderID = new CANDeviceID(26, kSuperStructureCanivoreName);
+    public static final CANDeviceID hoodCoderID = new CANDeviceID(26, kSuperStructureCanivoreName);
     public static final MechanismRatio hoodMotorRatio =
         isSim ? 
         new MechanismRatio(
@@ -174,9 +180,9 @@ public class Constants {
         new MechanismRatio(1, (1.0));
     public static final boolean hoodMotorInvert = true;
 
-    public static final CANDeviceID rollerMotorID = new CANDeviceID(28, kSuperStructureCanivoreName);
-    public static final MechanismRatio rollerMotorRatio = new MechanismRatio(12, 18);
-    public static final boolean rollerMotorInvert = false;
+    public static final CANDeviceID shooterMotorID = new CANDeviceID(28, kSuperStructureCanivoreName);
+    public static final MechanismRatio shooterMotorRatio = new MechanismRatio(12, 18);
+    public static final boolean shooterMotorInvert = false;
 
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
@@ -192,27 +198,20 @@ public class Constants {
 
     public static final SimpleMotorFeedforward rollerFeedforward =
         new SimpleMotorFeedforward(0.1, 0.028);
-    public static final int rollerVelocityPIDSlot = 1;
-    public static final PIDConfig rollerVelocityPIDConfig = new PIDConfig(0.1, 0.0, 0.0);
-    public static final int rollerPositionPIDSlot = 0;
-    public static final PIDConfig rollerPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
+    public static final int shooterVelocityPIDSlot = 1;
+    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.1, 0.0, 0.0);
+    public static final int shooterPositionPIDSlot = 0;
+    public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
 
-    public static final double armMinAngle = Units.degreesToRadians(-1.0); // rads 
-    public static final double armMaxAngle = Units.degreesToRadians(150.0); // rads 
-    public static final double armStartingAngle = Units.degreesToRadians(90);
-    public static final double armCgOffset = Units.degreesToRadians(0);
+    public static final double hoodMinAngle = Units.degreesToRadians(0.0);
+    public static final double hoodMaxAngle = Units.degreesToRadians(70.0);
+    public static final double hoodStartingAngle = Units.degreesToRadians(90);
+    public static final double hoodCgOffset = Units.degreesToRadians(0);
+    public static final double hoodStowAngle = Units.degreesToRadians(0.1);
 
-    public static final double AngleTolerance = Units.degreesToRadians(1);
+    public static final double AngleTolerance = Units.degreesToRadians(0.2);
 
-    public static final double intakeVelocity = -150.0; // rads/s
     public static final double outtakeVelocity = 1300.0; // rads/s
-
-    public static final double rollerStallVelocity = 40; // rads/s
-    public static final double rollerStallCurrent = 30; // Amps
-
-
-    public static final double armIntakeAngle = Units.degreesToRadians(130);
-
     
     public static final Transform2d robotToArm =
         new Transform2d(Units.inchesToMeters(12.0), 0.0, new Rotation2d());
@@ -220,9 +219,9 @@ public class Constants {
 
     // For simulation only
     public static final double WheelRadius = Units.inchesToMeters(1.5);
-    public static final double simArmMOI = 0.379; // kgMetersSquared
-    public static final double simArmCGLength = Units.inchesToMeters(8.5); // m
-    public static final double simRollerMOI = 0.003; // kgMetersSquared
+    public static final double simHoodMOI = 0.379; // kgMetersSquared
+    public static final double simHoodCGLength = Units.inchesToMeters(8.5); // m
+    public static final double simShooterMOI = 0.003; // kgMetersSquared
     
   }
 
@@ -360,9 +359,7 @@ public class Constants {
     public static final double maxAngle = Units.degreesToRadians(110.0); // rads
     public static final double startingAngle = maxAngle;
     public static final double intakeDeployAngle = Math.toRadians(40); // rad
-    public static final double intakeScoreAngle = Math.toRadians(85); // rad
     public static final double intakeStowAngle = Math.toRadians(105); // rad
-    public static final double intakeClimbAngle = Math.toRadians(100); // rad
     public static final double intakeRollerVelocity = 100; // rad/s
     public static final double outtakeRollerVelocity = -100; // rad/s
     public static final double holdRollerVelocity = 10; // rad/s
