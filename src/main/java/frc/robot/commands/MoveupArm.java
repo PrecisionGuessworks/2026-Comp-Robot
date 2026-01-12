@@ -4,18 +4,18 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 
 
 public class MoveupArm extends Command {
 
-  private final ElevatorSubsystem m_elevator;
+  private final ClimberSubsystem m_elevator;
   private final ArmSubsystem m_arm;
   
   private int m_TestOption = 0;
   private Timer m_ejectTimer = new Timer();
 
-  public MoveupArm(int TestOption, ElevatorSubsystem elevator, ArmSubsystem arm) {
+  public MoveupArm(int TestOption, ClimberSubsystem elevator, ArmSubsystem arm) {
     m_TestOption = TestOption;
     m_elevator = elevator;
     m_arm = arm;

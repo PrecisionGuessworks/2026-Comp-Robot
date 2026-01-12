@@ -32,7 +32,7 @@ import frc.robot.commands.Moveup;
 import frc.robot.commands.MoveupArm;
 import frc.robot.commands.StowArm;
 import frc.robot.generated.TunerConstants;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.ElevatorSubsystem;
@@ -76,7 +76,7 @@ public class RobotContainer {
 
     public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
     //cpublic static final IntakeSubsystem intake = new IntakeSubsystem();
-    public static final ArmSubsystem arm = new ArmSubsystem();
+    public static final ShooterSubsystem arm = new ShooterSubsystem();
 
 
 

@@ -7,18 +7,18 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
 public class CoralMoveScore extends Command {
-  private final ElevatorSubsystem m_elevator;
-  private final ArmSubsystem m_arm;
+  private final ClimberSubsystem m_elevator;
+  private final ShooterSubsystem m_arm;
   //private Pose2d m_pose;
   public int pastscoreheight = 4;
   public CoralMoveScore(
-      ElevatorSubsystem elevatorSubsystem,
-      ArmSubsystem armSubsystem) {
+      ClimberSubsystem elevatorSubsystem,
+      ShooterSubsystem armSubsystem) {
     
     //m_pose = currentPose;
     m_elevator = elevatorSubsystem;

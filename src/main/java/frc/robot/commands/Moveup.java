@@ -3,15 +3,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 
 
 public class Moveup extends Command {
 
-  private final ElevatorSubsystem m_elevator;
+  private final ClimberSubsystem m_elevator;
   private Timer m_ejectTimer = new Timer();
 
-  public Moveup(ElevatorSubsystem elevator) {
+  public Moveup(ClimberSubsystem elevator) {
 
     m_elevator = elevator;
 

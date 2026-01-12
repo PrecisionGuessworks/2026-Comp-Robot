@@ -5,32 +5,27 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
-public class IntakeCoral extends Command {
-  private final ElevatorSubsystem m_elevator;
-  private final ArmSubsystem m_arm;
+public class Intake extends Command {
+  private final ShooterSubsystem m_shooter;
 private Timer m_placeTimer = new Timer();
 
-  public IntakeCoral(
-      ElevatorSubsystem elevatorSubsystem,
-      ArmSubsystem armSubsystem) {
-    m_elevator = elevatorSubsystem;
-    m_arm = armSubsystem;
+  public Intake(
+      ShooterSubsystem shooterSubsystem) {
+    m_shooter = shooterSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(elevatorSubsystem, armSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_elevator.setHeight(Constants.Elevator.stowHeight);
-    m_arm.setArmAngle(Constants.Arm.armIntakeAngle);
-    m_arm.setWristAngle(Constants.Arm.wristIntakeAngle);
-    m_arm.setArmRollerCurrent(55, 90);  
-    m_arm.setRollerVelocity(Constants.Arm.intakeVelocity);
+    m_shooter.setArmAngle(Constants.Arm.armIntakeAngle);
+    m_shooter.setRollerVelocity(Constants.Arm.intakeVelocity);
     m_placeTimer.restart();
   }
 

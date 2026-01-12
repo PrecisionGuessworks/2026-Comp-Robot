@@ -4,22 +4,22 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
 public class CoralMoveStow extends Command {
 //  private final IntakeSubsystem m_intake;
-  private final ElevatorSubsystem m_elevator;
-  private final ArmSubsystem m_arm;
+  private final ClimberSubsystem m_elevator;
+  private final ShooterSubsystem m_arm;
   public int pastscoreheight = 0;
   public boolean trueendtrigger = false;
   private Timer m_placeTimer = new Timer();
 
   public CoralMoveStow(
  //     IntakeSubsystem intakeSubsystem,
-      ElevatorSubsystem elevatorSubsystem,
-      ArmSubsystem armSubsystem) {
+      ClimberSubsystem elevatorSubsystem,
+      ShooterSubsystem armSubsystem) {
  //   m_intake = intakeSubsystem;
     m_elevator = elevatorSubsystem;
     m_arm = armSubsystem;
@@ -58,8 +58,8 @@ public class CoralMoveStow extends Command {
   if(m_elevator.isAtScore()){
     m_arm.setArmAngle(Constants.Arm.armStowAngle);
    m_arm.setWristAngle(Constants.Arm.wristStowAngle);
-   m_arm.setArmRollerCurrent(30, 60);
-    m_arm.setRollerVelocity(0);
+   m_arm.setShooterCurrent(30, 60);
+    m_arm.setShooterVelocity(0);
     RobotContainer.arm.setHasPiece(false);
     if (m_elevator.getHeightLocation()!=1){
     m_elevator.setHeight(Constants.Elevator.PreStow);

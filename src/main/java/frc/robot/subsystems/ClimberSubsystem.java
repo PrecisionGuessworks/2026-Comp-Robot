@@ -17,7 +17,7 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class ClimberSubsystem extends SubsystemBase {
   private final QuixTalonFX m_motor =
       new QuixTalonFX(
           Constants.Elevator.motorID,
@@ -63,7 +63,7 @@ public class ElevatorSubsystem extends SubsystemBase {
   private boolean m_ElevatorOff = false;
   private boolean m_ElevatorOffLast = m_ElevatorOff;
 
-  public ElevatorSubsystem() {
+  public ClimberSubsystem() {
     // Show scheduler status in SmartDashboard.
     SmartDashboard.putData(this);
 
