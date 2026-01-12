@@ -181,22 +181,22 @@ public class ShooterSubsystem extends SubsystemBase {
     DogLog.log("Hood: Current Velocity (deg per sec)", Units.radiansToDegrees(m_armMotor.getSensorVelocity()),"deg per sec");
 
     m_shooterMotor.logMotorState();
-    m_armMotor.logMotorState();
-    m_armCoder.logSensorState();
+    m_hoodMotor.logMotorState();
+    // m_hoodCoder.logSensorState();
   
 
   }
 
   // --- BEGIN STUFF FOR SIMULATION ---
   
-  private static final SingleJointedArmSim m_armSim =
+  private static final SingleJointedArmSim m_hoodSim =
       new SingleJointedArmSim(
-          DCMotor.getKrakenX60Foc(1),
-          Constants.Shooter.armMotorRatio.reduction(),
-          Constants.Shooter.simArmMOI,
-          Constants.Shooter.simArmCGLength,
-          Constants.Shooter.armMinAngle,
-          Constants.Shooter.armMaxAngle,
+          DCMotor.getKrakenX44Foc(1),
+          Constants.Shooter.hoodMotorRatio.reduction(),
+          Constants.Shooter.simHoodMOI,
+          Constants.Shooter.simHoodCGLength,
+          Constants.Shooter.hoodMinAngle,
+          Constants.Shooter.hoodMaxAngle,
           true, // Simulate gravity
           ArmStartingAngle);
 

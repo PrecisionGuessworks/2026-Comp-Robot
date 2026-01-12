@@ -49,21 +49,21 @@ public class IntakeSubsystem extends SubsystemBase {
               .setReverseSoftLimit(Constants.Intake.minAngle)
               .setForwardSoftLimit(Constants.Intake.maxAngle));
 
-  private final QuixTalonFX m_deployFollower = new QuixTalonFX(
-                Constants.Intake.deployFollowerID,
-                m_deployMotor,
-                Constants.Intake.followerInvert,
-                QuixTalonFX.makeDefaultConfig().setBrakeMode()
-              .setSupplyCurrentLimit(30.0)
-              .setStatorCurrentLimit(40.0)
-              .setMotionMagicConfig(
-                  Constants.Intake.deployMaxVelocity,
-                  Constants.Intake.deployMaxAcceleration,
-                  Constants.Intake.deployMaxJerk)
-              .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
-              .setBootPositionOffset(Constants.Intake.startingAngle)
-              .setReverseSoftLimit(Constants.Intake.minAngle)
-              .setForwardSoftLimit(Constants.Intake.maxAngle));
+  // private final QuixTalonFX m_deployFollower = new QuixTalonFX(
+  //               Constants.Intake.deployFollowerID,
+  //               m_deployMotor,
+  //               Constants.Intake.followerInvert,
+  //               QuixTalonFX.makeDefaultConfig().setBrakeMode()
+  //             .setSupplyCurrentLimit(30.0)
+  //             .setStatorCurrentLimit(40.0)
+  //             .setMotionMagicConfig(
+  //                 Constants.Intake.deployMaxVelocity,
+  //                 Constants.Intake.deployMaxAcceleration,
+  //                 Constants.Intake.deployMaxJerk)
+  //             .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
+  //             .setBootPositionOffset(Constants.Intake.startingAngle)
+  //             .setReverseSoftLimit(Constants.Intake.minAngle)
+  //             .setForwardSoftLimit(Constants.Intake.maxAngle));
 
   private double m_targetAngle = Constants.Intake.startingAngle;
   private Timer m_lastPieceTimer = new Timer();
@@ -158,7 +158,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     m_rollerMotor.logMotorState();
     m_deployMotor.logMotorState();
-    m_deployFollower.logMotorState();
+    // m_deployFollower.logMotorState();
   }
 
   // --- BEGIN STUFF FOR SIMULATION ---

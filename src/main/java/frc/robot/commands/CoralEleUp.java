@@ -8,15 +8,15 @@ import frc.robot.subsystems.ClimberSubsystem;
 
 public class CoralEleUp extends Command {
 
-  private final ClimberSubsystem m_elevator;
+  private final ClimberSubsystem m_climber;
   private Timer m_ejectTimer = new Timer();
 
-  public CoralEleUp(ClimberSubsystem elevator) {
+  public CoralEleUp(ClimberSubsystem climber) {
 
-    m_elevator = elevator;
+    m_climber = climber;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(elevator);
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
@@ -29,14 +29,14 @@ public class CoralEleUp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_elevator.setHeight(Constants.Elevator.L2);
-    m_elevator.setHeight(Constants.Elevator.PreStow);
+    //m_climber.setHeight(Constants.climber.L2);
+    m_climber.setHeight(Constants.Climber.PreStow);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-   // m_elevator.setHeight(Constants.Elevator.stowHeight);
+   // m_climber.setHeight(Constants.climber.stowHeight);
 
   }
 

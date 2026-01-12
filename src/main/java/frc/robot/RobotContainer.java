@@ -27,15 +27,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralEleUp;
 import frc.robot.commands.CoralMoveScore;
 import frc.robot.commands.CoralMoveStow;
-import frc.robot.commands.IntakeCoral;
 import frc.robot.commands.Moveup;
-import frc.robot.commands.MoveupArm;
-import frc.robot.commands.StowArm;
+import frc.robot.commands.StowAll;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.ClimberSubsystem;
 
 public class RobotContainer {
     public static double MaxSpeed = Constants.Drive.MaxSpeedPercentage*(TunerConstants.kSpeedAt12Volts.in(MetersPerSecond)); // kSpeedAt12Volts desired top speed
@@ -74,9 +72,9 @@ public class RobotContainer {
 
 
 
-    public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+    public static final ClimberSubsystem climber = new ClimberSubsystem();
     //cpublic static final IntakeSubsystem intake = new IntakeSubsystem();
-    public static final ShooterSubsystem arm = new ShooterSubsystem();
+    public static final ShooterSubsystem shooter = new ShooterSubsystem();
 
 
 
@@ -97,12 +95,10 @@ public class RobotContainer {
         // DogLog.setEnabled(Constants.DogLogEnabled);
 
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
-        robotCommands.put("CoralMoveScore", new CoralMoveScore(elevator, arm));
-        robotCommands.put("CoralMoveStow", new CoralMoveStow(elevator, arm));
-        robotCommands.put("IntakeCoral", new IntakeCoral(elevator, arm));
-        robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowArm", new StowArm(elevator, arm)));
-        robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.elevator.setHeightLocation(4)));
-
+        robotCommands.put("CoralMoveScore", new CoralMoveScore(climber, shooter));
+        robotCommands.put("CoralMoveStow", new CoralMoveStow(climber, shooter));
+        robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
+        robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
     
         NamedCommands.registerCommands(robotCommands);
 
@@ -153,19 +149,19 @@ public class RobotContainer {
         //     point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
         // ));
 
-        driver.leftBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(elevator, arm), DrivetrainExtra.pathfindingCommand(true,true)));
-        driver.rightBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(elevator, arm), DrivetrainExtra.pathfindingCommand(false,true)));
-        driver.leftBumper().onFalse(new CoralMoveStow(elevator, arm));
-        driver.rightBumper().onFalse(new CoralMoveStow(elevator, arm));
+        driver.leftBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(true,true)));
+        driver.rightBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(false,true)));
+        driver.leftBumper().onFalse(new CoralMoveStow(climber, shooter));
+        driver.rightBumper().onFalse(new CoralMoveStow(climber, shooter));
 
         //driver.y().whileTrue(new ClimbSet(climber));
         //driver.x().whileTrue(pathfindingtofollowCommand());
-        driver.leftTrigger().or(() -> (RobotContainer.elevator.getHeight() >= Constants.Elevator.SlowmodeHeight) && !DriverStation.isAutonomous()).whileTrue(drivetrain.applyRequest(() ->
+        driver.leftTrigger().or(() -> (RobotContainer.climber.getHeight() >= Constants.Climber.SlowmodeHeight) && !DriverStation.isAutonomous()).whileTrue(drivetrain.applyRequest(() ->
         drive.withVelocityX(-driver.getLeftY() * MaxSpeed * Constants.Drive.SlowSpeedPercentage) // Drive forward with negative Y (forward)
             .withVelocityY(-driver.getLeftX() * MaxSpeed * Constants.Drive.SlowSpeedPercentage) // Drive left with negative X (left)
             .withRotationalRate(-driver.getRightX() * MaxAngularRate * Constants.Drive.SlowRotPercentage) // Drive counterclockwise with negative X (left)
         ));
-        driver.rightTrigger().whileTrue(new IntakeCoral(elevator, arm));
+        // driver.rightTrigger().whileTrue(new IntakeCoral(climber, shooter));
        // driver.leftTrigger().whileTrue(new IntakeAlgae(intake, 0));
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         
@@ -178,16 +174,16 @@ public class RobotContainer {
         
 
 
-       // driver.a().whileTrue(new AlgeaWack(elevator, arm));
+       // driver.a().whileTrue(new AlgeaWack(elevator, shooter));
        
-       driver.a().whileTrue(new MoveupArm(1,elevator,arm)); 
-       driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2,elevator,arm))); 
-       driver.y().whileTrue(new Moveup(elevator));
+    //    driver.a().whileTrue(new MoveupArm(1, climber, shooter)); 
+    //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 
+       driver.y().whileTrue(new Moveup(climber));
 
 
-       operator.y().whileTrue(new CoralEleUp(elevator));
+       operator.y().whileTrue(new CoralEleUp(climber));
 
-        operator.rightBumper().whileTrue(new StowArm(elevator, arm));
+        operator.rightBumper().whileTrue(new StowAll(climber, shooter));
         operator.start().whileTrue(drivetrain.applyRequest(() ->
         drive.withVelocityX(-driver.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
             .withVelocityY(-driver.getLeftX() * MaxSpeed) // Drive left with negative X (left)

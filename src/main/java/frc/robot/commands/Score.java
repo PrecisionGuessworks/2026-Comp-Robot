@@ -10,25 +10,24 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Score extends Command {
-  private final ClimberSubsystem m_elevator;
+  private final ClimberSubsystem m_climber;
   private final ShooterSubsystem m_arm;
 
   public Score(
-      ClimberSubsystem elevatorSubsystem,
+      ClimberSubsystem climberSubsystem,
       ShooterSubsystem armSubsystem) {
-    m_elevator = elevatorSubsystem;
+    m_climber = climberSubsystem;
     m_arm = armSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(elevatorSubsystem, armSubsystem);
+    addRequirements(climberSubsystem, armSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_elevator.setHeight(Constants.Elevator.stowHeight);
-    m_arm.setArmAngle(Constants.Arm.armStowAngle);
-    m_arm.setWristAngle(Constants.Arm.wristStowAngle);
+    m_climber.setHeight(Constants.Climber.stowHeight);
+    m_arm.setArmAngle(Constants.Shooter.armStowAngle);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,8 +35,8 @@ public class Score extends Command {
   public void execute() {
     m_arm.setAmpFeederVelocity(Constants.Arm.ampShootVelocity,Constants.Arm.feederShootVelocity);
       m_Timer.restart();
-      if(!Robot.isReal()){
-        ShotVelocity = Constants.Arm.quickShootVelocity * Constants.Arm.WheelRadius * Constants.Shotefficiency;  
+      if(Constants.SimFuel){
+        ShotVelocity = Constants.Shooter.quickShootVelocity * Constants.Shooter.WheelRadius * Constants.Shotefficiency;  
             Robot.updateNoteViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),0.4, new Rotation3d(0,-Constants.Arm.armShootAngle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
             new double[] {RobotContainer.drivetrain.getFieldSpeedsX() + ShotVelocity * Math.cos(Constants.Arm.armShootAngle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
               RobotContainer.drivetrain.getFieldSpeedsY() + ShotVelocity * Math.cos(Constants.Arm.armShootAngle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
@@ -50,7 +49,7 @@ public class Score extends Command {
   // public void end(boolean interrupted) {
   //   m_arm.setArmAngle(Constants.Arm.armStowAngle);
   //   m_arm.setWristAngle(Constants.Arm.wristStowAngle);
-  //   m_elevator.setHeight(Constants.Elevator.stowHeight);
+  //   m_climber.setHeight(Constants.Elevator.stowHeight);
   // }
 
   // Returns true when the command should end.

@@ -104,10 +104,10 @@ public class Robot extends TimedRobot {
     }
 
   if (RobotContainer.driver.pov(0).getAsBoolean() == true || RobotContainer.operator.pov(0).getAsBoolean() == true){
-    RobotContainer.elevator.setHeightLocation(4);
+    RobotContainer.climber.setHeightLocation(4);
 
   } else if (RobotContainer.driver.pov(90).getAsBoolean() == true || RobotContainer.operator.pov(90).getAsBoolean() == true){
-    RobotContainer.elevator.setHeightLocation(3);
+    RobotContainer.climber.setHeightLocation(3);
 
   }
 
@@ -127,15 +127,13 @@ public class Robot extends TimedRobot {
   //   }
   // }
 
-    if (RobotContainer.operator.rightStick().getAsBoolean() == true) {
-      double rightyop = RobotContainer.operator.getRightY();
-      RobotContainer.arm.setArmRollerCurrent(45,25);
-      if (Math.abs(rightyop) > 0.1) { // Deadband of 0.1
-      RobotContainer.arm.setRollerVelocity(rightyop*40);
-    } else {
-      RobotContainer.arm.setRollerVelocity(0);
-    }
-  }
+    // if (RobotContainer.operator.rightStick().getAsBoolean() == true) {
+    //   double rightyop = RobotContainer.operator.getRightY();
+    //   RobotContainer.shooter.setShooterVelocity(rightyop*40);
+    // } else {
+    //   RobotContainer.shooter.setShooterVelocity(0);
+    // }
+  
   
   
 }

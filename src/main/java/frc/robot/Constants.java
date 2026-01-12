@@ -43,14 +43,16 @@ public class Constants {
     public static final double g = 9.81; 
     public static final double defaultPeriodSecs = 0.02; 
     public static final boolean isSim =  false;// edu.wpi.first.wpilibj.RobotBase.isSimulation(); // Uses diffrent constants if sim or real
+    public static final boolean SimFuel = true; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
 
     public static final class ShotCalc {
 
+    // CHECK!
     public static final Pose2d targetpose =  DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
-    new Pose2d(16.5,5.5,new Rotation2d(0)) :
-    new Pose2d(0.0,5.5,new Rotation2d(0));
+    new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
+    new Pose2d(12,4.05,new Rotation2d(0)); // Red
 
     public static final InterpolatingDoubleTreeMap Velocity;
     static {
@@ -63,13 +65,15 @@ public class Constants {
     public static final InterpolatingDoubleTreeMap Angle;
     static {
         Angle = new InterpolatingDoubleTreeMap();
-        Angle.put(0.0, Units.degreesToRadians(70));
-        Angle.put(1.0, Units.degreesToRadians(55));
-        Angle.put(2.0, Units.degreesToRadians(45));
-        Angle.put(3.0, Units.degreesToRadians(35));
-        Angle.put(4.0, Units.degreesToRadians(30));
-        Angle.put(5.0, Units.degreesToRadians(26));
+        Angle.put(0.0, Units.degreesToRadians(80));
+        Angle.put(1.0, Units.degreesToRadians(75));
+        Angle.put(2.0, Units.degreesToRadians(71));
+        Angle.put(3.0, Units.degreesToRadians(68));
+        Angle.put(4.0, Units.degreesToRadians(65));
+        Angle.put(5.0, Units.degreesToRadians(63));
     }
+
+    public static final double SimShotefficiency = 0.85; 
   }
     
     
@@ -215,6 +219,7 @@ public class Constants {
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
+    public static final double WheelRadius = Units.inchesToMeters(1.5);
     public static final double simArmMOI = 0.379; // kgMetersSquared
     public static final double simArmCGLength = Units.inchesToMeters(8.5); // m
     public static final double simRollerMOI = 0.003; // kgMetersSquared

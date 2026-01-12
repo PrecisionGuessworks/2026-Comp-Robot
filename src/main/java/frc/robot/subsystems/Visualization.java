@@ -102,14 +102,6 @@ public static void Update2DVisualization() {
             0,
             Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.arm.getArmAngle()) + Units.degreesToRadians(- Constants.Viz.elevatorAngle.getDegrees()))));
 
-    ArmWristViz.setRelativeTransform(
-      new Transform2d(
-          Constants.Viz.ArmArmLength,
-          0.0,
-          Rotation2d.fromRadians(
-            //m_ArmWristViz.getRelativeTransform().getRotation().getRadians()
-                  + Units.degreesToRadians(RobotContainer.arm.getWristAngle()+90)+ Units.degreesToRadians(- Constants.Viz.elevatorAngle.getDegrees()) - Units.degreesToRadians(90))));
-
     ArmWheelViz.setRelativeTransform(
         new Transform2d(
             Constants.Viz.ArmWristLength,
@@ -131,7 +123,7 @@ public static void Update2DVisualization() {
     public static void Update3DVisualization() {
     // 3d viz
     final double stage1Height = Constants.Viz3d.stage1Height;
-    final double CarrageHeight = RobotContainer.elevator.getHeight();
+    final double CarrageHeight = RobotContainer.climber.getHeight();
     final Pose3d stageOne =
       Constants.Viz3d.elevatorBase.transformBy(
           new Transform3d(0, 0, CarrageHeight >= stage1Height ? CarrageHeight-stage1Height : 0, new Rotation3d()));
@@ -157,21 +149,22 @@ public static void Update2DVisualization() {
     DogLog.log("3DViz: 3ElevatorCarriage", elevatorCarriage);
     DogLog.log("3DViz: 2Stage1", stageOne);
     DogLog.log("3DViz: 4ArmViz", armViz);
-    DogLog.log("3DViz: 5WristViz", wristViz);
-    DogLog.log("3DViz: CoralViz", coralViz);
+    DogLog.log("3DViz: 5HoodViz", hoodViz);
+    DogLog.log("3DViz: 6IntakeViz", intakeViz);
+    DogLog.log("3DViz: FuelViz", fuelViz[1]);
     }
 
-    StructArrayPublisher<Pose3d> notepublisher = NetworkTableInstance.getDefault()
-        .getStructArrayTopic("noteViz", Pose3d.struct).publish();
-  public static Pose3d[] noteViz = {new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0))};
-  public static double noteVelocity[][] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}}; 
-  public static int noteIndex = 0;
+    StructArrayPublisher<Pose3d> fuelpublisher = NetworkTableInstance.getDefault()
+        .getStructArrayTopic("fuelViz", Pose3d.struct).publish();
+  public static Pose3d[] fuelViz = {new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0)),new Pose3d(-10,0,0, new Rotation3d(0,0,0))};
+  public static double fuelVelocity[][] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}}; 
+  public static int fuelIndex = 0;
 
-  public static void updateNoteViz(Pose3d noteStartPose3d, double[] noteStartVelocity){
-    noteViz[noteIndex] = noteStartPose3d;
-    noteVelocity[noteIndex] = noteStartVelocity;
-    noteIndex++;
-    if (noteIndex > noteViz.length - 1) noteIndex = 0;
+  public static void updateFuelViz(Pose3d fuelStartPose3d, double[] fuelStartVelocity){
+    fuelViz[fuelIndex] = fuelStartPose3d;
+    fuelVelocity[fuelIndex] = fuelStartVelocity;
+    fuelIndex++;
+    if (fuelIndex > fuelViz.length - 1) fuelIndex = 0;
   }
     
 
