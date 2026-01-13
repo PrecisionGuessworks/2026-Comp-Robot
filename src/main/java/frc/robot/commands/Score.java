@@ -11,38 +11,37 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class Score extends Command {
   private final ClimberSubsystem m_climber;
-  private final ShooterSubsystem m_arm;
+  private final ShooterSubsystem m_shooter;
 
   public Score(
       ClimberSubsystem climberSubsystem,
-      ShooterSubsystem armSubsystem) {
+      ShooterSubsystem shooterSubsystem) {
     m_climber = climberSubsystem;
-    m_arm = armSubsystem;
+    m_shooter = shooterSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climberSubsystem, armSubsystem);
+    addRequirements(climberSubsystem, shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.setHeight(Constants.Climber.stowHeight);
-    m_arm.setHoodAngle(Constants.Shooter.hoodStowAngle);
+    m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_arm.setAmpFeederVelocity(Constants.Shooter.ampShootVelocity,Constants.Shooter.feederShootVelocity);
-      m_Timer.restart();
+   
       
   }
 
   // Called once the command ends or is interrupted.
   // @Override
   // public void end(boolean interrupted) {
-  //   m_arm.setArmAngle(Constants.Arm.armStowAngle);
-  //   m_arm.setWristAngle(Constants.Arm.wristStowAngle);
+  //   m_shooter.setArmAngle(Constants.Arm.armStowAngle);
+  //   m_shooter.setWristAngle(Constants.Arm.wristStowAngle);
   //   m_climber.setHeight(Constants.Elevator.stowHeight);
   // }
 

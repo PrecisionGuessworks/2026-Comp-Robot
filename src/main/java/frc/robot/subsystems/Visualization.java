@@ -107,7 +107,7 @@ public static void Update2DVisualization() {
             0.0,
             Rotation2d.fromRadians(
                 ArmWheelViz.getRelativeTransform().getRotation().getRadians()
-                    + RobotContainer.shooter.RollerTargetVelocity)));
+                    + RobotContainer.shooter.getShooterVelocity() * Constants.Viz.angularVelocityScalar)));
 
     }
 
@@ -130,7 +130,11 @@ public static void Update2DVisualization() {
     final Pose3d armViz = elevatorCarriage.transformBy(
         new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
 
-
+    final Pose3d hoodViz = Constants.Viz3d.shooterBase.transformBy(
+        new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
+    final Pose3d intakeViz = Constants.Viz3d.intakeBase.transformBy(
+        new Transform3d(0, 0, Units.inchesToMeters(2.0), new Rotation3d(0,0,0))); 
+    
     DogLog.log("3DViz: Zeropublisher", new Pose3d());
     DogLog.log("3DViz: 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
     DogLog.log("3DViz: 3ElevatorCarriage", elevatorCarriage);

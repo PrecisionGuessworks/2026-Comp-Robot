@@ -96,8 +96,6 @@ public class ClimberSubsystem extends SubsystemBase {
   public boolean isAtHeight(double height, double tolerance) {
     return Math.abs(height - getHeight()) <= tolerance;
   }
-  private double armAngle = 0;
-  private double wristAngle = 0;
 
   public void setElevatorOn(boolean lineup){
     m_ElevatorOff = lineup;

@@ -186,17 +186,17 @@ public class Constants {
 
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
-    public static final Constraints ArmConstraints =
+    public static final Constraints HoodConstraints =
         new Constraints(3.5, 10.0); // rad/s and rad/s^2  8, 20.0
-    public static final double ArmMaxJerk = 1.0; // rad/s^3
-    public static final int armPositionPIDSlot = 0;
-    public static final PIDConfig armPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0, 0.25, 0.0008, 0.09, GravityTypeValue.Arm_Cosine);
-    public static final double armExpo_kV = 0.25;    
-    public static final double armExpo_kA = 0.01; // Use a slower kA of 0.1 V/(rps/s)
+    public static final double HoodMaxJerk = 1.0; // rad/s^3
+    public static final int hoodPositionPIDSlot = 0;
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0, 0.25, 0.0008, 0.09, GravityTypeValue.Arm_Cosine);
+    public static final double hoodExpo_kV = 0.25;    
+    public static final double hoodExpo_kA = 0.01; // Use a slower kA of 0.1 V/(rps/s)
   //  public static final int armCoralPositionPIDSlot = 1;
   //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
 
-    public static final SimpleMotorFeedforward rollerFeedforward =
+    public static final SimpleMotorFeedforward shooterFeedforward =
         new SimpleMotorFeedforward(0.1, 0.028);
     public static final int shooterVelocityPIDSlot = 1;
     public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.1, 0.0, 0.0);
@@ -320,6 +320,18 @@ public class Constants {
             0,
             Units.inchesToMeters(4.0),
             new Rotation3d(0, 0, 0));
+    public static final Pose3d shooterBase =
+        new Pose3d(
+            Units.inchesToMeters(3.5),
+            0,
+            Units.inchesToMeters(4.0),
+            new Rotation3d(0, 0, 0));
+    public static final Pose3d intakeBase =
+        new Pose3d(
+            Units.inchesToMeters(3.5),
+            0,
+            Units.inchesToMeters(4.0),
+            new Rotation3d(0, 0, 0));
     public static final Transform3d elevatorCarriageToLauncherArmPivot =
         new Transform3d(0, 0, Units.inchesToMeters(16.0), new Rotation3d());
   }
@@ -349,24 +361,32 @@ public class Constants {
         new MechanismRatio(
             1, (27.0 / 1.0) * (36.0 / 16.0)); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(2.0, 0, 0.3, 0, 1.5, 0.000, 0.08, GravityTypeValue.Arm_Cosine);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(2.0, 0, 0.3, 0, 1.5, 0.000, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
+    public static final double Expo_kV = 0.2;
+    public static final double Expo_kA = 0.1; 
+
     public static final double deployMaxVelocity = 0.2; // rad/s
     public static final double deployMaxAcceleration = 140.0; // rad/s^2
     public static final double deployMaxJerk = 800.0; // rad/s^3
 
-    public static final double minAngle = Units.degreesToRadians(-20.0); // rads
-    public static final double maxAngle = Units.degreesToRadians(110.0); // rads
-    public static final double startingAngle = maxAngle;
-    public static final double intakeDeployAngle = Math.toRadians(40); // rad
-    public static final double intakeStowAngle = Math.toRadians(105); // rad
-    public static final double intakeRollerVelocity = 100; // rad/s
-    public static final double outtakeRollerVelocity = -100; // rad/s
-    public static final double holdRollerVelocity = 10; // rad/s
+    public static final double sprocketPitchDiameter = Units.inchesToMeters(2.0);
+
+    public static final double minExtension = Units.inchesToMeters(0.0);
+    public static final double maxExtension = Units.inchesToMeters(10.0);
+    public static final double startingPosition = minExtension;
+    public static final double intakeStow = Units.inchesToMeters(0.0);
+
+    public static final double intakeFullDeployExtension = Units.inchesToMeters(10.0);
+    public static final double intakeSmallDeployExtension = Units.inchesToMeters(2.0);
+
+
+    public static final double intakeRollerVelocity = 100;
+    public static final double outtakeRollerVelocity = -100;
+    public static final double holdRollerVelocity = 10;
 
     // For simulation only
-    public static final double simArmMOI = 0.2; // kgMetersSquared
-    public static final double simArmCGLength = Units.inchesToMeters(7.0); // m
+public static final double simCarriageMass = 2.0; // kg
     public static final double simRollerMOI = 0.01; // kgMetersSquared
   }
 

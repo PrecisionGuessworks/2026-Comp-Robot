@@ -25,8 +25,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralEleUp;
-import frc.robot.commands.CoralMoveScore;
-import frc.robot.commands.CoralMoveStow;
 import frc.robot.commands.Moveup;
 import frc.robot.commands.StowAll;
 import frc.robot.generated.TunerConstants;
@@ -95,8 +93,6 @@ public class RobotContainer {
         // DogLog.setEnabled(Constants.DogLogEnabled);
 
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
-        robotCommands.put("CoralMoveScore", new CoralMoveScore(climber, shooter));
-        robotCommands.put("CoralMoveStow", new CoralMoveStow(climber, shooter));
         robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
     
@@ -149,10 +145,10 @@ public class RobotContainer {
         //     point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
         // ));
 
-        driver.leftBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(true,true)));
-        driver.rightBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(false,true)));
-        driver.leftBumper().onFalse(new CoralMoveStow(climber, shooter));
-        driver.rightBumper().onFalse(new CoralMoveStow(climber, shooter));
+        // driver.leftBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(true,true)));
+        // driver.rightBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(false,true)));
+        // driver.leftBumper().onFalse(new CoralMoveStow(climber, shooter));
+        // driver.rightBumper().onFalse(new CoralMoveStow(climber, shooter));
 
         //driver.y().whileTrue(new ClimbSet(climber));
         //driver.x().whileTrue(pathfindingtofollowCommand());

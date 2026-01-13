@@ -5,27 +5,24 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ClimberSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class Intake extends Command {
-  private final ShooterSubsystem m_shooter;
+  private final IntakeSubsystem m_intake;
 private Timer m_placeTimer = new Timer();
 
   public Intake(
-      ShooterSubsystem shooterSubsystem) {
-    m_shooter = shooterSubsystem;
+      IntakeSubsystem intakeSubsystem) {
+    m_intake = intakeSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
+    addRequirements(intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_elevator.setHeight(Constants.Elevator.stowHeight);
-    m_shooter.setArmAngle(Constants.Arm.armIntakeAngle);
-    m_shooter.setRollerVelocity(Constants.Arm.intakeVelocity);
+
     m_placeTimer.restart();
   }
 
@@ -33,29 +30,20 @@ private Timer m_placeTimer = new Timer();
   @Override
   public void execute() {
     //System.out.println(m_arm.getArmAngle());
-    if (RobotContainer.arm.getArmAngle() > 110) {
-      m_elevator.setHeight(Constants.Elevator.intakeHeight);
-    } else {
-      m_elevator.setHeight(Constants.Elevator.stowHeight);
-    }
-    //m_elevator.setHeight(Constants.Elevator.stowHeight);
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_arm.setArmAngle(Constants.Arm.armStowAngle);
-    m_arm.setWristAngle(Constants.Arm.wristStowAngle);
-    m_elevator.setHeight(Constants.Elevator.stowHeight);
-    m_arm.setArmRollerCurrent(10, 10); 
-    m_arm.setRollerVelocity(-20);
-    RobotContainer.arm.setHasPiece(true);
+    // m_intake.setPosition(Constants.Intake.startingPosition);
+    m_intake.setRollerVelocity(Constants.Intake.holdRollerVelocity);
+
   }
 
   // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return m_arm.isrollerStalled()&&m_placeTimer.hasElapsed(0.30);
-  }
+  // @Override
+  // public boolean isFinished() {
+  //   return m_placeTimer.hasElapsed(0.30);
+  // }
 }

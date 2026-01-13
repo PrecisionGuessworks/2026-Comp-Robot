@@ -1,13 +1,16 @@
 package frc.robot.subsystems;
 
+import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -36,36 +39,22 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.deployMotorID,
           Constants.Intake.deployMotorRatio,
           QuixTalonFX.makeDefaultConfig()
-              .setInverted(Constants.Intake.deployMotorInvert)
               .setBrakeMode()
-              .setSupplyCurrentLimit(30.0)
-              .setStatorCurrentLimit(40.0)
+              .setSupplyCurrentLimit(40.0)
+              .setStatorCurrentLimit(90.0)
+              .setInverted(Constants.Intake.deployMotorInvert)
+              .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
               .setMotionMagicConfig(
                   Constants.Intake.deployMaxVelocity,
                   Constants.Intake.deployMaxAcceleration,
-                  Constants.Intake.deployMaxJerk)
-              .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
-              .setBootPositionOffset(Constants.Intake.startingAngle)
-              .setReverseSoftLimit(Constants.Intake.minAngle)
-              .setForwardSoftLimit(Constants.Intake.maxAngle));
+                  Constants.Intake.deployMaxJerk,
+                  Constants.Intake.Expo_kV,
+                  Constants.Intake.Expo_kA)
+              .setReverseSoftLimit(Constants.Intake.minExtension)
+              .setForwardSoftLimit(Constants.Intake.maxExtension));
 
-  // private final QuixTalonFX m_deployFollower = new QuixTalonFX(
-  //               Constants.Intake.deployFollowerID,
-  //               m_deployMotor,
-  //               Constants.Intake.followerInvert,
-  //               QuixTalonFX.makeDefaultConfig().setBrakeMode()
-  //             .setSupplyCurrentLimit(30.0)
-  //             .setStatorCurrentLimit(40.0)
-  //             .setMotionMagicConfig(
-  //                 Constants.Intake.deployMaxVelocity,
-  //                 Constants.Intake.deployMaxAcceleration,
-  //                 Constants.Intake.deployMaxJerk)
-  //             .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
-  //             .setBootPositionOffset(Constants.Intake.startingAngle)
-  //             .setReverseSoftLimit(Constants.Intake.minAngle)
-  //             .setForwardSoftLimit(Constants.Intake.maxAngle));
 
-  private double m_targetAngle = Constants.Intake.startingAngle;
+  private double m_targetPosition = Constants.Intake.startingPosition;
   private Timer m_lastPieceTimer = new Timer();
   public boolean m_hasPiece = false;
 
@@ -90,16 +79,16 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_lastPieceTimer.get() < 1.0;
   }
 
-  public double getAngle() {
-    return m_deployMotor.getSensorPosition();
+    public double getPosition() {
+    return Constants.Climber.motorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
   }
 
-  public void setAngle(double targetAngle) {
-    m_targetAngle = targetAngle;
+  public void setPosition(double targetPosition) {
+    m_targetPosition = targetPosition;
   }
 
-  public boolean isAtAngle(double angle, double tolerance) {
-    return Math.abs(angle - m_deployMotor.getSensorPosition()) <= tolerance;
+  public boolean isAtPosition(double position, double tolerance) {
+    return Math.abs(position - getPosition()) <= tolerance;
   }
 
   public void setRollerVelocity(double velocity) {
@@ -121,13 +110,10 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_rollerMotor.getSupplyCurrent();
   }
 
-  public void disabledInit() {
-    m_deployMotor.setBrakeMode(true);
-  }
+  // public void disabledInit() {
+  //   m_deployMotor.setBrakeMode(true);
+  // }
 
-  public void disabledExit() {
-    m_deployMotor.setBrakeMode(false);
-  }
 
   @Override
   public void periodic() {
@@ -140,21 +126,11 @@ public class IntakeSubsystem extends SubsystemBase {
     // SmartDashboard.putBoolean("Intake: Has Piece", hasPiece());
 
     m_deployMotor.setMotionMagicPositionSetpoint(
-        Constants.Intake.deployPositionSlot, m_targetAngle);
+        Constants.Intake.deployPositionSlot, m_targetPosition);
 
-    // SmartDashboard.putNumber(
-    //     "Intake: Current Angle (deg)", Units.radiansToDegrees(m_deployMotor.getSensorPosition()));
-    // SmartDashboard.putNumber(
-    //     "Intake: Target Angle (deg)",
-    //     Units.radiansToDegrees(m_deployMotor.getClosedLoopReference()));
-    // SmartDashboard.putNumber(
-    //     "Intake: Current Velocity (deg per sec)",
-    //     Units.radiansToDegrees(m_deployMotor.getSensorVelocity()));
-    // SmartDashboard.putNumber(
-    //     "Intake: Target Velocity (deg per sec)",
-    //     Units.radiansToDegrees(m_deployMotor.getClosedLoopReferenceSlope()));
-    // SmartDashboard.putNumber(
-    //     "Intake: Current Roller Velocity (rad per sec)", m_rollerMotor.getSensorVelocity());
+    DogLog.log("Intake: Position", Units.metersToInches(getPosition()),"In");
+    DogLog.log("Intake: Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
+    DogLog.log("Intake: Target set Position", Units.metersToInches(m_targetPosition),"In");
 
     m_rollerMotor.logMotorState();
     m_deployMotor.logMotorState();
@@ -162,16 +138,17 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   // --- BEGIN STUFF FOR SIMULATION ---
-  private static final SingleJointedArmSim m_armSim =
-      new SingleJointedArmSim(
-          DCMotor.getKrakenX60Foc(1),
+  private static final ElevatorSim m_elevatorSim =
+      new ElevatorSim(
+          DCMotor.getKrakenX60Foc(2),
           Constants.Intake.deployMotorRatio.reduction(),
-          Constants.Intake.simArmMOI,
-          Constants.Intake.simArmCGLength,
-          Constants.Intake.minAngle,
-          Constants.Intake.maxAngle,
-          true, // Simulate gravity
-          Constants.Intake.startingAngle);
+          Constants.Intake.simCarriageMass,
+          Constants.Intake.sprocketPitchDiameter * 0.5,
+          Constants.Intake.minExtension,
+          Constants.Intake.maxExtension,
+          false,
+          0);
+
   static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
   private static final FlywheelSim m_rollerSim =
       new FlywheelSim(
@@ -184,14 +161,14 @@ public class IntakeSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-    m_armSim.setInput(m_deployMotor.getPercentOutput() * RobotController.getBatteryVoltage());
-    m_armSim.update(TimedRobot.kDefaultPeriod);
+    m_elevatorSim.setInput(m_deployMotor.getPercentOutput() * RobotController.getBatteryVoltage());
+    m_elevatorSim.update(TimedRobot.kDefaultPeriod);
     m_deployMotor.setSimSensorPositionAndVelocity(
-        m_armSim.getAngleRads() - Constants.Intake.startingAngle,
-        // m_armSim.getVelocityRadPerSec(), // TODO: Figure out why this causes jitter
+        m_elevatorSim.getPositionMeters(),
+        // m_elevatorSim.getVelocityMetersPerSecond(), // TODO: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
-        Constants.Intake.deployMotorRatio);
+        Constants.Climber.motorRatio);
 
     m_rollerSim.setInput(m_rollerMotor.getPercentOutput() * RobotController.getBatteryVoltage());
     m_rollerSim.update(TimedRobot.kDefaultPeriod);

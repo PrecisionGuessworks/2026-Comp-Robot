@@ -52,13 +52,13 @@ public class ShooterSubsystem extends SubsystemBase {
               .setSupplyCurrentLimit(30.0)
               .setStatorCurrentLimit(80.0)
               .setMotionMagicConfig(
-                  Constants.Shooter.ArmConstraints.maxVelocity,
-                  Constants.Shooter.ArmConstraints.maxAcceleration,
-                  Constants.Shooter.ArmMaxJerk,
-                  Constants.Shooter.armExpo_kV,
-                  Constants.Shooter.armExpo_kA)
+                  Constants.Shooter.HoodConstraints.maxVelocity,
+                  Constants.Shooter.HoodConstraints.maxAcceleration,
+                  Constants.Shooter.HoodMaxJerk,
+                  Constants.Shooter.hoodExpo_kV,
+                  Constants.Shooter.hoodExpo_kA)
 
-              .setPIDConfig(Constants.Shooter.armPositionPIDSlot, Constants.Shooter.armPositionPIDConfig)
+              .setPIDConfig(Constants.Shooter.hoodPositionPIDSlot, Constants.Shooter.hoodPositionPIDConfig)
               .setBootPositionOffset(HoodStartingAngle)
               // .setReverseSoftLimit(Constants.Shooter.armMinAngle)
               // .setForwardSoftLimit(Constants.Shooter.armMaxAngle)
@@ -88,7 +88,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double getHoodAngle() { 
-    return Units.radiansToDegrees(m_hoodMotor.getSensorPosition()) * Constants.Shooter.hoodMotorRatio.inverseReduction() + Units.radiansToDegrees(ArmStartingAngle) ;
+    return Units.radiansToDegrees(m_hoodMotor.getSensorPosition()) * Constants.Shooter.hoodMotorRatio.inverseReduction() + Units.radiansToDegrees(Constants.Shooter.hoodStartingAngle) ;
     //: Units.rotationsToRadians(m_armCoder.getAbsPosition());   Constants.isSim ? 
     }
     
@@ -112,7 +112,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
 
-  public void seShooterCurrent(double StatorCurrentLimit, double SupplyCurrentLimit) {
+
+  public void setShooterCurrent(double StatorCurrentLimit, double SupplyCurrentLimit) {
     m_shooterMotor.setStatorCurrentLimit(StatorCurrentLimit,SupplyCurrentLimit);
   }
 
@@ -136,6 +137,10 @@ public class ShooterSubsystem extends SubsystemBase {
           velocity,
           Constants.Shooter.shooterFeedforward.calculate(velocity));
     }
+  }
+
+  public double getShooterVelocity() {
+    return m_shooterMotor.getSensorVelocity();
   }
 
   // public void disabledInit() {
@@ -205,7 +210,7 @@ public class ShooterSubsystem extends SubsystemBase {
       new FlywheelSim(
           LinearSystemId.createFlywheelSystem(
               m_simMotor,
-              Constants.Shooter.simshooterMOI,
+              Constants.Shooter.simShooterMOI,
               Constants.Shooter.shooterMotorRatio.reduction()),
           m_simMotor);
 
@@ -216,7 +221,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_hoodSim.setInput(m_hoodMotor.getPercentOutput() * RobotController.getBatteryVoltage());
     m_hoodSim.update(TimedRobot.kDefaultPeriod);
     m_hoodMotor.setSimSensorPositionAndVelocity(
-        m_hoodSim.getAngleRads() - ArmStartingAngle,
+        m_hoodSim.getAngleRads() - HoodStartingAngle,
         // m_hoodSim.getVelocityRadPerSec(), // TODO: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
