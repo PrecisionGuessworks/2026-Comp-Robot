@@ -72,8 +72,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private Timer m_lastPieceTimer = new Timer();
 
   public ShooterSubsystem() {
-    m_lastPieceTimer.start();
-    m_lastPieceTimer.reset();
 
     // Show scheduler status in SmartDashboard.
     SmartDashboard.putData(this);
@@ -110,8 +108,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public boolean getHasPiece() {
     return hasPiece;
   }
-
-
 
   public void setShooterCurrent(double StatorCurrentLimit, double SupplyCurrentLimit) {
     m_shooterMotor.setStatorCurrentLimit(StatorCurrentLimit,SupplyCurrentLimit);
@@ -173,7 +169,6 @@ public class ShooterSubsystem extends SubsystemBase {
       //   Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
       m_hoodMotor.setMotionMagicPositionSetpointExpo(
           Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
-
 
    // }
     

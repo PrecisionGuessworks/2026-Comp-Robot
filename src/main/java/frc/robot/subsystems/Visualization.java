@@ -34,57 +34,43 @@ private static  final Link2d chassisViz =
               new Color("#FAB604"),
               new Transform2d(Constants.Viz.xOffset, Units.inchesToMeters(3.0), new Rotation2d())));
 
-  // Elevator viz
-  private  static final Link2d elevatorFrameViz =
+  // Climber viz
+  private  static final Link2d climberFrameViz =
       robotViz.addLink(
           new Link2d(
               robotViz,
-              "Elevator Base",
-              Constants.Viz.elevatorBaseLength,
+              "Climber Base",
+              Constants.Viz.climberBaseLength,
               4.0,
               Color.kGreen,
               new Transform2d(
-                  Constants.Viz.elevatorBaseX,
-                  Constants.Viz.elevatorBaseY,
-                  Constants.Viz.elevatorAngle)));
-  private static  final Link2d elevatorCarriageViz =
-      elevatorFrameViz.addLink(
+                  Constants.Viz.climberBaseX,
+                  Constants.Viz.climberBaseY,
+                  Constants.Viz.climberAngle)));
+  private static  final Link2d climberCarriageViz =
+      climberFrameViz.addLink(
           new Link2d(
               robotViz,
-              "Elevator Carriage",
-              Constants.Viz.elevatorCarriageLength,
+              "Climber Carriage",
+              Constants.Viz.climberCarriageLength,
               6.0,
               Color.kLightGreen));
 
 // Intake viz
-// private static final Link2d intakeArmViz =
-// robotViz.addLink(
-//     new Link2d(robotViz, "Intake Arm", Constants.Viz.intakeArmLength, 10.0, Color.kBlue));
-// private static final Link2d intakeRollerViz =
-// intakeArmViz.addLink(
-//     new Link2d(robotViz, "Intake Roller", Units.inchesToMeters(1.0), 10.0, Color.kLightBlue));
-
-//     m_intakeArmViz.setRelativeTransform(
-//         new Transform2d(
-//             Constants.Viz.intakePivotX,
-//             Constants.Viz.intakePivotY,
-//             Rotation2d.fromRadians(m_armSim.getAngleRads())));
-//     m_intakeRollerViz.setRelativeTransform(
-//         new Transform2d(
-//             Constants.Viz.intakeArmLength,
-//             0.0,
-//             Rotation2d.fromRadians(
-//                 m_intakeRollerViz.getRelativeTransform().getRotation().getRadians()
-//                     + m_rollerSim.getAngularVelocityRadPerSec()
-//                         * Constants.Viz.angularVelocityScalar)));
+private static final Link2d intakeViz =
+robotViz.addLink(
+    new Link2d(robotViz, "Intake", Constants.Viz.intakeArmLength, 10.0, Color.kBlue));
+private static final Link2d intakeRollerViz =
+intakeViz.addLink(
+    new Link2d(robotViz, "Intake Roller", Units.inchesToMeters(1.0), 10.0, Color.kLightBlue));
 
 
-private static final Link2d ArmArmViz =
-elevatorCarriageViz.addLink(
-        new Link2d(robotViz, "Arm Arm", Constants.Viz.ArmArmLength, 10, Color.kRed));
-private static final Link2d ArmWheelViz =
-ArmArmViz.addLink(
-        new Link2d(robotViz, "Arm Wheel", Units.inchesToMeters(2.0), 10, Color.kCoral));
+private static final Link2d HoodViz =
+robotViz.addLink(
+        new Link2d(robotViz, "Hood", Constants.Viz.HoodLength, 10, Color.kRed));
+private static final Link2d ShooterViz =
+HoodViz.addLink(
+        new Link2d(robotViz, "Shooter", Units.inchesToMeters(2.0), 10, Color.kCoral));
 
 
 
@@ -92,22 +78,38 @@ ArmArmViz.addLink(
 
 public static void Update2DVisualization() {
 
-        elevatorCarriageViz.setRelativeTransform(
+        climberCarriageViz.setRelativeTransform(
             new Transform2d(RobotContainer.climber.getHeight(), 0.0, new Rotation2d()));
 
-         ArmArmViz.setRelativeTransform(
+        HoodViz.setRelativeTransform(
         new Transform2d(
-            Constants.Viz.ArmArmPivotX,
-            0,
-            Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()) + Units.degreesToRadians(- Constants.Viz.elevatorAngle.getDegrees()))));
+            Constants.Viz.HoodPivotX,
+            Constants.Viz.HoodPivotY,
+            Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()) + Units.degreesToRadians( 180))));
 
-    ArmWheelViz.setRelativeTransform(
+    ShooterViz.setRelativeTransform(
         new Transform2d(
-            Constants.Viz.ArmWristLength,
+            Constants.Viz.HoodLength,
             0.0,
             Rotation2d.fromRadians(
-                ArmWheelViz.getRelativeTransform().getRotation().getRadians()
+                ShooterViz.getRelativeTransform().getRotation().getRadians()
                     + RobotContainer.shooter.getShooterVelocity() * Constants.Viz.angularVelocityScalar)));
+
+
+        
+    intakeViz.setRelativeTransform(
+        new Transform2d(
+            Constants.Viz.intakeX,
+            Constants.Viz.intakeY,
+            new Rotation2d()));
+    intakeRollerViz.setRelativeTransform(
+        new Transform2d(
+            Constants.Viz.intakeArmLength,
+            0.0,
+            Rotation2d.fromRadians(
+                intakeRollerViz.getRelativeTransform().getRotation().getRadians()
+                    + RobotContainer.intake.getRollerVelocity()
+                        * Constants.Viz.angularVelocityScalar)));
 
     }
 
@@ -153,7 +155,7 @@ public static void Update2DVisualization() {
 
 
 
-    StructArrayPublisher<Pose3d> fuelpublisher = NetworkTableInstance.getDefault()
+  public static  StructArrayPublisher<Pose3d> fuelpublisher = NetworkTableInstance.getDefault()
         .getStructArrayTopic("fuelViz", Pose3d.struct).publish();
   public static Pose3d[] fuelViz = {new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d(),new Pose3d()};
   public static double fuelVelocity[][] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0},{0,0,0}}; 
@@ -200,6 +202,7 @@ public static void Update2DVisualization() {
         new Rotation3d(0,0,0)
       );
      }
+     fuelpublisher.set(new Pose3d[] {fuelViz[0],fuelViz[1],fuelViz[2],fuelViz[3],fuelViz[4],fuelViz[5],fuelViz[6],fuelViz[7],fuelViz[8],fuelViz[9],fuelViz[10],fuelViz[11],fuelViz[12],fuelViz[13],fuelViz[14],fuelViz[15],fuelViz[16],fuelViz[17],fuelViz[18],fuelViz[19]} );
     }
     }
     

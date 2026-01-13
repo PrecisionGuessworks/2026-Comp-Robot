@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.Pose;
 import frc.robot.generated.TimedCommand2;
 
 public class DrivetrainExtra {
@@ -53,36 +54,36 @@ public class DrivetrainExtra {
         return getRobotAccelX() * Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()) - getRobotAccelY() * Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians());
     }
     
-     public static Rotation2d targetangle() {
+     public static Rotation2d targetangle(Pose2d targetpose){
         /* First put the drivetrain into auto run mode, then run the auto */
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
         pose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
-        Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
+        // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
         System.out.println(PhotonUtils.getYawToPose(pose,targetpose));
         return PhotonUtils.getYawToPose(pose,targetpose);
         
     }
 
-    public static AngularVelocity targetAngleFeeds(){
+    public static AngularVelocity targetAngleFeeds(Pose2d targetpose) {
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
         pose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
-        Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
+        // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
         // Pose2d targetpose = Constants.ShotCalc.targetpose;
         double vx = getFieldSpeedsX();
         double vy = getFieldSpeedsY();
         double deltaX = targetpose.getX() - pose.getX();
         double deltaY = targetpose.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
-        return AngularVelocity.ofBaseUnits(omega, null);
+        return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 
-    public static double targetDistance() {
+    public static double targetDistance(Pose2d targetpose) {
         /* Returns distance to target from target pose */
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
-        Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
+        // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
         // Pose2d targetpose = Constants.ShotCalc.targetpose;
         return pose.getTranslation().getDistance(targetpose.getTranslation());
     }

@@ -65,6 +65,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     Visualization.Update3DVisualization();
+    Visualization.updateFuelViz();
 
     // OLD LL vision code
     // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");

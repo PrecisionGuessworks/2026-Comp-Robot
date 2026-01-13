@@ -1,53 +1,64 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.Visualization;
 
 public class Score extends Command {
-  private final ClimberSubsystem m_climber;
   private final ShooterSubsystem m_shooter;
+  private double distanceToTarget;
+  private double hoodAngle;
+  private double shooterVelocity;
+  private Timer m_timer = new Timer();
+  private int loopCount = 0;
 
   public Score(
-      ClimberSubsystem climberSubsystem,
       ShooterSubsystem shooterSubsystem) {
-    m_climber = climberSubsystem;
     m_shooter = shooterSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(climberSubsystem, shooterSubsystem);
+    addRequirements(shooterSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
-
+    distanceToTarget = DrivetrainExtra.targetDistance(Constants.ShotCalc.targetpose);
+    hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
+    shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
+    m_shooter.setHoodAngle(hoodAngle);
+    m_shooter.setShooterVelocity(shooterVelocity);
+    m_timer.restart();
+    loopCount = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
-      
+    distanceToTarget = DrivetrainExtra.targetDistance(Constants.ShotCalc.targetpose);
+    hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
+    shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
+    m_shooter.setHoodAngle(hoodAngle);
+    m_shooter.setShooterVelocity(shooterVelocity);
+    if (loopCount % 10 == 0) {
+    Visualization.LaunchFuelViz(shooterVelocity, hoodAngle);
+    }
+    loopCount++;
   }
 
   // Called once the command ends or is interrupted.
-  // @Override
-  // public void end(boolean interrupted) {
-  //   m_shooter.setArmAngle(Constants.Arm.armStowAngle);
-  //   m_shooter.setWristAngle(Constants.Arm.wristStowAngle);
-  //   m_climber.setHeight(Constants.Elevator.stowHeight);
-  // }
+  @Override
+  public void end(boolean interrupted) {
+    m_shooter.setShooterVelocity(0.0);
+    m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
+  }
 
   // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return true;
-  }
+  // @Override
+  // public boolean isFinished() {
+  //   return true;
+  // }
 }

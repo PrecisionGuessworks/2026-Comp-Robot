@@ -110,6 +110,11 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_rollerMotor.getSupplyCurrent();
   }
 
+    public double getRollerVelocity() {
+    return m_rollerMotor.getSensorVelocity();
+  }
+
+
   // public void disabledInit() {
   //   m_deployMotor.setBrakeMode(true);
   // }

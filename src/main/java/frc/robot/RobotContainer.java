@@ -14,6 +14,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 
 import dev.doglog.DogLog;
 import dev.doglog.DogLogOptions;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.RobotController;
@@ -26,11 +27,13 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralEleUp;
 import frc.robot.commands.Moveup;
+import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class RobotContainer {
@@ -71,7 +74,7 @@ public class RobotContainer {
 
 
     public static final ClimberSubsystem climber = new ClimberSubsystem();
-    //cpublic static final IntakeSubsystem intake = new IntakeSubsystem();
+    public static final IntakeSubsystem intake = new IntakeSubsystem();
     public static final ShooterSubsystem shooter = new ShooterSubsystem();
 
 
@@ -160,6 +163,16 @@ public class RobotContainer {
         // driver.rightTrigger().whileTrue(new IntakeCoral(climber, shooter));
        // driver.leftTrigger().whileTrue(new IntakeAlgae(intake, 0));
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        driver.back().whileTrue(new StowAll(climber, shooter));
+
+        driver.rightBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
+        angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+            .withVelocityY(-driver.getLeftX() * MaxSpeed)
+            .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose  ))
+            .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
+            )));
+        
+        
         
 
         // driver.y().whileTrue(drivetrain.applyRequest(() ->
@@ -179,7 +192,7 @@ public class RobotContainer {
 
        operator.y().whileTrue(new CoralEleUp(climber));
 
-        operator.rightBumper().whileTrue(new StowAll(climber, shooter));
+
         operator.start().whileTrue(drivetrain.applyRequest(() ->
         drive.withVelocityX(-driver.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
             .withVelocityY(-driver.getLeftX() * MaxSpeed) // Drive left with negative X (left)

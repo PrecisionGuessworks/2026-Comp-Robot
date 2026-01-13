@@ -205,7 +205,7 @@ public class Constants {
 
     public static final double hoodMinAngle = Units.degreesToRadians(0.0);
     public static final double hoodMaxAngle = Units.degreesToRadians(70.0);
-    public static final double hoodStartingAngle = Units.degreesToRadians(90);
+    public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(0.1);
 
@@ -291,21 +291,20 @@ public class Constants {
   public static final class Viz {
     public static final double xOffset = Units.inchesToMeters(30.0);
 
-    public static final double intakePivotX = xOffset + Units.inchesToMeters(27.25);
-    public static final double intakePivotY = Units.inchesToMeters(11.25);
-    public static final double intakeArmLength = Units.inchesToMeters(14.0);
+    public static final double intakeX = xOffset + Units.inchesToMeters(27.25);
+    public static final double intakeY = Units.inchesToMeters(6);
+    public static final double intakeArmLength = Units.inchesToMeters(10.0);
 
-    public static final double elevatorBaseX = xOffset + Units.inchesToMeters(18.0);
-    public static final double elevatorBaseY = Units.inchesToMeters(3.0);
-    public static final Rotation2d elevatorAngle = Rotation2d.fromDegrees(90.0);
-    public static final double elevatorBaseLength = Units.inchesToMeters(35.0);
-    public static final double elevatorCarriageLength = Units.inchesToMeters(6.0);
+    public static final double climberBaseX = xOffset + Units.inchesToMeters(2.0);
+    public static final double climberBaseY = Units.inchesToMeters(3.0);
+    public static final Rotation2d climberAngle = Rotation2d.fromDegrees(90.0);
+    public static final double climberBaseLength = Units.inchesToMeters(18.0);
+    public static final double climberCarriageLength = Units.inchesToMeters(6.0);
 
-    public static final double ArmArmPivotX = Units.inchesToMeters(4.0);
-    public static final double ArmArmLength = Units.inchesToMeters(12.0);
-    public static final double ArmWristLength = Units.inchesToMeters(6.0);
-    public static final double ArmRollerX = Units.inchesToMeters(8.0);
-    public static final double ArmRollerY = Units.inchesToMeters(0);
+    public static final double HoodPivotX = xOffset + Units.inchesToMeters(12.0);
+    public static final double HoodPivotY = Units.inchesToMeters(12.0); 
+    public static final double HoodLength = Units.inchesToMeters(4.0);
+    public static final double ShooterRadius = Units.inchesToMeters(2.0);
 
     public static final double angularVelocityScalar = 0.01;
   }
@@ -375,10 +374,10 @@ public class Constants {
     public static final double minExtension = Units.inchesToMeters(0.0);
     public static final double maxExtension = Units.inchesToMeters(10.0);
     public static final double startingPosition = minExtension;
-    public static final double intakeStow = Units.inchesToMeters(0.0);
+    public static final double intakeStow = Units.inchesToMeters(3.0);
 
     public static final double intakeFullDeployExtension = Units.inchesToMeters(10.0);
-    public static final double intakeSmallDeployExtension = Units.inchesToMeters(2.0);
+    public static final double intakeSmallDeployExtension = Units.inchesToMeters(3.0);
 
 
     public static final double intakeRollerVelocity = 100;
