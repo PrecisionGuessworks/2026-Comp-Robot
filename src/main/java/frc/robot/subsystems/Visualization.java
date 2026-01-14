@@ -147,7 +147,11 @@ public static void Update2DVisualization() {
     DogLog.log("3DViz: 4ArmViz", armViz);
     DogLog.log("3DViz: 5HoodViz", hoodViz);
     DogLog.log("3DViz: 6IntakeViz", intakeViz);
-    DogLog.log("3DViz: FuelViz", fuelViz[1]);
+    DogLog.log("3DViz: FuelViz:1", fuelViz[1]);
+    DogLog.log("3DViz: FuelViz:5", fuelViz[5]);
+    DogLog.log("3DViz: FuelViz:10", fuelViz[10]);
+    DogLog.log("3DViz: FuelViz:15", fuelViz[15]);
+    DogLog.log("3DViz: FuelViz:19", fuelViz[19]);
     }
 
 

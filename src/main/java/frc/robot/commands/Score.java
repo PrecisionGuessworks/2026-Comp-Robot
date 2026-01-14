@@ -44,7 +44,7 @@ public class Score extends Command {
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     if (loopCount % 10 == 0) {
-    Visualization.LaunchFuelViz(shooterVelocity, hoodAngle);
+    Visualization.LaunchFuelViz(shooterVelocity, 90-hoodAngle);
     }
     loopCount++;
   }

@@ -102,8 +102,8 @@ public class IntakeSubsystem extends SubsystemBase {
     }
   }
 
-  public void setRollerCurrnt (double current){
-    m_rollerMotor.setStatorCurrentLimit(current);
+  public void setRollerCurrent (double stator, double supply){
+    m_rollerMotor.setStatorCurrentLimit(stator,supply);
   }
 
   public double getRollerCurrent (){
@@ -149,7 +149,7 @@ public class IntakeSubsystem extends SubsystemBase {
   // --- BEGIN STUFF FOR SIMULATION ---
   private static final ElevatorSim m_elevatorSim =
       new ElevatorSim(
-          DCMotor.getKrakenX60Foc(2),
+          DCMotor.getKrakenX60Foc(1),
           Constants.Intake.deployMotorRatio.reduction(),
           Constants.Intake.simCarriageMass,
           Constants.Intake.sprocketPitchDiameter * 0.5,

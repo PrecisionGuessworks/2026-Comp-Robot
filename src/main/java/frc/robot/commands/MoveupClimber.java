@@ -6,22 +6,23 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
 
 
-public class Moveup extends Command {
+public class MoveupClimber extends Command {
 
-  private final ClimberSubsystem m_elevator;
+  private final ClimberSubsystem m_climber;
   private Timer m_ejectTimer = new Timer();
 
-  public Moveup(ClimberSubsystem elevator) {
+  public MoveupClimber(ClimberSubsystem climber) {
 
-    m_elevator = elevator;
+    m_climber = climber;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(elevator);
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_climber.setHeight(Constants.Climber.maxHeight);
     
     
   }
@@ -29,14 +30,14 @@ public class Moveup extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_elevator.setHeight(Constants.Elevator.L2);
+    
  
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_elevator.setHeight(Constants.Climber.stowHeight);
+    m_climber.setHeight(Constants.Climber.stowHeight);
 
   }
 

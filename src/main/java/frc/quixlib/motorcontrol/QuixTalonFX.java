@@ -313,7 +313,10 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
 
     if (DriverStation.isFMSAttached()){
-    new Alert("Tunables are still LIVE and FMS is attatched. Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
+    new Alert("Tunables are still LIVE and FMS is attatched!!! Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
+    }
+    if (DriverStation.isFMSAttached()){
+    new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
     }
 
     SupplyCurrentSubscriber = DogLog.tunable(name+ "/Supply Current Limit",m_config.SUPPLY_CURRENT_LIMIT);
@@ -495,11 +498,11 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     DogLog.log(name + ": Sensor Position", getSensorPosition(),"rad");
     DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rad per sec");
     if (!DriverStation.isFMSAttached()){
-    updateTunerConstants0();
+    updateTunerConstants();
     }
   }
 
-  public void updateTunerConstants0(){
+  public void updateTunerConstants(){
     boolean updated = false;
     String name = m_controller.getDescription()+" ID: " + m_canID.deviceNumber +" ";
     if (SupplyCurrentSubscriber.get() != m_config.SUPPLY_CURRENT_LIMIT){

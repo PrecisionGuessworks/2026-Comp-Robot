@@ -74,35 +74,35 @@ public class Robot extends TimedRobot {
     // }
 
     // First, tell Limelight your robot's current orientation
-      double robotYaw = RobotContainer.drivetrain.getState().Pose.getRotation().getDegrees(); // CHECK !!!  
-      LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName, robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
+    //   double robotYaw = RobotContainer.drivetrain.getState().Pose.getRotation().getDegrees(); // CHECK !!!  
+    //   LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName, robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
       
-      // Get the pose estimate
-      LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
+    //   // Get the pose estimate
+    //   LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
 
-      // Add it to your pose estimator
-      RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
-      if (limelightMeasurement != null){
-      RobotContainer.drivetrain.addVisionMeasurement(
-          limelightMeasurement.pose,
-          limelightMeasurement.timestampSeconds
-      );
-      }
+    //   // Add it to your pose estimator
+    //   RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
+    //   if (limelightMeasurement != null){
+    //   RobotContainer.drivetrain.addVisionMeasurement(
+    //       limelightMeasurement.pose,
+    //       limelightMeasurement.timestampSeconds
+    //   );
+    //   }
 
 
-    try{
-      var visionEst = vision.getEstimatedGlobalPose();
-    visionEst.ifPresent(
-            est -> {
-                // Change our trust in the measurement based on the tags we can see
-                var estStdDevs = vision.getEstimationStdDevs();
+    // try{
+    //   var visionEst = vision.getEstimatedGlobalPose();
+    // visionEst.ifPresent(
+    //         est -> {
+    //             // Change our trust in the measurement based on the tags we can see
+    //             var estStdDevs = vision.getEstimationStdDevs();
 
-                RobotContainer.drivetrain.addVisionMeasurement(
-                        est.estimatedPose.toPose2d(), Utils.fpgaToCurrentTime(est.timestampSeconds), estStdDevs);
-            });
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    //             RobotContainer.drivetrain.addVisionMeasurement(
+    //                     est.estimatedPose.toPose2d(), Utils.fpgaToCurrentTime(est.timestampSeconds), estStdDevs);
+    //         });
+    // } catch (Exception e) {
+    //   e.printStackTrace();
+    // }
 
   if(RobotContainer.driver.back().getAsBoolean()) {
     lineup = true;

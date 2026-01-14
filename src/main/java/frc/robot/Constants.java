@@ -65,12 +65,12 @@ public class Constants {
     public static final InterpolatingDoubleTreeMap Angle;
     static {
         Angle = new InterpolatingDoubleTreeMap();
-        Angle.put(0.0, Units.degreesToRadians(80));
-        Angle.put(1.0, Units.degreesToRadians(75));
-        Angle.put(2.0, Units.degreesToRadians(71));
-        Angle.put(3.0, Units.degreesToRadians(68));
-        Angle.put(4.0, Units.degreesToRadians(65));
-        Angle.put(5.0, Units.degreesToRadians(63));
+        Angle.put(0.0, Units.degreesToRadians(10));
+        Angle.put(1.0, Units.degreesToRadians(15));
+        Angle.put(2.0, Units.degreesToRadians(20));
+        Angle.put(3.0, Units.degreesToRadians(25));
+        Angle.put(4.0, Units.degreesToRadians(35));
+        Angle.put(5.0, Units.degreesToRadians(43));
     }
     // Used for sotm (Shoot on the move)
     public static final InterpolatingDoubleTreeMap Time;
@@ -93,7 +93,6 @@ public class Constants {
     
     
     
-    
     public static class Drive { 
         //Drive Constants that are not in TunerConstants / Gnenerated
 
@@ -107,18 +106,18 @@ public class Constants {
         public static final double DRotation = 0.1;
         
         // 0.0-1.0 of the max speed
-        public static final double MaxSpeedPercentage = 0.95; // Default 1.0
+        public static final double MaxSpeedPercentage = 0.75; // Default 1.0
         public static final double SlowSpeedPercentage = 0.10; // Default 0.15
         
         // Rotation per second max angular velocity
-        public static final double MaxAngularRatePercentage = 0.82; // Default 0.75 
+        public static final double MaxAngularRatePercentage = 0.62; // Default 0.75 
         public static final double SlowRotPercentage = 0.15; // Default 0.15
 
         // Deadbands for the drive and rotation
         public static final double DriveDeadband = isSim ? 0.15 : 0.1; // Drive Deadband
         public static final double RotationDeadband = isSim ? 0.15 : 0.1; // Rotation Deadband
         public static final double SnapDriveDeadband = 0.001; // Snap Rotation Deadband
-        public static final double SnapRotationDeadband = 0.001; // Snap Rotation Deadband
+        public static final double SnapRotationDeadband = 0.00000000001; // Snap Rotation Deadband
 
     }
 
@@ -148,14 +147,12 @@ public class Constants {
     public static final double Expo_kA = 0.1; // Use a slower kA of 0.1 V/(rps/s)
 
     public static final double minHeight = 0.0; // m
-    public static final double maxHeight = Units.inchesToMeters(60.0); // m
+    public static final double maxHeight = Units.inchesToMeters(30.0); // m
     public static final double stowHeight = Units.inchesToMeters(0.5); // m
-    public static final double wristStowHeight = Units.inchesToMeters(4); // m
     public static final double armStowHeight = Units.inchesToMeters(8); // m
     public static final double stowTolerance = Units.inchesToMeters(0.1); // m
     public static final double intakeHeight = Units.inchesToMeters(11.75); // m // 
 
-    public static final double PreStow = Units.inchesToMeters(10); // m
     public static final double SlowmodeHeight = Units.inchesToMeters(25); // m
 
     // For simulation only
@@ -232,9 +229,6 @@ public class Constants {
     //         3, 2.5,
     //         Units.degreesToRadians(400), Units.degreesToRadians(600));
 
-     public static final double XvelocityFactor = 0.1;
-     public static final double YvelocityFactor = 0.1;
-
     public static final double SpeedReductionFactor = 0.15;
 
     public static final double PTranslationSlow = 3;
@@ -251,6 +245,13 @@ public class Constants {
     public static final double feildFlipy = 8;
 
     public static final Pose2d Error = new Pose2d(6, 6, Rotation2d.fromDegrees(0));
+
+    public static final double[][] HoodSafetyZones = {
+      //minX, maxX, minY, maxY
+      {0, 17.5, 0, 8}, 
+      {17.5, 34, 0, 8},
+    };
+    public static final double HoodSafetyVelocityOffset = 0.1; // Multiples by current velocity to see if Robot is going into a Safety Zone with Hood up
 
   }
 
@@ -269,16 +270,6 @@ public class Constants {
             AprilTagFields.kDefaultField.loadAprilTagLayoutField();
 
     // Increase these numbers to trust your state estimate less.
-    // 461 values
-    // public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.03, 0.03, Units.degreesToRadians(0.01));
-    // public static final Function<Double, Matrix<N3, N1>> VISION_STD_DEV_MULTITAG_FUNCTION =
-    //         dist -> dist < 3.0
-    //                 ? VecBuilder.fill(Math.min(0.03, 0.03 * dist), Math.min(0.03, 0.03 * dist), DriverStation.isEnabled() ? Units.degreesToRadians(5.0) : Units.degreesToRadians(0.05))
-    //                 : VecBuilder.fill(0.05 * dist, 0.05 * dist, Units.degreesToRadians(180.0) * dist);
-    // public static final Function<Double, Matrix<N3, N1>> VISION_STD_DEV_FUNCTION =
-    //         dist -> dist < 3.0
-    //                 ? VecBuilder.fill(0.075 * dist, 0.075 * dist, Units.degreesToRadians(180.0) * dist)
-    //                 : VecBuilder.fill(0.1 * dist, 0.1 * dist, Units.degreesToRadians(180.0) * dist);
 
     public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(4, 4, 8); // m, m, rad
     public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
@@ -309,7 +300,7 @@ public class Constants {
     public static final double HoodLength = Units.inchesToMeters(4.0);
     public static final double ShooterRadius = Units.inchesToMeters(2.0);
 
-    public static final double angularVelocityScalar = 0.01;
+    public static final double angularVelocityScalar = 0.001;
   }
 
   public static final class Viz3d {
@@ -368,18 +359,18 @@ public class Constants {
     public static final double Expo_kV = 0.2;
     public static final double Expo_kA = 0.1; 
 
-    public static final double deployMaxVelocity = 0.2; // rad/s
-    public static final double deployMaxAcceleration = 140.0; // rad/s^2
-    public static final double deployMaxJerk = 800.0; // rad/s^3
+    public static final double deployMaxVelocity = 1; // m/s
+    public static final double deployMaxAcceleration = 10.0; // m/s^2
+    public static final double deployMaxJerk = 2.0; // m/s^3
 
     public static final double sprocketPitchDiameter = Units.inchesToMeters(2.0);
 
     public static final double minExtension = Units.inchesToMeters(0.0);
-    public static final double maxExtension = Units.inchesToMeters(10.0);
+    public static final double maxExtension = Units.inchesToMeters(11.2);
     public static final double startingPosition = minExtension;
-    public static final double intakeStow = Units.inchesToMeters(3.0);
+    public static final double intakeStow = Units.inchesToMeters(4.0);
 
-    public static final double intakeFullDeployExtension = Units.inchesToMeters(10.0);
+    public static final double intakeFullDeployExtension = Units.inchesToMeters(11.0);
     public static final double intakeSmallDeployExtension = Units.inchesToMeters(3.0);
 
 
@@ -388,7 +379,7 @@ public class Constants {
     public static final double holdRollerVelocity = 10;
 
     // For simulation only
-public static final double simCarriageMass = 2.0; // kg
+    public static final double simCarriageMass = 3.0; // kg
     public static final double simRollerMOI = 0.01; // kgMetersSquared
   }
 

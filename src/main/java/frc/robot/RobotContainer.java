@@ -25,9 +25,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.commands.CoralEleUp;
 import frc.robot.commands.Intake;
-import frc.robot.commands.Moveup;
+import frc.robot.commands.MoveupClimber;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
 import frc.robot.generated.TunerConstants;
@@ -59,7 +58,8 @@ public class RobotContainer {
 
     public final SwerveRequest.FieldCentricFacingAngle angle = new SwerveRequest.FieldCentricFacingAngle()
         .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband) // Add a deadband
-        .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors 
+        .withDriveRequestType(DriveRequestType.OpenLoopVoltage) // Use open-loop control for drive motors 
+        .withHeadingPID(Constants.Drive.PRotation, Constants.Drive.IRotation, Constants.Drive.DRotation);
          //  .withSteerRequestType(SteerRequestType.MotionMagicExpo); // Use motion magic control for steer motors
 
     private PowerDistribution powerDistribution = new PowerDistribution();
@@ -96,6 +96,8 @@ public class RobotContainer {
         DogLog.setOptions(new DogLogOptions().withLogExtras(true));
         // DogLog.setEnabled(Constants.DogLogEnabled);
 
+
+
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
@@ -104,14 +106,10 @@ public class RobotContainer {
 
 
 
-        autoChooser = AutoBuilder.buildAutoChooser("Tests");
-        SmartDashboard.putData("Auto", autoChooser);
-        angle.HeadingController.setPID( Constants.Drive.PRotation,  Constants.Drive.IRotation , Constants.Drive.DRotation);
-        configureBindings();
-
     
 
-
+        autoChooser = AutoBuilder.buildAutoChooser("Tests");
+        SmartDashboard.putData("Auto", autoChooser);
         SmartDashboard.putData(
         "Gyro",
         builder -> {
@@ -174,6 +172,7 @@ public class RobotContainer {
             )));
 
         driver.rightTrigger().whileTrue(new Intake(intake));
+        driver.a().whileTrue(new MoveupClimber(climber));
         
         
         
@@ -190,7 +189,7 @@ public class RobotContainer {
        
     //    driver.a().whileTrue(new MoveupArm(1, climber, shooter)); 
     //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 
-       driver.y().whileTrue(new Moveup(climber));
+       driver.y().whileTrue(new MoveupClimber(climber));
 
     }
 

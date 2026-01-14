@@ -77,6 +77,7 @@ public class DrivetrainExtra {
         double deltaX = targetpose.getX() - pose.getX();
         double deltaY = targetpose.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
+        System.out.println("omega: " + omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 
