@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CoralEleUp;
+import frc.robot.commands.Intake;
 import frc.robot.commands.Moveup;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
@@ -41,7 +42,7 @@ public class RobotContainer {
     public static double MaxAngularRate = RotationsPerSecond.of(Constants.Drive.MaxAngularRatePercentage).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     public static final CommandXboxController driver = new CommandXboxController(0);
-    public static final CommandXboxController operator = new CommandXboxController(1);
+    // public static final CommandXboxController operator = new CommandXboxController(1);
 
     // public static final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     public static final CommandSwerveDrivetrain drivetrain = new CommandSwerveDrivetrain(TunerConstants.DrivetrainConstants,250, Constants.Vision.ODOM_STD_DEV, Constants.Vision.kSingleTagStdDevs, TunerConstants.FrontLeft, TunerConstants.FrontRight, TunerConstants.BackLeft, TunerConstants.BackRight);
@@ -57,7 +58,7 @@ public class RobotContainer {
 
 
     public final SwerveRequest.FieldCentricFacingAngle angle = new SwerveRequest.FieldCentricFacingAngle()
-        .withDeadband(MaxSpeed * Constants.Drive.SnapRotationDeadband).withRotationalDeadband(MaxAngularRate * Constants.Drive.SnapRotationDeadband) // Add a deadband
+        .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband) // Add a deadband
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors 
          //  .withSteerRequestType(SteerRequestType.MotionMagicExpo); // Use motion magic control for steer motors
 
@@ -168,9 +169,11 @@ public class RobotContainer {
         driver.rightBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
         angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
-            .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose  ))
+            .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose ))
             .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
             )));
+
+        driver.rightTrigger().whileTrue(new Intake(intake));
         
         
         
@@ -188,16 +191,6 @@ public class RobotContainer {
     //    driver.a().whileTrue(new MoveupArm(1, climber, shooter)); 
     //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 
        driver.y().whileTrue(new Moveup(climber));
-
-
-       operator.y().whileTrue(new CoralEleUp(climber));
-
-
-        operator.start().whileTrue(drivetrain.applyRequest(() ->
-        drive.withVelocityX(-driver.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-            .withVelocityY(-driver.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-            .withRotationalRate(-driver.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-    ));
 
     }
 

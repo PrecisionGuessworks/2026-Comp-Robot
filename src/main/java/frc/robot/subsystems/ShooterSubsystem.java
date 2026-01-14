@@ -86,7 +86,7 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public double getHoodAngle() { 
-    return Units.radiansToDegrees(m_hoodMotor.getSensorPosition()) * Constants.Shooter.hoodMotorRatio.inverseReduction() + Units.radiansToDegrees(Constants.Shooter.hoodStartingAngle) ;
+    return Units.radiansToDegrees(m_hoodMotor.getSensorPosition()) * Constants.Shooter.hoodMotorRatio.inverseReduction() ;
     //: Units.rotationsToRadians(m_armCoder.getAbsPosition());   Constants.isSim ? 
     }
     
@@ -153,24 +153,15 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
 
 
-    if (getHoodAngle() <= 115 && getHoodAngle() >= 92) { // might need check 
-       m_hoodTargetAngle = Constants.Shooter.hoodStowAngle;
-      //System.out.println("1");
+    if (setm_hoodTargetAngle <= Constants.Shooter.hoodMaxAngle && setm_hoodTargetAngle >= Constants.Shooter.hoodMinAngle) { 
+       m_hoodTargetAngle = setm_hoodTargetAngle;
     }
-    
 
-    // if(hasPiece){
-    //   m_armMotor.setMotionMagicPositionSetpoint(
-    //     Constants.Shooter.armCoralPositionPIDSlot, m_armTargetAngle);
-    //   m_wristMotor.setMotionMagicPositionSetpoint(
-    //     Constants.Shooter.wristCoralPositionPIDSlot, m_wristTargetAngle);
-    // } else {
-      // m_hoodMotor.setMotionMagicPositionSetpoint(
-      //   Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
       m_hoodMotor.setMotionMagicPositionSetpointExpo(
           Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
 
-   // }
+
+        
     
     //  Logging
     DogLog.log("Hood: Current Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getSensorPosition()),"deg");
@@ -179,6 +170,10 @@ public class ShooterSubsystem extends SubsystemBase {
     DogLog.log("Hood: Target Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getClosedLoopReference()),"deg");
     DogLog.log("Hood: Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
     DogLog.log("Hood: Current Velocity (deg per sec)", Units.radiansToDegrees(m_hoodMotor.getSensorVelocity()),"deg per sec");
+
+    DogLog.log("Shooter: Current Velocity (rad per sec)", m_shooterMotor.getSensorVelocity(),"rad per sec");
+    DogLog.log("Shooter: Target Velocity (rad per sec)", m_shooterMotor.getClosedLoopReference(),"rad per sec");
+    DogLog.log("Shooter: Target set Velocity (rad per sec)", shooterTargetVelocity,"rad per sec");
 
     m_shooterMotor.logMotorState();
     m_hoodMotor.logMotorState();

@@ -137,6 +137,10 @@ public class IntakeSubsystem extends SubsystemBase {
     DogLog.log("Intake: Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
     DogLog.log("Intake: Target set Position", Units.metersToInches(m_targetPosition),"In");
 
+    DogLog.log("Intake: Roller Velocity", getRollerVelocity(),"Rad/s");
+    DogLog.log("Intake: Roller Target Velocity", m_rollerMotor.getClosedLoopReference(),"Rad/s");
+    
+
     m_rollerMotor.logMotorState();
     m_deployMotor.logMotorState();
     // m_deployFollower.logMotorState();

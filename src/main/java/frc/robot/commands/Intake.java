@@ -22,8 +22,9 @@ private Timer m_placeTimer = new Timer();
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_intake.setPosition(Constants.Intake.intakeFullDeployExtension);
+    m_intake.setRollerVelocity(Constants.Intake.intakeRollerVelocity);
 
-    m_placeTimer.restart();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,8 +37,9 @@ private Timer m_placeTimer = new Timer();
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // m_intake.setPosition(Constants.Intake.startingPosition);
+    m_intake.setPosition(Constants.Intake.intakeSmallDeployExtension);
     m_intake.setRollerVelocity(Constants.Intake.holdRollerVelocity);
+
 
   }
 

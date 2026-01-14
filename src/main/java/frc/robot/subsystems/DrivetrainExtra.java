@@ -58,17 +58,18 @@ public class DrivetrainExtra {
         /* First put the drivetrain into auto run mode, then run the auto */
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
-        pose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
+        Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
         // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
-        System.out.println(PhotonUtils.getYawToPose(pose,targetpose));
-        return PhotonUtils.getYawToPose(pose,targetpose);
+        Rotation2d temp = PhotonUtils.getYawToPose(temppose,targetpose);
+        System.out.println(temp);
+        return temp;
         
     }
 
     public static AngularVelocity targetAngleFeeds(Pose2d targetpose) {
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
-        pose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
+        // Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
         // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
         // Pose2d targetpose = Constants.ShotCalc.targetpose;
         double vx = getFieldSpeedsX();

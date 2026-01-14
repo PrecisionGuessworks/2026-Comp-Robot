@@ -87,7 +87,7 @@ public class Robot extends TimedRobot {
           limelightMeasurement.pose,
           limelightMeasurement.timestampSeconds
       );
-  }
+      }
 
 
     try{
@@ -104,21 +104,10 @@ public class Robot extends TimedRobot {
       e.printStackTrace();
     }
 
-  if (RobotContainer.driver.pov(0).getAsBoolean() == true || RobotContainer.operator.pov(0).getAsBoolean() == true){
-    RobotContainer.climber.setHeightLocation(4);
-
-  } else if (RobotContainer.driver.pov(90).getAsBoolean() == true || RobotContainer.operator.pov(90).getAsBoolean() == true){
-    RobotContainer.climber.setHeightLocation(3);
-
-  }
-
   if(RobotContainer.driver.back().getAsBoolean()) {
     lineup = true;
   }
 
-  if(RobotContainer.operator.back().getAsBoolean()) {
-    elevatorOn = true;
-  }
 
   
   // double leftY = m_robotContainer.operator.getLeftY();

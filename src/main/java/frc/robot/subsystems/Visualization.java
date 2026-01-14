@@ -59,7 +59,10 @@ private static  final Link2d chassisViz =
 // Intake viz
 private static final Link2d intakeViz =
 robotViz.addLink(
-    new Link2d(robotViz, "Intake", Constants.Viz.intakeArmLength, 10.0, Color.kBlue));
+    new Link2d(robotViz, "Intake", Constants.Viz.intakeLength, 10.0, Color.kBlue));
+private static final Link2d intakeBaseViz =
+robotViz.addLink(
+    new Link2d(robotViz,"Intake Base",Constants.Viz.intakeBaseLength,6.0,Color.kNavy,new Transform2d(Constants.Viz.intakeBaseX,Constants.Viz.intakeBaseY,new Rotation2d())));
 private static final Link2d intakeRollerViz =
 intakeViz.addLink(
     new Link2d(robotViz, "Intake Roller", Units.inchesToMeters(1.0), 10.0, Color.kLightBlue));
@@ -85,7 +88,7 @@ public static void Update2DVisualization() {
         new Transform2d(
             Constants.Viz.HoodPivotX,
             Constants.Viz.HoodPivotY,
-            Rotation2d.fromRadians(Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()) + Units.degreesToRadians( 180))));
+            Rotation2d.fromRadians(-Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()) + Units.degreesToRadians( 180))));
 
     ShooterViz.setRelativeTransform(
         new Transform2d(
@@ -99,12 +102,12 @@ public static void Update2DVisualization() {
         
     intakeViz.setRelativeTransform(
         new Transform2d(
-            Constants.Viz.intakeX,
+            Constants.Viz.intakeX+RobotContainer.intake.getPosition(),
             Constants.Viz.intakeY,
             new Rotation2d()));
     intakeRollerViz.setRelativeTransform(
         new Transform2d(
-            Constants.Viz.intakeArmLength,
+            Constants.Viz.intakeLength,
             0.0,
             Rotation2d.fromRadians(
                 intakeRollerViz.getRelativeTransform().getRotation().getRadians()

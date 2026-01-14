@@ -42,7 +42,7 @@ public class Constants {
 
     public static final double g = 9.81; 
     public static final double defaultPeriodSecs = 0.02; 
-    public static final boolean isSim =  false;// edu.wpi.first.wpilibj.RobotBase.isSimulation(); // Uses diffrent constants if sim or real
+    public static final boolean isSim =  edu.wpi.first.wpilibj.RobotBase.isSimulation(); // Uses diffrent constants if sim or real
     public static final boolean SimFuel = true; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
@@ -85,7 +85,7 @@ public class Constants {
 
     public static final double SimShotefficiency = 0.85;
     public static final double Drag = 0.07; // Drag Coefficient for Simulations
-    public static final double Friction = 4; // Friction Coefficient for Simulations 
+    public static final double Friction = 0.8; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations
 
     }
@@ -102,9 +102,9 @@ public class Constants {
         public static final double ITranslation = 0.001;
         public static final double DTranslation = 0.1;
 
-        public static final double PRotation = 3;
-        public static final double IRotation = 0.001;
-        public static final double DRotation = 0.03;
+        public static final double PRotation = 6;
+        public static final double IRotation = 0.01;
+        public static final double DRotation = 0.1;
         
         // 0.0-1.0 of the max speed
         public static final double MaxSpeedPercentage = 0.95; // Default 1.0
@@ -115,8 +115,8 @@ public class Constants {
         public static final double SlowRotPercentage = 0.15; // Default 0.15
 
         // Deadbands for the drive and rotation
-        public static final double DriveDeadband = isSim ? 0.15 : 0.02; // Drive Deadband
-        public static final double RotationDeadband = isSim ? 0.15 : 0.02; // Rotation Deadband
+        public static final double DriveDeadband = isSim ? 0.15 : 0.1; // Drive Deadband
+        public static final double RotationDeadband = isSim ? 0.15 : 0.1; // Rotation Deadband
         public static final double SnapDriveDeadband = 0.001; // Snap Rotation Deadband
         public static final double SnapRotationDeadband = 0.001; // Snap Rotation Deadband
 
@@ -291,9 +291,12 @@ public class Constants {
   public static final class Viz {
     public static final double xOffset = Units.inchesToMeters(30.0);
 
-    public static final double intakeX = xOffset + Units.inchesToMeters(27.25);
+    public static final double intakeX = xOffset + Units.inchesToMeters(20);
     public static final double intakeY = Units.inchesToMeters(6);
-    public static final double intakeArmLength = Units.inchesToMeters(10.0);
+    public static final double intakeLength = Units.inchesToMeters(10.0);
+    public static final double intakeBaseX = xOffset + Units.inchesToMeters(19.0);
+    public static final double intakeBaseY = Units.inchesToMeters(5.0);
+    public static final double intakeBaseLength = Units.inchesToMeters(12.0);
 
     public static final double climberBaseX = xOffset + Units.inchesToMeters(2.0);
     public static final double climberBaseY = Units.inchesToMeters(3.0);
@@ -302,7 +305,7 @@ public class Constants {
     public static final double climberCarriageLength = Units.inchesToMeters(6.0);
 
     public static final double HoodPivotX = xOffset + Units.inchesToMeters(12.0);
-    public static final double HoodPivotY = Units.inchesToMeters(12.0); 
+    public static final double HoodPivotY = Units.inchesToMeters(16.0); 
     public static final double HoodLength = Units.inchesToMeters(4.0);
     public static final double ShooterRadius = Units.inchesToMeters(2.0);
 
