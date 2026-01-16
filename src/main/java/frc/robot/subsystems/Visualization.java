@@ -196,7 +196,7 @@ public static void Update2DVisualization() {
         fuelViz[i] = new Pose3d(fuelViz[i].getX(),fuelViz[i].getY(),0.1, new Rotation3d(0,0,0));
         fuelVelocity[i][0] -= (fuelVelocity[i][0] > 0 ? 1 : -1) * Constants.ShotCalc.Friction*(fuelVelocity[i][0]) * (fuelVelocity[i][0])* Constants.defaultPeriodSecs;
         fuelVelocity[i][1] -= (fuelVelocity[i][1] > 0 ? 1 : -1) * Constants.ShotCalc.Friction*(fuelVelocity[i][1]) * (fuelVelocity[i][1])* Constants.defaultPeriodSecs;
-        if (Math.abs(fuelVelocity[i][0])+Math.abs(fuelVelocity[i][1])  < 0.5){
+        if (Math.abs(fuelVelocity[i][0])+Math.abs(fuelVelocity[i][1])  < 0.3){
         fuelVelocity[i][0] = 0;
         fuelVelocity[i][1] = 0;
         }

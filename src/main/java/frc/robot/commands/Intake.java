@@ -1,15 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class Intake extends Command {
   private final IntakeSubsystem m_intake;
-private Timer m_placeTimer = new Timer();
+  // private Timer m_placeTimer = new Timer();
 
   public Intake(
       IntakeSubsystem intakeSubsystem) {

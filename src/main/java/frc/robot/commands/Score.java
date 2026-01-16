@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -44,7 +45,7 @@ public class Score extends Command {
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     if (loopCount % 10 == 0) {
-    Visualization.LaunchFuelViz(shooterVelocity, 90-hoodAngle);
+    Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
     loopCount++;
   }

@@ -9,7 +9,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 public class MoveupClimber extends Command {
 
   private final ClimberSubsystem m_climber;
-  private Timer m_ejectTimer = new Timer();
+  // private Timer m_ejectTimer = new Timer();
 
   public MoveupClimber(ClimberSubsystem climber) {
 

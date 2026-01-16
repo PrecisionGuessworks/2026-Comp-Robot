@@ -103,6 +103,7 @@ public class RobotContainer {
         robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
     
         NamedCommands.registerCommands(robotCommands);
+        configureBindings();
 
 
 
@@ -177,11 +178,11 @@ public class RobotContainer {
         
         
 
-        // driver.y().whileTrue(drivetrain.applyRequest(() ->
-        //     angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
-        //     .withVelocityY(-driver.getLeftX() * MaxSpeed)
-        //     .withTargetDirection(new Rotation2d(Math.toRadians(0))))
-        // );
+        driver.y().whileTrue(drivetrain.applyRequest(() ->
+            angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+            .withVelocityY(-driver.getLeftX() * MaxSpeed)
+            .withTargetDirection(new Rotation2d(Math.toRadians(90))))
+        );
         
 
 

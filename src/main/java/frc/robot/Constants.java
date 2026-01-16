@@ -84,7 +84,7 @@ public class Constants {
     }
 
     public static final double SimShotefficiency = 0.85;
-    public static final double Drag = 0.07; // Drag Coefficient for Simulations
+    public static final double Drag = 0.03; // Drag Coefficient for Simulations
     public static final double Friction = 0.8; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations
 
@@ -97,13 +97,22 @@ public class Constants {
         //Drive Constants that are not in TunerConstants / Gnenerated
 
         // PID for Rotation and Translation for Auto and Teleop Snap
-        public static final double PTranslation = 5;
-        public static final double ITranslation = 0.001;
-        public static final double DTranslation = 0.1;
+        // public static final double PTranslation = 5;
+        // public static final double ITranslation = 0.001;
+        // public static final double DTranslation = 0.1;
 
-        public static final double PRotation = 6;
-        public static final double IRotation = 0.01;
-        public static final double DRotation = 0.1;
+        // public static final double PRotation = 6;
+        // public static final double IRotation = 0.01;
+        // public static final double DRotation = 0.1;
+
+
+        public static final double PTranslation = 10;
+        public static final double ITranslation = 0;
+        public static final double DTranslation = 0;
+
+        public static final double PRotation = 7;
+        public static final double IRotation = 0;
+        public static final double DRotation = 0;
         
         // 0.0-1.0 of the max speed
         public static final double MaxSpeedPercentage = 0.75; // Default 1.0

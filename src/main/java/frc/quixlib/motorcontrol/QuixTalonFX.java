@@ -7,7 +7,6 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.configs.TalonFXConfigurator;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.Follower;
@@ -55,6 +54,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   private final MotionMagicExpoTorqueCurrentFOC m_motionMagicExpoTorqueControl = new MotionMagicExpoTorqueCurrentFOC(0);
   private final DynamicMotionMagicVoltage m_dynamicMotionMagicControl =
       new DynamicMotionMagicVoltage(0, 0, 0);
+
 
   private final QuixStatusSignal m_percentOutputSignal;
   private final QuixStatusSignal m_sensorPositionSignal;
