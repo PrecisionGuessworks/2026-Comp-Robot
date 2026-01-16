@@ -178,7 +178,7 @@ public static void Update2DVisualization() {
   public static void LaunchFuelViz(double velocity,double angle){
     if(Constants.SimFuel){
         double ShotVelocity = velocity * Constants.Shooter.WheelRadius * Constants.ShotCalc.SimShotefficiency;  
-            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),0.4, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
+            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),Constants.Viz.HoodPivotY, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
             new double[] {DrivetrainExtra.getFieldSpeedsX() + ShotVelocity * Math.cos(angle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
               DrivetrainExtra.getFieldSpeedsY() + ShotVelocity * Math.cos(angle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
               ShotVelocity * Math.sin(angle) });

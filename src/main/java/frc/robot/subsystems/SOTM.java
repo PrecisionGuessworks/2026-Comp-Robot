@@ -41,7 +41,7 @@ public class SOTM {
     // private final XboxController m_driver;
     private double m_wrongBallTime;
     private final Timer m_timer = new Timer();
-    public static Translation2d VirtualGoal = new Translation2d();
+    public static Translation2d movingGoalLocation = new Translation2d();
 
     // private static LinearInterpolationTable m_timeTable = ShooterConstants.kTimeTable;
     // private static LinearInterpolationTable m_hoodTable = ShooterConstants.kHoodTable;
@@ -85,7 +85,7 @@ public class SOTM {
         //     target = GoalConstants.kWrongBallGoal;
         // }
 
-        Translation2d robotToGoal = target.minus(RobotContainer.drivetrain.getState().Pose.getTranslation());
+        Translation2d robotToGoal = target.minus(robotPose.getTranslation());
         double dist = robotToGoal.getDistance(new Translation2d()) ; // * 39.37    in meteres
 
         DogLog.log("SOTM: Distance to Goal", dist);
@@ -96,7 +96,7 @@ public class SOTM {
 
         DogLog.log("SOTM: Fixed Time", shotTime);
 
-        Translation2d movingGoalLocation = new Translation2d();
+        // Translation2d movingGoalLocation = new Translation2d();
 
         for(int i=0;i<5;i++){
 
@@ -107,12 +107,12 @@ public class SOTM {
 
             // SmartDashboard.putNumber("Goal X", virtualGoalX);
             // SmartDashboard.putNumber("Goal Y", virtualGoalY);
-            VirtualGoal = new Translation2d(virtualGoalX, virtualGoalY);
+            Translation2d VirtualGoal = new Translation2d(virtualGoalX, virtualGoalY);
             DogLog.log("SOTM: Virtual Goal", new Pose2d(VirtualGoal, new Rotation2d()));
 
             Translation2d testGoalLocation = new Translation2d(virtualGoalX, virtualGoalY);
 
-            Translation2d toTestGoal = testGoalLocation.minus(RobotContainer.drivetrain.getState().Pose.getTranslation());
+            Translation2d toTestGoal = testGoalLocation.minus(robotPose.getTranslation());
 
             double newShotTime = Constants.ShotCalc.Time.get(toTestGoal.getDistance(new Translation2d()) );
 
@@ -129,8 +129,9 @@ public class SOTM {
             }
 
         }
+        DogLog.log("SOTM: Moving Goal", new Pose2d(movingGoalLocation, new Rotation2d()));
 
-        double newDist = movingGoalLocation.minus(RobotContainer.drivetrain.getState().Pose.getTranslation()).getDistance(new Translation2d()) ;
+        double newDist = movingGoalLocation.minus(robotPose.getTranslation()).getDistance(new Translation2d()) ;
 
         DogLog.log("SOTM: New Distance", newDist);
 
@@ -191,7 +192,7 @@ public class SOTM {
     public static Rotation2d targetangle(){
         /* First put the drivetrain into auto run mode, then run the auto */
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
-        Rotation2d temp = PhotonUtils.getYawToPose(pose, new Pose2d(VirtualGoal,new Rotation2d()));
+        Rotation2d temp = PhotonUtils.getYawToPose(pose, new Pose2d(movingGoalLocation,new Rotation2d()));
         System.out.println(temp);
         return temp;
         
@@ -199,7 +200,7 @@ public class SOTM {
 
     public static double targetDistance() {
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
-        double distance = pose.getTranslation().getDistance(VirtualGoal);
+        double distance = pose.getTranslation().getDistance(movingGoalLocation);
         System.out.println("Distance: " + distance);
         return distance;
     }
@@ -208,8 +209,8 @@ public class SOTM {
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
         double vx = DrivetrainExtra.getFieldSpeedsX();
         double vy = DrivetrainExtra.getFieldSpeedsY();
-        double deltaX = VirtualGoal.getX() - pose.getX();
-        double deltaY = VirtualGoal.getY() - pose.getY();
+        double deltaX = movingGoalLocation.getX() - pose.getX();
+        double deltaY = movingGoalLocation.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
         System.out.println("omega: " + omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);

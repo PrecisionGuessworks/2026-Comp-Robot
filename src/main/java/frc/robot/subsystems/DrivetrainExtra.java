@@ -40,10 +40,10 @@ public class DrivetrainExtra {
 
     // Might need to be swapped idk.
     public static double getRobotAccelX(){
-        return RobotContainer.drivetrain.getPigeon2().getAccelerationX().getValueAsDouble();
+        return RobotContainer.drivetrain.getPigeon2().getAccelerationX().getValueAsDouble() * Constants.g;
     }
     public static double getRobotAccelY(){
-        return RobotContainer.drivetrain.getPigeon2().getAccelerationY().getValueAsDouble();
+        return RobotContainer.drivetrain.getPigeon2().getAccelerationY().getValueAsDouble() * Constants.g;
     }
 
     public static double getFieldAccelY(){
@@ -183,13 +183,10 @@ public class DrivetrainExtra {
         try {
             path = PathPlannerPath.fromPathFile("Testpath");
         } catch (FileVersionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

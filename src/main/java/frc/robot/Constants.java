@@ -59,37 +59,46 @@ public class Constants {
     public static final InterpolatingDoubleTreeMap Velocity;
     static {
         Velocity = new InterpolatingDoubleTreeMap();
-        Velocity.put(0.0, 200.0);
+        Velocity.put(0.5, 230.0);
+        Velocity.put(1.0, 235.0);
+        Velocity.put(1.5, 240.0);
         Velocity.put(2.0, 250.0);
+        Velocity.put(2.5, 275.0);
         Velocity.put(3.0, 300.0);
+        Velocity.put(3.5, 325.0);
         Velocity.put(4.0, 350.0);
     }
     public static final InterpolatingDoubleTreeMap Angle;
     static {
         Angle = new InterpolatingDoubleTreeMap();
-        Angle.put(0.0, Units.degreesToRadians(10));
-        Angle.put(1.0, Units.degreesToRadians(15));
-        Angle.put(2.0, Units.degreesToRadians(20));
-        Angle.put(3.0, Units.degreesToRadians(25));
-        Angle.put(4.0, Units.degreesToRadians(35));
-        Angle.put(5.0, Units.degreesToRadians(43));
+        Angle.put(0.5, Units.degreesToRadians(6));
+        Angle.put(1.0, Units.degreesToRadians(8));
+        Angle.put(1.5, Units.degreesToRadians(12));
+        Angle.put(2.0, Units.degreesToRadians(15));
+        Angle.put(2.5, Units.degreesToRadians(17));
+        Angle.put(3.0, Units.degreesToRadians(19));
+        Angle.put(3.5, Units.degreesToRadians(20.5));
+        Angle.put(4.0, Units.degreesToRadians(22));
     }
     // Used for sotm (Shoot on the move)
     public static final InterpolatingDoubleTreeMap Time;
     static {
         Time = new InterpolatingDoubleTreeMap();
-        Time.put(1.0, 0.2);
-        Time.put(2.0, 0.3);
-        Time.put(3.0, 0.4);
-        Time.put(4.0, 0.5);
-        Time.put(5.0, 0.6);
+        Time.put(0.5, 1.0);
+        Time.put(1.0, 1.2);
+        Time.put(1.5, 1.25);
+        Time.put(2.0, 1.3);
+        Time.put(2.5, 1.35);
+        Time.put(3.0, 1.4);
+        Time.put(3.5, 1.45);
+        Time.put(4.0, 1.5);
     }
 
     public static final double SimShotefficiency = 0.85;
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
     public static final double Friction = 0.8; // Friction Coefficient for Simulations 
-    public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations
-    public static final double kAccelCompFactor = 0.5; // Factor for Compensating for Robot Acceleration when Shooting on the Move
+    public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations (NOT USED RN)
+    public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
     }
     
@@ -308,7 +317,7 @@ public class Constants {
     public static final double climberCarriageLength = Units.inchesToMeters(6.0);
 
     public static final double HoodPivotX = xOffset + Units.inchesToMeters(12.0);
-    public static final double HoodPivotY = Units.inchesToMeters(16.0); 
+    public static final double HoodPivotY = Units.inchesToMeters(18.0); 
     public static final double HoodLength = Units.inchesToMeters(4.0);
     public static final double ShooterRadius = Units.inchesToMeters(2.0);
 
