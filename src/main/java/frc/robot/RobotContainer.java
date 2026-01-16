@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Intake;
 import frc.robot.commands.MoveupClimber;
+import frc.robot.commands.STOMScore;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
 import frc.robot.generated.TunerConstants;
@@ -34,6 +35,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class RobotContainer {
@@ -165,11 +167,19 @@ public class RobotContainer {
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         driver.back().whileTrue(new StowAll(climber, shooter));
 
-        driver.rightBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
+        driver.leftBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
         angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
             .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose ))
             .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
+            )));
+
+
+        driver.rightBumper().whileTrue(new ParallelCommandGroup(new STOMScore(shooter),drivetrain.applyRequest(() ->
+        angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+            .withVelocityY(-driver.getLeftX() * MaxSpeed)
+            .withTargetDirection(SOTM.targetangle( ))
+            .withTargetRateFeedforward(SOTM.targetAngleFeeds())
             )));
 
         driver.rightTrigger().whileTrue(new Intake(intake));

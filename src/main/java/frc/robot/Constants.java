@@ -26,6 +26,8 @@ import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.motorcontrol.MechanismRatio;
 import frc.quixlib.motorcontrol.PIDConfig;
 
+
+
 public class Constants {
     // CANID's:
     //
@@ -87,6 +89,7 @@ public class Constants {
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
     public static final double Friction = 0.8; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations
+    public static final double kAccelCompFactor = 0.5; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
     }
     

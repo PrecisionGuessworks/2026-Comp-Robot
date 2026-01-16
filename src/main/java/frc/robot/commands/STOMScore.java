@@ -9,7 +9,7 @@ import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
 
-public class Score extends Command {
+public class STOMScore extends Command {
   private final ShooterSubsystem m_shooter;
   private double distanceToTarget;
   private double hoodAngle;
@@ -17,7 +17,7 @@ public class Score extends Command {
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
-  public Score(
+  public STOMScore(
       ShooterSubsystem shooterSubsystem) {
     m_shooter = shooterSubsystem;
 
@@ -28,19 +28,20 @@ public class Score extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    distanceToTarget = DrivetrainExtra.targetDistance(Constants.ShotCalc.targetpose);
+    distanceToTarget = SOTM.targetDistance();
     hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
     shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     m_timer.restart();
     loopCount = 0;
+    SOTM.calcSOTM();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    distanceToTarget = DrivetrainExtra.targetDistance(Constants.ShotCalc.targetpose);
+    distanceToTarget = SOTM.targetDistance();
     hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
     shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
     m_shooter.setHoodAngle(hoodAngle);
@@ -49,6 +50,7 @@ public class Score extends Command {
     Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
     loopCount++;
+    SOTM.calcSOTM();
   }
 
   // Called once the command ends or is interrupted.

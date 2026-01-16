@@ -54,7 +54,7 @@ public class DrivetrainExtra {
         return getRobotAccelX() * Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()) - getRobotAccelY() * Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians());
     }
     
-     public static Rotation2d targetangle(Pose2d targetpose){
+    public static Rotation2d targetangle(Pose2d targetpose){
         /* First put the drivetrain into auto run mode, then run the auto */
         SwerveDriveState state = RobotContainer.drivetrain.getState();
         Pose2d pose = state.Pose;
