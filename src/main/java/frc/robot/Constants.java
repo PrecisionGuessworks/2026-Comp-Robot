@@ -59,39 +59,48 @@ public class Constants {
     public static final InterpolatingDoubleTreeMap Velocity;
     static {
         Velocity = new InterpolatingDoubleTreeMap();
-        Velocity.put(0.5, 230.0);
+        Velocity.put(0.5, 235.0);
         Velocity.put(1.0, 235.0);
         Velocity.put(1.5, 240.0);
-        Velocity.put(2.0, 250.0);
-        Velocity.put(2.5, 275.0);
-        Velocity.put(3.0, 300.0);
-        Velocity.put(3.5, 325.0);
-        Velocity.put(4.0, 350.0);
+        Velocity.put(2.0, 245.0);
+        Velocity.put(2.5, 250.0);
+        Velocity.put(3.0, 255.0);
+        Velocity.put(3.5, 260.0);
+        Velocity.put(4.0, 268.0);
+        Velocity.put(4.5, 280.0);
+        Velocity.put(5.0, 290.0);
+        Velocity.put(5.5, 300.0);
     }
     public static final InterpolatingDoubleTreeMap Angle;
     static {
         Angle = new InterpolatingDoubleTreeMap();
-        Angle.put(0.5, Units.degreesToRadians(6));
-        Angle.put(1.0, Units.degreesToRadians(8));
-        Angle.put(1.5, Units.degreesToRadians(12));
-        Angle.put(2.0, Units.degreesToRadians(15));
-        Angle.put(2.5, Units.degreesToRadians(17));
-        Angle.put(3.0, Units.degreesToRadians(19));
-        Angle.put(3.5, Units.degreesToRadians(20.5));
-        Angle.put(4.0, Units.degreesToRadians(22));
+        Angle.put(0.5, Units.degreesToRadians(4));
+        Angle.put(1.0, Units.degreesToRadians(6));
+        Angle.put(1.5, Units.degreesToRadians(8));
+        Angle.put(2.0, Units.degreesToRadians(11));
+        Angle.put(2.5, Units.degreesToRadians(15));
+        Angle.put(3.0, Units.degreesToRadians(17));
+        Angle.put(3.5, Units.degreesToRadians(19));
+        Angle.put(4.0, Units.degreesToRadians(20.5));
+        Angle.put(4.5, Units.degreesToRadians(23));
+        Angle.put(5.0, Units.degreesToRadians(24));
+        Angle.put(5.5, Units.degreesToRadians(25));
     }
     // Used for sotm (Shoot on the move)
     public static final InterpolatingDoubleTreeMap Time;
     static {
         Time = new InterpolatingDoubleTreeMap();
-        Time.put(0.5, 1.0);
+        Time.put(0.5, 1.2);
         Time.put(1.0, 1.2);
-        Time.put(1.5, 1.25);
-        Time.put(2.0, 1.3);
-        Time.put(2.5, 1.35);
-        Time.put(3.0, 1.4);
+        Time.put(1.5, 1.3);
+        Time.put(2.0, 1.43);
+        Time.put(2.5, 1.44);
+        Time.put(3.0, 1.44);
         Time.put(3.5, 1.45);
         Time.put(4.0, 1.5);
+        Time.put(4.5, 1.5);
+        Time.put(5.0, 1.5);
+        Time.put(5.5, 1.5);
     }
 
     public static final double SimShotefficiency = 0.85;

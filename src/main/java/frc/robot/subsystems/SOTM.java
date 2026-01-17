@@ -41,6 +41,7 @@ public class SOTM {
     // private final XboxController m_driver;
     private double m_wrongBallTime;
     private final Timer m_timer = new Timer();
+    public static double newDist = 0.0;
     public static Translation2d movingGoalLocation = new Translation2d();
 
     // private static LinearInterpolationTable m_timeTable = ShooterConstants.kTimeTable;
@@ -127,11 +128,12 @@ public class SOTM {
             else{
                 shotTime = newShotTime;
             }
+            
 
         }
         DogLog.log("SOTM: Moving Goal", new Pose2d(movingGoalLocation, new Rotation2d()));
 
-        double newDist = movingGoalLocation.minus(robotPose.getTranslation()).getDistance(new Translation2d()) ;
+        newDist = movingGoalLocation.minus(robotPose.getTranslation()).getDistance(new Translation2d()) ;
 
         DogLog.log("SOTM: New Distance", newDist);
 
@@ -192,17 +194,18 @@ public class SOTM {
     public static Rotation2d targetangle(){
         /* First put the drivetrain into auto run mode, then run the auto */
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
-        Rotation2d temp = PhotonUtils.getYawToPose(pose, new Pose2d(movingGoalLocation,new Rotation2d()));
-        System.out.println(temp);
+        Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
+        Rotation2d temp = PhotonUtils.getYawToPose(temppose, new Pose2d(movingGoalLocation,new Rotation2d(0)));
+        // System.out.println(temp);
         return temp;
         
     }
 
     public static double targetDistance() {
-        Pose2d pose = RobotContainer.drivetrain.getState().Pose;
-        double distance = pose.getTranslation().getDistance(movingGoalLocation);
-        System.out.println("Distance: " + distance);
-        return distance;
+        // Pose2d pose = RobotContainer.drivetrain.getState().Pose;
+        // double distance = pose.getTranslation().getDistance(movingGoalLocation);
+        // System.out.println("Distance: " + distance);
+        return newDist;
     }
 
     public static AngularVelocity targetAngleFeeds() {
@@ -212,7 +215,7 @@ public class SOTM {
         double deltaX = movingGoalLocation.getX() - pose.getX();
         double deltaY = movingGoalLocation.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
-        System.out.println("omega: " + omega);
+        // System.out.println("omega: " + omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 

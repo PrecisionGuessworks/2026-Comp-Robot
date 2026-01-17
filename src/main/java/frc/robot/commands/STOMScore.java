@@ -51,6 +51,7 @@ public class STOMScore extends Command {
     }
     loopCount++;
     SOTM.calcSOTM();
+
   }
 
   // Called once the command ends or is interrupted.
