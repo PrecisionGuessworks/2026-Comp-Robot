@@ -43,7 +43,7 @@ public class RobotContainer {
     public static double MaxAngularRate = RotationsPerSecond.of(Constants.Drive.MaxAngularRatePercentage).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     public static final CommandXboxController driver = new CommandXboxController(0);
-    // public static final CommandXboxController operator = new CommandXboxController(1);
+    public static final CommandXboxController operator = new CommandXboxController(1);
 
     // public static final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     public static final CommandSwerveDrivetrain drivetrain = new CommandSwerveDrivetrain(TunerConstants.DrivetrainConstants,250, Constants.Vision.ODOM_STD_DEV, Constants.Vision.kSingleTagStdDevs, TunerConstants.FrontLeft, TunerConstants.FrontRight, TunerConstants.BackLeft, TunerConstants.BackRight);
@@ -167,12 +167,14 @@ public class RobotContainer {
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         driver.back().whileTrue(new StowAll(climber, shooter));
 
-        driver.leftBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
-        angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
-            .withVelocityY(-driver.getLeftX() * MaxSpeed)
-            .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose ))
-            .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
-            )));
+        // driver.leftBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
+        // angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+        //     .withVelocityY(-driver.getLeftX() * MaxSpeed)
+        //     .withTargetDirection(DrivetrainExtra.targetangle(Constants.ShotCalc.targetpose ))
+        //     .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
+        //     )));
+
+        driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
 
         driver.rightBumper().whileTrue(new ParallelCommandGroup(new STOMScore(shooter),drivetrain.applyRequest(() ->

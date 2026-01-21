@@ -32,8 +32,13 @@ public class Constants {
     // CANID's:
     //
     // Drivetrain 1-19
-    // Elevator / Arm 20-29 
-    // Intake 30-39
+    // - 4 drive, 4 steer
+    // Shooter / Indexer 20-29 
+    // - 2 hood, 2 shooter, 1 indexer
+    // Intake / Hopper 30-39
+    // - 1 intake deploy, 2 intake roller, 1 hopper
+    // Climber 40-49
+    // - 2 climber motors
     
 
 
@@ -56,52 +61,62 @@ public class Constants {
     new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
     new Pose2d(12,4.05,new Rotation2d(0)); // Red
 
-    public static final InterpolatingDoubleTreeMap Velocity;
+    public static final Pose2d leftPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
+    new Pose2d(3.23,5.79,new Rotation2d(0)) : // Blue
+    new Pose2d(13.41,5.79,new Rotation2d(0)); // Red
+
+    public static final Pose2d rightPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ? 
+    new Pose2d(3.23,2.31,new Rotation2d(0)) : // Blue
+    new Pose2d(13.41,2.31,new Rotation2d(0)); // Red
+
+    public static final InterpolatingDoubleTreeMap ShotVelocity;
     static {
-        Velocity = new InterpolatingDoubleTreeMap();
-        Velocity.put(0.5, 235.0);
-        Velocity.put(1.0, 235.0);
-        Velocity.put(1.5, 240.0);
-        Velocity.put(2.0, 245.0);
-        Velocity.put(2.5, 250.0);
-        Velocity.put(3.0, 255.0);
-        Velocity.put(3.5, 260.0);
-        Velocity.put(4.0, 268.0);
-        Velocity.put(4.5, 280.0);
-        Velocity.put(5.0, 290.0);
-        Velocity.put(5.5, 300.0);
+        ShotVelocity = new InterpolatingDoubleTreeMap();
+        ShotVelocity.put(0.5, 235.0);
+        ShotVelocity.put(1.0, 235.0);
+        ShotVelocity.put(1.5, 240.0);
+        ShotVelocity.put(2.0, 245.0);
+        ShotVelocity.put(2.5, 250.0);
+        ShotVelocity.put(3.0, 255.0);
+        ShotVelocity.put(3.5, 260.0);
+        ShotVelocity.put(4.0, 268.0);
+        ShotVelocity.put(4.5, 280.0);
+        ShotVelocity.put(5.0, 290.0);
+        ShotVelocity.put(5.5, 300.0);
     }
-    public static final InterpolatingDoubleTreeMap Angle;
+    public static final InterpolatingDoubleTreeMap ShotAngle;
     static {
-        Angle = new InterpolatingDoubleTreeMap();
-        Angle.put(0.5, Units.degreesToRadians(4));
-        Angle.put(1.0, Units.degreesToRadians(6));
-        Angle.put(1.5, Units.degreesToRadians(8));
-        Angle.put(2.0, Units.degreesToRadians(11));
-        Angle.put(2.5, Units.degreesToRadians(15));
-        Angle.put(3.0, Units.degreesToRadians(17));
-        Angle.put(3.5, Units.degreesToRadians(19));
-        Angle.put(4.0, Units.degreesToRadians(20.5));
-        Angle.put(4.5, Units.degreesToRadians(23));
-        Angle.put(5.0, Units.degreesToRadians(24));
-        Angle.put(5.5, Units.degreesToRadians(25));
+        ShotAngle = new InterpolatingDoubleTreeMap();
+        ShotAngle.put(0.5, Units.degreesToRadians(4));
+        ShotAngle.put(1.0, Units.degreesToRadians(6));
+        ShotAngle.put(1.5, Units.degreesToRadians(8));
+        ShotAngle.put(2.0, Units.degreesToRadians(11));
+        ShotAngle.put(2.5, Units.degreesToRadians(15));
+        ShotAngle.put(3.0, Units.degreesToRadians(17));
+        ShotAngle.put(3.5, Units.degreesToRadians(19));
+        ShotAngle.put(4.0, Units.degreesToRadians(20.5));
+        ShotAngle.put(4.5, Units.degreesToRadians(23));
+        ShotAngle.put(5.0, Units.degreesToRadians(24));
+        ShotAngle.put(5.5, Units.degreesToRadians(25));
     }
     // Used for sotm (Shoot on the move)
-    public static final InterpolatingDoubleTreeMap Time;
+    public static final InterpolatingDoubleTreeMap ShotTime;
     static {
-        Time = new InterpolatingDoubleTreeMap();
-        Time.put(0.5, 1.2);
-        Time.put(1.0, 1.2);
-        Time.put(1.5, 1.3);
-        Time.put(2.0, 1.43);
-        Time.put(2.5, 1.44);
-        Time.put(3.0, 1.44);
-        Time.put(3.5, 1.45);
-        Time.put(4.0, 1.5);
-        Time.put(4.5, 1.5);
-        Time.put(5.0, 1.5);
-        Time.put(5.5, 1.5);
+        ShotTime = new InterpolatingDoubleTreeMap();
+        ShotTime.put(0.5, 1.2);
+        ShotTime.put(1.0, 1.2);
+        ShotTime.put(1.5, 1.3);
+        ShotTime.put(2.0, 1.43);
+        ShotTime.put(2.5, 1.44);
+        ShotTime.put(3.0, 1.44);
+        ShotTime.put(3.5, 1.45);
+        ShotTime.put(4.0, 1.5);
+        ShotTime.put(4.5, 1.5);
+        ShotTime.put(5.0, 1.5);
+        ShotTime.put(5.5, 1.5);
     }
+
+    // TODO: Need to add pass constants later
 
     public static final double SimShotefficiency = 0.85;
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
@@ -210,6 +225,14 @@ public class Constants {
     public static final CANDeviceID shooterMotorID = new CANDeviceID(28, kSuperStructureCanivoreName);
     public static final MechanismRatio shooterMotorRatio = new MechanismRatio(12, 18);
     public static final boolean shooterMotorInvert = false;
+
+    public static final CANDeviceID shooter2MotorID = new CANDeviceID(29, kSuperStructureCanivoreName);
+    public static final MechanismRatio shooter2MotorRatio = new MechanismRatio(12, 18);
+    public static final MotorAlignmentValue shooter2MotorInvert = MotorAlignmentValue.Opposed;
+
+    public static final CANDeviceID indexerMotorID = new CANDeviceID(27, kSuperStructureCanivoreName);
+    public static final MechanismRatio indexerMotorRatio = new MechanismRatio(1, 1);
+    public static final boolean indexerMotorInvert = false;
 
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
@@ -364,6 +387,13 @@ public class Constants {
     public static final int beamBreakPort = 1;
 
     public static final CANDeviceID rollerMotorID = new CANDeviceID(33, kSuperStructureCanivoreName);
+    public static final CANDeviceID rollerMotor2ID = new CANDeviceID(34, kSuperStructureCanivoreName);
+    public static final MechanismRatio rollerMotor2Ratio =
+        new MechanismRatio(1, (1.0 / 3.0));
+    public static final CANDeviceID hopperMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
+    public static final MechanismRatio hopperMotorRatio =
+        new MechanismRatio(1, 1);
+    public static final boolean hopperMotorInvert = false;
 
     public static final MechanismRatio rollerMotorRatio =
         new MechanismRatio(1, (1.0 / 3.0));
@@ -374,15 +404,14 @@ public class Constants {
     public static final int rollerVelocitySlot = 0;
 
     public static final CANDeviceID deployMotorID = new CANDeviceID(31, kSuperStructureCanivoreName);
-    public static final CANDeviceID deployFollowerID = new CANDeviceID(32, kSuperStructureCanivoreName);
 
     public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
     public static final MechanismRatio deployMotorRatio =
         isSim ? 
         new MechanismRatio(
-            1, (42.0 / 10.0) * (22.0 / 22.0) * (42.0 / 16.0) * (36.0 / 16.0)) : // Sim
+            1, (42.0 / 10.0),4 ) : // Sim
         new MechanismRatio(
-            1, (27.0 / 1.0) * (36.0 / 16.0)); // Real
+            1, (27.0 / 1.0) * (36.0 / 16.0),4); // Real
     public static final boolean deployMotorInvert = false;
     public static final PIDConfig deployPIDConfig = new PIDConfig(2.0, 0, 0.3, 0, 1.5, 0.000, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
@@ -400,8 +429,8 @@ public class Constants {
     public static final double startingPosition = minExtension;
     public static final double intakeStow = Units.inchesToMeters(4.0);
 
-    public static final double intakeFullDeployExtension = Units.inchesToMeters(11.0);
-    public static final double intakeSmallDeployExtension = Units.inchesToMeters(3.0);
+    public static final double attackPosition = Units.inchesToMeters(11.0);
+    public static final double defPosition = Units.inchesToMeters(3.0);
 
 
     public static final double intakeRollerVelocity = 100;

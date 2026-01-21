@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.quixlib.viz.Link2d;
@@ -29,6 +30,28 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.rollerMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Intake.rollerMotorInvert)
+              .setSupplyCurrentLimit(40.0)
+              .setStatorCurrentLimit(80.0)
+              .setBrakeMode()
+              .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
+
+  private final QuixTalonFX m_roller2Motor =
+      new QuixTalonFX(
+          Constants.Intake.rollerMotor2ID,
+          Constants.Intake.rollerMotor2Ratio,
+          QuixTalonFX.makeDefaultConfig()
+              .setInverted(Constants.Intake.rollerMotorInvert)
+              .setSupplyCurrentLimit(40.0)
+              .setStatorCurrentLimit(80.0)
+              .setBrakeMode()
+              .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
+
+  private final QuixTalonFX m_hopperMotor =
+      new QuixTalonFX(
+          Constants.Intake.hopperMotorID,
+          Constants.Intake.hopperMotorRatio,
+          QuixTalonFX.makeDefaultConfig()
+              .setInverted(Constants.Intake.hopperMotorInvert)
               .setSupplyCurrentLimit(40.0)
               .setStatorCurrentLimit(80.0)
               .setBrakeMode()
@@ -54,9 +77,15 @@ public class IntakeSubsystem extends SubsystemBase {
               .setForwardSoftLimit(Constants.Intake.maxExtension));
 
 
-  private double m_targetPosition = Constants.Intake.startingPosition;
+  private double m_targetPosition = Constants.Intake.startingPosition; 
   private Timer m_lastPieceTimer = new Timer();
   public boolean m_hasPiece = false;
+  public boolean m_attackMode = false;
+  public boolean m_pastAttackMode = false;
+
+  private final Color Yellow = new Color(255, 255, 0);
+  private final Color Blue = new Color(0, 0, 255);
+  private Color m_currentColor = Blue;
 
   public IntakeSubsystem() {
     m_lastPieceTimer.start();
@@ -80,7 +109,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
     public double getPosition() {
-    return Constants.Climber.motorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
+    return Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
   }
 
   public void setPosition(double targetPosition) {
@@ -90,6 +119,11 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean isAtPosition(double position, double tolerance) {
     return Math.abs(position - getPosition()) <= tolerance;
   }
+
+  // public boolean isAtTarget(double tolerance) {
+  //    isAtPosition(m_targetPosition, tolerance);
+  //    return
+  // }
 
   public void setRollerVelocity(double velocity) {
     if (velocity == 0.0) {
@@ -110,14 +144,22 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_rollerMotor.getSupplyCurrent();
   }
 
-    public double getRollerVelocity() {
+  public double getRollerVelocity() {
     return m_rollerMotor.getSensorVelocity();
   }
 
 
-  // public void disabledInit() {
-  //   m_deployMotor.setBrakeMode(true);
-  // }
+  public void setAttackMode(boolean attackMode) {
+    m_attackMode = attackMode;
+  }
+
+  public boolean getAttackMode() {
+    return m_attackMode;
+  }
+
+  public void flipAttackMode() {
+    m_attackMode = !m_attackMode;
+  }
 
 
   @Override
@@ -127,12 +169,28 @@ public class IntakeSubsystem extends SubsystemBase {
       m_lastPieceTimer.reset();
     }
 
-    // SmartDashboard.putBoolean("Intake: Beam Break", m_beamBreak.get());
-    // SmartDashboard.putBoolean("Intake: Has Piece", hasPiece());
+    if (m_attackMode != m_pastAttackMode) {
+      if (m_attackMode) {
+        m_targetPosition = Constants.Intake.attackPosition;
+      } else {
+        m_targetPosition = Constants.Intake.defPosition;
+      }
+      m_pastAttackMode = m_attackMode;
+    }
+
+
+    if (m_attackMode) {
+      m_currentColor = Yellow;
+    } else {
+      m_currentColor = Blue;
+    }
+    SmartDashboard.putString("Intake Mode", m_currentColor.toHexString());
 
     m_deployMotor.setMotionMagicPositionSetpoint(
         Constants.Intake.deployPositionSlot, m_targetPosition);
 
+
+    DogLog.log("Intake: Attack Mode", m_attackMode);
     DogLog.log("Intake: Position", Units.metersToInches(getPosition()),"In");
     DogLog.log("Intake: Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
     DogLog.log("Intake: Target set Position", Units.metersToInches(m_targetPosition),"In");
@@ -142,7 +200,10 @@ public class IntakeSubsystem extends SubsystemBase {
     
 
     m_rollerMotor.logMotorState();
+    m_roller2Motor.logMotorState();
     m_deployMotor.logMotorState();
+    m_hopperMotor.logMotorState();
+    
     // m_deployFollower.logMotorState();
   }
 

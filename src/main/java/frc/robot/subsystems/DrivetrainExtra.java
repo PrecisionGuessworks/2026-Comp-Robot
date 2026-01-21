@@ -38,12 +38,33 @@ public class DrivetrainExtra {
         return RobotContainer.drivetrain.getState().Speeds.vxMetersPerSecond * Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()) - RobotContainer.drivetrain.getState().Speeds.vyMetersPerSecond * Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians());
     }
 
-    // Might need to be swapped idk.
+
+    private static double pastVX = 0.0; // Used for sim
+    private static double pastVY = 0.0;
+    private static double accelX = 0.0;
+    private static double accelY = 0.0;
+
+        // Might need to be swapped idk.
+
     public static double getRobotAccelX(){
-        return RobotContainer.drivetrain.getPigeon2().getAccelerationX().getValueAsDouble() * Constants.g;
+        if (Constants.isSim){
+        accelX = (RobotContainer.drivetrain.getState().Speeds.vxMetersPerSecond - pastVX)/Constants.defaultPeriodSecs;
+        pastVX = RobotContainer.drivetrain.getState().Speeds.vxMetersPerSecond;
+        } else {
+        accelX = RobotContainer.drivetrain.getPigeon2().getAccelerationX().getValueAsDouble() * Constants.g;
+        }
+        // System.out.println("AccelX: " + accelX);
+        return accelX;
     }
     public static double getRobotAccelY(){
-        return RobotContainer.drivetrain.getPigeon2().getAccelerationY().getValueAsDouble() * Constants.g;
+        if (Constants.isSim){
+        accelY = (RobotContainer.drivetrain.getState().Speeds.vyMetersPerSecond - pastVY)/Constants.defaultPeriodSecs;
+        pastVY = RobotContainer.drivetrain.getState().Speeds.vyMetersPerSecond;
+        } else {
+        accelY = RobotContainer.drivetrain.getPigeon2().getAccelerationY().getValueAsDouble() * Constants.g;
+        }
+        // System.out.println("AccelY: " + accelY);
+        return accelY;
     }
 
     public static double getFieldAccelY(){

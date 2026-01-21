@@ -20,7 +20,6 @@ public class Intake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.setPosition(Constants.Intake.intakeFullDeployExtension);
     m_intake.setRollerVelocity(Constants.Intake.intakeRollerVelocity);
 
   }
@@ -35,7 +34,6 @@ public class Intake extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.setPosition(Constants.Intake.intakeSmallDeployExtension);
     m_intake.setRollerVelocity(Constants.Intake.holdRollerVelocity);
 
 

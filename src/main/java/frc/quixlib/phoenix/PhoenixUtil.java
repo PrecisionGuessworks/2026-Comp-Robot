@@ -12,6 +12,7 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.configs.TorqueCurrentConfigs;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.quixlib.math.MathUtils;
@@ -177,6 +178,58 @@ public class PhoenixUtil {
     // TODO: Check other values
     return true;
   }
+
+  public static boolean TalonFXSConfigsEqual(
+      TalonFXSConfiguration expected, TalonFXSConfiguration actual) {
+    if (!isEqual(expected.MotorOutput, actual.MotorOutput)) {
+      DriverStation.reportWarning(
+          "[MotorOutput] Expected: " + expected.MotorOutput + ", Actual: " + actual.MotorOutput,
+          false);
+      return false;
+    }
+    if (!isEqual(expected.CurrentLimits, actual.CurrentLimits)) {
+      DriverStation.reportWarning(
+          "[CurrentLimits] Expected: "
+              + expected.CurrentLimits
+              + ", Actual: "
+              + actual.CurrentLimits,
+          false);
+      return false;
+    }
+    // if (!isEqual(expected.TorqueCurrent, actual.TorqueCurrent)) {
+    //   DriverStation.reportWarning(
+    //       "[TorqueCurrent] Expected: "
+    //           + expected.TorqueCurrent
+    //           + ", Actual: "
+    //           + actual.TorqueCurrent,
+    //       false);
+    //   return false;
+    // }
+    if (!isEqual(expected.Slot0, actual.Slot0)) {
+      DriverStation.reportWarning(
+          "[Slot0] Expected: " + expected.Slot0 + ", Actual: " + actual.Slot0, false);
+      return false;
+    }
+    if (!isEqual(expected.Slot1, actual.Slot1)) {
+      DriverStation.reportWarning(
+          "[Slot1] Expected: " + expected.Slot1 + ", Actual: " + actual.Slot1, false);
+      return false;
+    }
+    if (!isEqual(expected.Slot2, actual.Slot2)) {
+      DriverStation.reportWarning(
+          "[Slot2] Expected: " + expected.Slot2 + ", Actual: " + actual.Slot2, false);
+      return false;
+    }
+    if (!isEqual(expected.MotionMagic, actual.MotionMagic)) {
+      DriverStation.reportWarning(
+          "[MotionMagic] Expected: " + expected.MotionMagic + ", Actual: " + actual.MotionMagic,
+          false);
+      return false;
+    }
+    // TODO: Check other values
+    return true;
+  }
+
 
   public static boolean isEqual(Slot0Configs a, Slot0Configs b) {
     return MathUtils.epsilonEquals(a.kP, b.kP, kEps)

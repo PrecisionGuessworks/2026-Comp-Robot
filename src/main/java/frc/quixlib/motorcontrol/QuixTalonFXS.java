@@ -6,7 +6,8 @@ import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
+// import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.Follower;
@@ -17,11 +18,14 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.TorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
-import com.ctre.phoenix6.hardware.TalonFX;
+// import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
+import com.ctre.phoenix6.signals.MotorArrangementValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.sim.TalonFXSSimState;
 import com.ctre.phoenix6.sim.TalonFXSimState;
 
 import dev.doglog.DogLog;
@@ -36,13 +40,14 @@ import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
 import frc.robot.Robot;
 
-public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseable {
+public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseable {
   private static final double kCANTimeoutS = 0.1; // s
   private final CANDeviceID m_canID;
-  private final TalonFX m_controller;
-  private final TalonFXSimState m_simState;
+  private final TalonFXS m_controller;
+  private final TalonFXSSimState m_simState;
   private final MechanismRatio m_ratio;
-  private final QuixTalonFXConfiguration m_config;
+  private final MotorArrangementValue m_arrangement;
+  private final QuixTalonFXSConfiguration m_config;
 
   private final DutyCycleOut m_dutyCycleControl = new DutyCycleOut(0);
   private final VoltageOut m_voltageControl = new VoltageOut(0);
@@ -99,7 +104,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   
 
 
-  public static class QuixTalonFXConfiguration {
+  public static class QuixTalonFXSConfiguration {
     private NeutralModeValue NEUTRAL_MODE = NeutralModeValue.Coast;
     private boolean INVERTED = false;
     private double SUPPLY_CURRENT_LIMIT = 40.0; // A
@@ -122,42 +127,43 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     private double FeedbackSensorOffset = 0.0;
     private double FeedbackSensorMechRatio = 1.0;
     private double FeedbackSensorRotorRatio = 1.0;
+    // private MotorArrangementValue Motor_Arrangement = MotorArrangementValue.Disabled;
 
 
 
-    public QuixTalonFXConfiguration setBrakeMode() {
+    public QuixTalonFXSConfiguration setBrakeMode() {
       NEUTRAL_MODE = NeutralModeValue.Brake;
       return this;
     }
 
-    public QuixTalonFXConfiguration setInverted(final boolean inverted) {
+    public QuixTalonFXSConfiguration setInverted(final boolean inverted) {
       INVERTED = inverted;
       return this;
     }
 
-    public QuixTalonFXConfiguration setStatorCurrentLimit(final double amps) {
+    public QuixTalonFXSConfiguration setStatorCurrentLimit(final double amps) {
       STATOR_CURRENT_LIMIT = amps;
       return this;
     }
 
-    public QuixTalonFXConfiguration setSupplyCurrentLimit(final double amps) {
+    public QuixTalonFXSConfiguration setSupplyCurrentLimit(final double amps) {
       SUPPLY_CURRENT_LIMIT = amps;
       return this;
     }
 
-    public QuixTalonFXConfiguration setForwardSoftLimit(final double pos) {
+    public QuixTalonFXSConfiguration setForwardSoftLimit(final double pos) {
       FWD_SOFT_LIMIT_ENABLED = true;
       FWD_SOFT_LIMIT = pos;
       return this;
     }
 
-    public QuixTalonFXConfiguration setReverseSoftLimit(final double pos) {
+    public QuixTalonFXSConfiguration setReverseSoftLimit(final double pos) {
       REV_SOFT_LIMIT_ENABLED = true;
       REV_SOFT_LIMIT = pos;
       return this;
     }
 
-    public QuixTalonFXConfiguration setPIDConfig(int slot, PIDConfig config) {
+    public QuixTalonFXSConfiguration setPIDConfig(int slot, PIDConfig config) {
       switch (slot) {
         case 0:
           slot0Config = config;
@@ -174,14 +180,14 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       return this;
     }
 
-    public QuixTalonFXConfiguration setMotionMagicConfig(
+    public QuixTalonFXSConfiguration setMotionMagicConfig(
         final double cruiseVelocity, final double acceleration, final double jerk) {
       motionMagicCruiseVelocity = cruiseVelocity;
       motionMagicAcceleration = acceleration;
       motionMagicJerk = jerk;
       return this;
     }
-    public QuixTalonFXConfiguration setMotionMagicConfig(
+    public QuixTalonFXSConfiguration setMotionMagicConfig(
         final double cruiseVelocity, final double acceleration, final double jerk,final double MotionMagicExpo_kV,final double MotionMagicExpo_kA) {
       motionMagicCruiseVelocity = cruiseVelocity;
       motionMagicAcceleration = acceleration;
@@ -191,12 +197,12 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       return this;
     }
 
-    public QuixTalonFXConfiguration setBootPositionOffset(final double pos) {
+    public QuixTalonFXSConfiguration setBootPositionOffset(final double pos) {
       bootPositionOffset = pos;
       return this;
     }
 
-    public QuixTalonFXConfiguration setFeedbackConfig(final FeedbackSensorSourceValue FeedbackSensorSource, final int CANID, final double sensorOffset, final MechanismRatio RotorToSensorRatio, final MechanismRatio SensorToMechRatio) { // remote option, offset, sensor ratio to mech and rotor
+    public QuixTalonFXSConfiguration setFeedbackConfig(final FeedbackSensorSourceValue FeedbackSensorSource, final int CANID, final double sensorOffset, final MechanismRatio RotorToSensorRatio, final MechanismRatio SensorToMechRatio) { // remote option, offset, sensor ratio to mech and rotor
     feedbackSensorSource = FeedbackSensorSource;
     FeedbackRemoteSensorCANID = CANID;
     FeedbackSensorOffset = sensorOffset;
@@ -205,10 +211,15 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       return this;
     }
 
-    public TalonFXConfiguration toTalonFXConfiguration(
+    // public QuixTalonFXSConfiguration setMotorArrangement(MotorArrangementValue arrangement) {
+    //   Motor_Arrangement = arrangement;
+    //   return this;
+    // }
+
+    public TalonFXSConfiguration toTalonFXSConfiguration(
         final Function<Double, Double> toNativeSensorPosition,
         final Function<Double, Double> toNativeSensorVelocity) {
-      final TalonFXConfiguration config = new TalonFXConfiguration();
+      final TalonFXSConfiguration config = new TalonFXSConfiguration();
       config.MotorOutput.NeutralMode = NEUTRAL_MODE;
       config.MotorOutput.Inverted =
           INVERTED ? InvertedValue.Clockwise_Positive : InvertedValue.CounterClockwise_Positive;
@@ -216,12 +227,12 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
       //CANcoder config
      
-      config.Feedback.FeedbackSensorSource = feedbackSensorSource;
-      config.Feedback.FeedbackRemoteSensorID = FeedbackRemoteSensorCANID; // Local feedback
+      // config.ExternalFeedback.FeedbackSensorSource = feedbackSensorSource;
+      config.ExternalFeedback.FeedbackRemoteSensorID = FeedbackRemoteSensorCANID; // Local feedback
       //config.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder;
-      config.Feedback.FeedbackRotorOffset = FeedbackSensorOffset;
-      config.Feedback.RotorToSensorRatio = FeedbackSensorRotorRatio;
-      config.Feedback.SensorToMechanismRatio = FeedbackSensorMechRatio;
+      // config.ExternalFeedback.FeedbackRotorOffset = FeedbackSensorOffset;
+      config.ExternalFeedback.RotorToSensorRatio = FeedbackSensorRotorRatio;
+      config.ExternalFeedback.SensorToMechanismRatio = FeedbackSensorMechRatio;
 
       //config.HardwareLimitSwitch.
 
@@ -237,9 +248,10 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       config.CurrentLimits.SupplyCurrentLowerLimit = SUPPLY_CURRENT_LIMIT;
       config.CurrentLimits.SupplyCurrentLowerTime = 0.1; // s
 
-      config.TorqueCurrent.PeakForwardTorqueCurrent = STATOR_CURRENT_LIMIT;
-      config.TorqueCurrent.PeakReverseTorqueCurrent = -STATOR_CURRENT_LIMIT;
-      config.TorqueCurrent.TorqueNeutralDeadband = 0.0;
+      //  Used for FOC I think. SO FXS can not use it
+      // config.TorqueCurrent.PeakForwardTorqueCurrent = STATOR_CURRENT_LIMIT;
+      // config.TorqueCurrent.PeakReverseTorqueCurrent = -STATOR_CURRENT_LIMIT;
+      // config.TorqueCurrent.TorqueNeutralDeadband = 0.0;
 
       config.SoftwareLimitSwitch.ForwardSoftLimitEnable = FWD_SOFT_LIMIT_ENABLED;
       config.SoftwareLimitSwitch.ForwardSoftLimitThreshold =
@@ -264,31 +276,36 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       config.MotionMagic.MotionMagicExpo_kV = motionMagicExpo_kV;
       config.MotionMagic.MotionMagicExpo_kA = motionMagicExpo_kA;
 
+      // config.CustomBrushlessMotor.
+      // config.Commutation.MotorArrangement = Motor_Arrangement;
+
       return config;
     }
   }
 
-  public static QuixTalonFXConfiguration makeDefaultConfig() {
-    return new QuixTalonFXConfiguration();
+  public static QuixTalonFXSConfiguration makeDefaultConfig() {
+    return new QuixTalonFXSConfiguration();
   }
 
   /** Follower constructor */
-  public QuixTalonFX(
+  public QuixTalonFXS(
       final CANDeviceID canID,
-      final QuixTalonFX leader,
+      final QuixTalonFXS leader,
+      final MotorArrangementValue arrangement,
       final MotorAlignmentValue opposeLeader,
-      final QuixTalonFXConfiguration config) {
-    this(canID, leader.getMechanismRatio(), config);
+      final QuixTalonFXSConfiguration config) {
+    this(canID, leader.getMechanismRatio(), arrangement, config);
     m_controller.setControl(new Follower(leader.getDeviceID(), opposeLeader));
   }
 
   /** Constructor with full configuration */
-  public QuixTalonFX(
-      final CANDeviceID canID, final MechanismRatio ratio, final QuixTalonFXConfiguration config) {
+  public QuixTalonFXS(
+      final CANDeviceID canID, final MechanismRatio ratio, final MotorArrangementValue arrangement, final QuixTalonFXSConfiguration config) {
     m_canID = canID;
-    m_controller = new TalonFX(canID.deviceNumber, canID.CANbusName);
+    m_controller = new TalonFXS(canID.deviceNumber, canID.CANbusName);
     m_simState = m_controller.getSimState();
     m_ratio = ratio;
+    m_arrangement = arrangement;
     m_config = config;
 
     m_percentOutputSignal = new QuixStatusSignal(m_controller.getDutyCycle());
@@ -307,6 +324,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
     // SmartDashboard.putBoolean("TalonFX Configuration " + m_canID.toString(), );
     DogLog.log("Hardware: "+m_controller.getDescription()+" ID " + m_canID.deviceNumber + ": Configuration",setConfiguration());
+    DogLog.log("Hardware: "+m_controller.getDescription()+" ID " + m_canID.deviceNumber + ": Motor Arrangement",m_arrangement.toString());
     String name = m_controller.getDescription()+" ID  " + m_canID.deviceNumber +" ";
 
 
@@ -386,17 +404,17 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     boolean allSuccess = true;
 
     // Set motor controller configuration.
-    final TalonFXConfiguration config =
-        m_config.toTalonFXConfiguration(this::toNativeSensorPosition, this::toNativeSensorVelocity);
+    final TalonFXSConfiguration config =
+        m_config.toTalonFXSConfiguration(this::toNativeSensorPosition, this::toNativeSensorVelocity);
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_controller.getConfigurator().apply(config, kCANTimeoutS),
             () -> {
-              TalonFXConfiguration readConfig = new TalonFXConfiguration();
+              TalonFXSConfiguration readConfig = new TalonFXSConfiguration();
               m_controller.getConfigurator().refresh(readConfig, kCANTimeoutS);
-              return PhoenixUtil.TalonFXConfigsEqual(config, readConfig);
+              return PhoenixUtil.TalonFXSConfigsEqual(config, readConfig);
             },
-            "TalonFX " + m_canID + ": applyConfiguration");
+            "TalonFXS " + m_canID + ": applyConfiguration");
 
     // Set update frequencies.
     final double UpdateFreq = 100.0;
@@ -404,33 +422,33 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
         PhoenixUtil.retryUntilSuccess(
             () -> m_percentOutputSignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_percentOutputSignal.getAppliedUpdateFrequency() == UpdateFreq,
-            "TalonFX " + m_canID + ": m_percentOutputSignal.setUpdateFrequency()");
+            "TalonFXS " + m_canID + ": m_percentOutputSignal.setUpdateFrequency()");
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_sensorPositionSignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_sensorPositionSignal.getAppliedUpdateFrequency() == UpdateFreq,
-            "TalonFX " + m_canID + ": m_sensorPositionSignal.setUpdateFrequency()");
+            "TalonFXS " + m_canID + ": m_sensorPositionSignal.setUpdateFrequency()");
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_sensorVelocitySignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_sensorVelocitySignal.getAppliedUpdateFrequency() == UpdateFreq,
-            "TalonFX " + m_canID + ": m_sensorVelocitySignal.setUpdateFrequency()");
+            "TalonFXS " + m_canID + ": m_sensorVelocitySignal.setUpdateFrequency()");
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_closedLoopReferenceSignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_closedLoopReferenceSignal.getAppliedUpdateFrequency() == UpdateFreq,
-            "TalonFX " + m_canID + ": m_closedLoopReferenceSignal.setUpdateFrequency()");
+            "TalonFXS " + m_canID + ": m_closedLoopReferenceSignal.setUpdateFrequency()");
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_closedLoopReferenceSlopeSignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_closedLoopReferenceSlopeSignal.getAppliedUpdateFrequency() == UpdateFreq,
-            "TalonFX " + m_canID + ": m_closedLoopReferenceSlopeSignal.setUpdateFrequency()");
+            "TalonFXS " + m_canID + ": m_closedLoopReferenceSlopeSignal.setUpdateFrequency()");
 
     // Disable all signals that have not been explicitly defined.
     allSuccess &=
         PhoenixUtil.retryUntilSuccess(
             () -> m_controller.optimizeBusUtilization(0,kCANTimeoutS),
-            "TalonFX " + m_canID + ": optimizeBusUtilization");
+            "TalonFXS " + m_canID + ": optimizeBusUtilization");
 
     // Block until we get valid signals.
     // allSuccess &=
@@ -451,7 +469,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
   public boolean checkFaultsAndReconfigureIfNecessary() {
     if (m_controller.hasResetOccurred()) {
-      DriverStation.reportError("TalonFX " + m_canID + ": reset occured", false);
+      DriverStation.reportError("TalonFXS " + m_canID + ": reset occured", false);
       setConfiguration();
       return true;
     }
@@ -619,7 +637,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     m_controller
         .getConfigurator()
         .apply(
-            m_config.toTalonFXConfiguration(
+            m_config.toTalonFXSConfiguration(
                     this::toNativeSensorPosition, this::toNativeSensorVelocity)
                 .MotorOutput);
   }
@@ -631,7 +649,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     m_controller
         .getConfigurator()
         .apply(
-            m_config.toTalonFXConfiguration(
+            m_config.toTalonFXSConfiguration(
                     this::toNativeSensorPosition, this::toNativeSensorVelocity)
                 .CurrentLimits,
             kCANTimeoutS);
@@ -644,7 +662,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     m_controller
         .getConfigurator()
         .apply(
-            m_config.toTalonFXConfiguration(
+            m_config.toTalonFXSConfiguration(
                     this::toNativeSensorPosition, this::toNativeSensorVelocity)
                 .CurrentLimits,
             kCANTimeoutS);

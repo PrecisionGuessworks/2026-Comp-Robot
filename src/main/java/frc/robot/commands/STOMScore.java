@@ -29,8 +29,8 @@ public class STOMScore extends Command {
   @Override
   public void initialize() {
     distanceToTarget = SOTM.targetDistance();
-    hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
-    shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
+    hoodAngle = Constants.ShotCalc.ShotAngle.get(distanceToTarget);
+    shooterVelocity = Constants.ShotCalc.ShotVelocity.get(distanceToTarget);
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     m_timer.restart();
@@ -42,8 +42,8 @@ public class STOMScore extends Command {
   @Override
   public void execute() {
     distanceToTarget = SOTM.targetDistance();
-    hoodAngle = Constants.ShotCalc.Angle.get(distanceToTarget);
-    shooterVelocity = Constants.ShotCalc.Velocity.get(distanceToTarget);
+    hoodAngle = Constants.ShotCalc.ShotAngle.get(distanceToTarget);
+    shooterVelocity = Constants.ShotCalc.ShotVelocity.get(distanceToTarget);
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     if (loopCount % 10 == 0) {

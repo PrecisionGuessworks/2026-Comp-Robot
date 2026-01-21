@@ -31,11 +31,32 @@ public class ShooterSubsystem extends SubsystemBase {
 
       static double HoodStartingAngle = Constants.Shooter.hoodStartingAngle;
       public double shooterTargetVelocity = 0.0;
+      public double indexerTargetVelocity = 0.0;
      // : Units.rotationsToRadians(m_armCoder.getAbsPosition()); Constants.isSim ? 
   private final QuixTalonFX m_shooterMotor =
       new QuixTalonFX(
           Constants.Shooter.shooterMotorID,
           Constants.Shooter.shooterMotorRatio,
+          QuixTalonFX.makeDefaultConfig()
+              .setInverted(Constants.Shooter.shooterMotorInvert)
+              .setSupplyCurrentLimit(50.0)
+              .setStatorCurrentLimit(120.0)
+              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
+  private final QuixTalonFX m_shooter2Motor =
+      new QuixTalonFX(
+          Constants.Shooter.shooter2MotorID,
+          m_shooterMotor,
+          Constants.Shooter.shooter2MotorInvert,
+          QuixTalonFX.makeDefaultConfig()
+              .setInverted(Constants.Shooter.shooterMotorInvert)
+              .setSupplyCurrentLimit(50.0)
+              .setStatorCurrentLimit(120.0)
+              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
+
+  private final QuixTalonFX m_indexerMotor =
+      new QuixTalonFX(
+          Constants.Shooter.indexerMotorID,
+          Constants.Shooter.indexerMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.shooterMotorInvert)
               .setSupplyCurrentLimit(50.0)
@@ -138,6 +159,23 @@ public class ShooterSubsystem extends SubsystemBase {
   public double getShooterVelocity() {
     return m_shooterMotor.getSensorVelocity();
   }
+  
+  public void indexShooter(){
+
+  }
+
+  public void setIndexerVelocity(double velocity){
+    indexerTargetVelocity = velocity;
+    if (velocity == 0.0) {
+      m_indexerMotor.setPercentOutput(0.0);
+    } else {
+      m_indexerMotor.setVelocitySetpoint(
+          Constants.Shooter.shooterVelocityPIDSlot,
+          velocity,
+          Constants.Shooter.shooterFeedforward.calculate(velocity));
+    }
+  }
+
 
   // public void disabledInit() {
   //   m_armMotor.setBrakeMode(true);
@@ -175,8 +213,15 @@ public class ShooterSubsystem extends SubsystemBase {
     DogLog.log("Shooter: Target Velocity (rad per sec)", m_shooterMotor.getClosedLoopReference(),"rad per sec");
     DogLog.log("Shooter: Target set Velocity (rad per sec)", shooterTargetVelocity,"rad per sec");
 
+
+    DogLog.log("Indexer: Current Velocity (rad per sec)", m_indexerMotor.getSensorVelocity(),"rad per sec");
+    DogLog.log("Indexer: Target set Velocity (rad per sec)", indexerTargetVelocity,"rad per sec");
+    
+
     m_shooterMotor.logMotorState();
+    m_shooter2Motor.logMotorState();
     m_hoodMotor.logMotorState();
+    m_indexerMotor.logMotorState();
     // m_hoodCoder.logSensorState();
   
 

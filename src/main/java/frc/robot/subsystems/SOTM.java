@@ -92,7 +92,7 @@ public class SOTM {
         DogLog.log("SOTM: Distance to Goal", dist);
 
         //double fixedShotTime = m_timeTable.getOutput(dist);
-        double shotTime = Constants.ShotCalc.Time.get(dist);
+        double shotTime = Constants.ShotCalc.ShotTime.get(dist);
         
 
         DogLog.log("SOTM: Fixed Time", shotTime);
@@ -106,6 +106,9 @@ public class SOTM {
             double virtualGoalY = target.getY()
                     - shotTime * (DrivetrainExtra.getFieldSpeedsY() + DrivetrainExtra.getFieldAccelY() * ShotCalc.kAccelCompFactor);
 
+            System.out.println("AccelX: " + DrivetrainExtra.getFieldAccelX());
+            System.out.println("AccelY: " + DrivetrainExtra.getFieldAccelY());
+
             // SmartDashboard.putNumber("Goal X", virtualGoalX);
             // SmartDashboard.putNumber("Goal Y", virtualGoalY);
             Translation2d VirtualGoal = new Translation2d(virtualGoalX, virtualGoalY);
@@ -115,7 +118,7 @@ public class SOTM {
 
             Translation2d toTestGoal = testGoalLocation.minus(robotPose.getTranslation());
 
-            double newShotTime = Constants.ShotCalc.Time.get(toTestGoal.getDistance(new Translation2d()) );
+            double newShotTime = Constants.ShotCalc.ShotTime.get(toTestGoal.getDistance(new Translation2d()) );
 
             if(Math.abs(newShotTime-shotTime) <= 0.010){
                 i=4;
