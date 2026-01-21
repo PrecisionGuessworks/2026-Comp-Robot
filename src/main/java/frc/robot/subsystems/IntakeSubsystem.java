@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.motorcontrol.QuixTalonFX;
+import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.quixlib.viz.Link2d;
 import frc.robot.Constants;
 
@@ -24,10 +25,10 @@ public class IntakeSubsystem extends SubsystemBase {
   public final DigitalInput m_beamBreak = new DigitalInput(Constants.Intake.beamBreakPort);
   
 
-  private final QuixTalonFX m_rollerMotor =
+  private final QuixTalonFX m_ABrollerMotor =
       new QuixTalonFX(
-          Constants.Intake.rollerMotorID,
-          Constants.Intake.rollerMotorRatio,
+          Constants.Intake.ABrollerID,
+          Constants.Intake.ABrollerRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Intake.rollerMotorInvert)
               .setSupplyCurrentLimit(40.0)
@@ -35,11 +36,12 @@ public class IntakeSubsystem extends SubsystemBase {
               .setBrakeMode()
               .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
 
-  private final QuixTalonFX m_roller2Motor =
-      new QuixTalonFX(
-          Constants.Intake.rollerMotor2ID,
-          Constants.Intake.rollerMotor2Ratio,
-          QuixTalonFX.makeDefaultConfig()
+  private final QuixTalonFXS m_CrollerMotor =
+      new QuixTalonFXS(
+          Constants.Intake.CrollerID,
+          Constants.Intake.CrollerRatio,
+          Constants.Intake.CrollerArrangement,
+          QuixTalonFXS.makeDefaultConfig()
               .setInverted(Constants.Intake.rollerMotorInvert)
               .setSupplyCurrentLimit(40.0)
               .setStatorCurrentLimit(80.0)
@@ -78,6 +80,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
 
   private double m_targetPosition = Constants.Intake.startingPosition; 
+  private double m_setPosition = m_targetPosition;
   private Timer m_lastPieceTimer = new Timer();
   public boolean m_hasPiece = false;
   public boolean m_attackMode = false;
@@ -125,32 +128,56 @@ public class IntakeSubsystem extends SubsystemBase {
   //    return
   // }
 
-  public void setRollerVelocity(double velocity) {
+  public void setABRollerVelocity(double velocity) {
     if (velocity == 0.0) {
-      m_rollerMotor.setPercentOutput(0.0);
+      m_ABrollerMotor.setPercentOutput(0.0);
     } else {
-      m_rollerMotor.setVelocitySetpoint(
+      m_ABrollerMotor.setVelocitySetpoint(
           Constants.Intake.rollerVelocitySlot,
           velocity,
           Constants.Intake.rollerFeedforward.calculate(velocity));
     }
   }
 
-  public void setRollerCurrent (double stator, double supply){
-    m_rollerMotor.setStatorCurrentLimit(stator,supply);
+  public void setABRollerCurrent (double stator, double supply){
+    m_ABrollerMotor.setStatorCurrentLimit(stator,supply);
   }
 
-  public double getRollerCurrent (){
-    return m_rollerMotor.getSupplyCurrent();
+  public double getABRollerCurrent (){
+    return m_ABrollerMotor.getSupplyCurrent();
   }
 
-  public double getRollerVelocity() {
-    return m_rollerMotor.getSensorVelocity();
+  public double getABRollerVelocity() {
+    return m_ABrollerMotor.getSensorVelocity();
+  }
+
+   public void setCRollerVelocity(double velocity) {
+    if (velocity == 0.0) {
+      m_CrollerMotor.setPercentOutput(0.0);
+    } else {
+      m_CrollerMotor.setVelocitySetpoint(
+          Constants.Intake.rollerVelocitySlot,
+          velocity,
+          Constants.Intake.rollerFeedforward.calculate(velocity));
+    }
+  }
+
+  public void setCRollerCurrent (double stator, double supply){
+    m_CrollerMotor.setStatorCurrentLimit(stator,supply);
+  }
+
+  public double getCRollerCurrent (){
+    return m_CrollerMotor.getSupplyCurrent();
+  }
+
+  public double getCRollerVelocity() {
+    return m_CrollerMotor.getSensorVelocity();
   }
 
 
   public void setAttackMode(boolean attackMode) {
     m_attackMode = attackMode;
+    setIntakePosition();
   }
 
   public boolean getAttackMode() {
@@ -159,24 +186,34 @@ public class IntakeSubsystem extends SubsystemBase {
 
   public void flipAttackMode() {
     m_attackMode = !m_attackMode;
+    setIntakePosition();
+  }
+
+  public void setIntakePosition() {
+    if (m_attackMode) {
+        m_targetPosition = Constants.Intake.attackPosition;
+      } else {
+        m_targetPosition = Constants.Intake.defPosition;
+      }
+  }
+
+  public void retractIntakeSlow() {
+    m_targetPosition -= Constants.Intake.retractSlowSpeed;
   }
 
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    if (hasPiece()) {
-      m_lastPieceTimer.reset();
-    }
 
-    if (m_attackMode != m_pastAttackMode) {
-      if (m_attackMode) {
-        m_targetPosition = Constants.Intake.attackPosition;
-      } else {
-        m_targetPosition = Constants.Intake.defPosition;
-      }
-      m_pastAttackMode = m_attackMode;
-    }
+
+    // if (m_attackMode != m_pastAttackMode) {
+    //   if (m_attackMode) {
+    //     m_targetPosition = Constants.Intake.attackPosition;
+    //   } else {
+    //     m_targetPosition = Constants.Intake.defPosition;
+    //   }
+    //   m_pastAttackMode = m_attackMode;
+    // }
 
 
     if (m_attackMode) {
@@ -186,8 +223,12 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     SmartDashboard.putString("Intake Mode", m_currentColor.toHexString());
 
+    if (m_targetPosition >= Constants.Intake.minExtension && m_targetPosition <= Constants.Intake.maxExtension) {
+      m_setPosition = m_targetPosition;
+    }
+
     m_deployMotor.setMotionMagicPositionSetpoint(
-        Constants.Intake.deployPositionSlot, m_targetPosition);
+        Constants.Intake.deployPositionSlot, m_setPosition);
 
 
     DogLog.log("Intake: Attack Mode", m_attackMode);
@@ -195,12 +236,15 @@ public class IntakeSubsystem extends SubsystemBase {
     DogLog.log("Intake: Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
     DogLog.log("Intake: Target set Position", Units.metersToInches(m_targetPosition),"In");
 
-    DogLog.log("Intake: Roller Velocity", getRollerVelocity(),"Rad/s");
-    DogLog.log("Intake: Roller Target Velocity", m_rollerMotor.getClosedLoopReference(),"Rad/s");
+    DogLog.log("Intake: AB Roller Velocity", getABRollerVelocity(),"Rad/s");
+    DogLog.log("Intake: AB Roller Target Velocity", m_ABrollerMotor.getClosedLoopReference(),"Rad/s");
+
+    DogLog.log("Intake: C Roller Velocity", getCRollerVelocity(),"Rad/s");
+    DogLog.log("Intake: C Roller Target Velocity", m_CrollerMotor.getClosedLoopReference(),"Rad/s");
     
 
-    m_rollerMotor.logMotorState();
-    m_roller2Motor.logMotorState();
+    m_ABrollerMotor.logMotorState();
+    m_CrollerMotor.logMotorState();
     m_deployMotor.logMotorState();
     m_hopperMotor.logMotorState();
     
@@ -240,9 +284,10 @@ public class IntakeSubsystem extends SubsystemBase {
         TimedRobot.kDefaultPeriod,
         Constants.Climber.motorRatio);
 
-    m_rollerSim.setInput(m_rollerMotor.getPercentOutput() * RobotController.getBatteryVoltage());
+
+    m_rollerSim.setInput(m_CrollerMotor.getPercentOutput() * RobotController.getBatteryVoltage());
     m_rollerSim.update(TimedRobot.kDefaultPeriod);
-    m_rollerMotor.setSimSensorVelocity(
+    m_CrollerMotor.setSimSensorVelocity(
         m_rollerSim.getAngularVelocityRadPerSec(),
         TimedRobot.kDefaultPeriod,
         Constants.Intake.deployMotorRatio);

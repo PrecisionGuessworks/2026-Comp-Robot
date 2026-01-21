@@ -20,22 +20,24 @@ public class Intake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.setRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    m_intake.setABRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    m_intake.setCRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    m_intake.setIntakePosition();
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //System.out.println(m_arm.getArmAngle());
-    
+
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.setRollerVelocity(Constants.Intake.holdRollerVelocity);
-
+    m_intake.setABRollerVelocity(Constants.Intake.holdRollerVelocity);
+    m_intake.setCRollerVelocity(Constants.Intake.holdRollerVelocity);
 
   }
 

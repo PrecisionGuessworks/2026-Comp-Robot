@@ -111,7 +111,7 @@ public static void Update2DVisualization() {
             0.0,
             Rotation2d.fromRadians(
                 intakeRollerViz.getRelativeTransform().getRotation().getRadians()
-                    + RobotContainer.intake.getRollerVelocity()
+                    + RobotContainer.intake.getCRollerVelocity()
                         * Constants.Viz.angularVelocityScalar)));
 
     }

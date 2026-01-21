@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
+import com.ctre.phoenix6.signals.MotorArrangementValue;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
@@ -386,14 +387,23 @@ public class Constants {
   public static final class Intake {
     public static final int beamBreakPort = 1;
 
-    public static final CANDeviceID rollerMotorID = new CANDeviceID(33, kSuperStructureCanivoreName);
-    public static final CANDeviceID rollerMotor2ID = new CANDeviceID(34, kSuperStructureCanivoreName);
-    public static final MechanismRatio rollerMotor2Ratio =
+    public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
+    public static final MechanismRatio ABrollerRatio =
         new MechanismRatio(1, (1.0 / 3.0));
     public static final CANDeviceID hopperMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
     public static final MechanismRatio hopperMotorRatio =
         new MechanismRatio(1, 1);
     public static final boolean hopperMotorInvert = false;
+
+    public static final CANDeviceID CrollerID = new CANDeviceID(34, kSuperStructureCanivoreName);
+    public static final MechanismRatio CrollerRatio =
+        new MechanismRatio(1, (1.0 / 3.0));
+    public static final boolean CrollerInvert = false;
+    public static final MotorArrangementValue CrollerArrangement = MotorArrangementValue.NEO_JST;
+
+
+
+
 
     public static final MechanismRatio rollerMotorRatio =
         new MechanismRatio(1, (1.0 / 3.0));
@@ -432,6 +442,7 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(11.0);
     public static final double defPosition = Units.inchesToMeters(3.0);
 
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.02); 
 
     public static final double intakeRollerVelocity = 100;
     public static final double outtakeRollerVelocity = -100;
