@@ -34,8 +34,10 @@ import edu.wpi.first.wpilibj.Alert.AlertType;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
+@SuppressWarnings("rawtypes")
 public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseable {
   private static final double kCANTimeoutS = 0.1; // s
   private final CANDeviceID m_canID;
@@ -480,6 +482,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   }
 
   public void logMotorState() {
+    if (Constants.LogHardware){
     // m_percentOutputPublisher.set(getPercentOutput());
     // m_supplyCurrentPublisher.set(getSupplyCurrent());
     // m_statorCurrentPublisher.set(getStatorCurrent());
@@ -499,6 +502,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rad per sec");
     if (!DriverStation.isFMSAttached()){
     updateTunerConstants();
+    }
     }
   }
 

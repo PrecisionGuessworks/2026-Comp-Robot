@@ -1,9 +1,6 @@
 package frc.robot.subsystems;
 
 import dev.doglog.DogLog;
-import static edu.wpi.first.units.Units.Inches;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotController;
@@ -12,10 +9,7 @@ import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.motorcontrol.QuixTalonFX;
-import frc.quixlib.viz.Link2d;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 
 public class ClimberSubsystem extends SubsystemBase {
   private final QuixTalonFX m_motor =

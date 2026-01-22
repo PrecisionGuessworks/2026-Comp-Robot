@@ -10,8 +10,9 @@ import edu.wpi.first.units.measure.ImmutableAngle;
 import edu.wpi.first.units.measure.ImmutableAngularVelocity;
 import frc.quixlib.motorcontrol.MechanismRatio;
 import frc.quixlib.phoenix.PhoenixUtil;
+import frc.robot.Constants;
 
-
+@SuppressWarnings("rawtypes")
 public class QuixCANCoder implements QuixAbsoluteEncoder {
   private static final double kCANTimeoutS = 0.1; // s
   private final CANDeviceID m_canID;
@@ -66,12 +67,14 @@ public class QuixCANCoder implements QuixAbsoluteEncoder {
   }
 
   public void logSensorState() {
+    if (Constants.LogHardware){
     // m_positionPublisher.set(getPosition());
     // m_absolutePositionPublisher.set(getAbsPosition());
     // m_velocityPublisher.set(getVelocity());
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Sensor Position", getPosition(),"rad");
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Absolute Position", getAbsPosition(),"rad");
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Velocity", getVelocity(),"rad per sec" );
+    }
 
 
   }

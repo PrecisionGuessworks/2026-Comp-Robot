@@ -1,19 +1,14 @@
 package frc.robot.generated;
 
-import static frc.robot.Constants.Vision.*;
- 
-import edu.wpi.first.math.Matrix;
-import edu.wpi.first.math.VecBuilder;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.numbers.N1;
-import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import frc.robot.Robot;
+import static frc.robot.Constants.Vision.kCameraName;
+import static frc.robot.Constants.Vision.kMultiTagStdDevs;
+import static frc.robot.Constants.Vision.kRobotToCam;
+import static frc.robot.Constants.Vision.kSingleTagStdDevs;
+import static frc.robot.Constants.Vision.kTagLayout;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
@@ -24,6 +19,13 @@ import org.photonvision.simulation.VisionSystemSim;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import dev.doglog.DogLog;
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import frc.robot.Robot;
  
 public class Vision {
      private final PhotonCamera camera;

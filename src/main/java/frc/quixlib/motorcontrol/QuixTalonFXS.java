@@ -38,8 +38,10 @@ import edu.wpi.first.wpilibj.Alert.AlertType;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
+@SuppressWarnings("rawtypes")
 public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseable {
   private static final double kCANTimeoutS = 0.1; // s
   private final CANDeviceID m_canID;
@@ -56,7 +58,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   private final PositionVoltage m_positionControl = new PositionVoltage(0);
   private final MotionMagicVoltage m_motionMagicControl = new MotionMagicVoltage(0);
   private final MotionMagicExpoVoltage m_motionMagicExpoControl = new MotionMagicExpoVoltage(0);
-  private final MotionMagicExpoTorqueCurrentFOC m_motionMagicExpoTorqueControl = new MotionMagicExpoTorqueCurrentFOC(0);
+  // private final MotionMagicExpoTorqueCurrentFOC m_motionMagicExpoTorqueControl = new MotionMagicExpoTorqueCurrentFOC(0);
   private final DynamicMotionMagicVoltage m_dynamicMotionMagicControl =
       new DynamicMotionMagicVoltage(0, 0, 0);
 
@@ -122,9 +124,9 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     private double motionMagicExpo_kV = 0.12; // 
     private double motionMagicExpo_kA = 0.1; // 
     private double bootPositionOffset = 0.0; // In MechanismRatio units
-    private FeedbackSensorSourceValue feedbackSensorSource = FeedbackSensorSourceValue.RotorSensor;
+    // private FeedbackSensorSourceValue feedbackSensorSource = FeedbackSensorSourceValue.RotorSensor;
     private int FeedbackRemoteSensorCANID = 0;
-    private double FeedbackSensorOffset = 0.0;
+    // private double FeedbackSensorOffset = 0.0;
     private double FeedbackSensorMechRatio = 1.0;
     private double FeedbackSensorRotorRatio = 1.0;
     // private MotorArrangementValue Motor_Arrangement = MotorArrangementValue.Disabled;
@@ -203,9 +205,9 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     }
 
     public QuixTalonFXSConfiguration setFeedbackConfig(final FeedbackSensorSourceValue FeedbackSensorSource, final int CANID, final double sensorOffset, final MechanismRatio RotorToSensorRatio, final MechanismRatio SensorToMechRatio) { // remote option, offset, sensor ratio to mech and rotor
-    feedbackSensorSource = FeedbackSensorSource;
+    // feedbackSensorSource = FeedbackSensorSource;
     FeedbackRemoteSensorCANID = CANID;
-    FeedbackSensorOffset = sensorOffset;
+    // FeedbackSensorOffset = sensorOffset;
     FeedbackSensorMechRatio = SensorToMechRatio.inverseReduction();
     FeedbackSensorRotorRatio = RotorToSensorRatio.inverseReduction();
       return this;
@@ -498,6 +500,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   }
 
   public void logMotorState() {
+    if (Constants.LogHardware){
     // m_percentOutputPublisher.set(getPercentOutput());
     // m_supplyCurrentPublisher.set(getSupplyCurrent());
     // m_statorCurrentPublisher.set(getStatorCurrent());
@@ -517,6 +520,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rad per sec");
     if (!DriverStation.isFMSAttached()){
     updateTunerConstants();
+    }
     }
   }
 

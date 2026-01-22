@@ -12,11 +12,9 @@ import com.pathplanner.lib.path.PathConstraints;
 import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.FileVersionException;
 
-import dev.doglog.internal.TimedCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,7 +22,6 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.Pose;
 import frc.robot.generated.TimedCommand2;
 
 public class DrivetrainExtra {
@@ -121,9 +118,9 @@ public class DrivetrainExtra {
     
     public static Command pathfindingCommand(boolean left, boolean lineup) {
 
-    double intercpet = Math.tan(Units.degreesToRadians(30))*4.5;
-    double intercpetRed = Math.tan(Units.degreesToRadians(30))*13;
-    double slope = Math.tan(Units.degreesToRadians(30));
+    // double intercpet = Math.tan(Units.degreesToRadians(30))*4.5;
+    // double intercpetRed = Math.tan(Units.degreesToRadians(30))*13;
+    // double slope = Math.tan(Units.degreesToRadians(30));
     Pose2d targetPose = Constants.Pose.Error; // Example target pose
         
         PIDController xController = new PIDController(Constants.Pose.PTranslationSlow, Constants.Pose.ITranslationSlow, Constants.Pose.DTranslationSlow);

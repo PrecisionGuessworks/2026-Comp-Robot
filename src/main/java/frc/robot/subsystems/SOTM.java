@@ -2,17 +2,14 @@ package frc.robot.subsystems;
 
 import org.photonvision.PhotonUtils;
 
-import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveDriveState;
-
 import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.units.measure.AngularVelocity;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.Timer;
+import frc.robot.Constants;
+import frc.robot.Constants.ShotCalc;
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 // import frc.robot.Constants.GoalConstants;
 // import frc.robot.Constants.ShooterConstants;
@@ -26,10 +23,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import frc.robot.subsystems.ShooterHood;
 // import frc.robot.subsystems.Turret;
 import frc.robot.RobotContainer;
-import frc.robot.Constants;
-import frc.robot.Constants.Pose;
-import frc.robot.Constants.Shooter;
-import frc.robot.Constants.ShotCalc;
 
 public class SOTM {
     // private final Shooter m_shooter;
@@ -39,8 +32,8 @@ public class SOTM {
     // private final boolean m_updatePose;
     // private final ColorSensor m_color;
     // private final XboxController m_driver;
-    private double m_wrongBallTime;
-    private final Timer m_timer = new Timer();
+    // private double m_wrongBallTime;
+    // private final Timer m_timer = new Timer();
     public static double newDist = 0.0;
     public static Translation2d movingGoalLocation = new Translation2d();
 

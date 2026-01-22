@@ -3,8 +3,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import dev.doglog.DogLog;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
@@ -18,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.devices.QuixCANCoder;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class ShooterSubsystem extends SubsystemBase {
   //public final DigitalInput m_beamBreak = new DigitalInput(Constants.Shooter.beamBreakPort);
