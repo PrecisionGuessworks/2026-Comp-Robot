@@ -6,6 +6,7 @@ import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.measure.AngularVelocity;
 // import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants;
@@ -67,13 +68,12 @@ public class SOTM {
 
     // @Override
     // Retrun maybe [Hood,shotvelocity,angle,angle feeds]
-    public static void calcSOTM() {
+    public static void calcSOTM(Translation2d target, InterpolatingDoubleTreeMap ShotTime) {
 
         // double currentTime = m_timer.get();
         Pose2d robotPose = RobotContainer.drivetrain.getState().Pose;
 
-
-        Translation2d target = ShotCalc.targetpose.getTranslation();
+        // Translation2d target = ShotCalc.targetpose.getTranslation();
 
         // if (currentTime <= m_wrongBallTime + 0.100) {
         //     target = GoalConstants.kWrongBallGoal;
@@ -85,7 +85,7 @@ public class SOTM {
         DogLog.log("SOTM: Distance to Goal", dist);
 
         //double fixedShotTime = m_timeTable.getOutput(dist);
-        double shotTime = Constants.ShotCalc.ShotTime.get(dist);
+        double shotTime = ShotTime.get(dist);
         
 
         DogLog.log("SOTM: Fixed Time", shotTime);
@@ -99,8 +99,8 @@ public class SOTM {
             double virtualGoalY = target.getY()
                     - shotTime * (DrivetrainExtra.getFieldSpeedsY() + DrivetrainExtra.getFieldAccelY() * ShotCalc.kAccelCompFactor);
 
-            System.out.println("AccelX: " + DrivetrainExtra.getFieldAccelX());
-            System.out.println("AccelY: " + DrivetrainExtra.getFieldAccelY());
+            // System.out.println("AccelX: " + DrivetrainExtra.getFieldAccelX());
+            // System.out.println("AccelY: " + DrivetrainExtra.getFieldAccelY());
 
             // SmartDashboard.putNumber("Goal X", virtualGoalX);
             // SmartDashboard.putNumber("Goal Y", virtualGoalY);
@@ -111,7 +111,7 @@ public class SOTM {
 
             Translation2d toTestGoal = testGoalLocation.minus(robotPose.getTranslation());
 
-            double newShotTime = Constants.ShotCalc.ShotTime.get(toTestGoal.getDistance(new Translation2d()) );
+            double newShotTime = ShotTime.get(toTestGoal.getDistance(new Translation2d()) );
 
             if(Math.abs(newShotTime-shotTime) <= 0.010){
                 i=4;

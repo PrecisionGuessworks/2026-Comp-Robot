@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import dev.doglog.DogLog;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
@@ -16,6 +18,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.devices.QuixCANCoder;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
+import frc.robot.Constants.Pose;
 
 public class ShooterSubsystem extends SubsystemBase {
   //public final DigitalInput m_beamBreak = new DigitalInput(Constants.Shooter.beamBreakPort);
@@ -139,6 +144,26 @@ public class ShooterSubsystem extends SubsystemBase {
     //return Math.abs(m_shooterMotor.getSensorVelocity()) < Constants.Shooter.shooterStallVelocity;
     //return m_shooterMotor.getSupplyCurrent() > Constants.Shooter.shooterStallCurrent;
   return false;
+  }
+
+  public boolean isShooterSafe() {
+    Pose2d robotPose = RobotContainer.drivetrain.getState().Pose;
+    ChassisSpeeds robotSpeeds = RobotContainer.drivetrain.getState().Speeds;
+    Pose2d futurePose =
+        new Pose2d(
+            robotPose.getTranslation().getX() + robotSpeeds.vxMetersPerSecond * Constants.Pose.HoodSafetyVelocityOffset,
+            robotPose.getTranslation().getY() + robotSpeeds.vyMetersPerSecond * Constants.Pose.HoodSafetyVelocityOffset,
+            robotPose.getRotation());
+
+    for (double[] zone : Constants.Pose.HoodSafetyZones) {
+      if (futurePose.getX() >= zone[0]
+          && futurePose.getX() <= zone[1]
+          && futurePose.getY() >= zone[2]
+          && futurePose.getY() <= zone[3]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public void setShooterVelocity(double velocity) {

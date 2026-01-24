@@ -63,13 +63,13 @@ public class Constants {
     new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
     new Pose2d(12,4.05,new Rotation2d(0)); // Red
 
-    public static final Pose2d leftPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
-    new Pose2d(3.23,5.79,new Rotation2d(0)) : // Blue
-    new Pose2d(13.41,5.79,new Rotation2d(0)); // Red
+    public static final Pose2d upperPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
+    new Pose2d(2.5,6,new Rotation2d(0)) : // Blue
+    new Pose2d(14,6,new Rotation2d(0)); // Red
 
-    public static final Pose2d rightPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ? 
-    new Pose2d(3.23,2.31,new Rotation2d(0)) : // Blue
-    new Pose2d(13.41,2.31,new Rotation2d(0)); // Red
+    public static final Pose2d lowerPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ? 
+    new Pose2d(2.5,2,new Rotation2d(0)) : // Blue
+    new Pose2d(14,2,new Rotation2d(0)); // Red
 
     public static final InterpolatingDoubleTreeMap ShotVelocity;
     static {
@@ -118,11 +118,33 @@ public class Constants {
         ShotTime.put(5.5, 1.5);
     }
 
-    // TODO: Need to add pass constants later
+    public static final InterpolatingDoubleTreeMap PassVelocity;
+    static {
+        PassVelocity = new InterpolatingDoubleTreeMap();
+        PassVelocity.put(4.0, 300.0);
+        PassVelocity.put(6.0, 350.0);
+        PassVelocity.put(8.0, 400.0);
+    }
+
+    public static final InterpolatingDoubleTreeMap PassAngle;
+    static {
+        PassAngle = new InterpolatingDoubleTreeMap();
+        PassAngle.put(4.0, Units.degreesToRadians(80));
+        PassAngle.put(6.0, Units.degreesToRadians(80));
+        PassAngle.put(8.0, Units.degreesToRadians(80));
+    }
+
+    public static final InterpolatingDoubleTreeMap PassTime;
+    static {
+        PassTime = new InterpolatingDoubleTreeMap();
+        PassTime.put(4.0, 1.0);
+        PassTime.put(6.0, 1.2);
+        PassTime.put(8.0, 1.4);
+    }
 
     public static final double SimShotefficiency = 0.85;
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
-    public static final double Friction = 0.8; // Friction Coefficient for Simulations 
+    public static final double Friction = 0.6; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations (NOT USED RN)
     public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
@@ -256,7 +278,7 @@ public class Constants {
     public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
 
     public static final double hoodMinAngle = Units.degreesToRadians(0.0);
-    public static final double hoodMaxAngle = Units.degreesToRadians(70.0);
+    public static final double hoodMaxAngle = Units.degreesToRadians(81.0);
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(0.1);
@@ -301,10 +323,16 @@ public class Constants {
 
     public static final Pose2d Error = new Pose2d(6, 6, Rotation2d.fromDegrees(0));
 
+    public static final double ZoneLine = ShotCalc.targetpose.getX();
+    // public static final double RedZoneLine = 11.18;
+    public static final double Halfline = ShotCalc.targetpose.getY();
+
     public static final double[][] HoodSafetyZones = {
       //minX, maxX, minY, maxY
-      {0, 17.5, 0, 8}, 
-      {17.5, 34, 0, 8},
+      {3.5, 5.75, -1.0, 1.75}, 
+      {3.5, 5.75, 6, 8.5},
+      {10.8, 13, -1.0, 1.75},
+      {10.8, 13, 6, 8.5}
     };
     public static final double HoodSafetyVelocityOffset = 0.1; // Multiples by current velocity to see if Robot is going into a Safety Zone with Hood up
 
@@ -322,7 +350,7 @@ public class Constants {
             new Transform3d(new Translation3d(Units.inchesToMeters(13.311564), 0.0, Units.inchesToMeters(7.332072)), new Rotation3d(0, Math.toRadians(-20), 0));
 
     public static final AprilTagFieldLayout kTagLayout =
-            AprilTagFields.kDefaultField.loadAprilTagLayoutField();
+            AprilTagFields.k2026RebuiltAndymark.loadAprilTagLayoutField();
 
     // Increase these numbers to trust your state estimate less.
 

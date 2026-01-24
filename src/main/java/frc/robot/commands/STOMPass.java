@@ -9,7 +9,7 @@ import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
 
-public class STOMScore extends Command {
+public class STOMPass extends Command {
   private final ShooterSubsystem m_shooter;
   private double distanceToTarget;
   private double hoodAngle;
@@ -17,7 +17,7 @@ public class STOMScore extends Command {
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
-  public STOMScore(
+  public STOMPass(
       ShooterSubsystem shooterSubsystem) {
     m_shooter = shooterSubsystem;
 
@@ -35,17 +35,17 @@ public class STOMScore extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SOTM.calcSOTM(Constants.ShotCalc.lowerPassPose.getTranslation(), Constants.ShotCalc.PassTime);
     distanceToTarget = SOTM.targetDistance();
-    hoodAngle = Constants.ShotCalc.ShotAngle.get(distanceToTarget);
-    shooterVelocity = Constants.ShotCalc.ShotVelocity.get(distanceToTarget);
+    hoodAngle = Constants.ShotCalc.PassAngle.get(distanceToTarget);
+    shooterVelocity = Constants.ShotCalc.PassVelocity.get(distanceToTarget);
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setShooterVelocity(shooterVelocity);
     if (loopCount % 10 == 0) {
     Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
     loopCount++;
-    SOTM.calcSOTM(Constants.ShotCalc.targetpose.getTranslation(), Constants.ShotCalc.ShotTime);
-
+    
   }
 
   // Called once the command ends or is interrupted.

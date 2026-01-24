@@ -30,6 +30,7 @@ import frc.robot.commands.MoveupClimber;
 import frc.robot.commands.STOMScore;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
+import frc.robot.commands.ZoneScore;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -177,7 +178,7 @@ public class RobotContainer {
         driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
 
-        driver.rightBumper().whileTrue(new ParallelCommandGroup(new STOMScore(shooter),drivetrain.applyRequest(() ->
+        driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter),drivetrain.applyRequest(() ->
         angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
             .withTargetDirection(SOTM.targetangle( ))
