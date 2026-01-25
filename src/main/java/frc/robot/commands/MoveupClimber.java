@@ -37,7 +37,7 @@ public class MoveupClimber extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_climber.setHeight(Constants.Climber.stowHeight);
+    m_climber.setHeight(Constants.Climber.climbHeight);
 
   }
 

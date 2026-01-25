@@ -18,8 +18,8 @@ public class ClimberSubsystem extends SubsystemBase {
           Constants.Climber.motorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setBrakeMode()
-              .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(90.0)
+              .setSupplyCurrentLimit(Constants.Climber.SupplyLimit)
+              .setStatorCurrentLimit(Constants.Climber.StatorLimit)
               .setInverted(Constants.Climber.motorInvert)
               .setPIDConfig(Constants.Climber.motorPositionSlot, Constants.Climber.motorPIDConfig)
               .setMotionMagicConfig(
@@ -31,21 +31,21 @@ public class ClimberSubsystem extends SubsystemBase {
               .setReverseSoftLimit(Constants.Climber.minHeight)
               .setForwardSoftLimit(Constants.Climber.maxHeight));
               
-  private final QuixTalonFX m_follower = new QuixTalonFX(
-      Constants.Climber.followerID,
-      m_motor,
-      Constants.Climber.followerInvert,
-      QuixTalonFX.makeDefaultConfig().setBrakeMode()
-      .setSupplyCurrentLimit(40.0)
-      .setStatorCurrentLimit(90.0)
-      .setInverted(Constants.Climber.motorInvert)
-      .setPIDConfig(Constants.Climber.motorPositionSlot, Constants.Climber.motorPIDConfig)
-      .setMotionMagicConfig(
-          Constants.Climber.maxVelocity,
-          Constants.Climber.maxAcceleration,
-          Constants.Climber.maxJerk)
-      .setReverseSoftLimit(Constants.Climber.minHeight)
-      .setForwardSoftLimit(Constants.Climber.maxHeight));
+  // private final QuixTalonFX m_follower = new QuixTalonFX(
+  //     Constants.Climber.followerID,
+  //     m_motor,
+  //     Constants.Climber.followerInvert,
+  //     QuixTalonFX.makeDefaultConfig().setBrakeMode()
+  //     .setSupplyCurrentLimit(40.0)
+  //     .setStatorCurrentLimit(90.0)
+  //     .setInverted(Constants.Climber.motorInvert)
+  //     .setPIDConfig(Constants.Climber.motorPositionSlot, Constants.Climber.motorPIDConfig)
+  //     .setMotionMagicConfig(
+  //         Constants.Climber.maxVelocity,
+  //         Constants.Climber.maxAcceleration,
+  //         Constants.Climber.maxJerk)
+  //     .setReverseSoftLimit(Constants.Climber.minHeight)
+  //     .setForwardSoftLimit(Constants.Climber.maxHeight));
 
   private double m_setTargetHeight = Constants.Climber.minHeight;
   private double m_targetHeight = Constants.Climber.minHeight;
@@ -113,10 +113,8 @@ public boolean getElevatorOn(){
       m_ElevatorOffLast = m_ElevatorOff;
       if (m_ElevatorOff){
         m_motor.setStatorCurrentLimit(1,1);
-        m_follower.setStatorCurrentLimit(1,1);
       } else {
         m_motor.setStatorCurrentLimit(70,30);
-        m_follower.setStatorCurrentLimit(70,30);
       }
     }
     
@@ -137,7 +135,6 @@ public boolean getElevatorOn(){
 
     m_motor.logMotorState();
     // m_motor.updateTunerConstants0();
-    m_follower.logMotorState();
 
   }
 

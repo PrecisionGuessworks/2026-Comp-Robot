@@ -18,7 +18,7 @@ import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  public final DigitalInput m_beamBreak = new DigitalInput(Constants.Intake.beamBreakPort);
+  // public final DigitalInput m_beamBreak = new DigitalInput(Constants.Intake.beamBreakPort);
   
 
   private final QuixTalonFX m_ABrollerMotor =
@@ -62,7 +62,7 @@ public class IntakeSubsystem extends SubsystemBase {
           QuixTalonFX.makeDefaultConfig()
               .setBrakeMode()
               .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(90.0)
+              .setStatorCurrentLimit(120.0)
               .setInverted(Constants.Intake.deployMotorInvert)
               .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
               .setMotionMagicConfig(

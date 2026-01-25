@@ -22,7 +22,7 @@ public class StowAll extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_climber.setHeight(Constants.Climber.stowHeight);
+    m_climber.setHeight(Constants.Climber.minHeight);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
   }
 

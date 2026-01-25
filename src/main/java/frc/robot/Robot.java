@@ -49,6 +49,7 @@ public class Robot extends TimedRobot {
     vision = new Vision();
     SignalLogger.enableAutoLogging(false); // Disable CTRE Signal Logger auto logging
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 1);
+  LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName, 0.001);
         
   }
 
@@ -158,7 +159,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 2);
+    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     autoName = "";
     if (m_autonomousCommand != null) {
@@ -177,7 +178,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 2);
+    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

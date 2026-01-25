@@ -25,8 +25,8 @@ import frc.robot.Constants.Pose;
 public class ShooterSubsystem extends SubsystemBase {
   //public final DigitalInput m_beamBreak = new DigitalInput(Constants.Shooter.beamBreakPort);
 
-  static private final QuixCANCoder m_hoodCoder = 
-      new QuixCANCoder(Constants.Shooter.hoodCoderID, Constants.Shooter.hoodMotorRatio, SensorDirectionValue.Clockwise_Positive);
+  // static private final QuixCANCoder m_hoodCoder = 
+  //     new QuixCANCoder(Constants.Shooter.hoodCoderID, Constants.Shooter.hoodMotorRatio, SensorDirectionValue.Clockwise_Positive);
   
   // static private final QuixAbsoluteEncoder m_armCoder = 
   //     new QuixAbsoluteEncoder(Constants.Shooter.armCoderID, Constants.Shooter.armMotorRatio, SensorDirectionValue.Clockwise_Positive);
@@ -61,8 +61,8 @@ public class ShooterSubsystem extends SubsystemBase {
           Constants.Shooter.indexerMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.shooterMotorInvert)
-              .setSupplyCurrentLimit(50.0)
-              .setStatorCurrentLimit(120.0)
+              .setSupplyCurrentLimit(40.0)
+              .setStatorCurrentLimit(80.0)
               .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
 
   private final QuixTalonFX m_hoodMotor =
@@ -72,8 +72,8 @@ public class ShooterSubsystem extends SubsystemBase {
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.hoodMotorInvert)
               .setBrakeMode()
-              .setSupplyCurrentLimit(30.0)
-              .setStatorCurrentLimit(80.0)
+              .setSupplyCurrentLimit(40.0)
+              .setStatorCurrentLimit(100.0)
               .setMotionMagicConfig(
                   Constants.Shooter.HoodConstraints.maxVelocity,
                   Constants.Shooter.HoodConstraints.maxAcceleration,
@@ -117,9 +117,9 @@ public class ShooterSubsystem extends SubsystemBase {
     return m_shooterMotor.getSupplyCurrent();
   }
 
-  public double getHoodCoder(){
-    return Units.rotationsToDegrees(m_hoodCoder.getAbsPosition());
-  }
+  // public double getHoodCoder(){
+  //   return Units.rotationsToDegrees(m_hoodCoder.getAbsPosition());
+  // }
 
   public void setHoodAngle(double targetAngle) {
     setm_hoodTargetAngle = targetAngle;
@@ -225,7 +225,7 @@ public class ShooterSubsystem extends SubsystemBase {
     
     //  Logging
     DogLog.log("Hood: Current Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getSensorPosition()),"deg");
-    DogLog.log("Hood: Current CANcoder Angle (deg)", getHoodCoder(),"deg");
+    // DogLog.log("Hood: Current CANcoder Angle (deg)", getHoodCoder(),"deg");
     DogLog.log("Hood: Real Current Angle (deg)", getHoodAngle(),"deg");
     DogLog.log("Hood: Target Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getClosedLoopReference()),"deg");
     DogLog.log("Hood: Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
