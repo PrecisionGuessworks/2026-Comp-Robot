@@ -11,6 +11,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import dev.doglog.DogLog;
 import dev.doglog.DogLogOptions;
@@ -27,7 +28,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Intake;
 import frc.robot.commands.MoveupClimber;
-import frc.robot.commands.STOMScore;
+import frc.robot.commands.STOMAuto;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
 import frc.robot.commands.ZoneScore;
@@ -100,10 +101,13 @@ public class RobotContainer {
         // DogLog.setEnabled(Constants.DogLogEnabled);
 
 
-
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
-        robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
+        robotCommands.put("STOMAuto", new STOMAuto(shooter));
+        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter)));
+        robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new Score(shooter)));
+
+        // robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
     
         NamedCommands.registerCommands(robotCommands);
         configureBindings();

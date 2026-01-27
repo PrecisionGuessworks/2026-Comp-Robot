@@ -49,9 +49,6 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private double m_setTargetHeight = Constants.Climber.minHeight;
   private double m_targetHeight = Constants.Climber.minHeight;
-  public int m_HeightLocation = 4;
-  private boolean m_ElevatorOff = false;
-  private boolean m_ElevatorOffLast = m_ElevatorOff;
 
   public ClimberSubsystem() {
     // Show scheduler status in SmartDashboard.
@@ -80,23 +77,10 @@ public class ClimberSubsystem extends SubsystemBase {
   public void setHeight(double targetHeight) {
     m_setTargetHeight = targetHeight;
   }
-  public void setHeightLocation(int targetHeight) {
-    m_HeightLocation = targetHeight;
-  }
-  public int getHeightLocation() {
-    return m_HeightLocation;
-  }
 
   public boolean isAtHeight(double height, double tolerance) {
     return Math.abs(height - getHeight()) <= tolerance;
   }
-
-  public void setElevatorOn(boolean lineup){
-    m_ElevatorOff = lineup;
-}
-public boolean getElevatorOn(){
-    return m_ElevatorOff;
-}
 
   @Override
   public void periodic() {
@@ -108,25 +92,11 @@ public boolean getElevatorOn(){
     //m_targetHeight = m_setTargetHeight;
 
     // This method will be called once per scheduler run
-
-    if (m_ElevatorOff != m_ElevatorOffLast){
-      m_ElevatorOffLast = m_ElevatorOff;
-      if (m_ElevatorOff){
-        m_motor.setStatorCurrentLimit(1,1);
-      } else {
-        m_motor.setStatorCurrentLimit(70,30);
-      }
-    }
     
     m_motor.setMotionMagicPositionSetpointExpo(
         Constants.Climber.motorPositionSlot,
         m_targetHeight
         );
-
-    
-    SmartDashboard.putBoolean(
-          "Climber", !m_ElevatorOff);
-    DogLog.log("Climber: On", !m_ElevatorOff);
           
     DogLog.log("Climber: Height", Units.metersToInches(getHeight()),"Inch");
     DogLog.log("Climber: Target Height", Units.metersToInches(Constants.Climber.motorRatio.sensorRadiansToMechanismPosition(m_motor.getClosedLoopReference())),"Inchs");
@@ -141,7 +111,7 @@ public boolean getElevatorOn(){
   // --- BEGIN STUFF FOR SIMULATION ---
   private static final ElevatorSim m_elevatorSim =
       new ElevatorSim(
-          DCMotor.getKrakenX60Foc(2),
+          DCMotor.getKrakenX60Foc(1),
           Constants.Climber.motorRatio.reduction(),
           Constants.Climber.simCarriageMass,
           Constants.Climber.sprocketPitchDiameter * 0.5,

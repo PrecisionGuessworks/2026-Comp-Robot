@@ -245,9 +245,7 @@ public class Constants {
     public static final double AngleTolerance = Units.degreesToRadians(0.1);
 
     public static final double outtakeVelocity = 1300.0; // rads/s
-    
-    public static final Transform2d robotToArm =
-        new Transform2d(Units.inchesToMeters(12.0), 0.0, new Rotation2d());
+
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
@@ -421,6 +419,11 @@ public class Constants {
     public static final double simCarriageMass = 40.0; // kg
 
   }
+
+
+
+
+  
 
 
   public static final class Viz {

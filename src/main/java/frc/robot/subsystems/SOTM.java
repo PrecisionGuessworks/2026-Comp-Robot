@@ -92,7 +92,7 @@ public class SOTM {
 
         // Translation2d movingGoalLocation = new Translation2d();
 
-        for(int i=0;i<5;i++){
+        for(int i=0;i<7;i++){
 
             double virtualGoalX = target.getX()
                     - shotTime * (DrivetrainExtra.getFieldSpeedsX() + DrivetrainExtra.getFieldAccelX() * ShotCalc.kAccelCompFactor);
@@ -114,10 +114,10 @@ public class SOTM {
             double newShotTime = ShotTime.get(toTestGoal.getDistance(new Translation2d()) );
 
             if(Math.abs(newShotTime-shotTime) <= 0.010){
-                i=4;
+                i=6;
             }
             
-            if(i == 4){
+            if(i == 6){
                 movingGoalLocation = testGoalLocation;
                 DogLog.log("SOTM: New Shot Time", newShotTime);
             }
