@@ -13,6 +13,22 @@ TODO:
 
 - Did not add every roller into sim, cause I am lazy.
 
+- ADD SHIFT TIMER TO DASHBOARD!!! make sure it works correctly
+
+- Commands TODO:
+        Try to fix Auto Sotm
+        Maunal climb override
+        Home all
+        Pose off controls
+
+- Teach Commands and add:
+        Auto climb up and down
+        Climb set points
+        Bump Shot
+        Bump Pass
+        
+
+- Need to come up with auto naming convention
 ------------------------------- Controller Layouts --------------------------------------
 
 Driver:
