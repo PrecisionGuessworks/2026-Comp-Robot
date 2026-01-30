@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
@@ -44,7 +45,7 @@ public class ZoneScore extends Command {
   @Override
   public void execute() {
     safe = m_shooter.isShooterSafe();
-    
+    DogLog.log("SOTM: Safe", safe);
 
     // target = Constants.ShotCalc.targetpose.getTranslation();
 
@@ -56,14 +57,17 @@ public class ZoneScore extends Command {
     if ((currentPose.getX() > Constants.Pose.ZoneLine && alliance == Alliance.Blue)||(currentPose.getX() < Constants.Pose.ZoneLine && alliance == Alliance.Red)) {
         if (currentPose.getY() > Constants.Pose.Halfline){
            target = Constants.ShotCalc.upperPassPose.getTranslation();
-           System.out.println("Upper Pass Pose");
+          //  System.out.println("Upper Pass Pose");
+           DogLog.log("SOTM: Target","Upper Pass Pose");
         } else {
             target = Constants.ShotCalc.lowerPassPose.getTranslation();
-            System.out.println("Lower Pass Pose");
+            // System.out.println("Lower Pass Pose");
+            DogLog.log("SOTM: Target","Lower Pass Pose");
         }
     } else {
         target = Constants.ShotCalc.targetpose.getTranslation();
-        System.out.println("Target Pose");
+        // System.out.println("Target Pose");
+        DogLog.log("SOTM: Target","Target Pose");
     }
 
 

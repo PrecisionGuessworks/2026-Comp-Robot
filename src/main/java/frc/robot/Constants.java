@@ -58,6 +58,8 @@ public class Constants {
 
     public static final class ShotCalc {
 
+    public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
+
     // CHECK!
     public static final Pose2d targetpose =  DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
     new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
@@ -72,6 +74,7 @@ public class Constants {
     new Pose2d(14,2,new Rotation2d(0)); // Red
 
     public static final InterpolatingDoubleTreeMap ShotVelocity;
+    // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
         ShotVelocity.put(0.5, 235.0);
@@ -87,6 +90,7 @@ public class Constants {
         ShotVelocity.put(5.5, 300.0);
     }
     public static final InterpolatingDoubleTreeMap ShotAngle;
+    // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
         ShotAngle.put(0.5, Units.degreesToRadians(4));
@@ -103,6 +107,7 @@ public class Constants {
     }
     // Used for sotm (Shoot on the move)
     public static final InterpolatingDoubleTreeMap ShotTime;
+    // Distance in meters , time for shot to score in seconds
     static {
         ShotTime = new InterpolatingDoubleTreeMap();
         ShotTime.put(0.5, 1.2);
@@ -142,11 +147,11 @@ public class Constants {
         PassTime.put(8.0, 1.4);
     }
 
+    // For simulation only
     public static final double SimShotefficiency = 0.85;
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
     public static final double Friction = 0.6; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations (NOT USED RN)
-    public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
     }
     
@@ -183,8 +188,8 @@ public class Constants {
         public static final double SlowRotPercentage = 0.15; // Default 0.15
 
         // Deadbands for the drive and rotation
-        public static final double DriveDeadband = isSim ? 0.15 : 0.1; // Drive Deadband
-        public static final double RotationDeadband = isSim ? 0.15 : 0.1; // Rotation Deadband
+        public static final double DriveDeadband = isSim ? 0.15 : 0.01; // Drive Deadband   Uses higher deadband in sim because my controller sucks
+        public static final double RotationDeadband = isSim ? 0.15 : 0.01; // Rotation Deadband
         public static final double SnapDriveDeadband = 0.001; // Snap Rotation Deadband
         public static final double SnapRotationDeadband = 0.00001; // Snap Rotation Deadband
 
@@ -210,7 +215,6 @@ public class Constants {
     public static final boolean shooterMotorInvert = false;
 
     public static final CANDeviceID shooter2MotorID = new CANDeviceID(29, kSuperStructureCanivoreName);
-    public static final MechanismRatio shooter2MotorRatio = new MechanismRatio(12, 18);
     public static final MotorAlignmentValue shooter2MotorInvert = MotorAlignmentValue.Opposed;
 
     public static final CANDeviceID indexerMotorID = new CANDeviceID(27, kSuperStructureCanivoreName);
@@ -257,7 +261,110 @@ public class Constants {
   }
 
 
-  public static final class Pose {
+  public static final class Intake {
+
+    public static final CANDeviceID hopperMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
+    public static final MechanismRatio hopperMotorRatio =
+        new MechanismRatio(1, 1);
+    public static final boolean hopperMotorInvert = false;
+
+    public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
+    public static final MechanismRatio ABrollerRatio =
+        new MechanismRatio(1, (1.0 / 1.0));
+
+    public static final CANDeviceID CrollerID = new CANDeviceID(34, kSuperStructureCanivoreName);
+    public static final MechanismRatio CrollerRatio =
+        new MechanismRatio(1, (1.0 / 1.0));
+    public static final boolean CrollerInvert = false;
+    public static final MotorArrangementValue CrollerArrangement = MotorArrangementValue.NEO_JST;
+
+
+    public static final MechanismRatio rollerMotorRatio =
+        new MechanismRatio(1, (1.0 / 1.0));
+    public static final boolean rollerMotorInvert = false;
+    public static final SimpleMotorFeedforward rollerFeedforward =
+        new SimpleMotorFeedforward(0.3, 0.12, 0);
+    public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
+    public static final int rollerVelocitySlot = 0;
+
+
+
+    public static final CANDeviceID deployMotorID = new CANDeviceID(31, kSuperStructureCanivoreName);
+    public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
+    public static final double sprocketPitchDiameter = Units.inchesToMeters(1.84);
+    public static final MechanismRatio deployMotorRatio =
+        isSim ? 
+        new MechanismRatio(
+            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
+        new MechanismRatio(
+           1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
+    public static final boolean deployMotorInvert = false;
+    public static final PIDConfig deployPIDConfig = new PIDConfig(8.0, 0, 0.3, 0, 16, 0.01, 0.00, GravityTypeValue.Elevator_Static);
+    public static final int deployPositionSlot = 0;
+    public static final double Expo_kV = 0.2;
+    public static final double Expo_kA = 0.1; 
+
+    public static final double deployMaxVelocity = 1; // m/s
+    public static final double deployMaxAcceleration = 10.0; // m/s^2
+    public static final double deployMaxJerk = 2.0; // m/s^3
+
+    public static final double minExtension = Units.inchesToMeters(0.0);
+    public static final double maxExtension = Units.inchesToMeters(11.2);
+    public static final double startingPosition = minExtension;
+    public static final double intakeStow = Units.inchesToMeters(4.0);
+
+    public static final double attackPosition = Units.inchesToMeters(11.0);
+    public static final double defPosition = Units.inchesToMeters(3.0);
+
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.02); 
+
+    public static final double intakeRollerVelocity = 100;
+    public static final double outtakeRollerVelocity = -100;
+    public static final double holdRollerVelocity = 10;
+
+    // For simulation only
+    public static final double simCarriageMass = 3.0; // kg
+    public static final double simRollerMOI = 0.01; // kgMetersSquared
+  }
+
+  
+
+  public static final class Climber {
+    public static final CANDeviceID motorID = new CANDeviceID(40, kSuperStructureCanivoreName);
+    // public static final CANDeviceID followerID = new CANDeviceID(21, kSuperStructureCanivoreName);
+    public static final double StatorLimit = 120.0;
+    public static final double SupplyLimit = 60.0;
+    public static final double sprocketPitchDiameter = Units.inchesToMeters(0.75); 
+    public static final MechanismRatio motorRatio = isSim ? 
+        new MechanismRatio(
+            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
+        new MechanismRatio(
+            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
+    public static final boolean motorInvert = true;
+    // public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
+    public static final int motorPositionSlot = 0;
+    public static final PIDConfig motorPIDConfig = isSim ? 
+        new PIDConfig(5, 0.001, 0.1, 0.04, 41, 0.04, 0.4, GravityTypeValue.Elevator_Static) : 
+        new PIDConfig(20, 0.01, 0.04, 0.04, 41, 0.04, 0.4, GravityTypeValue.Elevator_Static);
+    public static final double maxVelocity = 0.3; // m/s 
+    public static final double maxAcceleration = 8.0; // m/s^2
+    public static final double maxJerk = 2.0; // m/s^3 (0 disables jerk limit)
+    public static final double Expo_kV = 0.1;    
+    public static final double Expo_kA = 0.1; // Use a slower kA of 0.1 V/(rps/s)
+
+    public static final double minHeight = 0.0;
+    public static final double maxHeight = Units.inchesToMeters(10.0); 
+    public static final double climbHeight = Units.inchesToMeters(2); 
+    public static final double Tolerance = Units.inchesToMeters(0.1);
+
+    // For simulation only
+    public static final double simCarriageMass = 60.0; // kg
+
+  }
+
+
+
+    public static final class Pose {
 
     // public static final PathConstraints constraints = new PathConstraints(
     //         3, 2.5,
@@ -316,113 +423,6 @@ public class Constants {
     public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.03, 0.03, Units.degreesToRadians(0.01));
     
 }
-  
-
-
-  public static final class Intake {
-
-    public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
-    public static final MechanismRatio ABrollerRatio =
-        new MechanismRatio(1, (1.0 / 3.0));
-
-    public static final CANDeviceID CrollerID = new CANDeviceID(34, kSuperStructureCanivoreName);
-    public static final MechanismRatio CrollerRatio =
-        new MechanismRatio(1, (1.0 / 3.0));
-    public static final boolean CrollerInvert = false;
-    public static final MotorArrangementValue CrollerArrangement = MotorArrangementValue.NEO_JST;
-
-    public static final CANDeviceID hopperMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
-    public static final MechanismRatio hopperMotorRatio =
-        new MechanismRatio(1, 1);
-    public static final boolean hopperMotorInvert = false;
-
-
-
-    public static final MechanismRatio rollerMotorRatio =
-        new MechanismRatio(1, (1.0 / 3.0));
-    public static final boolean rollerMotorInvert = false;
-    public static final SimpleMotorFeedforward rollerFeedforward =
-        new SimpleMotorFeedforward(0.3, 0.12, 0);
-    public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
-    public static final int rollerVelocitySlot = 0;
-
-    public static final CANDeviceID deployMotorID = new CANDeviceID(31, kSuperStructureCanivoreName);
-
-    public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
-    public static final double sprocketPitchDiameter = Units.inchesToMeters(1.84);
-    public static final MechanismRatio deployMotorRatio =
-        isSim ? 
-        new MechanismRatio(
-            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
-        new MechanismRatio(
-           1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
-    public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(8.0, 0, 0.3, 0, 16, 0.01, 0.00, GravityTypeValue.Elevator_Static);
-    public static final int deployPositionSlot = 0;
-    public static final double Expo_kV = 0.2;
-    public static final double Expo_kA = 0.1; 
-
-    public static final double deployMaxVelocity = 1; // m/s
-    public static final double deployMaxAcceleration = 10.0; // m/s^2
-    public static final double deployMaxJerk = 2.0; // m/s^3
-
-    public static final double minExtension = Units.inchesToMeters(0.0);
-    public static final double maxExtension = Units.inchesToMeters(11.2);
-    public static final double startingPosition = minExtension;
-    public static final double intakeStow = Units.inchesToMeters(4.0);
-
-    public static final double attackPosition = Units.inchesToMeters(11.0);
-    public static final double defPosition = Units.inchesToMeters(3.0);
-
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.02); 
-
-    public static final double intakeRollerVelocity = 100;
-    public static final double outtakeRollerVelocity = -100;
-    public static final double holdRollerVelocity = 10;
-
-    // For simulation only
-    public static final double simCarriageMass = 3.0; // kg
-    public static final double simRollerMOI = 0.01; // kgMetersSquared
-  }
-
-  
-
-  public static final class Climber {
-    public static final CANDeviceID motorID = new CANDeviceID(40, kSuperStructureCanivoreName);
-    // public static final CANDeviceID followerID = new CANDeviceID(21, kSuperStructureCanivoreName);
-    public static final double StatorLimit = 120.0;
-    public static final double SupplyLimit = 60.0;
-    public static final double sprocketPitchDiameter = Units.inchesToMeters(0.75); 
-    public static final MechanismRatio motorRatio = isSim ? 
-        new MechanismRatio(
-            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
-        new MechanismRatio(
-            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
-    public static final boolean motorInvert = true;
-    // public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
-    public static final int motorPositionSlot = 0;
-    public static final PIDConfig motorPIDConfig = isSim ? 
-        new PIDConfig(5, 0.001, 0.1, 0.04, 41, 0.04, 0.4, GravityTypeValue.Elevator_Static) : 
-        new PIDConfig(20, 0.01, 0.04, 0.04, 41, 0.04, 0.4, GravityTypeValue.Elevator_Static);
-    public static final double maxVelocity = 0.3; // m/s 
-    public static final double maxAcceleration = 8.0; // m/s^2
-    public static final double maxJerk = 2.0; // m/s^3 (0 disables jerk limit)
-    public static final double Expo_kV = 0.1;    
-    public static final double Expo_kA = 0.1; // Use a slower kA of 0.1 V/(rps/s)
-
-    public static final double minHeight = 0.0;
-    public static final double maxHeight = Units.inchesToMeters(10.0); 
-    public static final double climbHeight = Units.inchesToMeters(2); 
-    public static final double Tolerance = Units.inchesToMeters(0.1);
-
-    // For simulation only
-    public static final double simCarriageMass = 40.0; // kg
-
-  }
-
-
-
-
   
 
 

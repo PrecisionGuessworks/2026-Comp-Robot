@@ -22,7 +22,7 @@ TODO:
         Pose off controls
 
 - Teach Commands and add:
-        Auto climb up and down
+        Auto climb up, down and stow
         Climb set points
         Bump Shot
         Bump Pass

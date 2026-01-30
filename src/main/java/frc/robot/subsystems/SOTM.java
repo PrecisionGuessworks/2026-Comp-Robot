@@ -42,19 +42,6 @@ public class SOTM {
     // private static LinearInterpolationTable m_hoodTable = ShooterConstants.kHoodTable;
     // private static LinearInterpolationTable m_rpmTable = ShooterConstants.kRPMTable;
 
-    // public SOTM(Shooter shooter, Turret turret, Drivetrain drive, ShooterHood hood, boolean updatePose,
-    //         ColorSensor color, XboxController driver) {
-    //     m_shooter = shooter;
-    //     m_turret = turret;
-    //     m_drive = drive;
-    //     m_hood = hood;
-    //     m_updatePose = updatePose;
-    //     m_color = color;
-    //     m_driver = driver;
-    //     addRequirements(shooter, turret, hood);
-    // }
-
-
     // @Override
     // public void initialize() {
     //     m_turret.trackTarget(true);
@@ -192,7 +179,7 @@ public class SOTM {
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
         Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
         Rotation2d temp = PhotonUtils.getYawToPose(temppose, new Pose2d(movingGoalLocation,new Rotation2d(0)));
-        // System.out.println(temp);
+        DogLog.log("SOTM: Target Angle", temp.getDegrees());
         return temp;
         
     }
@@ -212,6 +199,7 @@ public class SOTM {
         double deltaY = movingGoalLocation.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
         // System.out.println("omega: " + omega);
+        DogLog.log("SOTM: FeedForward", omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 

@@ -17,7 +17,8 @@ import dev.doglog.DogLog;
 import dev.doglog.DogLogOptions;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PowerDistribution;import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -52,30 +53,22 @@ public class RobotContainer {
     /* Setting up bindings for necessary control of the swerve drive platform */
     public static final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(MaxAngularRate * Constants.Drive.RotationDeadband)
-            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+            .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
-    public static final SwerveRequest.FieldCentric driveAuto = new SwerveRequest.FieldCentric()
-            .withDeadband(Constants.Drive.SnapDriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband)
-            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
-
+    // public static final SwerveRequest.FieldCentric driveAuto = new SwerveRequest.FieldCentric()
+    //         .withDeadband(Constants.Drive.SnapDriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband)
+    //         .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
     public final SwerveRequest.FieldCentricFacingAngle angle = new SwerveRequest.FieldCentricFacingAngle()
         .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband) // Add a deadband
-        .withDriveRequestType(DriveRequestType.OpenLoopVoltage) // Use open-loop control for drive motors 
+        .withDriveRequestType(DriveRequestType.OpenLoopVoltage) 
         .withHeadingPID(Constants.Drive.PRotation, Constants.Drive.IRotation, Constants.Drive.DRotation);
-         //  .withSteerRequestType(SteerRequestType.MotionMagicExpo); // Use motion magic control for steer motors
 
     private PowerDistribution powerDistribution = new PowerDistribution();
 
-    /* Path follower */
     private final SendableChooser<Command> autoChooser;
 
-
     Map<String, Command> robotCommands  = new HashMap<String, Command>();
-
-
-
-
 
     public static final ClimberSubsystem climber = new ClimberSubsystem();
     public static final IntakeSubsystem intake = new IntakeSubsystem();
@@ -84,13 +77,7 @@ public class RobotContainer {
 
 
 
-
-
     public RobotContainer() {
-        // // Starts recording to data log
-        // DataLogManager.start();
-        // // Record both DS control and joystick data
-        // DriverStation.startDataLog(DataLogManager.getLog());
 
         DogLog.setOptions(new DogLogOptions().withNtPublish(Constants.DogLogNetworkTables));
         DogLog.setOptions(new DogLogOptions().withNtTunables(Constants.DogLogNetworkTables));
@@ -112,9 +99,6 @@ public class RobotContainer {
         configureBindings();
 
 
-
-    
-
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto", autoChooser);
         SmartDashboard.putData(
@@ -130,9 +114,6 @@ public class RobotContainer {
         SmartDashboard.putData("Command Scheduler", CommandScheduler.getInstance());
         DogLog.setPdh(powerDistribution);
           
-
-        //PathfindingCommand.warmupCommand().ignoringDisable(true).schedule();;
-        
     }
 
     
@@ -140,6 +121,7 @@ public class RobotContainer {
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
+
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
@@ -149,23 +131,6 @@ public class RobotContainer {
             )
         );
 
-        //driver.a().whileTrue(drivetrain.applyRequest(() -> brake));
-        // driver.b().whileTrue(drivetrain.applyRequest(() ->
-        //     point.withModuleDirection(new Rotation2d(-driver.getLeftY(), -driver.getLeftX()))
-        // ));
-
-        // driver.leftBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(true,true)));
-        // driver.rightBumper().whileTrue(new ParallelCommandGroup(new CoralMoveScore(climber, shooter), DrivetrainExtra.pathfindingCommand(false,true)));
-        // driver.leftBumper().onFalse(new CoralMoveStow(climber, shooter));
-        // driver.rightBumper().onFalse(new CoralMoveStow(climber, shooter));
-
-        //driver.y().whileTrue(new ClimbSet(climber));
-        //driver.x().whileTrue(pathfindingtofollowCommand());
-        // driver.leftTrigger().or(() -> (RobotContainer.climber.getHeight() >= Constants.Climber.SlowmodeHeight) && !DriverStation.isAutonomous()).whileTrue(drivetrain.applyRequest(() ->
-        // drive.withVelocityX(-driver.getLeftY() * MaxSpeed * Constants.Drive.SlowSpeedPercentage) // Drive forward with negative Y (forward)
-        //     .withVelocityY(-driver.getLeftX() * MaxSpeed * Constants.Drive.SlowSpeedPercentage) // Drive left with negative X (left)
-        //     .withRotationalRate(-driver.getRightX() * MaxAngularRate * Constants.Drive.SlowRotPercentage) // Drive counterclockwise with negative X (left)
-        // ));
         // driver.rightTrigger().whileTrue(new IntakeCoral(climber, shooter));
        // driver.leftTrigger().whileTrue(new IntakeAlgae(intake, 0));
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
@@ -199,10 +164,7 @@ public class RobotContainer {
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
             .withTargetDirection(new Rotation2d(Math.toRadians(90))))
         );
-        
 
-
-       // driver.a().whileTrue(new AlgeaWack(elevator, shooter));
        
     //    driver.a().whileTrue(new MoveupArm(1, climber, shooter)); 
     //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 

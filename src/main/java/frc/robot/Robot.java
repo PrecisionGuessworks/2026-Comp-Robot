@@ -13,6 +13,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 
+import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -113,14 +114,6 @@ public class Robot extends TimedRobot {
   //     RobotContainer.climber.setTargetAdjust(leftY);
   //   }
   // }
-
-    // if (RobotContainer.operator.rightStick().getAsBoolean() == true) {
-    //   double rightyop = RobotContainer.operator.getRightY();
-    //   RobotContainer.shooter.setShooterVelocity(rightyop*40);
-    // } else {
-    //   RobotContainer.shooter.setShooterVelocity(0);
-    // }
-  
   
   
 }
@@ -229,6 +222,8 @@ Visualization.Update2DVisualization();
     if (autoName != newAutoName | ally != newAlly) {
         newAlly = ally;
         autoName = newAutoName;
+        DogLog.log("Commands: Auto: Name", autoName);
+        DogLog.log("Commands: Auto: Alliance", ally.isPresent() ? ally.get().toString() : "None");
         if (AutoBuilder.getAllAutoNames().contains(autoName)) {
             System.out.println("Displaying " + autoName);
             try {
