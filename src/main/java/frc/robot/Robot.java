@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.Elastic;
 import frc.robot.generated.LimelightHelpers;
 import frc.robot.generated.Vision;
+import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Visualization;
 
 
@@ -45,8 +46,11 @@ public class Robot extends TimedRobot {
   Optional<Alliance> newAlly;
   private Vision vision;
 
+  public static final Lights lights = new Lights();
+
   public Robot() {
     m_robotContainer = new RobotContainer();
+    
     vision = new Vision();
     SignalLogger.enableAutoLogging(false); // Disable CTRE Signal Logger auto logging
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 1);
@@ -64,6 +68,9 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     Visualization.Update3DVisualization();
     Visualization.updateFuelViz();
+    if (!DriverStation.isDSAttached()) {
+      lights.setNotConnected();
+    }
 
     // OLD LL vision code
     // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
@@ -121,7 +128,6 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     autoName = "";
-
     Command resetGryo = new Command()
     {
         public boolean runsWhenDisabled()
@@ -145,8 +151,10 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() { 
     updateElasticField();
-    
-}
+    if (DriverStation.isDSAttached()) {
+    lights.setConnectedAlliance();
+    }
+  }
   @Override
   public void disabledExit() {}
 

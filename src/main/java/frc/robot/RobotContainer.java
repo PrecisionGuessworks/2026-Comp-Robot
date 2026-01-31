@@ -37,6 +37,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ClimberSubsystem;
 
@@ -73,6 +74,7 @@ public class RobotContainer {
     public static final ClimberSubsystem climber = new ClimberSubsystem();
     public static final IntakeSubsystem intake = new IntakeSubsystem();
     public static final ShooterSubsystem shooter = new ShooterSubsystem();
+
 
 
 
