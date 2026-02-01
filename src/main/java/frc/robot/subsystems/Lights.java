@@ -41,6 +41,8 @@ public class Lights extends SubsystemBase{
 
     private final CANdle m_candle = new CANdle(60, "rio");
     private static final int kUpdateFreqHz = 100;
+    private int PastControl = -1;
+    private int CurrentControl = -1;
 
     public Lights() {
         CANdleConfiguration config = new CANdleConfiguration();
@@ -58,6 +60,8 @@ public class Lights extends SubsystemBase{
     //                     new ColorFlowAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
     //                         .withColor(kViolet)
     //                 );
+
+
 
     public void setNotConnected() {
         m_candle.setControl(
@@ -81,6 +85,7 @@ public class Lights extends SubsystemBase{
                 .withUpdateFreqHz(kUpdateFreqHz)
 
         );
+        CurrentControl = 1;
     }
 
     public void setClearAll() {
@@ -125,8 +130,112 @@ public class Lights extends SubsystemBase{
                 .withSize(6)
                 .withBounceMode(LarsonBounceValue.Center)
         );
+        CurrentControl = 2;
     }
 
 
-    
+    public void setParty(){
+        m_candle.setControl(
+            new RainbowAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+
+        );
+        m_candle.setControl(
+            new RainbowAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+        );
+        m_candle.setControl(
+            new RainbowAnimation(kSlot2StartIdx, kSlot2EndIdx).withSlot(2)  
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+        );
+        CurrentControl = 3;
+    }
+
+    public void setFire(){
+        double cooling = 0.5;
+        double sparking = 0.5;
+        m_candle.setControl(
+            new FireAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+                .withCooling(cooling)
+                .withDirection(AnimationDirectionValue.Forward)
+                .withSparking(sparking)
+
+        );
+        m_candle.setControl(
+            new FireAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+                .withCooling(cooling)
+                .withDirection(AnimationDirectionValue.Forward)
+                .withSparking(sparking)
+        );
+        m_candle.setControl(
+            new FireAnimation(kSlot2StartIdx, kSlot2EndIdx).withSlot(2)  
+                .withFrameRate(85)
+                .withUpdateFreqHz(kUpdateFreqHz)
+                .withCooling(cooling)
+                .withDirection(AnimationDirectionValue.Forward)
+                .withSparking(sparking)
+        );
+        CurrentControl = 4;
+    }
+
+    public void setAttack(){
+        m_candle.setControl(
+            new ColorFlowAnimation(kSlot0StartIdx, kSlot0EndIdx).withSlot(0)
+                .withColor(kRed)
+                .withFrameRate(100)
+                .withUpdateFreqHz(kUpdateFreqHz)
+
+        );
+        m_candle.setControl(
+            new ColorFlowAnimation(kSlot1StartIdx, kSlot1EndIdx).withSlot(1)
+                .withColor(kRed)
+                .withFrameRate(100)
+                .withUpdateFreqHz(kUpdateFreqHz)
+
+        );
+        m_candle.setControl(
+            new ColorFlowAnimation(kSlot2StartIdx, kSlot2EndIdx).withSlot(2)
+                .withColor(kRed)
+                .withFrameRate(100)
+                .withUpdateFreqHz(kUpdateFreqHz)
+
+        );
+        CurrentControl = 5;
+    }
+
+
+    public void UpdatedControl(int control){
+        PastControl = CurrentControl;
+        CurrentControl = control;
+    }
+
+    public void setPreviousControl(){
+        CurrentControl = PastControl;
+        if (CurrentControl == 1){
+            setNotConnected();
+        }
+        else if (CurrentControl == 2){
+            setConnectedAlliance();
+        }
+        else if (CurrentControl == 3){
+            setParty();
+        }
+        else if (CurrentControl == 4){
+            setFire();
+        } else if (CurrentControl == 5){
+            setAttack();
+        } else {
+            setClearAll();
+        }
+
+    }
+
+
 }

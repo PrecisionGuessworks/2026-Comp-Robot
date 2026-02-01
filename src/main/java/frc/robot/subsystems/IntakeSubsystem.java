@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class IntakeSubsystem extends SubsystemBase {
   // public final DigitalInput m_beamBreak = new DigitalInput(Constants.Intake.beamBreakPort);
@@ -188,6 +189,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition() {
     if (m_attackMode) {
         m_targetPosition = Constants.Intake.attackPosition;
+        Robot.lights.setAttack();
       } else {
         m_targetPosition = Constants.Intake.defPosition;
       }

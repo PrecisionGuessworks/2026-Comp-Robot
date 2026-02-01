@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.Pose;
 import frc.robot.subsystems.DrivetrainExtra;
@@ -39,6 +40,7 @@ public class ZoneScore extends Command {
   public void initialize() {
     m_timer.restart();
     loopCount = 0;
+    Robot.lights.setFire();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -94,6 +96,7 @@ public class ZoneScore extends Command {
   public void end(boolean interrupted) {
     m_shooter.setShooterVelocity(0.0);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
+    Robot.lights.setPreviousControl();
   }
 
   // Returns true when the command should end.
