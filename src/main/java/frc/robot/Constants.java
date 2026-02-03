@@ -354,7 +354,10 @@ public class Constants {
 
     public static final double minHeight = 0.0;
     public static final double maxHeight = Units.inchesToMeters(10.0); 
-    public static final double climbHeight = Units.inchesToMeters(2); 
+    public static final double startingHeight = minHeight;
+    public static final double stowHeight = Units.inchesToMeters(2.0);
+    public static final double PostClimbHeight = Units.inchesToMeters(5); 
+    public static final double PreClimbHeight = Units.inchesToMeters(9.0);
     public static final double Tolerance = Units.inchesToMeters(0.1);
 
     // For simulation only

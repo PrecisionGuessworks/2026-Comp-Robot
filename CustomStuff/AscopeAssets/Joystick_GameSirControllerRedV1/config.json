@@ -1,0 +1,239 @@
+{
+  "name": "GameSir Controller (Red)",
+  "components": [
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        691,
+        216
+      ],
+      "sizePx": [
+        65,
+        65
+      ],
+      "sourceIndex": 1
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        748,
+        167
+      ],
+      "sizePx": [
+        65,
+        65
+      ],
+      "sourceIndex": 2
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        634,
+        165
+      ],
+      "sizePx": [
+        65,
+        65
+      ],
+      "sourceIndex": 3
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        691,
+        117
+      ],
+      "sizePx": [
+        65,
+        65
+      ],
+      "sourceIndex": 4
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        258,
+        60
+      ],
+      "sizePx": [
+        160,
+        40
+      ],
+      "sourceIndex": 5
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        686,
+        60
+      ],
+      "sizePx": [
+        160,
+        40
+      ],
+      "sourceIndex": 6
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        374,
+        104
+      ],
+      "sizePx": [
+        45,
+        45
+      ],
+      "sourceIndex": 7
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": true,
+      "centerPx": [
+        576,
+        104
+      ],
+      "sizePx": [
+        45,
+        45
+      ],
+      "sourceIndex": 8
+    },
+    {
+      "type": "axis",
+      "isYellow": false,
+      "centerPx": [
+        80,
+        120
+      ],
+      "sizePx": [
+        56,
+        160
+      ],
+      "sourceIndex": 2,
+      "sourceRange": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "axis",
+      "isYellow": false,
+      "centerPx": [
+        869,
+        120
+      ],
+      "sizePx": [
+        56,
+        160
+      ],
+      "sourceIndex": 3,
+      "sourceRange": [
+        0,
+        1
+      ]
+    },
+    {
+      "type": "joystick",
+      "isYellow": true,
+      "centerPx": [
+        258,
+        159
+      ],
+      "radiusPx": 54,
+      "xSourceIndex": 0,
+      "xSourceInverted": false,
+      "ySourceIndex": 1,
+      "ySourceInverted": true,
+      "buttonSourceIndex": 9
+    },
+    {
+      "type": "joystick",
+      "isYellow": true,
+      "centerPx": [
+        585,
+        271
+      ],
+      "radiusPx": 54,
+      "xSourceIndex": 4,
+      "xSourceInverted": false,
+      "ySourceIndex": 5,
+      "ySourceInverted": true,
+      "buttonSourceIndex": 10
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        362,
+        240
+      ],
+      "sizePx": [
+        46,
+        46
+      ],
+      "sourceIndex": 0,
+      "sourcePov": "up"
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        408,
+        286
+      ],
+      "sizePx": [
+        46,
+        46
+      ],
+      "sourceIndex": 0,
+      "sourcePov": "right"
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        362,
+        332
+      ],
+      "sizePx": [
+        46,
+        46
+      ],
+      "sourceIndex": 0,
+      "sourcePov": "down"
+    },
+    {
+      "type": "button",
+      "isYellow": true,
+      "isEllipse": false,
+      "centerPx": [
+        316,
+        286
+      ],
+      "sizePx": [
+        46,
+        46
+      ],
+      "sourceIndex": 0,
+      "sourcePov": "left"
+    }
+  ]
+}

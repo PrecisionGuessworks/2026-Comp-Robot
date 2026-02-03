@@ -21,10 +21,12 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.generated.Elastic;
 import frc.robot.generated.LimelightHelpers;
+import frc.robot.generated.ShiftHelpers;
 import frc.robot.generated.Vision;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Visualization;
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     Visualization.Update3DVisualization();
     Visualization.updateFuelViz();
+    updateFeildTimers();
     if (!DriverStation.isDSAttached()) {
       lights.setNotConnected();
     }
@@ -221,6 +224,26 @@ var debugField = vision.getSimDebugField();
 debugField.getObject("EstimatedRobot").setPose(pose);
 Visualization.Update2DVisualization();
 
+
+  }
+  private final Color Red = new Color(255, 0, 0);
+  private final Color Blue = new Color(0, 0, 255);
+  private Color m_currentColor = Blue;
+
+  public void updateFeildTimers() {
+    double matchTime = DriverStation.getMatchTime();
+    SmartDashboard.putNumber("Match Time", matchTime);
+    if (ShiftHelpers.blueWonAuto()) {
+      m_currentColor = Blue;
+    } else {
+      m_currentColor = Red;
+    }
+    SmartDashboard.putString("Won Auto", m_currentColor.toHexString());
+    DogLog.log("Match Info: Match Time", matchTime);
+    DogLog.log("Match Info: Current Shift Color", m_currentColor.toHexString());
+    SmartDashboard.putNumber("Shift Time", ShiftHelpers.timeLeftInShiftSeconds(matchTime));    
+    SmartDashboard.putNumber("Time",DriverStation.getMatchTime());
+    SmartDashboard.putBoolean("Our Shift", ShiftHelpers.currentShiftIsYours());
 
   }
 
