@@ -46,13 +46,15 @@ public class ShiftHelpers {
         }
     }
 
-    public static boolean currentShiftIsYours() {
-        double currentMatchTime = DriverStation.getMatchTime();
-        boolean isBlueShift = isCurrentShiftBlue(currentMatchTime);
-        if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
-            return isBlueShift;
-        } else {
-            return !isBlueShift;
-        }
-    }
+    // WRONG DO NOT USE!. It gets end game wrong
+
+    // public static boolean currentShiftIsYours() {
+    //     double currentMatchTime = DriverStation.getMatchTime();
+    //     boolean isBlueShift = isCurrentShiftBlue(currentMatchTime);
+    //     if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
+    //         return isBlueShift;
+    //     } else {
+    //         return !isBlueShift;
+    //     }
+    // }
 }
