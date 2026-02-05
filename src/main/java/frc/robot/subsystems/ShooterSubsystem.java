@@ -210,6 +210,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     if (setm_hoodTargetAngle <= Constants.Shooter.hoodMaxAngle && setm_hoodTargetAngle >= Constants.Shooter.hoodMinAngle) { 
        m_hoodTargetAngle = setm_hoodTargetAngle;
+    } else if (setm_hoodTargetAngle > Constants.Shooter.hoodMaxAngle) {
+       m_hoodTargetAngle = Constants.Shooter.hoodMaxAngle;
+    } else if (setm_hoodTargetAngle < Constants.Shooter.hoodMinAngle) {
+       m_hoodTargetAngle = Constants.Shooter.hoodMinAngle;
     }
 
       m_hoodMotor.setMotionMagicPositionSetpointExpo(

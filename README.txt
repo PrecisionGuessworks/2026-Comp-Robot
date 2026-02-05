@@ -28,7 +28,50 @@ TODO:
         Bump Pass
         
 
-- Need to come up with auto naming convention
+
+Auto Naming Convention:
+
+First Number is How many times it scores
+        .5's means intake but not score
+        C means climb at the end
+
+First Letter is Start Location
+
+S is for Shoot
+SB is for Bump Shot
+P is for Pass
+
+Currently we are not planning to go over bump so LB/RB should not be used.
+
+
+_____________________________________________________________________________
+|                                        |   |   |                   |
+|                                     L  |  LT   |                   |
+|---|                                    |   |   |                   |
+|   | Dep                                |___|___|                   |
+|---|                       LS           |       |                   |
+|                                        |  LB   |            LM     |
+|                                        |       |                   |
+|      LCLimb                            |_______|                   |
+|------|                              CL | /   \ |                   |
+|      |                              C  | \   / |                   |
+|      |                              CR |_______|                   |
+|------|                                 |       |                   |
+|      RCLimb                            |  RB   |             RM    |
+|                                        |       |                   |
+|                           RS           |       |                   |
+||                                       |_______|                   |
+|| Out                                   |   |   |                   |
+||                                    R  |  RT   |                   |
+||                                       |   |   |                   |
+|________________________________________|___|___|___________________|________
+
+
+Examples:
+2C-R-Out-RS-RM-RS-RCLimb: Start Right, Intake at Outpost, Right Score, Intake from Right middle, Right Score, CLimb on right side
+1C-CL-SB-LClimb: Start Center Left, Bump shot score, Climb on left side
+
+        
 ------------------------------- Controller Layouts --------------------------------------
 
 Driver:

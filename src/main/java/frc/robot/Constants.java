@@ -54,7 +54,7 @@ public class Constants {
     public static final boolean SimFuel = true; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on preformance)
+    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
 
     public static final class ShotCalc {
 
@@ -395,7 +395,7 @@ public class Constants {
     public static final double Halfline = ShotCalc.targetpose.getY();
 
     public static final double[][] HoodSafetyZones = {
-      //minX, maxX, minY, maxY
+      //minX, maxX, minY, maxY Poses of Safety Zones where Hood should not be up. ie trench.
       {3.5, 5.75, -1.0, 1.75}, 
       {3.5, 5.75, 6, 8.5},
       {10.8, 13, -1.0, 1.75},

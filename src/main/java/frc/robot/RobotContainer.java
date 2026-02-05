@@ -76,9 +76,6 @@ public class RobotContainer {
     public static final ShooterSubsystem shooter = new ShooterSubsystem();
 
 
-
-
-
     public RobotContainer() {
 
         DogLog.setOptions(new DogLogOptions().withNtPublish(Constants.DogLogNetworkTables));

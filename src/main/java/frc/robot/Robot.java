@@ -242,7 +242,7 @@ Visualization.Update2DVisualization();
     DogLog.log("Match Info: Match Time", matchTime);
     DogLog.log("Match Info: Current Shift Color", m_currentColor.toHexString());
     SmartDashboard.putNumber("Shift Time", ShiftHelpers.timeLeftInShiftSeconds(matchTime));    
-    SmartDashboard.putNumber("Time",DriverStation.getMatchTime());
+    SmartDashboard.putNumber("Time",matchTime);
     SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
 
   }
