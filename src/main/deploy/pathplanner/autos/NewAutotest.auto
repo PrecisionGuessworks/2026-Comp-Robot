@@ -43,7 +43,7 @@
       ]
     }
   },
-  "reseFixm": true,
-  "folder": null,
+  "resetOdom": true,
+  "folder": "Test",
   "choreoAuto": false
 }
