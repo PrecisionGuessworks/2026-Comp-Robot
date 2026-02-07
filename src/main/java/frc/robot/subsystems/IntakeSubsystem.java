@@ -82,6 +82,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean m_hasPiece = false;
   public boolean m_attackMode = false;
   public boolean m_pastAttackMode = false;
+  private boolean m_softLimitsEnabled = true;
 
   private final Color Yellow = new Color(255, 255, 0);
   private final Color Blue = new Color(0, 0, 255);
@@ -199,6 +200,42 @@ public class IntakeSubsystem extends SubsystemBase {
     m_targetPosition -= Constants.Intake.retractSlowSpeed;
   }
 
+  public void setSoftLimitsEnabled(boolean enabled) {
+    m_deployMotor.setForwardSoftLimit(enabled);
+    m_deployMotor.setReverseSoftLimit(enabled);
+    m_softLimitsEnabled = enabled;
+  }
+  
+  public void toggleSoftLimitsEnabled() {
+    boolean enabled = m_softLimitsEnabled;
+    setSoftLimitsEnabled(!enabled);
+    m_softLimitsEnabled = !enabled;
+  }
+
+  public void setDeployCurrent (double stator, double supply){
+    m_deployMotor.setStatorCurrentLimit(stator,supply);
+  }
+
+  public void zeroDeploy() {
+    m_deployMotor.setSensorPosition(0.0);
+  }
+
+  public void retractIntakeHome() {
+    m_targetPosition -= Constants.Intake.retractHomeSpeed;
+  }
+
+  public double getDepolyMotorCurrent() {
+    return m_deployMotor.getSupplyCurrent();
+  }
+
+  public double getDeployVelocity() {
+    return m_deployMotor.getSensorVelocity();
+  }
+
+  public boolean isDeployStalled() { // Maybe use velocity and current to determine if stalled?
+    return getDepolyMotorCurrent() >= Constants.Intake.retractHomeStatorCurrent;
+  }
+
 
   @Override
   public void periodic() {
@@ -221,7 +258,9 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     SmartDashboard.putString("Intake Mode", m_currentColor.toHexString());
 
-    if (m_targetPosition >= Constants.Intake.minExtension && m_targetPosition <= Constants.Intake.maxExtension) {
+    if (!m_softLimitsEnabled){
+      m_setPosition = m_targetPosition;
+    } else if (m_targetPosition >= Constants.Intake.minExtension && m_targetPosition <= Constants.Intake.maxExtension) {
       m_setPosition = m_targetPosition;
     }
 

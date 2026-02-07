@@ -654,6 +654,26 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
             kCANTimeoutS);
   }
 
+  public void setForwardSoftLimit(final boolean enabled) {
+    m_config.FWD_SOFT_LIMIT_ENABLED = enabled;
+    m_controller
+        .getConfigurator()
+        .apply(
+            m_config.toTalonFXConfiguration(
+                    this::toNativeSensorPosition, this::toNativeSensorVelocity)
+                .SoftwareLimitSwitch);
+  }
+
+  public void setReverseSoftLimit(final boolean enabled) {
+    m_config.REV_SOFT_LIMIT_ENABLED = enabled;
+    m_controller
+        .getConfigurator()
+        .apply(
+            m_config.toTalonFXConfiguration(
+                    this::toNativeSensorPosition, this::toNativeSensorVelocity)
+                .SoftwareLimitSwitch);
+  }
+
   public void setPercentOutput(final double percent) {
     m_dutyCycleControl.Output = percent;
     m_controller.setControl(m_dutyCycleControl);

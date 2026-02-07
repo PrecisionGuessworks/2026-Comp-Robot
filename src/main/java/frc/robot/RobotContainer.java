@@ -169,6 +169,14 @@ public class RobotContainer {
     //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 
        driver.y().whileTrue(new MoveupClimber(climber));
 
+    operator.leftBumper().whileTrue(Commands.runOnce(() -> {
+        double input = operator.getRightY();
+        if (Math.abs(input) > Constants.Drive.DriveDeadband) {
+         climber.setManualHeight(input);
+        }
+    }));
+    operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> climber.toggleSoftLimitsEnabled()));
+
     }
 
 

@@ -15,10 +15,14 @@ TODO:
 
 - ADD SHIFT TIMER TO DASHBOARD!!! make sure it works correctly
 
+- Maybe add either camera ignore or use gryo when going over bump
+
+- Add manual overides. ie. Trust pose or not, trust zone or not, home
+
 - Commands TODO:
         Try to fix Auto Sotm
-        Maunal climb override
-        Home all
+        Maunal climb override Done
+        Home all Done
         Pose off controls
 
 - Teach Commands and add:

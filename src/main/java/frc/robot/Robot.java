@@ -116,6 +116,8 @@ public class Robot extends TimedRobot {
     lineup = true;
   }
 
+  
+
 
   
   // double leftY = m_robotContainer.operator.getLeftY();
@@ -232,19 +234,33 @@ Visualization.Update2DVisualization();
 
   public void updateFeildTimers() {
     double matchTime = DriverStation.getMatchTime();
+    boolean WeBlue = ShiftHelpers.isCurrentShiftBlue(matchTime);
+    boolean WeWon = false;
+
     SmartDashboard.putNumber("Match Time", matchTime);
     if (ShiftHelpers.blueWonAuto()) {
       m_currentColor = Blue;
     } else {
       m_currentColor = Red;
     }
+    if (WeBlue){
+      if (ShiftHelpers.blueWonAuto()) {
+        WeWon = true;
+      }
+    }
+    else {
+      if (!ShiftHelpers.blueWonAuto()) {
+        WeWon = true;
+    }
+    }
+
     SmartDashboard.putString("Won Auto", m_currentColor.toHexString());
+    SmartDashboard.putBoolean("We Won Auto", WeWon);
     DogLog.log("Match Info: Match Time", matchTime);
     DogLog.log("Match Info: Current Shift Color", m_currentColor.toHexString());
     SmartDashboard.putNumber("Shift Time", ShiftHelpers.timeLeftInShiftSeconds(matchTime));    
     SmartDashboard.putNumber("Time",matchTime);
     SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
-
   }
 
   public void updateElasticField() {

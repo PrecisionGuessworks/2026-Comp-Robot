@@ -317,6 +317,10 @@ public class Constants {
     public static final double defPosition = Units.inchesToMeters(3.0);
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.02); 
+    public static final double retractHomeSpeed = Units.inchesToMeters(0.03);
+    public static final double retractHomeStatorCurrent = 10.0; // Amps
+    public static final double retractHomeSupplyCurrent = 10.0; // Amps
+    public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
     public static final double intakeRollerVelocity = 100;
     public static final double outtakeRollerVelocity = -100;
@@ -359,6 +363,8 @@ public class Constants {
     public static final double PostClimbHeight = Units.inchesToMeters(5); 
     public static final double PreClimbHeight = Units.inchesToMeters(9.0);
     public static final double Tolerance = Units.inchesToMeters(0.1);
+
+    public static final double ManualSpeed = 0.01; // increase to make manual control faster, decrease to make it slower
 
     // For simulation only
     public static final double simCarriageMass = 60.0; // kg

@@ -49,11 +49,29 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private double m_setTargetHeight = Constants.Climber.minHeight;
   private double m_targetHeight = Constants.Climber.minHeight;
+  private double m_setPosition = Constants.Climber.minHeight;
+  private boolean m_softLimitsEnabled = true;
 
   public ClimberSubsystem() {
     // Show scheduler status in SmartDashboard.
     SmartDashboard.putData(this);
 
+  }
+
+  public void setSoftLimitsEnabled(boolean enabled) {
+    m_motor.setForwardSoftLimit(enabled);
+    m_motor.setReverseSoftLimit(enabled);
+    m_softLimitsEnabled = enabled;
+  }
+  
+  public void toggleSoftLimitsEnabled() {
+    boolean enabled = m_softLimitsEnabled;
+    setSoftLimitsEnabled(!enabled);
+    m_softLimitsEnabled = !enabled;
+  }
+
+  public void zeroHeight() {
+    m_motor.setSensorPosition(0.0);
   }
 
   public double getHeight() {
@@ -64,9 +82,17 @@ public class ClimberSubsystem extends SubsystemBase {
     m_setTargetHeight = targetHeight;
   }
 
+  public void setManualHeight(double speed) { // Speed should be between -1 and 1, where positive is up and negative is down
+    m_setTargetHeight += speed * Constants.Climber.ManualSpeed;
+  }
+
   public boolean isAtHeight(double height, double tolerance) {
     return Math.abs(height - getHeight()) <= tolerance;
   }
+
+  // public boolean isDeployStalled() {
+  //   return m_motor.getStatorCurrent() >= Constants.Climber.
+  // } 
 
   @Override
   public void periodic() {
@@ -74,6 +100,11 @@ public class ClimberSubsystem extends SubsystemBase {
     // if (armAngle <= 50 && m_setTargetHeight <= Constants.Climber.armStowHeight){ 
     //   m_targetHeight = Constants.Climber.armStowHeight;
     // }
+    if (!m_softLimitsEnabled){
+      m_setPosition = m_setTargetHeight;
+    } else if (m_setTargetHeight >= Constants.Climber.minHeight && m_setTargetHeight <= Constants.Climber.maxHeight) {
+      m_setPosition = m_setTargetHeight;
+    }
 
     //m_targetHeight = m_setTargetHeight;
 
@@ -81,7 +112,7 @@ public class ClimberSubsystem extends SubsystemBase {
     
     m_motor.setMotionMagicPositionSetpointExpo(
         Constants.Climber.motorPositionSlot,
-        m_targetHeight
+        m_setPosition
         );
           
     DogLog.log("Climber: Height", Units.metersToInches(getHeight()),"Inch");
