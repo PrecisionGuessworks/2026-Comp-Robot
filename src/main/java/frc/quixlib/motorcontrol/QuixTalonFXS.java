@@ -2,7 +2,6 @@ package frc.quixlib.motorcontrol;
 
 import java.util.function.Function;
 
-import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
@@ -11,7 +10,6 @@ import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.DynamicMotionMagicVoltage;
 import com.ctre.phoenix6.controls.Follower;
-import com.ctre.phoenix6.controls.MotionMagicExpoTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -26,15 +24,14 @@ import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.MotorArrangementValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.sim.TalonFXSSimState;
-import com.ctre.phoenix6.sim.TalonFXSimState;
 
 import dev.doglog.DogLog;
 import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.units.measure.ImmutableAngle;
 import edu.wpi.first.units.measure.ImmutableAngularVelocity;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
@@ -241,7 +238,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
 
 
       if (Robot.isReal()) {
-        // TODO: Figure out why stator current limits break simulation.
+        // Fix: Figure out why stator current limits break simulation.
         config.CurrentLimits.StatorCurrentLimitEnable = true;
         config.CurrentLimits.StatorCurrentLimit = STATOR_CURRENT_LIMIT;
       }
@@ -649,7 +646,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   public void setStatorCurrentLimit(final double amps) {
     m_config.STATOR_CURRENT_LIMIT = amps;
 
-    // TODO: Consider a shorter non-blocking timeout
+    // Fix: Consider a shorter non-blocking timeout
     m_controller
         .getConfigurator()
         .apply(
@@ -662,7 +659,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     m_config.STATOR_CURRENT_LIMIT = stator;
     m_config.SUPPLY_CURRENT_LIMIT = supply;
 
-    // TODO: Consider a shorter non-blocking timeout
+    // Fix: Consider a shorter non-blocking timeout
     m_controller
         .getConfigurator()
         .apply(
@@ -803,7 +800,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   }
 
   public void setSensorPosition(final double pos) {
-    // TODO: Handle zero offset internally.
+    // Fix: Handle zero offset internally.
     m_controller.setPosition(toNativeSensorPosition(pos));
   }
 

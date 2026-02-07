@@ -1,4 +1,4 @@
-TODO:
+Fix:
 
 - clean up
 
@@ -19,7 +19,7 @@ TODO:
 
 - Add manual overides. ie. Trust pose or not, trust zone or not, home
 
-- Commands TODO:
+- Commands Fix:
         Try to fix Auto Sotm
         Maunal climb override Done
         Home all Done

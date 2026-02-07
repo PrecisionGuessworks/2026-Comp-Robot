@@ -15,6 +15,7 @@ import frc.quixlib.viz.Viz2d;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
+@SuppressWarnings("unused")
 public class Visualization {
 
 

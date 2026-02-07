@@ -278,7 +278,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_hoodSim.update(TimedRobot.kDefaultPeriod);
     m_hoodMotor.setSimSensorPositionAndVelocity(
         m_hoodSim.getAngleRads() - HoodStartingAngle,
-        // m_hoodSim.getVelocityRadPerSec(), // TODO: Figure out why this causes jitter
+        // m_hoodSim.getVelocityRadPerSec(), // Fix: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
         Constants.Shooter.hoodMotorRatio);

@@ -3,7 +3,6 @@ package frc.robot.generated;
 // Thank you FRC 3847
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 public class ShiftHelpers {
 

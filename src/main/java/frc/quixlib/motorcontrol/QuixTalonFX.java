@@ -230,7 +230,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
 
       if (Robot.isReal()) {
-        // TODO: Figure out why stator current limits break simulation.
+        // Fix: Figure out why stator current limits break simulation.
         config.CurrentLimits.StatorCurrentLimitEnable = true;
         config.CurrentLimits.StatorCurrentLimit = STATOR_CURRENT_LIMIT;
       }
@@ -631,7 +631,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   public void setStatorCurrentLimit(final double amps) {
     m_config.STATOR_CURRENT_LIMIT = amps;
 
-    // TODO: Consider a shorter non-blocking timeout
+    // Fix: Consider a shorter non-blocking timeout
     m_controller
         .getConfigurator()
         .apply(
@@ -644,7 +644,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     m_config.STATOR_CURRENT_LIMIT = stator;
     m_config.SUPPLY_CURRENT_LIMIT = supply;
 
-    // TODO: Consider a shorter non-blocking timeout
+    // Fix: Consider a shorter non-blocking timeout
     m_controller
         .getConfigurator()
         .apply(
@@ -805,7 +805,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   }
 
   public void setSensorPosition(final double pos) {
-    // TODO: Handle zero offset internally.
+    // Fix: Handle zero offset internally.
     m_controller.setPosition(toNativeSensorPosition(pos));
   }
 

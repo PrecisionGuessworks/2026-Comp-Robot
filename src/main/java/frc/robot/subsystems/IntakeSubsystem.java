@@ -316,7 +316,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_elevatorSim.update(TimedRobot.kDefaultPeriod);
     m_deployMotor.setSimSensorPositionAndVelocity(
         m_elevatorSim.getPositionMeters(),
-        // m_elevatorSim.getVelocityMetersPerSecond(), // TODO: Figure out why this causes jitter
+        // m_elevatorSim.getVelocityMetersPerSecond(), // Fix: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
         Constants.Climber.motorRatio);

@@ -175,7 +175,7 @@ public class PhoenixUtil {
           false);
       return false;
     }
-    // TODO: Check other values
+    // Fix: Check other values
     return true;
   }
 
@@ -226,7 +226,7 @@ public class PhoenixUtil {
           false);
       return false;
     }
-    // TODO: Check other values
+    // Fix: Check other values
     return true;
   }
 
