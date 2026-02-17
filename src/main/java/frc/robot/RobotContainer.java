@@ -106,7 +106,8 @@ public class RobotContainer {
          // SmartDashboard.putNumber("Time",Timer.getMatchTime());
         // SmartDashboard.putNumber("Time",DriverStation.getMatchTime());
         SmartDashboard.putNumber("Voltage",RobotController.getBatteryVoltage());
-        SmartDashboard.putNumber("CAN",RobotController.getCANStatus().percentBusUtilization * 100.0);
+        // SmartDashboard.putNumber("CAN",RobotController.getCANStatus().percentBusUtilization * 100.0);
+        
         SmartDashboard.putData("Command Scheduler", CommandScheduler.getInstance());
         DogLog.setPdh(powerDistribution);
           

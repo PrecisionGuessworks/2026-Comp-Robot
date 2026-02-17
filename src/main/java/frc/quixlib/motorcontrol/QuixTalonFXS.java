@@ -14,6 +14,7 @@ import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.TorqueCurrentFOC;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 // import com.ctre.phoenix6.hardware.TalonFX;
@@ -56,8 +57,8 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   private final MotionMagicVoltage m_motionMagicControl = new MotionMagicVoltage(0);
   private final MotionMagicExpoVoltage m_motionMagicExpoControl = new MotionMagicExpoVoltage(0);
   // private final MotionMagicExpoTorqueCurrentFOC m_motionMagicExpoTorqueControl = new MotionMagicExpoTorqueCurrentFOC(0);
-  private final DynamicMotionMagicVoltage m_dynamicMotionMagicControl =
-      new DynamicMotionMagicVoltage(0, 0, 0);
+  private final DynamicMotionMagicVoltage m_dynamicMotionMagicControl = new DynamicMotionMagicVoltage(0, 0, 0);
+  private final VelocityTorqueCurrentFOC m_velocityTorqueControFOC = new VelocityTorqueCurrentFOC(0);
 
 
   private final QuixStatusSignal m_percentOutputSignal;
@@ -761,6 +762,14 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     m_velocityControl.FeedForward = feedforwardVolts;
     m_voltageControl.EnableFOC = true;
     m_controller.setControl(m_velocityControl);
+  }
+
+  public void setVelocityFOCTorqueSetpoint(final int slot, final double velocity, final double feedforwardVolts) {
+    m_velocityTorqueControFOC.Slot = slot;
+    m_velocityTorqueControFOC.Velocity = toNativeSensorVelocity(velocity);
+    m_velocityTorqueControFOC.FeedForward = feedforwardVolts;
+    // m_velocityTorqueControFOC.EnableFOC = true;
+    m_controller.setControl(m_velocityTorqueControFOC);
   }
 
   public double getPercentOutput() {
