@@ -1,16 +1,16 @@
-package frc.robot.commands;
+package frc.robot.commands.TestCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
 
 
-public class MoveupClimber extends Command {
+public class MoveClimber extends Command {
 
   private final ClimberSubsystem m_climber;
   // private Timer m_ejectTimer = new Timer();
 
-  public MoveupClimber(ClimberSubsystem climber) {
+  public MoveClimber(ClimberSubsystem climber) {
 
     m_climber = climber;
 

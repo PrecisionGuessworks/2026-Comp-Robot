@@ -25,11 +25,13 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Intake;
-import frc.robot.commands.MoveupClimber;
 import frc.robot.commands.STOMAuto;
 import frc.robot.commands.Score;
 import frc.robot.commands.StowAll;
 import frc.robot.commands.ZoneScore;
+import frc.robot.commands.TestCommands.MoveClimber;
+import frc.robot.commands.TestCommands.MoveIntake;
+import frc.robot.commands.TestCommands.MoveShooter;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -140,7 +142,7 @@ public class RobotContainer {
         //     .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
         //     )));
 
-        driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
+        // driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
 
         driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter),drivetrain.applyRequest(() ->
@@ -151,21 +153,21 @@ public class RobotContainer {
             )));
 
         driver.rightTrigger().whileTrue(new Intake(intake));
-        driver.a().whileTrue(new MoveupClimber(climber));
+
+        
+        driver.a().whileTrue(new MoveClimber(climber));
+        driver.b().whileTrue(new MoveIntake(intake));
+        driver.x().whileTrue(new MoveShooter(shooter));
         
         
         
 
-        driver.y().whileTrue(drivetrain.applyRequest(() ->
-            angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
-            .withVelocityY(-driver.getLeftX() * MaxSpeed)
-            .withTargetDirection(new Rotation2d(Math.toRadians(90))))
-        );
+        // driver.y().whileTrue(drivetrain.applyRequest(() ->
+        //     angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+        //     .withVelocityY(-driver.getLeftX() * MaxSpeed)
+        //     .withTargetDirection(new Rotation2d(Math.toRadians(90))))
+        // );
 
-       
-    //    driver.a().whileTrue(new MoveupArm(1, climber, shooter)); 
-    //    driver.b().whileTrue(DrivetrainExtra.LogTime("test", new MoveupArm(2, climber, shooter))); 
-       driver.y().whileTrue(new MoveupClimber(climber));
 
     operator.leftBumper().whileTrue(Commands.runOnce(() -> {
         double input = operator.getRightY();

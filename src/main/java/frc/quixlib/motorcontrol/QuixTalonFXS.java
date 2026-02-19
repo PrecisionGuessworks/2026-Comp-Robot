@@ -760,7 +760,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     m_velocityControl.Slot = slot;
     m_velocityControl.Velocity = toNativeSensorVelocity(setpoint);
     m_velocityControl.FeedForward = feedforwardVolts;
-    m_voltageControl.EnableFOC = true;
+    // m_velocityControl.EnableFOC = true;
     m_controller.setControl(m_velocityControl);
   }
 

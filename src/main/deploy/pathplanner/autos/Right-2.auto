@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RStart-Mid-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-RS"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RS-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-DeepMid-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-RS"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

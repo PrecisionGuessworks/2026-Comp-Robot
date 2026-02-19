@@ -30,6 +30,7 @@ Fix:
         Climb set points
         Bump Shot
         Bump Pass
+        Intake
         
 
 
@@ -49,26 +50,26 @@ Currently we are not planning to go over bump so LB/RB should not be used.
 
 
 _____________________________________________________________________________
-|                                        |   |   |                   |
-|                                     L  |  LT   |                   |
-|---|                                    |   |   |                   |
-|   | Dep                                |___|___|                   |
+|                                            |                       |
+|                                     L     LT                       |
+|---|                                        |                       |
+|   | Dep                                 ___|___                    |
 |---|                       LS           |       |                   |
 |                                        |  LB   |            LM     |
 |                                        |       |                   |
 |      LCLimb                            |_______|                   |
 |------|                              CL | /   \ |                   |
-|      |                              C  | \   / |                   |
+|      |                    CS        C  | \   / |                   |
 |      |                              CR |_______|                   |
 |------|                                 |       |                   |
 |      RCLimb                            |  RB   |             RM    |
 |                                        |       |                   |
 |                           RS           |       |                   |
 ||                                       |_______|                   |
-|| Out                                   |   |   |                   |
-||                                    R  |  RT   |                   |
-||                                       |   |   |                   |
-|________________________________________|___|___|___________________|________
+|| Out                                       |                       |
+||                                    R     RT                       |
+||                                           |                       |
+|____________________________________________|_______________________|________
 
 
 Examples:
@@ -78,7 +79,7 @@ Examples:
         
 ------------------------------- Controller Layouts --------------------------------------
 
-Driver:
+----------------------- Driver:
 
 A:
 B:
@@ -103,6 +104,44 @@ Left Back Button:
 Right Back Button:
 
 Rumble:
+
+----------------------- Operator:
+
+A:
+B:
+X:
+Y:
+
+Left Bumper:
+Right Bumper:
+
+Left Trigger:
+Right Trigger:
+
+Back Button:
+Start Button:
+
+Left Stick:
+Right Stick:
+
+D-Pad:
+
+Left Back Button:
+Right Back Button:
+
+Rumble:
+
+
+
+
+
+
+
+
+
+
+
+
 
 ------------------------------- Furture Controller Layouts --------------------------------------
 
