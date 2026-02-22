@@ -172,6 +172,30 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_CrollerMotor.getSensorVelocity();
   }
 
+  public void setHopperRollerVelocity(double velocity) {
+    if (velocity == 0.0) {
+      m_hopperMotor.setPercentOutput(0.0);
+    } else {
+      m_hopperMotor.setVelocitySetpoint(
+          Constants.Intake.rollerVelocitySlot,
+          velocity,
+          Constants.Intake.rollerFeedforward.calculate(velocity));
+    }
+  }
+
+  public void setHopperRollerCurrent (double stator, double supply){
+    m_hopperMotor.setStatorCurrentLimit(stator,supply);
+  }
+
+  public double getHopperRollerCurrent (){
+    return m_hopperMotor.getSupplyCurrent();
+  }
+
+  public double getHopperRollerVelocity() {
+    return m_hopperMotor.getSensorVelocity();
+  }
+
+
 
   public void setAttackMode(boolean attackMode) {
     m_attackMode = attackMode;

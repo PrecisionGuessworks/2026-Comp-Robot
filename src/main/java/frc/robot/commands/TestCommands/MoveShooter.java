@@ -22,7 +22,7 @@ public class MoveShooter extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.setHoodAngle(Units.degreesToRadians(10));
+    m_shooter.setHoodAngle(Units.degreesToRadians(30));
     
     
   }

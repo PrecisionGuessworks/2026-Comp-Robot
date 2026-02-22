@@ -197,36 +197,36 @@ public class Constants {
   public static final class Shooter {
     public static final int beamBreakPort = 0;
 
-    public static final CANDeviceID hoodMotorID = new CANDeviceID(25, kSuperStructureCanivoreName);
+    public static final CANDeviceID hoodMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
     // public static final CANDeviceID hoodCoderID = new CANDeviceID(26, kSuperStructureCanivoreName);
     public static final MechanismRatio hoodMotorRatio =
         isSim ? 
         new MechanismRatio(
-            1, (25.0 / 1.0) * (42.0 / 20.0)) : // Sim
+            1, (45.0 / 1.0) * (42.0 / 20.0)) : // Sim
         new MechanismRatio(
-            1, (25.0 / 1.0) * (42.0 / 20.0)); // Real
+            1, (45.0 / 1.0) * (42.0 / 20.0)); // Real
     // public static final MechanismRatio hoodSensorRatio =
     //     new MechanismRatio(1, (1.0));
     public static final boolean hoodMotorInvert = true;
 
-    public static final CANDeviceID shooterMotorID = new CANDeviceID(28, kSuperStructureCanivoreName);
+    public static final CANDeviceID shooterMotorID = new CANDeviceID(50, kSuperStructureCanivoreName);
     public static final MechanismRatio shooterMotorRatio = new MechanismRatio(12, 18);
     public static final boolean shooterMotorInvert = false;
 
-    public static final CANDeviceID shooter2MotorID = new CANDeviceID(29, kSuperStructureCanivoreName);
+    public static final CANDeviceID shooter2MotorID = new CANDeviceID(51, kSuperStructureCanivoreName);
     public static final MotorAlignmentValue shooter2MotorInvert = MotorAlignmentValue.Opposed;
 
-    public static final CANDeviceID indexerMotorID = new CANDeviceID(27, kSuperStructureCanivoreName);
+    public static final CANDeviceID indexerMotorID = new CANDeviceID(37, kSuperStructureCanivoreName);
     public static final MechanismRatio indexerMotorRatio = new MechanismRatio(1, 1);
     public static final boolean indexerMotorInvert = false;
 
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
-        new Constraints(0.1, 0.1); // rad/s and rad/s^2  8, 20.0
+        new Constraints(0.75, 3); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 1.0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0.01, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
     public static final double hoodExpo_kV = 6;    
     public static final double hoodExpo_kA = 0.01;
   //  public static final int armCoralPositionPIDSlot = 1;
@@ -254,6 +254,7 @@ public class Constants {
 
     public static final double outtakeVelocity = 1300.0; // rads/s
 
+     public static final double indexerVelocity = 300.0; // rads/s
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
@@ -267,7 +268,7 @@ public class Constants {
 
   public static final class Intake {
 
-    public static final CANDeviceID hopperMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
+    public static final CANDeviceID hopperMotorID = new CANDeviceID(39, kSuperStructureCanivoreName);
     public static final MechanismRatio hopperMotorRatio =
         new MechanismRatio(1, 1);
     public static final boolean hopperMotorInvert = false;

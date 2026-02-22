@@ -88,7 +88,7 @@ public class RobotContainer {
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("STOMAuto", new STOMAuto(shooter));
-        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter)));
+        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,intake)));
         robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new Score(shooter)));
 
         // robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
@@ -145,7 +145,7 @@ public class RobotContainer {
         driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
 
-        driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter),drivetrain.applyRequest(() ->
+        driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter, intake),drivetrain.applyRequest(() ->
         angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
             .withTargetDirection(SOTM.targetangle( ))

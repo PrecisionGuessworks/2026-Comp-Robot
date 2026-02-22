@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
 
 public class ZoneScore extends Command {
   private final ShooterSubsystem m_shooter;
+  private final IntakeSubsystem m_intake;
   private double distanceToTarget;
   private double hoodAngle;
   private double shooterVelocity;
@@ -26,11 +28,12 @@ public class ZoneScore extends Command {
   private Translation2d target = new Translation2d();
 
   public ZoneScore(
-      ShooterSubsystem shooterSubsystem) {
+      ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem) {
     m_shooter = shooterSubsystem;
+    m_intake = intakeSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
+    addRequirements(shooterSubsystem, intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -83,6 +86,9 @@ public class ZoneScore extends Command {
         hoodAngle = Constants.Shooter.hoodStowAngle;
     }
     m_shooter.setHoodAngle(hoodAngle);
+    m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
+    m_intake.setHopperRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    
 
     loopCount++;
 
@@ -95,6 +101,8 @@ public class ZoneScore extends Command {
     m_shooter.setShooterVelocity(0.0);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
     Robot.lights.setPreviousControl();
+    m_shooter.setIndexerVelocity(0);
+    m_intake.setHopperRollerVelocity(0);
   }
 
   // Returns true when the command should end.
