@@ -223,21 +223,26 @@ public class Constants {
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
-        new Constraints(3.5, 10.0); // rad/s and rad/s^2  8, 20.0
+        new Constraints(0.1, 0.1); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 1.0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0.01, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
     public static final double hoodExpo_kV = 6;    
     public static final double hoodExpo_kA = 0.01;
   //  public static final int armCoralPositionPIDSlot = 1;
   //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
 
     public static final SimpleMotorFeedforward shooterFeedforward =
-        new SimpleMotorFeedforward(0.1, 0.028);
-    public static final int shooterVelocityPIDSlot = 1;
-    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.1, 0.0, 0.0);
-    public static final int shooterPositionPIDSlot = 0;
-    public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
+        new SimpleMotorFeedforward(0.2, 0.2);
+    public static final int shooterVelocityPIDSlot = 0;
+    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(30, 1.0, 2.0);
+
+    public static final SimpleMotorFeedforward indexerFeedforward =
+        new SimpleMotorFeedforward(0.2, 0.2);
+    public static final int indexerVelocityPIDSlot = 0;
+    public static final PIDConfig indexerVelocityPIDConfig = new PIDConfig(30, 1.0, 2.0);
+    // public static final int shooterPositionPIDSlot = 0;
+    // public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
 
     public static final double hoodMinAngle = Units.degreesToRadians(0.0);
     public static final double hoodMaxAngle = Units.degreesToRadians(81.0);

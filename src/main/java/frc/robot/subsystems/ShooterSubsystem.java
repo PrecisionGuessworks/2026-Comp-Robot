@@ -38,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
               .setInverted(Constants.Shooter.shooterMotorInvert)
               .setSupplyCurrentLimit(50.0)
               .setStatorCurrentLimit(120.0)
-              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
+              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterVelocityPIDConfig));
   private final QuixTalonFX m_shooter2Motor =
       new QuixTalonFX(
           Constants.Shooter.shooter2MotorID,
@@ -48,17 +48,17 @@ public class ShooterSubsystem extends SubsystemBase {
               .setInverted(Constants.Shooter.shooterMotorInvert)
               .setSupplyCurrentLimit(50.0)
               .setStatorCurrentLimit(120.0)
-              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
+              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterVelocityPIDConfig));
 
   private final QuixTalonFX m_indexerMotor =
       new QuixTalonFX(
           Constants.Shooter.indexerMotorID,
           Constants.Shooter.indexerMotorRatio,
           QuixTalonFX.makeDefaultConfig()
-              .setInverted(Constants.Shooter.shooterMotorInvert)
+              .setInverted(Constants.Shooter.indexerMotorInvert)
               .setSupplyCurrentLimit(40.0)
               .setStatorCurrentLimit(80.0)
-              .setPIDConfig(Constants.Shooter.shooterVelocityPIDSlot, Constants.Shooter.shooterPositionPIDConfig));
+              .setPIDConfig(Constants.Shooter.indexerVelocityPIDSlot, Constants.Shooter.indexerVelocityPIDConfig));
 
   private final QuixTalonFX m_hoodMotor =
       new QuixTalonFX(
