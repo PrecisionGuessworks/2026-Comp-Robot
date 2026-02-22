@@ -5,23 +5,26 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.DrivetrainExtra;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
 
-public class Score extends Command {
+public class VizScore extends Command {
   private final ShooterSubsystem m_shooter;
+  private final IntakeSubsystem m_intake;
   private double distanceToTarget;
   private double hoodAngle;
   private double shooterVelocity;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
-  public Score(
-      ShooterSubsystem shooterSubsystem) {
+  public VizScore(
+      ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem) {
     m_shooter = shooterSubsystem;
+    m_intake = intakeSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem);
+    addRequirements(shooterSubsystem, intakeSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -48,6 +51,9 @@ public class Score extends Command {
     Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
     loopCount++;
+    
+    m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
+    m_intake.setHopperRollerVelocity(Constants.Intake.intakeRollerVelocity);
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +61,8 @@ public class Score extends Command {
   public void end(boolean interrupted) {
     m_shooter.setShooterVelocity(0.0);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
+    m_shooter.setIndexerVelocity(0);
+    m_intake.setHopperRollerVelocity(0);
   }
 
   // Returns true when the command should end.

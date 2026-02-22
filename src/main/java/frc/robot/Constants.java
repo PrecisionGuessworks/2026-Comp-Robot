@@ -223,11 +223,13 @@ public class Constants {
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
-        new Constraints(0.75, 3); // rad/s and rad/s^2  8, 20.0
+        new Constraints(2, 3); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 1.0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
-    public static final double hoodExpo_kV = 6;    
+    // public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
+    // public static final double hoodExpo_kV = 6;    OLD!!!
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(2, 0.1, 0.4, 0.1, 9.24, 0.01, 0.07, GravityTypeValue.Arm_Cosine);
+    public static final double hoodExpo_kV = 0.12;  // 6  
     public static final double hoodExpo_kA = 0.01;
   //  public static final int armCoralPositionPIDSlot = 1;
   //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
@@ -249,6 +251,9 @@ public class Constants {
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(1);
+    public static final double HoodBumpAngle = Units.degreesToRadians(5);
+
+    public static final double ShooterBumpVelocity = 350.0;
 
     public static final double AngleTolerance = Units.degreesToRadians(0.1);
 
@@ -259,8 +264,8 @@ public class Constants {
 
     // For simulation only
     public static final double WheelRadius = Units.inchesToMeters(1.5);
-    public static final double simHoodMOI = 0.379; // kgMetersSquared
-    public static final double simHoodCGLength = Units.inchesToMeters(8.5); // m
+    public static final double simHoodMOI = 0.06; // kgMetersSquared
+    public static final double simHoodCGLength = Units.inchesToMeters(5); // m
     public static final double simShooterMOI = 0.003; // kgMetersSquared
     
   }
