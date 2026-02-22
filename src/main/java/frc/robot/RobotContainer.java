@@ -142,7 +142,7 @@ public class RobotContainer {
         //     .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
         //     )));
 
-        // driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
+        driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
 
         driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter),drivetrain.applyRequest(() ->

@@ -131,21 +131,21 @@ public static void Update2DVisualization() {
     final Pose3d elevatorCarriage =
         Constants.Viz3d.elevatorBase.transformBy(
             new Transform3d(0, 0, CarrageHeight+ Units.inchesToMeters(0.5), new Rotation3d()));
-    final Pose3d armViz = elevatorCarriage.transformBy(
-        new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
+    // final Pose3d armViz = elevatorCarriage.transformBy(
+    //     new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
 
     final Pose3d hoodViz = Constants.Viz3d.shooterBase.transformBy(
-        new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
-    final Pose3d intakeViz = Constants.Viz3d.intakeBase.transformBy(
-        new Transform3d(0, 0, Units.inchesToMeters(2.0), new Rotation3d(0,0,0))); 
+        new Transform3d(-0.214, 0, 0.39, new Rotation3d(0,Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()),0)));
+    final Pose3d intakeViz =
+      Constants.Viz3d.intakeBase.transformBy(
+          new Transform3d(RobotContainer.intake.getPosition(), 0, 0, new Rotation3d()));
     
     DogLog.log("3DViz: Zeropublisher", new Pose3d());
     DogLog.log("3DViz: 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
-    DogLog.log("3DViz: 3ElevatorCarriage", elevatorCarriage);
-    DogLog.log("3DViz: 2Stage1", stageOne);
-    DogLog.log("3DViz: 4ArmViz", armViz);
-    DogLog.log("3DViz: 5HoodViz", hoodViz);
-    DogLog.log("3DViz: 6IntakeViz", intakeViz);
+    DogLog.log("3DViz: 5ElevatorCarriage", elevatorCarriage);
+    DogLog.log("3DViz: 4Stage1", stageOne);
+    DogLog.log("3DViz: 3HoodViz", hoodViz);
+    DogLog.log("3DViz: 2IntakeViz", intakeViz);
     DogLog.log("3DViz: FuelViz: 1", fuelViz[1]);
     DogLog.log("3DViz: FuelViz: 4`", fuelViz[5]);
     DogLog.log("3DViz: FuelViz: 8", fuelViz[8]);
@@ -177,7 +177,7 @@ public static void Update2DVisualization() {
   public static void LaunchFuelViz(double velocity,double angle){
     if(Constants.SimFuel){
         double ShotVelocity = velocity * Constants.Shooter.WheelRadius * Constants.ShotCalc.SimShotefficiency;  
-            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX(),RobotContainer.drivetrain.getState().Pose.getY(),Constants.Viz.HoodPivotY, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
+            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX()-.25,RobotContainer.drivetrain.getState().Pose.getY(),Constants.Viz.HoodPivotY, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
             new double[] {DrivetrainExtra.getFieldSpeedsX() + ShotVelocity * Math.cos(angle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
               DrivetrainExtra.getFieldSpeedsY() + ShotVelocity * Math.cos(angle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
               ShotVelocity * Math.sin(angle) });

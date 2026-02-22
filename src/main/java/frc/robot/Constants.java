@@ -202,9 +202,9 @@ public class Constants {
     public static final MechanismRatio hoodMotorRatio =
         isSim ? 
         new MechanismRatio(
-            1, (45.0 / 1.0) * (42.0 / 20.0)) : // Sim
+            1, (25.0 / 1.0) * (42.0 / 20.0)) : // Sim
         new MechanismRatio(
-            1, (45.0 / 1.0) * (42.0 / 20.0)); // Real
+            1, (25.0 / 1.0) * (42.0 / 20.0)); // Real
     // public static final MechanismRatio hoodSensorRatio =
     //     new MechanismRatio(1, (1.0));
     public static final boolean hoodMotorInvert = true;
@@ -226,7 +226,7 @@ public class Constants {
         new Constraints(3.5, 10.0); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 1.0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0, 9.24, 0.01, 0.09, GravityTypeValue.Arm_Cosine);
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.0001, 0.03, 0, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
     public static final double hoodExpo_kV = 6;    
     public static final double hoodExpo_kA = 0.01;
   //  public static final int armCoralPositionPIDSlot = 1;
@@ -476,9 +476,9 @@ public class Constants {
             new Rotation3d(0, 0, 0));
     public static final Pose3d intakeBase =
         new Pose3d(
-            Units.inchesToMeters(3.5),
+            Units.inchesToMeters(0),
             0,
-            Units.inchesToMeters(4.0),
+            Units.inchesToMeters(0),
             new Rotation3d(0, 0, 0));
     public static final Transform3d elevatorCarriageToLauncherArmPivot =
         new Transform3d(0, 0, Units.inchesToMeters(16.0), new Rotation3d());
