@@ -53,7 +53,7 @@ public class VizScore extends Command {
     loopCount++;
     
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
-    m_intake.setHopperRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
   }
 
   // Called once the command ends or is interrupted.

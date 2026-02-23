@@ -30,6 +30,7 @@ import frc.robot.commands.STOMAuto;
 import frc.robot.commands.VizScore;
 import frc.robot.commands.StowAll;
 import frc.robot.commands.ZoneScore;
+import frc.robot.commands.TestCommands.IntakeRoll;
 import frc.robot.commands.TestCommands.MoveClimber;
 import frc.robot.commands.TestCommands.MoveIntake;
 import frc.robot.commands.TestCommands.MoveShooter;
@@ -161,6 +162,7 @@ public class RobotContainer {
         driver.a().whileTrue(new MoveClimber(climber));
         driver.b().whileTrue(new MoveIntake(intake));
         driver.x().whileTrue(new MoveShooter(shooter));
+        driver.y().whileTrue(new IntakeRoll(intake));
         
         
         

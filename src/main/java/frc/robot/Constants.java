@@ -314,8 +314,8 @@ public class Constants {
     public static final double Expo_kV = 0.2;
     public static final double Expo_kA = 0.1; 
 
-    public static final double deployMaxVelocity = 1; // m/s
-    public static final double deployMaxAcceleration = 10.0; // m/s^2
+    public static final double deployMaxVelocity = 0.25; // m/s
+    public static final double deployMaxAcceleration = 1.0; // m/s^2
     public static final double deployMaxJerk = 2.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
@@ -332,9 +332,12 @@ public class Constants {
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
-    public static final double intakeRollerVelocity = 100;
+    public static final double intakeCRollerVelocity = 100;
+    public static final double intakeABRollerVelocity = 100;
     public static final double outtakeRollerVelocity = -100;
-    public static final double holdRollerVelocity = 10;
+
+    public static final double hopperVelocity = 100;
+    public static final double holdRollerVelocity = 0;
 
     // For simulation only
     public static final double simCarriageMass = 3.0; // kg

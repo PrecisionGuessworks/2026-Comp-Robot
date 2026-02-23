@@ -1,14 +1,14 @@
-package frc.robot.commands;
+package frc.robot.commands.TestCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class Intake extends Command {
+public class IntakeRoll extends Command {
   private final IntakeSubsystem m_intake;
   // private Timer m_placeTimer = new Timer();
 
-  public Intake(
+  public IntakeRoll(
       IntakeSubsystem intakeSubsystem) {
     m_intake = intakeSubsystem;
 
@@ -21,7 +21,6 @@ public class Intake extends Command {
   public void initialize() {
     m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
     m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
-    m_intake.setIntakePosition();
 
   }
 

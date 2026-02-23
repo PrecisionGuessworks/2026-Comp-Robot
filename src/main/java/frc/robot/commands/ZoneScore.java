@@ -87,7 +87,7 @@ public class ZoneScore extends Command {
     }
     m_shooter.setHoodAngle(hoodAngle);
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
-    m_intake.setHopperRollerVelocity(Constants.Intake.intakeRollerVelocity);
+    m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
     
 
     loopCount++;
