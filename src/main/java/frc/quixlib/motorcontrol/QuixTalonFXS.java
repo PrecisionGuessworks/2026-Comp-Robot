@@ -46,7 +46,8 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
   private final TalonFXS m_controller;
   private final TalonFXSSimState m_simState;
   private final MechanismRatio m_ratio;
-  private final MotorArrangementValue m_arrangement;
+  private static MotorArrangementValue m_arrangement = MotorArrangementValue.Disabled;
+  
   private final QuixTalonFXSConfiguration m_config;
 
   private final DutyCycleOut m_dutyCycleControl = new DutyCycleOut(0);
@@ -277,7 +278,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
       config.MotionMagic.MotionMagicExpo_kA = motionMagicExpo_kA;
 
       // config.CustomBrushlessMotor.
-      // config.Commutation.MotorArrangement = Motor_Arrangement;
+      config.Commutation.MotorArrangement = m_arrangement;
 
       return config;
     }
@@ -443,6 +444,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
             () -> m_closedLoopReferenceSlopeSignal.setUpdateFrequency(UpdateFreq, kCANTimeoutS),
             () -> m_closedLoopReferenceSlopeSignal.getAppliedUpdateFrequency() == UpdateFreq,
             "TalonFXS " + m_canID + ": m_closedLoopReferenceSlopeSignal.setUpdateFrequency()");
+    
 
     // Disable all signals that have not been explicitly defined.
     allSuccess &=
@@ -463,7 +465,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
 
     // Check if unlicensed.
     allSuccess &= !m_controller.getStickyFault_UnlicensedFeatureInUse().getValue();
-
+            
     return allSuccess;
   }
 
