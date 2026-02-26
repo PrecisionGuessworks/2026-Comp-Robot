@@ -174,7 +174,7 @@ public class RobotContainer {
         // );
 
 
-    operator.leftBumper().whileTrue(Commands.runOnce(() -> {
+    operator.leftBumper().whileTrue(Commands.run(() -> {
         double input = operator.getRightY();
         if (Math.abs(input) > Constants.Drive.DriveDeadband) {
          climber.setManualHeight(input);

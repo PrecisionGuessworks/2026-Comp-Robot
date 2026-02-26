@@ -343,7 +343,7 @@ public class IntakeSubsystem extends SubsystemBase {
         // m_elevatorSim.getVelocityMetersPerSecond(), // Fix: Figure out why this causes jitter
         0.0,
         TimedRobot.kDefaultPeriod,
-        Constants.Climber.motorRatio);
+        Constants.Intake.deployMotorRatio);
 
 
     m_rollerSim.setInput(m_CrollerMotor.getPercentOutput() * RobotController.getBatteryVoltage());
@@ -351,7 +351,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_CrollerMotor.setSimSensorVelocity(
         m_rollerSim.getAngularVelocityRadPerSec(),
         TimedRobot.kDefaultPeriod,
-        Constants.Intake.deployMotorRatio);
+        Constants.Intake.rollerMotorRatio);
 
 
   }

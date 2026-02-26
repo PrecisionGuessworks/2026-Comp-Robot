@@ -309,14 +309,14 @@ public class Constants {
         new MechanismRatio(
            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(8.0, 0, 0.3, 0, 16, 0.01, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(12.0, 0.01, 0.05, 0.01, 11, 0.01, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
-    public static final double Expo_kV = 0.2;
+    public static final double Expo_kV = 0.1;
     public static final double Expo_kA = 0.1; 
 
-    public static final double deployMaxVelocity = 0.25; // m/s
-    public static final double deployMaxAcceleration = 1.0; // m/s^2
-    public static final double deployMaxJerk = 2.0; // m/s^3
+    public static final double deployMaxVelocity = 1; // m/s
+    public static final double deployMaxAcceleration = 1.5; // m/s^2
+    public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
     public static final double maxExtension = Units.inchesToMeters(11.2);
