@@ -39,9 +39,6 @@ public class Robot extends TimedRobot {
 
   private String autoName, newAutoName;
 
-  private boolean elevatorOn = false;
-  private boolean lineup = false;
-
   private final Field2d m_field = new Field2d();
   
   Optional<Alliance> ally = DriverStation.getAlliance();
@@ -112,9 +109,9 @@ public class Robot extends TimedRobot {
     //   e.printStackTrace();
     // }
 
-  if(RobotContainer.driver.back().getAsBoolean()) {
-    lineup = true;
-  }
+  // if(RobotContainer.driver.back().getAsBoolean()) {
+  //   lineup = true;
+  // }
 
   
 

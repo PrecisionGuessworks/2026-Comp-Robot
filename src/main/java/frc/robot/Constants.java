@@ -199,12 +199,18 @@ public class Constants {
 
     public static final CANDeviceID hoodMotorID = new CANDeviceID(32, kSuperStructureCanivoreName);
     // public static final CANDeviceID hoodCoderID = new CANDeviceID(26, kSuperStructureCanivoreName);
+    // public static final MechanismRatio hoodMotorRatio =
+    //     isSim ? 
+    //     new MechanismRatio(
+    //         1, (45.0 / 1.0) * (42.0 / 20.0)) : // Sim
+    //     new MechanismRatio(
+    //         1, (45.0 / 1.0) * (42.0 / 20.0)); // Real
     public static final MechanismRatio hoodMotorRatio =
         isSim ? 
         new MechanismRatio(
-            1, (45.0 / 1.0) * (42.0 / 20.0)) : // Sim
+            1, (53.1 / 1.0)) : // Sim
         new MechanismRatio(
-            1, (45.0 / 1.0) * (42.0 / 20.0)); // Real
+            1, (53.1 / 1.0)); // Real
     // public static final MechanismRatio hoodSensorRatio =
     //     new MechanismRatio(1, (1.0));
     public static final boolean hoodMotorInvert = true;
@@ -223,21 +229,21 @@ public class Constants {
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
-        new Constraints(2, 3); // rad/s and rad/s^2  8, 20.0
-    public static final double HoodMaxJerk = 1.0; // rad/s^3
+        new Constraints(4, 8); // rad/s and rad/s^2  8, 20.0
+    public static final double HoodMaxJerk = 0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
     // public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
     // public static final double hoodExpo_kV = 6;    OLD!!!
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(2, 0.1, 0.4, 0.1, 9.24, 0.01, 0.07, GravityTypeValue.Arm_Cosine);
-    public static final double hoodExpo_kV = 0.12;  // 6  
-    public static final double hoodExpo_kA = 0.01;
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.00, 0.15, 0.2, 0.2, 0.01, 0.12, GravityTypeValue.Arm_Cosine);
+    public static final double hoodExpo_kV = 0;  // 6  
+    public static final double hoodExpo_kA = 0;
   //  public static final int armCoralPositionPIDSlot = 1;
   //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
 
     public static final SimpleMotorFeedforward shooterFeedforward =
-        new SimpleMotorFeedforward(0.2, 0.2);
+        new SimpleMotorFeedforward(0.2, 0.26);
     public static final int shooterVelocityPIDSlot = 0;
-    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(30, 1.0, 2.0);
+    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(6, 0, 0.01);
 
     public static final SimpleMotorFeedforward indexerFeedforward =
         new SimpleMotorFeedforward(0.2, 0.2);
@@ -264,9 +270,9 @@ public class Constants {
 
     // For simulation only
     public static final double WheelRadius = Units.inchesToMeters(1.5);
-    public static final double simHoodMOI = 0.06; // kgMetersSquared
+    public static final double simHoodMOI = 0.171; // kgMetersSquared
     public static final double simHoodCGLength = Units.inchesToMeters(5); // m
-    public static final double simShooterMOI = 0.003; // kgMetersSquared
+    public static final double simShooterMOI = 0.002; // kgMetersSquared
     
   }
 
@@ -301,7 +307,7 @@ public class Constants {
 
     public static final CANDeviceID deployMotorID = new CANDeviceID(31, kSuperStructureCanivoreName);
     public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
-    public static final double sprocketPitchDiameter = Units.inchesToMeters(1.84);
+    public static final double sprocketPitchDiameter = Units.inchesToMeters(1.714286);
     public static final MechanismRatio deployMotorRatio =
         isSim ? 
         new MechanismRatio(
@@ -309,7 +315,7 @@ public class Constants {
         new MechanismRatio(
            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(12.0, 0.01, 0.05, 0.01, 11, 0.01, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(8.0, 0.01, 0.05, 0.01, 11, 0.02, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
     public static final double Expo_kV = 0.1;
     public static final double Expo_kA = 0.1; 

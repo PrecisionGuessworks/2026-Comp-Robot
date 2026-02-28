@@ -216,7 +216,9 @@ public class ShooterSubsystem extends SubsystemBase {
        m_hoodTargetAngle = Constants.Shooter.hoodMinAngle;
     }
 
-      m_hoodMotor.setMotionMagicPositionSetpointExpo(
+      // m_hoodMotor.setMotionMagicPositionSetpointExpo(
+      //     Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
+      m_hoodMotor.setMotionMagicPositionSetpoint(
           Constants.Shooter.hoodPositionPIDSlot, m_hoodTargetAngle);
 
 
@@ -261,7 +263,7 @@ public class ShooterSubsystem extends SubsystemBase {
           true, // Simulate gravity
           HoodStartingAngle);
 
-  static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
+  static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(2);
   private static final FlywheelSim m_shooterSim =
       new FlywheelSim(
           LinearSystemId.createFlywheelSystem(

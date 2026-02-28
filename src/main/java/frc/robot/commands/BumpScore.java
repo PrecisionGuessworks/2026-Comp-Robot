@@ -4,7 +4,6 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
@@ -12,9 +11,6 @@ import frc.robot.subsystems.Visualization;
 public class BumpScore extends Command {
   private final ShooterSubsystem m_shooter;
   private final IntakeSubsystem m_intake;
-  private double distanceToTarget;
-  private double hoodAngle;
-  private double shooterVelocity;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
@@ -42,6 +38,11 @@ public class BumpScore extends Command {
     
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
+
+    if (loopCount % 10 == 0) {
+    Visualization.LaunchFuelViz(Constants.Shooter.indexerVelocity, Units.degreesToRadians(90)-Constants.Shooter.HoodBumpAngle);
+    }
+    loopCount++;
   }
 
   // Called once the command ends or is interrupted.

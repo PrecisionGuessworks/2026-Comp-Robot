@@ -37,7 +37,7 @@ public class MoveShooter extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
+    m_shooter.setHoodAngle(Units.degreesToRadians(5));
     
   }
 

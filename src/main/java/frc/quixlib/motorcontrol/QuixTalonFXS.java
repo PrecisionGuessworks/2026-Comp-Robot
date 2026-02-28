@@ -19,6 +19,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 // import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.hardware.TalonFXS;
+import com.ctre.phoenix6.signals.AdvancedHallSupportValue;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
@@ -279,6 +280,7 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
 
       // config.CustomBrushlessMotor.
       config.Commutation.MotorArrangement = m_arrangement;
+      config.Commutation.AdvancedHallSupport = AdvancedHallSupportValue.Enabled;
 
       return config;
     }

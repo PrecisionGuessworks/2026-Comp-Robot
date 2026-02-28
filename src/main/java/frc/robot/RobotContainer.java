@@ -14,7 +14,6 @@ import com.pathplanner.lib.auto.NamedCommands;
 
 import dev.doglog.DogLog;
 import dev.doglog.DogLogOptions;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,13 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.BumpScore;
 import frc.robot.commands.Intake;
 import frc.robot.commands.STOMAuto;
-import frc.robot.commands.VizScore;
 import frc.robot.commands.StowAll;
+import frc.robot.commands.VizScore;
 import frc.robot.commands.ZoneScore;
 import frc.robot.commands.TestCommands.IntakeRoll;
 import frc.robot.commands.TestCommands.MoveClimber;
@@ -39,7 +37,6 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
