@@ -41,7 +41,7 @@ public class ZoneScore extends Command {
   public void initialize() {
     m_timer.restart();
     loopCount = 0;
-    Robot.lights.setFire();
+    // Robot.lights.setFire();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -100,7 +100,7 @@ public class ZoneScore extends Command {
   public void end(boolean interrupted) {
     m_shooter.setShooterVelocity(0.0);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
-    Robot.lights.setPreviousControl();
+    // Robot.lights.setPreviousControl();
     m_shooter.setIndexerVelocity(0);
     m_intake.setHopperRollerVelocity(0);
   }

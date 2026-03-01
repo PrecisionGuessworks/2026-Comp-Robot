@@ -50,7 +50,7 @@ public class Constants {
     public static final double g = 9.81; 
     public static final double defaultPeriodSecs = 0.02; 
     public static final boolean isSim =  edu.wpi.first.wpilibj.RobotBase.isSimulation(); // Uses diffrent constants if sim or real
-    public static final boolean SimFuel = true; // Set to true to enable fuel simulation
+    public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
     public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)

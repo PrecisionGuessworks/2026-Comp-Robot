@@ -80,8 +80,8 @@ HoodViz.addLink(
 
 public static void Update2DVisualization() {
 
-        climberCarriageViz.setRelativeTransform(
-            new Transform2d(RobotContainer.climber.getHeight(), 0.0, new Rotation2d()));
+        // climberCarriageViz.setRelativeTransform(
+        //     new Transform2d(RobotContainer.climber.getHeight(), 0.0, new Rotation2d()));
 
         HoodViz.setRelativeTransform(
         new Transform2d(
@@ -124,15 +124,15 @@ public static void Update2DVisualization() {
     public static void Update3DVisualization() {
     // 3d viz
     final double stage1Height = Constants.Viz3d.stage1Height;
-    final double CarrageHeight = RobotContainer.climber.getHeight();
-    final Pose3d stageOne =
-      Constants.Viz3d.elevatorBase.transformBy(
-          new Transform3d(0, 0, CarrageHeight >= stage1Height ? CarrageHeight-stage1Height : 0, new Rotation3d()));
-    final Pose3d elevatorCarriage =
-        Constants.Viz3d.elevatorBase.transformBy(
-            new Transform3d(0, 0, CarrageHeight+ Units.inchesToMeters(0.5), new Rotation3d()));
-    // final Pose3d armViz = elevatorCarriage.transformBy(
-    //     new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
+    // final double CarrageHeight = RobotContainer.climber.getHeight();
+    // final Pose3d stageOne =
+    //   Constants.Viz3d.elevatorBase.transformBy(
+    //       new Transform3d(0, 0, CarrageHeight >= stage1Height ? CarrageHeight-stage1Height : 0, new Rotation3d()));
+    // final Pose3d elevatorCarriage =
+    //     Constants.Viz3d.elevatorBase.transformBy(
+    //         new Transform3d(0, 0, CarrageHeight+ Units.inchesToMeters(0.5), new Rotation3d()));
+    // // final Pose3d armViz = elevatorCarriage.transformBy(
+    // //     new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
 
     final Pose3d hoodViz = Constants.Viz3d.shooterBase.transformBy(
         new Transform3d(-0.214, 0, 0.39, new Rotation3d(0,Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()),0)));
@@ -142,15 +142,10 @@ public static void Update2DVisualization() {
     
     DogLog.log("3DViz: Zeropublisher", new Pose3d());
     DogLog.log("3DViz: 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
-    DogLog.log("3DViz: 5ElevatorCarriage", elevatorCarriage);
-    DogLog.log("3DViz: 4Stage1", stageOne);
+    // DogLog.log("3DViz: 5ElevatorCarriage", elevatorCarriage);
+    // DogLog.log("3DViz: 4Stage1", stageOne);
     DogLog.log("3DViz: 3HoodViz", hoodViz);
     DogLog.log("3DViz: 2IntakeViz", intakeViz);
-    DogLog.log("3DViz: FuelViz: 1", fuelViz[1]);
-    DogLog.log("3DViz: FuelViz: 4`", fuelViz[5]);
-    DogLog.log("3DViz: FuelViz: 8", fuelViz[8]);
-    DogLog.log("3DViz: FuelViz: 12", fuelViz[12]);
-    DogLog.log("3DViz: FuelViz: 16", fuelViz[16]);
     }
 
 

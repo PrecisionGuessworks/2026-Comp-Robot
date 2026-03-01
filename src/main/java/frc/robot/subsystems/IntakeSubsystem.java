@@ -213,7 +213,7 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setIntakePosition() {
     if (m_attackMode) {
         m_targetPosition = Constants.Intake.attackPosition;
-        Robot.lights.setAttack();
+        // Robot.lights.setAttack();
       } else {
         m_targetPosition = Constants.Intake.defPosition;
       }

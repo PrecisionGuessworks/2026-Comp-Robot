@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
   Optional<Alliance> newAlly;
   private Vision vision;
 
-  public static final Lights lights = new Lights();
+  // public static final Lights lights = new Lights();
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -69,9 +69,9 @@ public class Robot extends TimedRobot {
     Visualization.Update3DVisualization();
     Visualization.updateFuelViz();
     updateFeildTimers();
-    if (!DriverStation.isDSAttached()) {
-      lights.setNotConnected();
-    }
+    // if (!DriverStation.isDSAttached()) {
+    //   lights.setNotConnected();
+    // }
 
     // OLD LL vision code
     // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
@@ -155,7 +155,7 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() { 
     updateElasticField();
     if (DriverStation.isDSAttached()) {
-    lights.setConnectedAlliance();
+    // lights.setConnectedAlliance();
     }
   }
   @Override

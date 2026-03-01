@@ -26,7 +26,7 @@ import frc.robot.commands.BumpPass;
 import frc.robot.commands.BumpScore;
 import frc.robot.commands.Intake;
 import frc.robot.commands.STOMAuto;
-import frc.robot.commands.StowAll;
+// import frc.robot.commands.StowAll;
 import frc.robot.commands.VizScore;
 import frc.robot.commands.ZoneScore;
 import frc.robot.commands.TestCommands.IntakeRoll;
@@ -70,7 +70,7 @@ public class RobotContainer {
 
     Map<String, Command> robotCommands  = new HashMap<String, Command>();
 
-    public static final ClimberSubsystem climber = new ClimberSubsystem();
+    // public static final ClimberSubsystem climber = new ClimberSubsystem();
     public static final IntakeSubsystem intake = new IntakeSubsystem();
     public static final ShooterSubsystem shooter = new ShooterSubsystem();
 
@@ -86,7 +86,7 @@ public class RobotContainer {
 
 
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
-        robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
+        // robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("STOMAuto", new STOMAuto(shooter));
         robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,intake)));
         robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,intake)));
@@ -133,7 +133,7 @@ public class RobotContainer {
         // driver.rightTrigger().whileTrue(new IntakeCoral(climber, shooter));
        // driver.leftTrigger().whileTrue(new IntakeAlgae(intake, 0));
         driver.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-        driver.back().whileTrue(new StowAll(climber, shooter));
+        // driver.back().whileTrue(new StowAll(climber, shooter));
 
         // driver.leftBumper().whileTrue(new ParallelCommandGroup(new Score(shooter),drivetrain.applyRequest(() ->
         // angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
@@ -173,13 +173,13 @@ public class RobotContainer {
         // );
 
 
-    operator.leftBumper().whileTrue(Commands.run(() -> {
-        double input = operator.getRightY();
-        if (Math.abs(input) > Constants.Drive.DriveDeadband) {
-         climber.setManualHeight(input);
-        }
-    }));
-    operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> climber.toggleSoftLimitsEnabled()));
+    // operator.leftBumper().whileTrue(Commands.run(() -> {
+    //     double input = operator.getRightY();
+    //     if (Math.abs(input) > Constants.Drive.DriveDeadband) {
+    //      climber.setManualHeight(input);
+    //     }
+    // }));
+    // operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> climber.toggleSoftLimitsEnabled()));
 
     }
 
