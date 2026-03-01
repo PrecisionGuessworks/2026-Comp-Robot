@@ -30,6 +30,7 @@ import frc.robot.generated.ShiftHelpers;
 import frc.robot.generated.Vision;
 import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Visualization;
+import com.ctre.phoenix6.Utils;
 
 
 public class Robot extends TimedRobot {
@@ -79,20 +80,20 @@ public class Robot extends TimedRobot {
     // }
 
     // First, tell Limelight your robot's current orientation
-    //   double robotYaw = RobotContainer.drivetrain.getState().Pose.getRotation().getDegrees(); // CHECK !!!  
-    //   LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName, robotYaw, 0.0, 0.0, 0.0, 0.0, 0.0);
+      double robotYaw = RobotContainer.drivetrain.getState().Pose.getRotation().getDegrees(); // CHECK !!!  
+      LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName, robotYaw, 0.0, 25.0, 0.0, 0.0, 0.0);
       
-    //   // Get the pose estimate
-    //   LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
-
-    //   // Add it to your pose estimator
-    //   RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
-    //   if (limelightMeasurement != null){
-    //   RobotContainer.drivetrain.addVisionMeasurement(
-    //       limelightMeasurement.pose,
-    //       limelightMeasurement.timestampSeconds
-    //   );
-    //   }
+      // Get the pose estimate
+      LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
+      // System.out.println(limelightMeasurement);
+      // Add it to your pose estimator
+      RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
+      if (limelightMeasurement != null){
+      RobotContainer.drivetrain.addVisionMeasurement(
+          limelightMeasurement.pose,
+          Utils.fpgaToCurrentTime(limelightMeasurement.timestampSeconds)
+      );
+      }
 
 
     // try{

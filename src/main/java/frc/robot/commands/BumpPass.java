@@ -8,13 +8,13 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
 
-public class BumpScore extends Command {
+public class BumpPass extends Command {
   private final ShooterSubsystem m_shooter;
   private final IntakeSubsystem m_intake;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
-  public BumpScore(
+  public BumpPass(
       ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem) {
     m_shooter = shooterSubsystem;
     m_intake = intakeSubsystem;
@@ -26,8 +26,8 @@ public class BumpScore extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.setHoodAngle(Constants.Shooter.hoodBumpAngle);
-    m_shooter.setShooterVelocity(Constants.Shooter.ShooterBumpVelocity);
+    m_shooter.setHoodAngle(Constants.Shooter.hoodBumpPassAngle);
+    m_shooter.setShooterVelocity(Constants.Shooter.ShooterBumpPassVelocity);
     m_timer.restart();
     loopCount = 0;
   }
@@ -41,7 +41,7 @@ public class BumpScore extends Command {
     m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
 
     if (loopCount % 10 == 0) {
-    Visualization.LaunchFuelViz(Constants.Shooter.indexerVelocity, Units.degreesToRadians(90)-Constants.Shooter.hoodBumpAngle);
+    Visualization.LaunchFuelViz(Constants.Shooter.indexerVelocity, Units.degreesToRadians(90)-Constants.Shooter.hoodBumpPassAngle);
     }
     }
     loopCount++;

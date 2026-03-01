@@ -213,7 +213,7 @@ public class Constants {
             1, (53.1 / 1.0)); // Real
     // public static final MechanismRatio hoodSensorRatio =
     //     new MechanismRatio(1, (1.0));
-    public static final boolean hoodMotorInvert = true;
+    public static final boolean hoodMotorInvert = false;
 
     public static final CANDeviceID shooterMotorID = new CANDeviceID(50, kSuperStructureCanivoreName);
     public static final MechanismRatio shooterMotorRatio = new MechanismRatio(12, 18);
@@ -257,15 +257,18 @@ public class Constants {
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(1);
-    public static final double HoodBumpAngle = Units.degreesToRadians(5);
+    public static final double hoodBumpAngle = Units.degreesToRadians(5);
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(50);
 
-    public static final double ShooterBumpVelocity = 350.0;
+
+    public static final double ShooterBumpVelocity = 250.0;
+    public static final double ShooterBumpPassVelocity = 475.0;
 
     public static final double AngleTolerance = Units.degreesToRadians(0.1);
 
     public static final double outtakeVelocity = 1300.0; // rads/s
 
-     public static final double indexerVelocity = 300.0; // rads/s
+     public static final double indexerVelocity = 500.0; // rads/s
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
@@ -339,7 +342,7 @@ public class Constants {
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
     public static final double intakeCRollerVelocity = 100;
-    public static final double intakeABRollerVelocity = 100;
+    public static final double intakeABRollerVelocity = 50;
     public static final double outtakeRollerVelocity = -100;
 
     public static final double hopperVelocity = 100;
@@ -432,7 +435,7 @@ public class Constants {
 
   public static class Vision {
 
-    public static final String LimeLightCamerName = "FrontLimelight"; // Front
+    public static final String LimeLightCamerName = "limelight-shooter"; // Front
     public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(.5, .5, 9999999);
     
     public static final String kCameraName = "FrontCamera"; // Front
@@ -448,7 +451,7 @@ public class Constants {
 
     public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(4, 4, 8); // m, m, rad
     public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
-    public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.03, 0.03, Units.degreesToRadians(0.01));
+    public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.3, 0.3, Units.degreesToRadians(0.01));
     
 }
   

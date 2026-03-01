@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.BumpPass;
 import frc.robot.commands.BumpScore;
 import frc.robot.commands.Intake;
 import frc.robot.commands.STOMAuto;
@@ -152,11 +153,12 @@ public class RobotContainer {
         //     )));
 
         driver.rightBumper().whileTrue(new BumpScore(shooter, intake));
+        driver.a().whileTrue(new BumpPass(shooter, intake));
 
         driver.rightTrigger().whileTrue(new Intake(intake));
 
         
-        driver.a().whileTrue(new MoveClimber(climber));
+        // driver.a().whileTrue(new MoveClimber(climber));
         driver.b().whileTrue(new MoveIntake(intake));
         driver.x().whileTrue(new MoveShooter(shooter));
         driver.y().whileTrue(new IntakeRoll(intake));
