@@ -81,22 +81,22 @@ Examples:
 
 ----------------------- Driver:
 
-A:
-B:
-X:
-Y:
+A: 
+B: Intake Test
+X: Hood Test
+Y: Intake Roller Test
 
-Left Bumper:
-Right Bumper:
+Left Bumper: BumpPass
+Right Bumper: BumpShot
 
-Left Trigger:
-Right Trigger:
+Left Trigger: SOTM Shot / Pass
+Right Trigger: Intake
 
 Back Button:
-Start Button:
+Start Button: Zero Heading
 
-Left Stick:
-Right Stick:
+Left Stick: Drive
+Right Stick: Rotate
 
 D-Pad:
 
@@ -108,15 +108,15 @@ Rumble:
 ----------------------- Operator:
 
 A:
-B:
+B: Outtake  NOT IN CODE!!!
 X:
 Y:
 
-Left Bumper:
-Right Bumper:
+Left Bumper: Intake Enable Soft Stops / Zero.  UNTESTED!!!!
+Right Bumper: Stow Intake                      UNTESTED!!!!
 
-Left Trigger:
-Right Trigger:
+Left Trigger: Allow manual overides            UNTESTED!!!!
+Right Trigger: Flip intake mode
 
 Back Button:
 Start Button:

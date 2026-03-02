@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.BumpPass;
 import frc.robot.commands.BumpScore;
@@ -38,6 +39,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
@@ -142,21 +144,19 @@ public class RobotContainer {
         //     .withTargetRateFeedforward(DrivetrainExtra.targetAngleFeeds(Constants.ShotCalc.targetpose))
         //     )));
 
-        driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
-
-
-        // driver.rightBumper().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter, intake),drivetrain.applyRequest(() ->
-        // angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
-        //     .withVelocityY(-driver.getLeftX() * MaxSpeed)
-        //     .withTargetDirection(SOTM.targetangle( ))
-        //     .withTargetRateFeedforward(SOTM.targetAngleFeeds())
-        //     )));
+        // driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
         driver.rightBumper().whileTrue(new BumpScore(shooter, intake));
-        driver.a().whileTrue(new BumpPass(shooter, intake));
+        driver.leftBumper().whileTrue(new BumpPass(shooter, intake));
 
         driver.rightTrigger().whileTrue(new Intake(intake));
 
+        driver.leftTrigger().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter, intake),drivetrain.applyRequest(() ->
+        angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
+            .withVelocityY(-driver.getLeftX() * MaxSpeed)
+            .withTargetDirection(SOTM.targetangle( ))
+            .withTargetRateFeedforward(SOTM.targetAngleFeeds())
+            )));
         
         // driver.a().whileTrue(new MoveClimber(climber));
         driver.b().whileTrue(new MoveIntake(intake));
@@ -180,6 +180,16 @@ public class RobotContainer {
     //     }
     // }));
     // operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> climber.toggleSoftLimitsEnabled()));
+
+    operator.rightTrigger().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
+    operator.rightBumper().onTrue(Commands.runOnce(() -> intake.setPosition(Constants.Intake.intakeStow)));
+    operator.leftTrigger().whileTrue(Commands.run(() -> {
+        double input = operator.getRightY();
+        if (Math.abs(input) > Constants.Drive.DriveDeadband) {
+         intake.setPosition(input);
+        }
+    }));
+    operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
 
     }
 

@@ -169,7 +169,7 @@ public class ShooterSubsystem extends SubsystemBase {
       m_shooterMotor.setVelocitySetpoint(
           Constants.Shooter.shooterVelocityPIDSlot,
           velocity,
-          Constants.Shooter.shooterFeedforward.calculate(velocity));
+          Constants.Shooter.shooterFeedforward.calculateWithVelocities(getShooterVelocity(),velocity));
     }
   }
 
@@ -263,7 +263,7 @@ public class ShooterSubsystem extends SubsystemBase {
           true, // Simulate gravity
           HoodStartingAngle);
 
-  static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(2);
+  static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
   private static final FlywheelSim m_shooterSim =
       new FlywheelSim(
           LinearSystemId.createFlywheelSystem(

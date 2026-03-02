@@ -241,14 +241,14 @@ public class Constants {
   //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
 
     public static final SimpleMotorFeedforward shooterFeedforward =
-        new SimpleMotorFeedforward(0.2, 0.26);
+        new SimpleMotorFeedforward(0.001, 0.02);
     public static final int shooterVelocityPIDSlot = 0;
-    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(6, 0, 0.01);
+    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.2, 0, 0);
 
     public static final SimpleMotorFeedforward indexerFeedforward =
-        new SimpleMotorFeedforward(0.2, 0.2);
+        new SimpleMotorFeedforward(0.1, 0.02);
     public static final int indexerVelocityPIDSlot = 0;
-    public static final PIDConfig indexerVelocityPIDConfig = new PIDConfig(30, 1.0, 2.0);
+    public static final PIDConfig indexerVelocityPIDConfig = new PIDConfig(0.1, 0, 0);
     // public static final int shooterPositionPIDSlot = 0;
     // public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
 
@@ -330,7 +330,7 @@ public class Constants {
     public static final double minExtension = Units.inchesToMeters(0.0);
     public static final double maxExtension = Units.inchesToMeters(11.2);
     public static final double startingPosition = minExtension;
-    public static final double intakeStow = Units.inchesToMeters(4.0);
+    public static final double intakeStow = Units.inchesToMeters(0.5);
 
     public static final double attackPosition = Units.inchesToMeters(11.0);
     public static final double defPosition = Units.inchesToMeters(3.0);
