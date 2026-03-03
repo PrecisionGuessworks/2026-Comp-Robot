@@ -122,7 +122,7 @@ Back Button:
 Start Button:
 
 Left Stick:
-Right Stick:
+Right Stick: Manually move intake UNTESTED!!!!
 
 D-Pad:
 

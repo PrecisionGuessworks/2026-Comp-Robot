@@ -116,6 +116,10 @@ public class IntakeSubsystem extends SubsystemBase {
     m_targetPosition = targetPosition;
   }
 
+  public void setManualHeight(double speed) { // Speed should be between -1 and 1, where positive is up and negative is down
+    m_targetPosition += speed * Constants.Intake.ManualSpeed;
+  }
+
   public boolean isAtPosition(double position, double tolerance) {
     return Math.abs(position - getPosition()) <= tolerance;
   }
@@ -233,6 +237,9 @@ public class IntakeSubsystem extends SubsystemBase {
     boolean enabled = m_softLimitsEnabled;
     setSoftLimitsEnabled(!enabled);
     m_softLimitsEnabled = !enabled;
+    if (m_softLimitsEnabled) {
+    zeroDeploy();
+    }  
   }
 
   public void setDeployCurrent (double stator, double supply){

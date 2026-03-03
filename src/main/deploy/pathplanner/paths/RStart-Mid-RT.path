@@ -20,12 +20,12 @@
         "y": 1.1256787932564327
       },
       "prevControl": {
-        "x": 6.765039929015084,
-        "y": 0.844001774622892
+        "x": 6.7703478090371245,
+        "y": 0.8374550998015482
       },
       "nextControl": {
-        "x": 7.901749235187184,
-        "y": 1.748202359077971
+        "x": 7.852380952380951,
+        "y": 1.7315699404761902
       },
       "isLocked": false,
       "linkedName": null
@@ -36,12 +36,12 @@
         "y": 2.332866015971605
       },
       "prevControl": {
-        "x": 7.610070984915705,
-        "y": 3.242280390417036
+        "x": 7.597894345238096,
+        "y": 3.297641369047619
       },
       "nextControl": {
-        "x": 6.791142718760958,
-        "y": 0.8070463357989686
+        "x": 6.83551826289203,
+        "y": 0.7928350562899964
       },
       "isLocked": false,
       "linkedName": null
@@ -94,7 +94,25 @@
     }
   ],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeDeploy",
+      "waypointRelativePos": 0.007874015748031496,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeDeploy"
+        }
+      }
+    },
+    {
+      "name": "IntakeRoller",
+      "waypointRelativePos": 1.0708661417322818,
+      "endWaypointRelativePos": 2.098425196850396,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 3.5,

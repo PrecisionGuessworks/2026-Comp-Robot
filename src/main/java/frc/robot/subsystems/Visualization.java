@@ -135,7 +135,7 @@ public static void Update2DVisualization() {
     // //     new Transform3d(0, 0, Units.inchesToMeters(7.7), new Rotation3d(0,Units.degreesToRadians( -RobotContainer.shooter.getHoodAngle()+90),0)));
 
     final Pose3d hoodViz = Constants.Viz3d.shooterBase.transformBy(
-        new Transform3d(-0.214, 0, 0.39, new Rotation3d(0,Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()),0)));
+        new Transform3d(-0.195, 0, 0.39, new Rotation3d(0,Units.degreesToRadians(RobotContainer.shooter.getHoodAngle()),0)));
     final Pose3d intakeViz =
       Constants.Viz3d.intakeBase.transformBy(
           new Transform3d(RobotContainer.intake.getPosition(), 0, 0, new Rotation3d()));

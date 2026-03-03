@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Shoot;
 
 import dev.doglog.DogLog;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -92,7 +92,9 @@ public class ZoneScore extends Command {
 
     loopCount++;
 
-
+    m_intake.retractIntakeSlow();
+    m_intake.setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
+    m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
   }
 
   // Called once the command ends or is interrupted.
@@ -103,6 +105,8 @@ public class ZoneScore extends Command {
     // Robot.lights.setPreviousControl();
     m_shooter.setIndexerVelocity(0);
     m_intake.setHopperRollerVelocity(0);
+    m_intake.setABRollerVelocity(0);
+    m_intake.setCRollerVelocity(0);
   }
 
   // Returns true when the command should end.

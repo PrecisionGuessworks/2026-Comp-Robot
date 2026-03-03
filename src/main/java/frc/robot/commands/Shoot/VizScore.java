@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Shoot;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
@@ -51,9 +51,11 @@ public class VizScore extends Command {
     Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
     loopCount++;
-    
+   m_intake.retractIntakeSlow();
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
+    m_intake.setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
+    m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
   }
 
   // Called once the command ends or is interrupted.
@@ -63,6 +65,8 @@ public class VizScore extends Command {
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
     m_shooter.setIndexerVelocity(0);
     m_intake.setHopperRollerVelocity(0);
+    m_intake.setABRollerVelocity(0);
+    m_intake.setCRollerVelocity(0);
   }
 
   // Returns true when the command should end.

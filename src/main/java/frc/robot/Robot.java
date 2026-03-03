@@ -94,6 +94,9 @@ public class Robot extends TimedRobot {
           Utils.fpgaToCurrentTime(limelightMeasurement.timestampSeconds)
       );
       }
+      DogLog.log("Vision: Limelight Measurement", limelightMeasurement != null ? limelightMeasurement.pose.toString() : "No Measurement");
+      DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
+      // DogLog.log("Vision: Robot Yaw", LimelightHelpers.);
 
 
     // try{

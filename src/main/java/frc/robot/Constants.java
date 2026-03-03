@@ -76,17 +76,17 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 235.0);
-        ShotVelocity.put(1.0, 235.0);
-        ShotVelocity.put(1.5, 240.0);
-        ShotVelocity.put(2.0, 245.0);
-        ShotVelocity.put(2.5, 250.0);
-        ShotVelocity.put(3.0, 255.0);
-        ShotVelocity.put(3.5, 260.0);
-        ShotVelocity.put(4.0, 268.0);
-        ShotVelocity.put(4.5, 280.0);
-        ShotVelocity.put(5.0, 290.0);
-        ShotVelocity.put(5.5, 300.0);
+        ShotVelocity.put(0.5, 335.0);
+        ShotVelocity.put(1.0, 335.0);
+        ShotVelocity.put(1.5, 340.0);
+        ShotVelocity.put(2.0, 345.0);
+        ShotVelocity.put(2.5, 350.0);
+        ShotVelocity.put(3.0, 355.0);
+        ShotVelocity.put(3.5, 360.0);
+        ShotVelocity.put(4.0, 368.0);
+        ShotVelocity.put(4.5, 380.0);
+        ShotVelocity.put(5.0, 390.0);
+        ShotVelocity.put(5.5, 400.0);
     }
     public static final InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
@@ -147,7 +147,7 @@ public class Constants {
     }
 
     // For simulation only
-    public static final double SimShotefficiency = 0.85;
+    public static final double SimShotefficiency = 0.4;
     public static final double Drag = 0.03; // Drag Coefficient for Simulations
     public static final double Friction = 0.6; // Friction Coefficient for Simulations 
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations (NOT USED RN)
@@ -179,11 +179,11 @@ public class Constants {
         public static final double DRotation = 0;
         
         // 0.0-1.0 of the max speed
-        public static final double MaxSpeedPercentage = 0.75; // Default 1.0
-        public static final double SlowSpeedPercentage = 0.10; // Default 0.15
+        public static final double MaxSpeedPercentage = 0.95; // Default 1.0
+        public static final double SlowSpeedPercentage = 0.15; // Default 0.15
         
         // Rotation per second max angular velocity
-        public static final double MaxAngularRatePercentage = 0.62; // Default 0.75 
+        public static final double MaxAngularRatePercentage = 0.72; // Default 0.75 
         public static final double SlowRotPercentage = 0.15; // Default 0.15
 
         // Deadbands for the drive and rotation
@@ -272,7 +272,7 @@ public class Constants {
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
-    public static final double WheelRadius = Units.inchesToMeters(1.5);
+    public static final double WheelRadius = Units.inchesToMeters(2);
     public static final double simHoodMOI = 0.171; // kgMetersSquared
     public static final double simHoodCGLength = Units.inchesToMeters(5); // m
     public static final double simShooterMOI = 0.002; // kgMetersSquared
@@ -335,7 +335,7 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(11.0);
     public static final double defPosition = Units.inchesToMeters(3.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.02); 
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.03); 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.03);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
@@ -343,10 +343,14 @@ public class Constants {
 
     public static final double intakeCRollerVelocity = 100;
     public static final double intakeABRollerVelocity = 50;
+    public static final double SlowCRollerVelocity = 25;
+    public static final double SlowABRollerVelocity = 20;
     public static final double outtakeRollerVelocity = -100;
 
     public static final double hopperVelocity = 100;
     public static final double holdRollerVelocity = 0;
+
+    public static final double ManualSpeed = 0.01; // increase to make manual control faster, decrease to make it slower
 
     // For simulation only
     public static final double simCarriageMass = 3.0; // kg

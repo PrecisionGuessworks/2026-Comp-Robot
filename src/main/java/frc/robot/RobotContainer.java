@@ -23,13 +23,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.commands.BumpPass;
-import frc.robot.commands.BumpScore;
+import frc.robot.commands.Auto.AutoIntakeDeploy;
+import frc.robot.commands.Auto.AutoIntakeRoller;
 import frc.robot.commands.Intake;
-import frc.robot.commands.STOMAuto;
-// import frc.robot.commands.StowAll;
-import frc.robot.commands.VizScore;
-import frc.robot.commands.ZoneScore;
+import frc.robot.commands.Shoot.BumpPass;
+import frc.robot.commands.Shoot.BumpScore;
+import frc.robot.commands.Shoot.STOMAuto;
+import frc.robot.commands.Shoot.VizScore;
+import frc.robot.commands.Shoot.ZoneScore;
 import frc.robot.commands.TestCommands.IntakeRoll;
 import frc.robot.commands.TestCommands.MoveClimber;
 import frc.robot.commands.TestCommands.MoveIntake;
@@ -92,6 +93,8 @@ public class RobotContainer {
         robotCommands.put("STOMAuto", new STOMAuto(shooter));
         robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,intake)));
         robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,intake)));
+        robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
+        robotCommands.put("IntakeRoller", new AutoIntakeRoller(intake));
 
         // robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
     
@@ -159,6 +162,7 @@ public class RobotContainer {
             )));
         
         // driver.a().whileTrue(new MoveClimber(climber));
+        driver.a().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
         driver.b().whileTrue(new MoveIntake(intake));
         driver.x().whileTrue(new MoveShooter(shooter));
         driver.y().whileTrue(new IntakeRoll(intake));
@@ -186,7 +190,7 @@ public class RobotContainer {
     operator.leftTrigger().whileTrue(Commands.run(() -> {
         double input = operator.getRightY();
         if (Math.abs(input) > Constants.Drive.DriveDeadband) {
-         intake.setPosition(input);
+         intake.setManualHeight(input);
         }
     }));
     operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
