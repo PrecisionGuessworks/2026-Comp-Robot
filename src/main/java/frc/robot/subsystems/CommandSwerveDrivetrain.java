@@ -297,6 +297,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
 
     private void updateSwerveElastic(){
+        if (Constants.LogHardware){
         SmartDashboard.putData("Swerve Drive", new Sendable() {
             @Override
             public void initSendable(SendableBuilder builder) {
@@ -319,5 +320,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
             }
         });
+    }
     }
 }

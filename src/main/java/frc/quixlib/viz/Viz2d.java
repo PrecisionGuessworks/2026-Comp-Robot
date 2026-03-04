@@ -17,7 +17,7 @@ public class Viz2d extends SubsystemBase {
   public Viz2d(String name, double width, double height, double pixelsPerMeter) {
     m_pixelsPerMeter = pixelsPerMeter;
     m_viz = new Mechanism2d(metersToPixels(width), metersToPixels(height));
-    SmartDashboard.putData(name, m_viz);
+    // SmartDashboard.putData(name, m_viz);
   }
 
   /** Adds a top-level link. */

@@ -87,12 +87,13 @@ public class ShooterSubsystem extends SubsystemBase {
   private double m_hoodTargetAngle = HoodStartingAngle;
   private double setm_hoodTargetAngle = HoodStartingAngle;
   private boolean hasPiece = true;
+  public boolean isSafeOVERIDE = false;
   private Timer m_lastPieceTimer = new Timer();
 
   public ShooterSubsystem() {
 
     // Show scheduler status in SmartDashboard.
-    SmartDashboard.putData(this);
+    // SmartDashboard.putData(this);
   }
 
   // public boolean hasPiece() {
@@ -144,6 +145,9 @@ public class ShooterSubsystem extends SubsystemBase {
   public boolean isShooterSafe() {
     Pose2d robotPose = RobotContainer.drivetrain.getState().Pose;
     ChassisSpeeds robotSpeeds = RobotContainer.drivetrain.getState().Speeds;
+    if (isSafeOVERIDE) {
+      return true;
+    }
     Pose2d futurePose =
         new Pose2d(
             robotPose.getTranslation().getX() + robotSpeeds.vxMetersPerSecond * Constants.Pose.HoodSafetyVelocityOffset,

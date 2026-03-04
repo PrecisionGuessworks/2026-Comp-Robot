@@ -326,8 +326,10 @@ public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseab
     m_controller.hasResetOccurred();
 
     // SmartDashboard.putBoolean("TalonFX Configuration " + m_canID.toString(), );
+    if (Constants.LogHardware){
     DogLog.log("Hardware: "+m_controller.getDescription()+" ID " + m_canID.deviceNumber + ": Configuration",setConfiguration());
     DogLog.log("Hardware: "+m_controller.getDescription()+" ID " + m_canID.deviceNumber + ": Motor Arrangement",m_arrangement.toString());
+    }
     String name = m_controller.getDescription()+" ID  " + m_canID.deviceNumber +" ";
 
 

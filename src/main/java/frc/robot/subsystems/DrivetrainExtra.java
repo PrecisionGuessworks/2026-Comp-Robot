@@ -79,7 +79,7 @@ public class DrivetrainExtra {
         Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
         // Pose2d targetpose = new Pose2d(16.7,5.5,new Rotation2d(0));
         Rotation2d temp = PhotonUtils.getYawToPose(temppose,targetpose);
-        System.out.println(temp);
+        // System.out.println(temp);
         return temp;
         
     }
@@ -95,7 +95,7 @@ public class DrivetrainExtra {
         double deltaX = targetpose.getX() - pose.getX();
         double deltaY = targetpose.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
-        System.out.println("omega: " + omega);
+        // System.out.println("omega: " + omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 

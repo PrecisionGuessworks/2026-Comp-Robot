@@ -14,6 +14,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import dev.doglog.DogLog;
+import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -87,16 +88,45 @@ public class Robot extends TimedRobot {
       LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
       // System.out.println(limelightMeasurement);
       // Add it to your pose estimator
-      RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
-      if (limelightMeasurement != null){
-      RobotContainer.drivetrain.addVisionMeasurement(
+      // RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
+      // if (limelightMeasurement != null){
+      // RobotContainer.drivetrain.addVisionMeasurement(
+      //     limelightMeasurement.pose,
+      //     Utils.fpgaToCurrentTime(limelightMeasurement.timestampSeconds)
+      // );
+      // }
+      
+      // DogLog.log("Vision: Robot Yaw", LimelightHelpers.);
+      //  LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
+      boolean doRejectUpdate = false;
+      if (limelightMeasurement != null) {
+      DogLog.log("Vision: Limelight Measurement", limelightMeasurement.pose.toString());
+      DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
+      if(limelightMeasurement.tagCount == 1 && limelightMeasurement.rawFiducials.length == 1)
+      {
+        if(limelightMeasurement.rawFiducials[0].ambiguity > .7)
+        {
+          doRejectUpdate = true;
+        }
+        if(limelightMeasurement.rawFiducials[0].distToCamera > 3)
+        {
+          doRejectUpdate = true;
+        }
+      }
+      if(limelightMeasurement.tagCount == 0)
+      {
+        doRejectUpdate = true;
+      }
+
+      if(!doRejectUpdate)
+      {
+        RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs.times(limelightMeasurement.rawFiducials[0].distToCamera/2));
+        RobotContainer.drivetrain.addVisionMeasurement(
           limelightMeasurement.pose,
           Utils.fpgaToCurrentTime(limelightMeasurement.timestampSeconds)
       );
       }
-      DogLog.log("Vision: Limelight Measurement", limelightMeasurement != null ? limelightMeasurement.pose.toString() : "No Measurement");
-      DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
-      // DogLog.log("Vision: Robot Yaw", LimelightHelpers.);
+    }
 
 
     // try{

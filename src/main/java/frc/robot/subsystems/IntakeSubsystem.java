@@ -92,7 +92,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_lastPieceTimer.reset();
 
     // Show scheduler status in SmartDashboard.
-    SmartDashboard.putData(this);
+    // SmartDashboard.putData(this);
   }
 
   public boolean hasPiece() {

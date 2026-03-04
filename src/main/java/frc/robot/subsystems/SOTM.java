@@ -8,6 +8,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
 import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.Constants.ShotCalc;
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 // import frc.robot.Constants.GoalConstants;
@@ -77,7 +79,7 @@ public class SOTM {
 
         // Translation2d movingGoalLocation = new Translation2d();
 
-        for(int i=0;i<7;i++){
+        for(int i=0;i<5;i++){
 
             double virtualGoalX = target.getX()
                     - shotTime * (DrivetrainExtra.getFieldSpeedsX() + DrivetrainExtra.getFieldAccelX() * ShotCalc.kAccelCompFactor);
@@ -99,10 +101,10 @@ public class SOTM {
             double newShotTime = ShotTime.get(toTestGoal.getDistance(new Translation2d()) );
 
             if(Math.abs(newShotTime-shotTime) <= 0.010){
-                i=6;
+                i=4;
             }
             
-            if(i == 6){
+            if(i == 4){
                 movingGoalLocation = testGoalLocation;
                 DogLog.log("SOTM: New Shot Time", newShotTime);
             }
@@ -177,6 +179,9 @@ public class SOTM {
         Pose2d pose = RobotContainer.drivetrain.getState().Pose;
         Pose2d temppose = new Pose2d(pose.getTranslation(), new Rotation2d(0));
         Rotation2d temp = PhotonUtils.getYawToPose(temppose, new Pose2d(movingGoalLocation,new Rotation2d(0)));
+        if(DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red){
+            temp = temp.plus(Rotation2d.fromDegrees(180));
+        }
         DogLog.log("SOTM: Target Angle", temp.getDegrees());
         return temp;
         
@@ -197,6 +202,9 @@ public class SOTM {
         double deltaY = movingGoalLocation.getY() - pose.getY();
         double omega = -(vy * deltaX - vx * deltaY) / (deltaX * deltaX + deltaY * deltaY);
         // System.out.println("omega: " + omega);
+        if(DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red){
+            omega = -omega;
+        }
         DogLog.log("SOTM: FeedForward", omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }

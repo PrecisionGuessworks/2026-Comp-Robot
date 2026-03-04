@@ -65,6 +65,7 @@ public class RobotContainer {
     public final SwerveRequest.FieldCentricFacingAngle angle = new SwerveRequest.FieldCentricFacingAngle()
         .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband) // Add a deadband
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage) 
+        .withMaxAbsRotationalRate(RotationsPerSecond.of(Constants.Drive.SnapMaxAngularRatePercentage).in(RadiansPerSecond))
         .withHeadingPID(Constants.Drive.PRotation, Constants.Drive.IRotation, Constants.Drive.DRotation);
 
     private PowerDistribution powerDistribution = new PowerDistribution();
@@ -195,7 +196,11 @@ public class RobotContainer {
     }));
     operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
 
+
+    operator.a().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = !shooter.isSafeOVERIDE));
+
     }
+
 
 
 // --------------------------------------------------------- Commands --------------------------------------------------------- 

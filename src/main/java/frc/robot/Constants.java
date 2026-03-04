@@ -53,7 +53,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
 
     public static final class ShotCalc {
 
@@ -72,37 +72,38 @@ public class Constants {
     new Pose2d(2.5,2,new Rotation2d(0)) : // Blue
     new Pose2d(14,2,new Rotation2d(0)); // Red
 
+
     public static final InterpolatingDoubleTreeMap ShotVelocity;
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 335.0);
-        ShotVelocity.put(1.0, 335.0);
-        ShotVelocity.put(1.5, 340.0);
-        ShotVelocity.put(2.0, 345.0);
+        ShotVelocity.put(0.5, 250.0);
+        ShotVelocity.put(1.0, 275.0);
+        ShotVelocity.put(1.5, 300.0);
+        ShotVelocity.put(2.0, 325.0);
         ShotVelocity.put(2.5, 350.0);
-        ShotVelocity.put(3.0, 355.0);
-        ShotVelocity.put(3.5, 360.0);
-        ShotVelocity.put(4.0, 368.0);
-        ShotVelocity.put(4.5, 380.0);
-        ShotVelocity.put(5.0, 390.0);
-        ShotVelocity.put(5.5, 400.0);
+        ShotVelocity.put(3.0, 360.0);
+        ShotVelocity.put(3.5, 380.0);
+        ShotVelocity.put(4.0, 400.0);
+        ShotVelocity.put(4.5, 425.0);
+        ShotVelocity.put(5.0, 450.0);
+        ShotVelocity.put(5.5, 475.0);
     }
     public static final InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
-        ShotAngle.put(0.5, Units.degreesToRadians(4));
-        ShotAngle.put(1.0, Units.degreesToRadians(6));
-        ShotAngle.put(1.5, Units.degreesToRadians(8));
+        ShotAngle.put(0.5, Units.degreesToRadians(8));
+        ShotAngle.put(1.0, Units.degreesToRadians(9));
+        ShotAngle.put(1.5, Units.degreesToRadians(10));
         ShotAngle.put(2.0, Units.degreesToRadians(11));
         ShotAngle.put(2.5, Units.degreesToRadians(15));
-        ShotAngle.put(3.0, Units.degreesToRadians(17));
-        ShotAngle.put(3.5, Units.degreesToRadians(19));
-        ShotAngle.put(4.0, Units.degreesToRadians(20.5));
-        ShotAngle.put(4.5, Units.degreesToRadians(23));
-        ShotAngle.put(5.0, Units.degreesToRadians(24));
-        ShotAngle.put(5.5, Units.degreesToRadians(25));
+        ShotAngle.put(3.0, Units.degreesToRadians(18));
+        ShotAngle.put(3.5, Units.degreesToRadians(20.5));
+        ShotAngle.put(4.0, Units.degreesToRadians(24));
+        ShotAngle.put(4.5, Units.degreesToRadians(28));
+        ShotAngle.put(5.0, Units.degreesToRadians(32));
+        ShotAngle.put(5.5, Units.degreesToRadians(35));
     }
     // Used for sotm (Shoot on the move)
     public static final InterpolatingDoubleTreeMap ShotTime;
@@ -125,17 +126,17 @@ public class Constants {
     public static final InterpolatingDoubleTreeMap PassVelocity;
     static {
         PassVelocity = new InterpolatingDoubleTreeMap();
-        PassVelocity.put(4.0, 300.0);
-        PassVelocity.put(6.0, 350.0);
-        PassVelocity.put(8.0, 400.0);
+        PassVelocity.put(4.0, 450.0);
+        PassVelocity.put(6.0, 475.0);
+        PassVelocity.put(8.0, 475.0);
     }
 
     public static final InterpolatingDoubleTreeMap PassAngle;
     static {
         PassAngle = new InterpolatingDoubleTreeMap();
-        PassAngle.put(4.0, Units.degreesToRadians(80));
-        PassAngle.put(6.0, Units.degreesToRadians(80));
-        PassAngle.put(8.0, Units.degreesToRadians(80));
+        PassAngle.put(4.0, Units.degreesToRadians(40));
+        PassAngle.put(6.0, Units.degreesToRadians(40));
+        PassAngle.put(8.0, Units.degreesToRadians(40));
     }
 
     public static final InterpolatingDoubleTreeMap PassTime;
@@ -174,7 +175,7 @@ public class Constants {
         public static final double ITranslation = 0;
         public static final double DTranslation = 0;
 
-        public static final double PRotation = 7;
+        public static final double PRotation = 4;
         public static final double IRotation = 0;
         public static final double DRotation = 0;
         
@@ -184,6 +185,7 @@ public class Constants {
         
         // Rotation per second max angular velocity
         public static final double MaxAngularRatePercentage = 0.72; // Default 0.75 
+        public static final double SnapMaxAngularRatePercentage = 0.75; // Default 0.5
         public static final double SlowRotPercentage = 0.15; // Default 0.15
 
         // Deadbands for the drive and rotation
@@ -257,8 +259,9 @@ public class Constants {
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(1);
-    public static final double hoodBumpAngle = Units.degreesToRadians(5);
-    public static final double hoodBumpPassAngle = Units.degreesToRadians(50);
+    public static final double hoodBumpAngle = Units.degreesToRadians(9);
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(40);
+    // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
 
 
     public static final double ShooterBumpVelocity = 250.0;
@@ -422,9 +425,9 @@ public class Constants {
 
     public static final Pose2d Error = new Pose2d(6, 6, Rotation2d.fromDegrees(0));
 
-    public static final double ZoneLine = ShotCalc.targetpose.getX();
+    public static double ZoneLine = ShotCalc.targetpose.getX();
     // public static final double RedZoneLine = 11.18;
-    public static final double Halfline = ShotCalc.targetpose.getY();
+    public static double Halfline = ShotCalc.targetpose.getY();
 
     public static final double[][] HoodSafetyZones = {
       //minX, maxX, minY, maxY Poses of Safety Zones where Hood should not be up. ie trench.

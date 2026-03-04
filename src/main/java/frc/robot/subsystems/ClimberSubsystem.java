@@ -54,7 +54,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public ClimberSubsystem() {
     // Show scheduler status in SmartDashboard.
-    SmartDashboard.putData(this);
+    // SmartDashboard.putData(this);
 
   }
 

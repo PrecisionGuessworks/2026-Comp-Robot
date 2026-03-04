@@ -82,19 +82,27 @@ public class ZoneScore extends Command {
       if (loopCount % 10 == 0) {
       Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
-    } else {
-        hoodAngle = Constants.Shooter.hoodStowAngle;
-    }
-    m_shooter.setHoodAngle(hoodAngle);
+
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
-    
-
-    loopCount++;
-
     m_intake.retractIntakeSlow();
     m_intake.setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
     m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+    
+
+    } else {
+        hoodAngle = Constants.Shooter.hoodStowAngle;
+    m_shooter.setIndexerVelocity(0);
+    m_intake.setHopperRollerVelocity(0);
+    m_intake.setABRollerVelocity(0);
+    m_intake.setCRollerVelocity(0);
+    }
+    m_shooter.setHoodAngle(hoodAngle);
+
+
+    loopCount++;
+
+
   }
 
   // Called once the command ends or is interrupted.
