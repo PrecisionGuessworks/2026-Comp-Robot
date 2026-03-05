@@ -282,13 +282,24 @@ public class Constants {
     
   }
 
-
-  public static final class Intake {
-
-    public static final CANDeviceID hopperMotorID = new CANDeviceID(39, kSuperStructureCanivoreName);
+  public static final class Hopper {
+       public static final CANDeviceID hopperMotorID = new CANDeviceID(39, kSuperStructureCanivoreName);
     public static final MechanismRatio hopperMotorRatio =
         new MechanismRatio(1, 1);
     public static final boolean hopperMotorInvert = false;
+
+    public static final SimpleMotorFeedforward rollerFeedforward =
+        new SimpleMotorFeedforward(0.3, 0.12, 0);
+    public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
+    public static final int rollerVelocitySlot = 0;
+    
+    public static final double hopperVelocity = 100;
+
+  }
+
+
+  public static final class Intake {
+
 
     public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
     public static final MechanismRatio ABrollerRatio =
@@ -311,17 +322,17 @@ public class Constants {
 
 
 
-    public static final CANDeviceID deployMotorID = new CANDeviceID(31, kSuperStructureCanivoreName);
+    public static final CANDeviceID deployMotorID = new CANDeviceID(40, kSuperStructureCanivoreName);
     public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
     public static final double sprocketPitchDiameter = Units.inchesToMeters(1.714286);
     public static final MechanismRatio deployMotorRatio =
         isSim ? 
         new MechanismRatio(
-            1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
+            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
         new MechanismRatio(
-           1, (20.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
+           1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(8.0, 0.01, 0.05, 0.01, 11, 0.02, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(6.0, 0.01, 0.05, 0.01, 11, 0.02, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
     public static final double Expo_kV = 0.1;
     public static final double Expo_kA = 0.1; 
@@ -350,7 +361,6 @@ public class Constants {
     public static final double SlowABRollerVelocity = 20;
     public static final double outtakeRollerVelocity = -100;
 
-    public static final double hopperVelocity = 100;
     public static final double holdRollerVelocity = 0;
 
     public static final double ManualSpeed = 0.01; // increase to make manual control faster, decrease to make it slower

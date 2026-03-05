@@ -4,23 +4,25 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.Visualization;
+import frc.robot.subsystems.HopperSubsystem;
 
 public class BumpScore extends Command {
   private final ShooterSubsystem m_shooter;
-  private final IntakeSubsystem m_intake;
+  private final HopperSubsystem m_hopper;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
 
   public BumpScore(
-      ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem) {
+      ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem) {
     m_shooter = shooterSubsystem;
-    m_intake = intakeSubsystem;
+    m_hopper = hopperSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooterSubsystem, intakeSubsystem);
+    addRequirements(shooterSubsystem, hopperSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -38,16 +40,14 @@ public class BumpScore extends Command {
     
     if(m_timer.get()>0.5){
           m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
-    m_intake.setHopperRollerVelocity(Constants.Intake.hopperVelocity);
+    m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
 
     if (loopCount % 10 == 0) {
     Visualization.LaunchFuelViz(Constants.Shooter.indexerVelocity, Units.degreesToRadians(90)-Constants.Shooter.hoodBumpAngle);
     }
     }
     loopCount++;
-    m_intake.retractIntakeSlow();
-    m_intake.setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
-    m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+    RobotContainer.intake.retractIntakeSlowShoot();
   }
 
   // Called once the command ends or is interrupted.
@@ -56,9 +56,8 @@ public class BumpScore extends Command {
     m_shooter.setShooterVelocity(0.0);
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
     m_shooter.setIndexerVelocity(0);
-    m_intake.setHopperRollerVelocity(0);
-    m_intake.setABRollerVelocity(0);
-    m_intake.setCRollerVelocity(0);
+    m_hopper.setHopperRollerVelocity(0);
+    RobotContainer.intake.retractIntakeSlowShootSTOP();
   }
 
   // Returns true when the command should end.

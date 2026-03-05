@@ -16,6 +16,7 @@ import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
   // public final DigitalInput m_beamBreak = new DigitalInput(Constants.Intake.beamBreakPort);
@@ -44,16 +45,7 @@ public class IntakeSubsystem extends SubsystemBase {
               .setBrakeMode()
               .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
 
-  private final QuixTalonFX m_hopperMotor =
-      new QuixTalonFX(
-          Constants.Intake.hopperMotorID,
-          Constants.Intake.hopperMotorRatio,
-          QuixTalonFX.makeDefaultConfig()
-              .setInverted(Constants.Intake.hopperMotorInvert)
-              .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(80.0)
-              .setBrakeMode()
-              .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
+  
 
   private final QuixTalonFX m_deployMotor =
       new QuixTalonFX(
@@ -88,8 +80,8 @@ public class IntakeSubsystem extends SubsystemBase {
   private Color m_currentColor = Blue;
 
   public IntakeSubsystem() {
-    m_lastPieceTimer.start();
-    m_lastPieceTimer.reset();
+    // m_lastPieceTimer.start();
+    // m_lastPieceTimer.reset();
 
     // Show scheduler status in SmartDashboard.
     // SmartDashboard.putData(this);
@@ -175,29 +167,6 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_CrollerMotor.getSensorVelocity();
   }
 
-  public void setHopperRollerVelocity(double velocity) {
-    if (velocity == 0.0) {
-      m_hopperMotor.setPercentOutput(0.0);
-    } else {
-      m_hopperMotor.setVelocitySetpoint(
-          Constants.Intake.rollerVelocitySlot,
-          velocity,
-          Constants.Intake.rollerFeedforward.calculate(velocity));
-    }
-  }
-
-  public void setHopperRollerCurrent (double stator, double supply){
-    m_hopperMotor.setStatorCurrentLimit(stator,supply);
-  }
-
-  public double getHopperRollerCurrent (){
-    return m_hopperMotor.getSupplyCurrent();
-  }
-
-  public double getHopperRollerVelocity() {
-    return m_hopperMotor.getSensorVelocity();
-  }
-
 
 
   public void setAttackMode(boolean attackMode) {
@@ -223,8 +192,19 @@ public class IntakeSubsystem extends SubsystemBase {
       }
   }
 
-  public void retractIntakeSlow() {
+  public void retractIntakeSlowShoot() {
+    if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
     m_targetPosition -= Constants.Intake.retractSlowSpeed;
+  setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
+  setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+  }
+  }
+
+  public void retractIntakeSlowShootSTOP() {
+    if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
+    setABRollerVelocity(0);
+    setCRollerVelocity(0);
+  }
   }
 
   public void setSoftLimitsEnabled(boolean enabled) {
@@ -313,7 +293,6 @@ public class IntakeSubsystem extends SubsystemBase {
     m_ABrollerMotor.logMotorState();
     m_CrollerMotor.logMotorState();
     m_deployMotor.logMotorState();
-    m_hopperMotor.logMotorState();
     
     // m_deployFollower.logMotorState();
   }

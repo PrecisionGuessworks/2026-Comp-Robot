@@ -39,6 +39,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.DrivetrainExtra;
+import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.SOTM;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -77,6 +78,7 @@ public class RobotContainer {
     // public static final ClimberSubsystem climber = new ClimberSubsystem();
     public static final IntakeSubsystem intake = new IntakeSubsystem();
     public static final ShooterSubsystem shooter = new ShooterSubsystem();
+    public static final HopperSubsystem hopper = new HopperSubsystem();
 
 
     public RobotContainer() {
@@ -92,8 +94,8 @@ public class RobotContainer {
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         // robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("STOMAuto", new STOMAuto(shooter));
-        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,intake)));
-        robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,intake)));
+        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,hopper)));
+        robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,hopper)));
         robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
         robotCommands.put("IntakeRoller", new AutoIntakeRoller(intake));
 
@@ -150,12 +152,12 @@ public class RobotContainer {
 
         // driver.leftBumper().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
 
-        driver.rightBumper().whileTrue(new BumpScore(shooter, intake));
-        driver.leftBumper().whileTrue(new BumpPass(shooter, intake));
+        driver.rightBumper().whileTrue(new BumpScore(shooter, hopper));
+        driver.leftBumper().whileTrue(new BumpPass(shooter, hopper));
 
         driver.rightTrigger().whileTrue(new Intake(intake));
 
-        driver.leftTrigger().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter, intake),drivetrain.applyRequest(() ->
+        driver.leftTrigger().whileTrue(new ParallelCommandGroup(new ZoneScore(shooter, hopper),drivetrain.applyRequest(() ->
         angle.withVelocityX(-driver.getLeftY() * MaxSpeed)
             .withVelocityY(-driver.getLeftX() * MaxSpeed)
             .withTargetDirection(SOTM.targetangle( ))
