@@ -69,7 +69,13 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private double m_targetPosition = Constants.Intake.startingPosition; 
   private double m_setPosition = m_targetPosition;
-  private Timer m_lastPieceTimer = new Timer();
+  private double m_intakeABsetpoint = 0.0;
+  private double m_intakeCsetpoint = 0.0;
+  private boolean m_intakeCjam = false;
+  private boolean m_intakeCjamCool = false;
+  private Timer m_antiJamTimer = new Timer();
+  private Timer m_antiJamTimerCool = new Timer();
+  private Timer m_antiJamTimerSpinup = new Timer();
   public boolean m_hasPiece = false;
   public boolean m_attackMode = false;
   public boolean m_pastAttackMode = false;
@@ -87,18 +93,18 @@ public class IntakeSubsystem extends SubsystemBase {
     // SmartDashboard.putData(this);
   }
 
-  public boolean hasPiece() {
-    //m_rollerMotor.getSupplyCurrent();
-    return m_hasPiece;
-  }
+  // public boolean hasPiece() {
+  //   //m_rollerMotor.getSupplyCurrent();
+  //   return m_hasPiece;
+  // }
 
-  public void setHasPiece(boolean hasPiece) {
-    m_hasPiece = hasPiece;
-  }
+  // public void setHasPiece(boolean hasPiece) {
+  //   m_hasPiece = hasPiece;
+  // }
 
-  public boolean recentlyHadPiece() {
-    return m_lastPieceTimer.get() < 1.0;
-  }
+  // public boolean recentlyHadPiece() {
+  //   return m_lastPieceTimer.get() < 1.0;
+  // }
 
     public double getPosition() {
     return Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
@@ -122,6 +128,7 @@ public class IntakeSubsystem extends SubsystemBase {
   // }
 
   public void setABRollerVelocity(double velocity) {
+    m_intakeABsetpoint = velocity;
     if (velocity == 0.0) {
       m_ABrollerMotor.setPercentOutput(0.0);
     } else {
@@ -145,6 +152,8 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
    public void setCRollerVelocity(double velocity) {
+    m_antiJamTimerSpinup.restart();
+    m_intakeCsetpoint = velocity;
     if (velocity == 0.0) {
       m_CrollerMotor.setPercentOutput(0.0);
     } else {
@@ -260,6 +269,41 @@ public class IntakeSubsystem extends SubsystemBase {
     //   m_pastAttackMode = m_attackMode;
     // }
 
+    if (getCRollerVelocity() < 100 && m_intakeCsetpoint > 30 && !m_intakeCjam && m_antiJamTimerSpinup.hasElapsed(Constants.Intake.antiJamCRollerTimeSpinup)) {
+      m_intakeCjam = true;
+      m_antiJamTimerCool.start();
+      setCRollerVelocity(0);
+      m_intakeCjamCool = true;
+    }
+    if (m_intakeCsetpoint == 0&&m_intakeCjam){
+      m_intakeCjam = false;
+      m_intakeCjamCool = false;
+      m_antiJamTimer.reset();
+      m_antiJamTimerCool.reset();
+    }
+    if (m_intakeCjam) {
+
+      if (m_intakeCjamCool && m_antiJamTimerCool.hasElapsed(Constants.Intake.antiJamCRollerTimeCool)) {
+      m_antiJamTimerCool.reset();
+      m_antiJamTimer.start();
+      setCRollerVelocity(m_intakeCsetpoint);
+      m_intakeCjamCool = false;
+
+      if (!m_intakeCjamCool && m_antiJamTimer.hasElapsed(Constants.Intake.antiJamCRollerTime)) {
+        m_antiJamTimer.reset();
+        m_antiJamTimerCool.start();
+        setCRollerVelocity(0);
+      m_intakeCjamCool = true;
+  
+      }
+
+
+
+    }
+
+
+    }
+    
 
     if (m_attackMode) {
       m_currentColor = Yellow;
@@ -278,16 +322,18 @@ public class IntakeSubsystem extends SubsystemBase {
         Constants.Intake.deployPositionSlot, m_setPosition);
 
 
-    DogLog.log("Intake: Attack Mode", m_attackMode);
-    DogLog.log("Intake: Position", Units.metersToInches(getPosition()),"In");
-    DogLog.log("Intake: Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
-    DogLog.log("Intake: Target set Position", Units.metersToInches(m_targetPosition),"In");
+    DogLog.log("Intake/ Attack Mode", m_attackMode);
+    DogLog.log("Intake/ Position", Units.metersToInches(getPosition()),"In");
+    DogLog.log("Intake/ Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
+    DogLog.log("Intake/ Target set Position", Units.metersToInches(m_targetPosition),"In");
 
-    DogLog.log("Intake: AB Roller Velocity", getABRollerVelocity(),"Rad/s");
-    DogLog.log("Intake: AB Roller Target Velocity", m_ABrollerMotor.getClosedLoopReference(),"Rad/s");
+    DogLog.log("Intake/ AB Roller Velocity", getABRollerVelocity(),"Rad/s");
+    DogLog.log("Intake/ AB Roller Setpoint", m_intakeABsetpoint,"Rad/s");
+    DogLog.log("Intake/ AB Roller Target Velocity", m_ABrollerMotor.getClosedLoopReference(),"Rad/s");
 
-    DogLog.log("Intake: C Roller Velocity", getCRollerVelocity(),"Rad/s");
-    DogLog.log("Intake: C Roller Target Velocity", m_CrollerMotor.getClosedLoopReference(),"Rad/s");
+    DogLog.log("Intake/ C Roller Velocity", getCRollerVelocity(),"Rad/s");
+    DogLog.log("Intake/ C Roller Setpoint", m_intakeCsetpoint,"Rad/s");
+    DogLog.log("Intake/ C Roller Target Velocity", m_CrollerMotor.getClosedLoopReference(),"Rad/s");
     
 
     m_ABrollerMotor.logMotorState();

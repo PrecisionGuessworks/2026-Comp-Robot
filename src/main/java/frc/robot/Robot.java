@@ -261,7 +261,10 @@ Visualization.Update2DVisualization();
   }
   private final Color Red = new Color(255, 0, 0);
   private final Color Blue = new Color(0, 0, 255);
+  private final Color Black = new Color(0, 0, 0);
+  private final Color Green = new Color(0, 255, 0);
   private Color m_currentColor = Blue;
+  private Color m_weWonAuto = Black;
 
   public void updateFeildTimers() {
     double matchTime = DriverStation.getMatchTime();
@@ -274,24 +277,38 @@ Visualization.Update2DVisualization();
     } else {
       m_currentColor = Red;
     }
-    if (WeBlue){
-      if (ShiftHelpers.blueWonAuto()) {
-        WeWon = true;
+
+    if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
+      if (ShiftHelpers.blueWonAuto()&&ShiftHelpers.isDataReady()) {
+        m_weWonAuto = Green;
+      }
+      else {
+        m_weWonAuto = Red;
       }
     }
     else {
-      if (!ShiftHelpers.blueWonAuto()) {
-        WeWon = true;
+      if (!ShiftHelpers.blueWonAuto()&&ShiftHelpers.isDataReady()) {
+        m_weWonAuto = Green;
+      }
+      else {
+        m_weWonAuto = Red;
+      }
     }
+    if (!ShiftHelpers.isDataReady()) {
+      m_weWonAuto = Black;
     }
 
     SmartDashboard.putString("Won Auto", m_currentColor.toHexString());
-    SmartDashboard.putBoolean("We Won Auto", WeWon);
+    SmartDashboard.putString("We Won Auto", m_weWonAuto.toHexString());
     DogLog.log("Match Info: Match Time", matchTime);
     DogLog.log("Match Info: Current Shift Color", m_currentColor.toHexString());
     SmartDashboard.putNumber("Shift Time", ShiftHelpers.timeLeftInShiftSeconds(matchTime));    
     SmartDashboard.putNumber("Time",matchTime);
-    SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
+    if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
+      SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
+    } else {
+      SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftRed(matchTime));
+    }
   }
 
   public void updateElasticField() {

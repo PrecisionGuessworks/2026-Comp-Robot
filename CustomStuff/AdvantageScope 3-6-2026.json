@@ -1,0 +1,305 @@
+{
+  "hubs": [
+    {
+      "x": -7,
+      "y": -7,
+      "width": 1454,
+      "height": 926,
+      "state": {
+        "sidebar": {
+          "width": 394,
+          "expanded": [
+            "/Robot/3DViz/ 5HoodViz/translation",
+            "/Robot/3DViz/ 5HoodViz/rotation",
+            "/Robot/3DViz/ 5HoodViz/rotation/q",
+            "/Robot/SOTM/ Virtual Goal",
+            "/Robot/Hardware/ Talon FX (v6) 21 ID 21",
+            "/Tunable/Talon FX (v6) 20 ID",
+            "/Tunable/Talon FX (v6) 20 ID/ 20 ",
+            "/Tunable/Talon FX (v6) 20 ID/ 20 /Slot 0",
+            "/SmartDashboard/VisionSystemSim-main/Sim Field",
+            "/Tunable/Talon FX (v6) 32 ID  32 /Slot 0",
+            "/Log3/DS",
+            "/Log3/DS/joystick0",
+            "/Tunable/Talon FX (v6) 50 ID  50 ",
+            "/Tunable/Talon FX (v6) 51 ID  51 ",
+            "/Tunable/Talon FX (v6) 50 ID  50 /Slot 0",
+            "/Log18",
+            "/Log18/Robot",
+            "/Log18/Robot/Shooter",
+            "/Robot",
+            "/Robot/Tunable/Talon FX (v6) 31 ID  31 ",
+            "/Robot/Hardware/ Talon FX (v6) 37 ID 37",
+            "/Robot/SOTM",
+            "/Robot/Intake",
+            "/Tunable"
+          ]
+        },
+        "tabs": {
+          "selected": 1,
+          "tabs": [
+            {
+              "type": 0,
+              "title": "",
+              "controller": null,
+              "controllerUUID": "r4ruvrztul91kipbblj3zyhogo6fckgh",
+              "renderer": "",
+              "controlsHeight": 0
+            },
+            {
+              "type": 1,
+              "title": "Line Graph",
+              "controller": {
+                "leftSources": [
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Hood: Target set Angle (deg)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#e5b31b",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Hood: Real Current Angle (deg)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#80588e",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake: Position",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#858584",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake: Target Position",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#3b875a",
+                      "size": "normal"
+                    }
+                  }
+                ],
+                "rightSources": [
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Shooter: Target set Velocity (rad per sec)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#af2437",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Shooter: Current Velocity (rad per sec)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#2b66a2",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "NT:/Robot/Shooter: Current Velocity (rad per sec)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#e48b32",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "NT:/Robot/Shooter: Target set Velocity (rad per sec)",
+                    "logType": "Number",
+                    "visible": false,
+                    "options": {
+                      "color": "#c0b487",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake: C Roller Velocity",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#d993aa",
+                      "size": "normal"
+                    }
+                  }
+                ],
+                "discreteSources": [],
+                "leftLockedRange": null,
+                "rightLockedRange": null,
+                "leftUnitConversion": {
+                  "autoTarget": null,
+                  "preset": null
+                },
+                "rightUnitConversion": {
+                  "autoTarget": null,
+                  "preset": null
+                },
+                "leftFilter": 0,
+                "rightFilter": 0
+              },
+              "controllerUUID": "jop0ohj0csfrd29nyefz95ya9a507uu5",
+              "renderer": null,
+              "controlsHeight": 201
+            },
+            {
+              "type": 2,
+              "title": "2D Field",
+              "controller": {
+                "sources": [
+                  {
+                    "type": "robot",
+                    "logKey": "NT:/Robot/3DViz: 1DriveBase",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "bumpers": ""
+                    }
+                  },
+                  {
+                    "type": "ghost",
+                    "logKey": "NT:/Robot/SOTM: Virtual Goal",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "color": "#00ff00"
+                    }
+                  },
+                  {
+                    "type": "ghost",
+                    "logKey": "/Robot/SOTM: Virtual Goal",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "color": "#00ff00"
+                    }
+                  }
+                ],
+                "field": "FRC:2026 Field",
+                "orientation": 2,
+                "size": "large"
+              },
+              "controllerUUID": "y9fxyftzglyd8gy98ttryyfxmysrjptu",
+              "renderer": null,
+              "controlsHeight": 200
+            },
+            {
+              "type": 5,
+              "title": "Console",
+              "controller": "console",
+              "controllerUUID": "0lwwpfz422bj1zgs489sxtsnbch1vpbv",
+              "renderer": {
+                "highlight": false
+              },
+              "controlsHeight": 0
+            },
+            {
+              "type": 3,
+              "title": "3D Field",
+              "controller": {
+                "sources": [
+                  {
+                    "type": "robot",
+                    "logKey": "NT:/Robot/3DViz: 1DriveBase",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Scope"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "NT:/Robot/3DViz: 2IntakeViz",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "NT:/Robot/3DViz: 3HoodViz",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "gamePiece",
+                    "logKey": "NT:fuelViz",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "variant": "Fuel"
+                    }
+                  },
+                  {
+                    "type": "ghost",
+                    "logKey": "NT:/Robot/SOTM: Virtual Goal",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "2026 KitBot",
+                      "color": "#00ff00"
+                    }
+                  }
+                ],
+                "game": "FRC:2026 Field"
+              },
+              "controllerUUID": "r67f5ttxv1966tgn9wqr0mdn6zm55w9q",
+              "renderer": {
+                "cameraIndex": -1,
+                "orbitFov": 50,
+                "cameraPosition": [
+                  -3.2401386990450605,
+                  1.5547764371801231,
+                  -0.9569196199090011
+                ],
+                "cameraTarget": [
+                  2.5187333485588392,
+                  0.11653285113757066,
+                  -1.6802862215628471
+                ]
+              },
+              "controlsHeight": 200
+            },
+            {
+              "type": 8,
+              "title": "Joysticks",
+              "controller": [
+                "GameSir Controller (Red)",
+                "GameSir Controller (Black)",
+                "None",
+                "None",
+                "None",
+                "None"
+              ],
+              "controllerUUID": "fnshd7hediqij35l7yhay2wv8wel4ruy",
+              "renderer": null,
+              "controlsHeight": 85
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "satellites": [],
+  "version": "26.0.0"
+}

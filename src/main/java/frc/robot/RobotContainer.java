@@ -94,8 +94,11 @@ public class RobotContainer {
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         // robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
         robotCommands.put("STOMAuto", new STOMAuto(shooter));
-        robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,hopper)));
-        robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,hopper)));
+        // robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,hopper)));
+        // robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,hopper)));
+        robotCommands.put("ZoneScore", new ZoneScore(shooter,hopper));
+        robotCommands.put("Score", new VizScore(shooter,hopper));
+        robotCommands.put("BumpScore", new BumpScore(shooter, hopper));
         robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
         robotCommands.put("IntakeRoller", new AutoIntakeRoller(intake));
 

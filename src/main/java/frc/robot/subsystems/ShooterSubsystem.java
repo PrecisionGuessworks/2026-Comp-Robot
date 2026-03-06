@@ -229,20 +229,19 @@ public class ShooterSubsystem extends SubsystemBase {
         
     
     //  Logging
-    DogLog.log("Hood: Current Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getSensorPosition()),"deg");
-    // DogLog.log("Hood: Current CANcoder Angle (deg)", getHoodCoder(),"deg");
-    DogLog.log("Hood: Real Current Angle (deg)", getHoodAngle(),"deg");
-    DogLog.log("Hood: Target Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getClosedLoopReference()),"deg");
-    DogLog.log("Hood: Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
-    // DogLog.log("Hood: Current Velocity (deg per sec)", Units.radiansToDegrees(m_hoodMotor.getSensorVelocity()),"deg per sec");
+    DogLog.log("Hood/ Current Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getSensorPosition()),"deg");
+    // DogLog.log("Hood/ Current CANcoder Angle (deg)", getHoodCoder(),"deg");
+    DogLog.log("Hood/ Real Current Angle (deg)", getHoodAngle(),"deg");
+    DogLog.log("Hood/ Target Angle (deg)", Units.radiansToDegrees(m_hoodMotor.getClosedLoopReference()),"deg");
+    DogLog.log("Hood/ Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
+    // DogLog.log("Hood/ Current Velocity (deg per sec)", Units.radiansToDegrees(m_hoodMotor.getSensorVelocity()),"deg per sec");
 
-    DogLog.log("Shooter: Current Velocity (rad per sec)", m_shooterMotor.getSensorVelocity(),"rad per sec");
-    // DogLog.log("Shooter: Target Velocity (rad per sec)", m_shooterMotor.getClosedLoopReference(),"rad per sec");
-    DogLog.log("Shooter: Target set Velocity (rad per sec)", shooterTargetVelocity,"rad per sec");
+    DogLog.log("Shooter/ Current Velocity (rad per sec)", m_shooterMotor.getSensorVelocity(),"rad per sec");
+    // DogLog.log("Shooter/ Target Velocity (rad per sec)", m_shooterMotor.getClosedLoopReference(),"rad per sec");
+    DogLog.log("Shooter/ Target set Velocity (rad per sec)", shooterTargetVelocity,"rad per sec");
 
-
-    DogLog.log("Indexer: Current Velocity (rad per sec)", m_indexerMotor.getSensorVelocity(),"rad per sec");
-    DogLog.log("Indexer: Target set Velocity (rad per sec)", indexerTargetVelocity,"rad per sec");
+    DogLog.log("Indexer/ Current Velocity (rad per sec)", m_indexerMotor.getSensorVelocity(),"rad per sec");
+    DogLog.log("Indexer/ Target set Velocity (rad per sec)", indexerTargetVelocity,"rad per sec");
     
 
     m_shooterMotor.logMotorState();

@@ -43,7 +43,7 @@ public class BumpScore extends Command {
     m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
 
     if (loopCount % 10 == 0) {
-    Visualization.LaunchFuelViz(Constants.Shooter.indexerVelocity, Units.degreesToRadians(90)-Constants.Shooter.hoodBumpAngle);
+    Visualization.LaunchFuelViz(Constants.Shooter.ShooterBumpVelocity, Units.degreesToRadians(90)-Constants.Shooter.hoodBumpAngle);
     }
     }
     loopCount++;

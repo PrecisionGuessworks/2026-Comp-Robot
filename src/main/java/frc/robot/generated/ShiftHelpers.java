@@ -14,6 +14,14 @@ public class ShiftHelpers {
         // Safe default if data isn't ready yet
         return false;
     }
+    public static boolean isDataReady() {
+        String matchInfo = DriverStation.getGameSpecificMessage();
+        if (matchInfo != null && matchInfo.length() > 0) {
+            return true;
+        }
+        // Safe default if data isn't ready yet
+        return false;
+    }
 
     public static int timeLeftInShiftSeconds(double currentMatchTime) {
         if (currentMatchTime >= 130) {
@@ -40,6 +48,20 @@ public class ShiftHelpers {
             return blueWonAuto() ? false : true;
         } else if (currentMatchTime >= 30 && currentMatchTime <= 55) {
             return blueWonAuto() ? true : false;
+        } else {
+            return true;
+        }
+    }
+
+    public static boolean isCurrentShiftRed(double currentMatchTime) {
+        if (currentMatchTime >= 105 && currentMatchTime <= 130) {
+            return !blueWonAuto() ? false : true;
+        } else if (currentMatchTime >= 80 && currentMatchTime <= 105) {
+            return !blueWonAuto() ? true : false;
+        } else if (currentMatchTime >= 55 && currentMatchTime <= 80) {
+            return !blueWonAuto() ? false : true;
+        } else if (currentMatchTime >= 30 && currentMatchTime <= 55) {
+            return !blueWonAuto() ? true : false;
         } else {
             return true;
         }

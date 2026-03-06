@@ -37,6 +37,7 @@ import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.generated.Elastic;
 
 @SuppressWarnings("rawtypes")
 public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseable {
@@ -316,12 +317,7 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
 
 
 
-    if (DriverStation.isFMSAttached()){
-    new Alert("Tunables are still LIVE and FMS is attatched!!! Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
-    }
-    if (DriverStation.isFMSAttached()){
-    new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
-    }
+
 
     SupplyCurrentSubscriber = DogLog.tunable(name+ "/Supply Current Limit",m_config.SUPPLY_CURRENT_LIMIT);
     StatorCurrentSubscriber = DogLog.tunable(name+ "/Stator Current Limit",m_config.STATOR_CURRENT_LIMIT);
@@ -509,6 +505,14 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   }
 
   public void updateTunerConstants(){
+    if (DriverStation.isFMSAttached()){
+    // new Alert("Tunables are still LIVE and FMS is attatched!!! Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
+    }
+    if (DriverStation.isFMSAttached()){
+    // new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
+    Elastic.Notification notification = new Elastic.Notification(Elastic.NotificationLevel.ERROR, "Tunables are still LIVE!!!", "FMS is attatched, Tunables updates will be ignored");
+    Elastic.sendNotification(notification);
+    }
     boolean updated = false;
     String name = m_controller.getDescription()+" ID: " + m_canID.deviceNumber +" ";
     if (SupplyCurrentSubscriber.get() != m_config.SUPPLY_CURRENT_LIMIT){

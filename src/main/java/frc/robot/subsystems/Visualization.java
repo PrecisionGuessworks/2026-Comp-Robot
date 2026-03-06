@@ -140,12 +140,12 @@ public static void Update2DVisualization() {
       Constants.Viz3d.intakeBase.transformBy(
           new Transform3d(RobotContainer.intake.getPosition(), 0, 0, new Rotation3d()));
     
-    DogLog.log("3DViz: Zeropublisher", new Pose3d());
-    DogLog.log("3DViz: 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
-    // DogLog.log("3DViz: 5ElevatorCarriage", elevatorCarriage);
-    // DogLog.log("3DViz: 4Stage1", stageOne);
-    DogLog.log("3DViz: 3HoodViz", hoodViz);
-    DogLog.log("3DViz: 2IntakeViz", intakeViz);
+    DogLog.log("3DViz/ Zeropublisher", new Pose3d());
+    DogLog.log("3DViz/ 1DriveBase", RobotContainer.drivetrain.getState().Pose);     
+    // DogLog.log("3DViz/ 5ElevatorCarriage", elevatorCarriage);
+    // DogLog.log("3DViz/ 4Stage1", stageOne);
+    DogLog.log("3DViz/ 3HoodViz", hoodViz);
+    DogLog.log("3DViz/ 2IntakeViz", intakeViz);
     }
 
 
@@ -172,7 +172,7 @@ public static void Update2DVisualization() {
   public static void LaunchFuelViz(double velocity,double angle){
     if(Constants.SimFuel){
         double ShotVelocity = velocity * Constants.Shooter.WheelRadius * Constants.ShotCalc.SimShotefficiency;  
-            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX()-.25,RobotContainer.drivetrain.getState().Pose.getY(),Constants.Viz.HoodPivotY, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
+            updateSingleFuelViz(new Pose3d(RobotContainer.drivetrain.getState().Pose.getX()-.25*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),RobotContainer.drivetrain.getState().Pose.getY()-.25*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),Constants.Viz.HoodPivotY, new Rotation3d(0,-angle,RobotContainer.drivetrain.getState().Pose.getRotation().getRadians())), 
             new double[] {DrivetrainExtra.getFieldSpeedsX() + ShotVelocity * Math.cos(angle)*Math.cos(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()),
               DrivetrainExtra.getFieldSpeedsY() + ShotVelocity * Math.cos(angle)*Math.sin(RobotContainer.drivetrain.getState().Pose.getRotation().getRadians()), 
               ShotVelocity * Math.sin(angle) });

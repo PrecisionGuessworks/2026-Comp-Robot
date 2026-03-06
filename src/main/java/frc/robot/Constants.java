@@ -4,6 +4,7 @@ import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.MotorArrangementValue;
 
+import dev.doglog.DogLog;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.Matrix;
@@ -20,11 +21,13 @@ import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.motorcontrol.MechanismRatio;
 import frc.quixlib.motorcontrol.PIDConfig;
+import frc.robot.generated.Elastic;
 
 
 
@@ -73,7 +76,7 @@ public class Constants {
     new Pose2d(14,2,new Rotation2d(0)); // Red
 
 
-    public static final InterpolatingDoubleTreeMap ShotVelocity;
+    public static InterpolatingDoubleTreeMap ShotVelocity;
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
@@ -89,7 +92,7 @@ public class Constants {
         ShotVelocity.put(5.0, 450.0);
         ShotVelocity.put(5.5, 475.0);
     }
-    public static final InterpolatingDoubleTreeMap ShotAngle;
+    public static InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
@@ -106,7 +109,7 @@ public class Constants {
         ShotAngle.put(5.5, Units.degreesToRadians(35));
     }
     // Used for sotm (Shoot on the move)
-    public static final InterpolatingDoubleTreeMap ShotTime;
+    public static InterpolatingDoubleTreeMap ShotTime;
     // Distance in meters , time for shot to score in seconds
     static {
         ShotTime = new InterpolatingDoubleTreeMap();
@@ -123,7 +126,7 @@ public class Constants {
         ShotTime.put(5.5, 1.5);
     }
 
-    public static final InterpolatingDoubleTreeMap PassVelocity;
+    public static InterpolatingDoubleTreeMap PassVelocity;
     static {
         PassVelocity = new InterpolatingDoubleTreeMap();
         PassVelocity.put(4.0, 450.0);
@@ -131,7 +134,7 @@ public class Constants {
         PassVelocity.put(8.0, 475.0);
     }
 
-    public static final InterpolatingDoubleTreeMap PassAngle;
+    public static InterpolatingDoubleTreeMap PassAngle;
     static {
         PassAngle = new InterpolatingDoubleTreeMap();
         PassAngle.put(4.0, Units.degreesToRadians(40));
@@ -139,7 +142,7 @@ public class Constants {
         PassAngle.put(8.0, Units.degreesToRadians(40));
     }
 
-    public static final InterpolatingDoubleTreeMap PassTime;
+    public static InterpolatingDoubleTreeMap PassTime;
     static {
         PassTime = new InterpolatingDoubleTreeMap();
         PassTime.put(4.0, 1.0);
@@ -154,7 +157,6 @@ public class Constants {
     public static final double MagnusLift = 1; // Magnus Lift Coefficient for Simulations (NOT USED RN)
 
     }
-    
     
     
     
@@ -266,6 +268,7 @@ public class Constants {
 
     public static final double ShooterBumpVelocity = 250.0;
     public static final double ShooterBumpPassVelocity = 475.0;
+    
 
     public static final double AngleTolerance = Units.degreesToRadians(0.1);
 
@@ -356,6 +359,12 @@ public class Constants {
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
     public static final double intakeCRollerVelocity = 100;
+    public static final double antiJamCRollerVelocity = 25;
+    public static final double antiJamCRollerTime = 0.1;
+    public static final double antiJamCRollerTimeCool = 0.2;
+    public static final double antiJamCRollerTimeSpinup = 1;
+
+
     public static final double intakeABRollerVelocity = 50;
     public static final double SlowCRollerVelocity = 25;
     public static final double SlowABRollerVelocity = 20;
@@ -523,9 +532,25 @@ public class Constants {
     public static final Transform3d elevatorCarriageToLauncherArmPivot =
         new Transform3d(0, 0, Units.inchesToMeters(16.0), new Rotation3d());
   }
+//   private final DoubleSubscriber ShotVelocitySubscriber1;
+//   private final DoubleSubscriber ShotVelocitySubscriber2;
+//   private final DoubleSubscriber ShotVelocitySubscriber3;
 
+//   public void updateTunables() {
+//     if (DriverStation.isFMSAttached()){
+//     // new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
+//     Elastic.Notification notification = new Elastic.Notification(Elastic.NotificationLevel.ERROR, "Tunables are still LIVE!!!", "FMS is attatched, Tunables updates will be ignored");
+//     Elastic.sendNotification(notification);
+//     Elastic.Notification notification2 = new Elastic.Notification(Elastic.NotificationLevel.WARNING, "I hope this is a practice match", "");
+//     Elastic.sendNotification(notification2);
+//     }
 
+//     ShotVelocitySubscriber1 = DogLog.tunable("ShotCalc /ShotVelocity",Constants.ShotCalc.ShotVelocity);
+//     for (Double key : Constants.ShotCalc.ShotVelocity.) {
+//         double value = Constants.ShotCalc.ShotVelocity.getInterpolated(key);
+//         ShotVelocitySubscriber.set(value, key);
+//     }
 
-  
+//   }
 
 }

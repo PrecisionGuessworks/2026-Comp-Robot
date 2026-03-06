@@ -69,13 +69,13 @@ public class SOTM {
         Translation2d robotToGoal = target.minus(robotPose.getTranslation());
         double dist = robotToGoal.getDistance(new Translation2d()) ; // * 39.37    in meteres
 
-        DogLog.log("SOTM: Distance to Goal", dist);
+        DogLog.log("SOTM/ Distance to Goal", dist);
 
         //double fixedShotTime = m_timeTable.getOutput(dist);
         double shotTime = ShotTime.get(dist);
         
 
-        DogLog.log("SOTM: Fixed Time", shotTime);
+        DogLog.log("SOTM/ Fixed Time", shotTime);
 
         // Translation2d movingGoalLocation = new Translation2d();
 
@@ -92,7 +92,7 @@ public class SOTM {
             // SmartDashboard.putNumber("Goal X", virtualGoalX);
             // SmartDashboard.putNumber("Goal Y", virtualGoalY);
             Translation2d VirtualGoal = new Translation2d(virtualGoalX, virtualGoalY);
-            DogLog.log("SOTM: Virtual Goal", new Pose2d(VirtualGoal, new Rotation2d()));
+            DogLog.log("SOTM/ Virtual Goal", new Pose2d(VirtualGoal, new Rotation2d()));
 
             Translation2d testGoalLocation = new Translation2d(virtualGoalX, virtualGoalY);
 
@@ -106,7 +106,7 @@ public class SOTM {
             
             if(i == 4){
                 movingGoalLocation = testGoalLocation;
-                DogLog.log("SOTM: New Shot Time", newShotTime);
+                DogLog.log("SOTM/ New Shot Time", newShotTime);
             }
             else{
                 shotTime = newShotTime;
@@ -114,11 +114,11 @@ public class SOTM {
             
 
         }
-        DogLog.log("SOTM: Moving Goal", new Pose2d(movingGoalLocation, new Rotation2d()));
+        DogLog.log("SOTM/ Moving Goal", new Pose2d(movingGoalLocation, new Rotation2d()));
 
         newDist = movingGoalLocation.minus(robotPose.getTranslation()).getDistance(new Translation2d()) ;
 
-        DogLog.log("SOTM: New Distance", newDist);
+        DogLog.log("SOTM/ New Distance", newDist);
 
         // m_turret.aimAtGoal(RobotContainer.drivetrain.getState().Pose, movingGoalLocation, false);
         // if (SmartDashboard.getBoolean("Adjust Shot?", false)) {
@@ -182,7 +182,7 @@ public class SOTM {
         if(DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red){
             temp = temp.plus(Rotation2d.fromDegrees(180));
         }
-        DogLog.log("SOTM: Target Angle", temp.getDegrees());
+        DogLog.log("SOTM/ Target Angle", temp.getDegrees());
         return temp;
         
     }
@@ -205,7 +205,7 @@ public class SOTM {
         if(DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red){
             omega = -omega;
         }
-        DogLog.log("SOTM: FeedForward", omega);
+        DogLog.log("SOTM/ FeedForward", omega);
         return AngularVelocity.ofBaseUnits(omega, edu.wpi.first.units.Units.RadiansPerSecond);
     }
 

@@ -50,8 +50,8 @@ public void setHopperRollerVelocity(double velocity) {
     @Override
   public void periodic() {
 
-    DogLog.log("Hopper: Current Velocity (rad per sec)", m_hopperMotor.getSensorVelocity(),"rad per sec");
-    DogLog.log("Hopper: Target set Velocity (rad per sec)", hopperTargetVelocity,"rad per sec");
+    DogLog.log("Hopper/ Current Velocity (rad per sec)", m_hopperMotor.getSensorVelocity(),"rad per sec");
+    DogLog.log("Hopper/ Target set Velocity (rad per sec)", hopperTargetVelocity,"rad per sec");
     m_hopperMotor.logMotorState();
   }
 
