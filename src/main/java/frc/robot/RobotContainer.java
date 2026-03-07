@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.Auto.AutoBumpScoreAngle;
 import frc.robot.commands.Auto.AutoIntakeDeploy;
 import frc.robot.commands.Auto.AutoIntakeRoller;
 import frc.robot.commands.Intake;
@@ -99,6 +100,8 @@ public class RobotContainer {
         robotCommands.put("ZoneScore", new ZoneScore(shooter,hopper));
         robotCommands.put("Score", new VizScore(shooter,hopper));
         robotCommands.put("BumpScore", new BumpScore(shooter, hopper));
+        robotCommands.put("BumpScoreAngle", new AutoBumpScoreAngle(shooter, hopper));
+        robotCommands.put("ScoreWarmup", Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocity)));
         robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
         robotCommands.put("IntakeRoller", new AutoIntakeRoller(intake));
 

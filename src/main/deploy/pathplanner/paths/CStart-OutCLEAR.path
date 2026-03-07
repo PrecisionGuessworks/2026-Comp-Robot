@@ -3,50 +3,49 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.4474267968056782,
-        "y": 0.49794143744454233
+        "x": 3.5297781721384203,
+        "y": 3.9987843833185446
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9946850044365567,
-        "y": 0.9888642413487128
+        "x": 1.5424181547619047,
+        "y": 2.8017187499999996
       },
       "isLocked": false,
-      "linkedName": "Out"
+      "linkedName": "CStart"
     },
     {
       "anchor": {
-        "x": 2.2260159716060333,
-        "y": 2.1397160603371774
+        "x": 0.4474267968056782,
+        "y": 0.49794143744454233
       },
       "prevControl": {
-        "x": 1.5741348713398398,
-        "y": 1.6407453416149063
+        "x": 1.3140327380952377,
+        "y": 2.5080803571428576
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RS"
+      "linkedName": "Out"
     }
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.18804347826087026,
-      "rotationDegrees": 90.0
+      "waypointRelativePos": 0.4005576208178453,
+      "rotationDegrees": 54.26716596024397
+    },
+    {
+      "waypointRelativePos": 0.5613382899628234,
+      "rotationDegrees": 52.30260532201341
     }
   ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "ScoreWarmup",
-      "waypointRelativePos": 0.2919389978213507,
+      "name": "IntakeDeploy",
+      "waypointRelativePos": 0.3790849673202617,
       "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "ScoreWarmup"
-        }
-      }
+      "command": null
     }
   ],
   "globalConstraints": {
@@ -58,14 +57,14 @@
     "unlimited": false
   },
   "goalEndState": {
-    "velocity": 0,
-    "rotation": 38.89376875265895
-  },
-  "reversed": false,
-  "folder": "Right",
-  "idealStartingState": {
     "velocity": 0.0,
     "rotation": 90.0
+  },
+  "reversed": false,
+  "folder": "Center",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

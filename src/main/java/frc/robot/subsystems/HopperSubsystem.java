@@ -1,9 +1,11 @@
 package frc.robot.subsystems;
 
 import dev.doglog.DogLog;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class HopperSubsystem extends SubsystemBase {
 private final QuixTalonFX m_hopperMotor =
@@ -17,6 +19,7 @@ private final QuixTalonFX m_hopperMotor =
               .setBrakeMode()
               .setPIDConfig(Constants.Hopper.rollerVelocitySlot, Constants.Hopper.rollerPIDConfig));
 private double hopperTargetVelocity = 0.0;
+private double hoppersetTargetVelocity = 0.0;
 
 public HopperSubsystem() {
 
@@ -24,14 +27,7 @@ public HopperSubsystem() {
 
 public void setHopperRollerVelocity(double velocity) {
     hopperTargetVelocity = velocity;
-    if (velocity == 0.0) {
-      m_hopperMotor.setPercentOutput(0.0);
-    } else {
-      m_hopperMotor.setVelocitySetpoint(
-          Constants.Hopper.rollerVelocitySlot,
-          velocity,
-          Constants.Hopper.rollerFeedforward.calculate(velocity));
-    }
+
   }
 
   public void setHopperRollerCurrent (double stator, double supply){
@@ -49,9 +45,24 @@ public void setHopperRollerVelocity(double velocity) {
 
     @Override
   public void periodic() {
+    if (RobotContainer.driver.rightTrigger().getAsBoolean() && DriverStation.isTeleop()) {
+      hoppersetTargetVelocity = Constants.Hopper.hopperIntakeVelocity;
+    } else {
+      hoppersetTargetVelocity = hopperTargetVelocity;
+    }
+
+    
+        if (hoppersetTargetVelocity == 0.0) {
+      m_hopperMotor.setPercentOutput(0.0);
+    } else {
+      m_hopperMotor.setVelocitySetpoint(
+          Constants.Hopper.rollerVelocitySlot,
+          hoppersetTargetVelocity,
+          Constants.Hopper.rollerFeedforward.calculate(hoppersetTargetVelocity));
+    }
 
     DogLog.log("Hopper/ Current Velocity (rad per sec)", m_hopperMotor.getSensorVelocity(),"rad per sec");
-    DogLog.log("Hopper/ Target set Velocity (rad per sec)", hopperTargetVelocity,"rad per sec");
+    DogLog.log("Hopper/ Target set Velocity (rad per sec)", hoppersetTargetVelocity,"rad per sec");
     m_hopperMotor.logMotorState();
   }
 

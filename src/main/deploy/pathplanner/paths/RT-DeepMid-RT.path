@@ -108,8 +108,8 @@
     },
     {
       "name": "IntakeRoller",
-      "waypointRelativePos": 0.492125984251968,
-      "endWaypointRelativePos": 2.3188976377952724,
+      "waypointRelativePos": 0.6377952755905516,
+      "endWaypointRelativePos": 2.1141732283464556,
       "command": null
     }
   ],

@@ -268,6 +268,12 @@ public class Constants {
 
     public static final double ShooterBumpVelocity = 250.0;
     public static final double ShooterBumpPassVelocity = 475.0;
+    public static final double WarmupVelocity = 350.0;
+
+    
+    public static final double ShooterBumpVelocityAngle = 270.0;
+        public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
+
     
 
     public static final double AngleTolerance = Units.degreesToRadians(0.1);
@@ -296,7 +302,9 @@ public class Constants {
     public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
     public static final int rollerVelocitySlot = 0;
     
-    public static final double hopperVelocity = 100;
+    public static final double hopperVelocity = 300;
+    public static final double hopperIntakeVelocity = 80;
+
 
   }
 
@@ -335,7 +343,7 @@ public class Constants {
         new MechanismRatio(
            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(2.0, 0.00, 0.01, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(6.0, 0.01, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
     public static final double Expo_kV = 0.0;
     public static final double Expo_kA = 0.0; 
@@ -352,8 +360,8 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(12.5);
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.03); 
-    public static final double retractHomeSpeed = Units.inchesToMeters(0.03);
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.05); 
+    public static final double retractHomeSpeed = Units.inchesToMeters(0.05);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
@@ -439,7 +447,7 @@ public class Constants {
 
     public static final double Tolerance = 0.01;
 
-    public static final double feildFlip = 17.5;
+    public static final double feildFlip = 16.5;
     public static final double feildFlipy = 8;
 
     public static final Pose2d Error = new Pose2d(6, 6, Rotation2d.fromDegrees(0));

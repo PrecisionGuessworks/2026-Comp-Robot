@@ -8,30 +8,38 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.9946850044365567,
-        "y": 0.9888642413487128
+        "x": 0.9029389880952379,
+        "y": 1.1442931547619049
       },
       "isLocked": false,
       "linkedName": "Out"
     },
     {
       "anchor": {
-        "x": 2.2260159716060333,
-        "y": 2.1397160603371774
+        "x": 2.2275744047619046,
+        "y": 3.2323883928571435
       },
       "prevControl": {
-        "x": 1.5741348713398398,
-        "y": 1.6407453416149063
+        "x": 1.5750446428571427,
+        "y": 2.8343452380952385
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "RS"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 0.18804347826087026,
       "rotationDegrees": 90.0
+    },
+    {
+      "waypointRelativePos": 0.6375464684014889,
+      "rotationDegrees": 57.969903268396635
+    },
+    {
+      "waypointRelativePos": 0.7964684014869847,
+      "rotationDegrees": 44.87497589238409
     }
   ],
   "constraintZones": [],
@@ -39,7 +47,7 @@
   "eventMarkers": [
     {
       "name": "ScoreWarmup",
-      "waypointRelativePos": 0.2919389978213507,
+      "waypointRelativePos": 0.17538126361655745,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -59,7 +67,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 38.89376875265895
+    "rotation": 19.99588434941183
   },
   "reversed": false,
   "folder": "Right",
