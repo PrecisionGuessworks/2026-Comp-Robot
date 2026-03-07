@@ -6,6 +6,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 public class Intake extends Command {
   private final IntakeSubsystem m_intake;
+  private boolean m_lastAttackMode = false;
   // private Timer m_placeTimer = new Timer();
 
   public Intake(
@@ -19,15 +20,32 @@ public class Intake extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
-    m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
+
     m_intake.setIntakePosition();
+    if (m_intake.getAttackMode()){
+      m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
+      m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
+    } else {
+      m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
+      m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+    }
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    if (m_intake.getAttackMode() != m_lastAttackMode){
+      if (m_intake.getAttackMode()){
+        m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
+        m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
+      } else {
+        m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
+        m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+      }
+      m_lastAttackMode = m_intake.getAttackMode();
+    }
 
 
   }

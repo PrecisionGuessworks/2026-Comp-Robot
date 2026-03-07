@@ -41,7 +41,7 @@ public class IntakeSubsystem extends SubsystemBase {
           QuixTalonFXS.makeDefaultConfig()
               .setInverted(Constants.Intake.rollerMotorInvert)
               .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(80.0)
+              .setStatorCurrentLimit(60.0)
               .setBrakeMode()
               .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
 
@@ -53,8 +53,8 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.deployMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setBrakeMode()
-              .setSupplyCurrentLimit(30.0)
-              .setStatorCurrentLimit(40.0)
+              .setSupplyCurrentLimit(20.0)
+              .setStatorCurrentLimit(50.0)
               .setInverted(Constants.Intake.deployMotorInvert)
               .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
               .setMotionMagicConfig(

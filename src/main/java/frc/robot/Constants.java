@@ -335,22 +335,22 @@ public class Constants {
         new MechanismRatio(
            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
     public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(6.0, 0.01, 0.05, 0.01, 11, 0.02, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(2.0, 0.00, 0.01, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
-    public static final double Expo_kV = 0.1;
-    public static final double Expo_kA = 0.1; 
+    public static final double Expo_kV = 0.0;
+    public static final double Expo_kA = 0.0; 
 
     public static final double deployMaxVelocity = 1; // m/s
-    public static final double deployMaxAcceleration = 1.5; // m/s^2
+    public static final double deployMaxAcceleration = 2.0; // m/s^2
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
-    public static final double maxExtension = Units.inchesToMeters(11.2);
+    public static final double maxExtension = Units.inchesToMeters(13);
     public static final double startingPosition = minExtension;
     public static final double intakeStow = Units.inchesToMeters(0.5);
 
-    public static final double attackPosition = Units.inchesToMeters(11.0);
-    public static final double defPosition = Units.inchesToMeters(3.0);
+    public static final double attackPosition = Units.inchesToMeters(12.5);
+    public static final double defPosition = Units.inchesToMeters(4.0);
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.03); 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.03);
@@ -366,7 +366,7 @@ public class Constants {
 
 
     public static final double intakeABRollerVelocity = 50;
-    public static final double SlowCRollerVelocity = 25;
+    public static final double SlowCRollerVelocity = 5;
     public static final double SlowABRollerVelocity = 20;
     public static final double outtakeRollerVelocity = -100;
 
