@@ -265,6 +265,7 @@ Visualization.Update2DVisualization();
   private final Color Green = new Color(0, 255, 0);
   private Color m_currentColor = Blue;
   private Color m_weWonAuto = Black;
+  private Color m_OurShift = Black;
 
   public void updateFeildTimers() {
     double matchTime = DriverStation.getMatchTime();
@@ -305,9 +306,21 @@ Visualization.Update2DVisualization();
     SmartDashboard.putNumber("Shift Time", ShiftHelpers.timeLeftInShiftSeconds(matchTime));    
     SmartDashboard.putNumber("Time",matchTime);
     if (DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue) {
-      SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
+      // SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftBlue(matchTime));
+      if (ShiftHelpers.isCurrentShiftBlue(matchTime)){
+        m_OurShift = Green;
+      } else {
+        m_OurShift = Black;
+      }
+      SmartDashboard.putString("Our Shift", m_OurShift.toHexString());
     } else {
-      SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftRed(matchTime));
+      // SmartDashboard.putBoolean("Our Shift", ShiftHelpers.isCurrentShiftRed(matchTime));
+      if (ShiftHelpers.isCurrentShiftRed(matchTime)){
+        m_OurShift = Green;
+      } else {
+        m_OurShift = Black;
+      }
+      SmartDashboard.putString("Our Shift", m_OurShift.toHexString());
     }
   }
 

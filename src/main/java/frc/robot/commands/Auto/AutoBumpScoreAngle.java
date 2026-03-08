@@ -28,7 +28,7 @@ public class AutoBumpScoreAngle extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.setHoodAngle(Constants.Shooter.ShooterBumpVelocityAngle);
+    m_shooter.setHoodAngle(Constants.Shooter.hoodBumpAngleAngle);
     m_shooter.setShooterVelocity(Constants.Shooter.ShooterBumpVelocityAngle);
     m_timer.restart();
     loopCount = 0;

@@ -85,11 +85,11 @@ public class Constants {
         ShotVelocity.put(1.5, 300.0);
         ShotVelocity.put(2.0, 325.0);
         ShotVelocity.put(2.5, 350.0);
-        ShotVelocity.put(3.0, 360.0);
-        ShotVelocity.put(3.5, 380.0);
-        ShotVelocity.put(4.0, 400.0);
-        ShotVelocity.put(4.5, 425.0);
-        ShotVelocity.put(5.0, 450.0);
+        ShotVelocity.put(3.0, 370.0);
+        ShotVelocity.put(3.5, 390.0);
+        ShotVelocity.put(4.0, 410.0);
+        ShotVelocity.put(4.5, 435.0);
+        ShotVelocity.put(5.0, 460.0);
         ShotVelocity.put(5.5, 475.0);
     }
     public static InterpolatingDoubleTreeMap ShotAngle;
@@ -97,16 +97,16 @@ public class Constants {
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
         ShotAngle.put(0.5, Units.degreesToRadians(8));
-        ShotAngle.put(1.0, Units.degreesToRadians(9));
-        ShotAngle.put(1.5, Units.degreesToRadians(10));
-        ShotAngle.put(2.0, Units.degreesToRadians(11));
-        ShotAngle.put(2.5, Units.degreesToRadians(15));
-        ShotAngle.put(3.0, Units.degreesToRadians(18));
-        ShotAngle.put(3.5, Units.degreesToRadians(20.5));
-        ShotAngle.put(4.0, Units.degreesToRadians(24));
-        ShotAngle.put(4.5, Units.degreesToRadians(28));
-        ShotAngle.put(5.0, Units.degreesToRadians(32));
-        ShotAngle.put(5.5, Units.degreesToRadians(35));
+        ShotAngle.put(1.0, Units.degreesToRadians(10));
+        ShotAngle.put(1.5, Units.degreesToRadians(12));
+        ShotAngle.put(2.0, Units.degreesToRadians(15));
+        ShotAngle.put(2.5, Units.degreesToRadians(20));
+        ShotAngle.put(3.0, Units.degreesToRadians(27.2));
+        ShotAngle.put(3.5, Units.degreesToRadians(30.5));
+        ShotAngle.put(4.0, Units.degreesToRadians(33));
+        ShotAngle.put(4.5, Units.degreesToRadians(36));
+        ShotAngle.put(5.0, Units.degreesToRadians(39));
+        ShotAngle.put(5.5, Units.degreesToRadians(40));
     }
     // Used for sotm (Shoot on the move)
     public static InterpolatingDoubleTreeMap ShotTime;
@@ -261,18 +261,24 @@ public class Constants {
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(1);
-    public static final double hoodBumpAngle = Units.degreesToRadians(9);
+    
     public static final double hoodBumpPassAngle = Units.degreesToRadians(40);
     // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
 
+    public static final double hoodBumpAngle = Units.degreesToRadians(9); // REAL
+    public static final double ShooterBumpVelocity = 250.0; 
+    // public static final double hoodBumpAngle = Units.degreesToRadians(27.4); // 3.05
+    // public static final double ShooterBumpVelocity = 370.0; 
 
-    public static final double ShooterBumpVelocity = 250.0;
-    public static final double ShooterBumpPassVelocity = 475.0;
+
+    public static final double ShooterBumpPassVelocity = 475.0; 
     public static final double WarmupVelocity = 350.0;
 
-    
+    // AUTOS
     public static final double ShooterBumpVelocityAngle = 270.0;
         public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
+            public static final double ShooterBumpVelocityAuto = 270.0;
+        public static final double hoodBumpAngleAuto = Units.degreesToRadians(7.5);
 
     
 
@@ -302,8 +308,8 @@ public class Constants {
     public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
     public static final int rollerVelocitySlot = 0;
     
-    public static final double hopperVelocity = 300;
-    public static final double hopperIntakeVelocity = 80;
+    public static final double hopperVelocity = 400;
+    public static final double hopperIntakeVelocity = 60;
 
 
   }
@@ -342,8 +348,8 @@ public class Constants {
             1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
         new MechanismRatio(
            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
-    public static final boolean deployMotorInvert = false;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(6.0, 0.01, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
+    public static final boolean deployMotorInvert = true;
+    public static final PIDConfig deployPIDConfig = new PIDConfig(3.0, 0.00, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
     public static final double Expo_kV = 0.0;
     public static final double Expo_kA = 0.0; 
@@ -360,8 +366,8 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(12.5);
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.05); 
-    public static final double retractHomeSpeed = Units.inchesToMeters(0.05);
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.09); 
+    public static final double retractHomeSpeed = Units.inchesToMeters(0.09);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
@@ -373,9 +379,9 @@ public class Constants {
     public static final double antiJamCRollerTimeSpinup = 1;
 
 
-    public static final double intakeABRollerVelocity = 50;
-    public static final double SlowCRollerVelocity = 5;
-    public static final double SlowABRollerVelocity = 20;
+    public static final double intakeABRollerVelocity = 60;
+    public static final double SlowCRollerVelocity = 10;
+    public static final double SlowABRollerVelocity = 25;
     public static final double outtakeRollerVelocity = -100;
 
     public static final double holdRollerVelocity = 0;
@@ -470,7 +476,8 @@ public class Constants {
   public static class Vision {
 
     public static final String LimeLightCamerName = "limelight-shooter"; // Front
-    public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(.5, .5, 9999999);
+    // public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(.8, .8, 9999999);
+    public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(1, 1, 2);
     
     public static final String kCameraName = "FrontCamera"; // Front
     

@@ -15,11 +15,13 @@ public class BumpScore extends Command {
   private final HopperSubsystem m_hopper;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
+  private boolean ShootReady = false;
 
   public BumpScore(
       ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem) {
     m_shooter = shooterSubsystem;
     m_hopper = hopperSubsystem;
+    
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooterSubsystem, hopperSubsystem);
@@ -32,13 +34,14 @@ public class BumpScore extends Command {
     m_shooter.setShooterVelocity(Constants.Shooter.ShooterBumpVelocity);
     m_timer.restart();
     loopCount = 0;
+    ShootReady = m_shooter.getShooterVelocity()>200;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     
-    if(m_timer.get()>0.5){
+    if(m_timer.get()>0.5||ShootReady){
           m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
 

@@ -29,6 +29,7 @@ public class ZoneScore extends Command {
   private int loopCount = 0;
   private boolean safe = false;
   private Translation2d target = new Translation2d();
+  private boolean ShootReady = false;
 
   public ZoneScore(
       ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem) {
@@ -44,6 +45,7 @@ public class ZoneScore extends Command {
   public void initialize() {
     m_timer.restart();
     loopCount = 0;
+    ShootReady = m_shooter.getShooterVelocity()>200;
     // Robot.lights.setFire();
   }
 
@@ -85,10 +87,11 @@ public class ZoneScore extends Command {
       if (loopCount % 10 == 0) {
       Visualization.LaunchFuelViz(shooterVelocity, Units.degreesToRadians(90)-hoodAngle);
     }
-
+    if(m_timer.get()>0.5||ShootReady){
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
     RobotContainer.intake.retractIntakeSlowShoot();
+    }
 
     
 

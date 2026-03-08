@@ -28,8 +28,8 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.ABrollerRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Intake.rollerMotorInvert)
-              .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(80.0)
+              .setSupplyCurrentLimit(30.0)
+              .setStatorCurrentLimit(60.0)
               .setBrakeMode()
               .setPIDConfig(Constants.Intake.rollerVelocitySlot, Constants.Intake.rollerPIDConfig));
 
@@ -71,11 +71,11 @@ public class IntakeSubsystem extends SubsystemBase {
   private double m_setPosition = m_targetPosition;
   private double m_intakeABsetpoint = 0.0;
   private double m_intakeCsetpoint = 0.0;
-  private boolean m_intakeCjam = false;
-  private boolean m_intakeCjamCool = false;
-  private Timer m_antiJamTimer = new Timer();
-  private Timer m_antiJamTimerCool = new Timer();
-  private Timer m_antiJamTimerSpinup = new Timer();
+  // private boolean m_intakeCjam = false;
+  // private boolean m_intakeCjamCool = false;
+  // private Timer m_antiJamTimer = new Timer();
+  // private Timer m_antiJamTimerCool = new Timer();
+  // private Timer m_antiJamTimerSpinup = new Timer();
   public boolean m_hasPiece = false;
   public boolean m_attackMode = false;
   public boolean m_pastAttackMode = false;
@@ -152,7 +152,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
    public void setCRollerVelocity(double velocity) {
-    m_antiJamTimerSpinup.restart();
+    // m_antiJamTimerSpinup.restart();
     m_intakeCsetpoint = velocity;
     if (velocity == 0.0) {
       m_CrollerMotor.setPercentOutput(0.0);
@@ -260,49 +260,49 @@ public class IntakeSubsystem extends SubsystemBase {
   public void periodic() {
 
 
-    // if (m_attackMode != m_pastAttackMode) {
-    //   if (m_attackMode) {
-    //     m_targetPosition = Constants.Intake.attackPosition;
-    //   } else {
-    //     m_targetPosition = Constants.Intake.defPosition;
-    //   }
-    //   m_pastAttackMode = m_attackMode;
+    if (m_attackMode != m_pastAttackMode) {
+      if (m_attackMode) {
+        m_targetPosition = Constants.Intake.attackPosition;
+      } else {
+        m_targetPosition = Constants.Intake.defPosition;
+      }
+      m_pastAttackMode = m_attackMode;
+    }
+
+    // if (getCRollerVelocity() < 100 && m_intakeCsetpoint > 30 && !m_intakeCjam && m_antiJamTimerSpinup.hasElapsed(Constants.Intake.antiJamCRollerTimeSpinup)) {
+    //   m_intakeCjam = true;
+    //   m_antiJamTimerCool.start();
+    //   setCRollerVelocity(0);
+    //   m_intakeCjamCool = true;
+    // }
+    // if (m_intakeCsetpoint == 0&&m_intakeCjam){
+    //   m_intakeCjam = false;
+    //   m_intakeCjamCool = false;
+    //   m_antiJamTimer.reset();
+    //   m_antiJamTimerCool.reset();
+    // }
+    // if (m_intakeCjam) {
+
+    //   if (m_intakeCjamCool && m_antiJamTimerCool.hasElapsed(Constants.Intake.antiJamCRollerTimeCool)) {
+    //   m_antiJamTimerCool.reset();
+    //   m_antiJamTimer.start();
+    //   setCRollerVelocity(m_intakeCsetpoint);
+    //   m_intakeCjamCool = false;
+
+    //   if (!m_intakeCjamCool && m_antiJamTimer.hasElapsed(Constants.Intake.antiJamCRollerTime)) {
+    //     m_antiJamTimer.reset();
+    //     m_antiJamTimerCool.start();
+    //     setCRollerVelocity(0);
+    //   m_intakeCjamCool = true;
+  
+      // }
+
+
+
     // }
 
-    if (getCRollerVelocity() < 100 && m_intakeCsetpoint > 30 && !m_intakeCjam && m_antiJamTimerSpinup.hasElapsed(Constants.Intake.antiJamCRollerTimeSpinup)) {
-      m_intakeCjam = true;
-      m_antiJamTimerCool.start();
-      setCRollerVelocity(0);
-      m_intakeCjamCool = true;
-    }
-    if (m_intakeCsetpoint == 0&&m_intakeCjam){
-      m_intakeCjam = false;
-      m_intakeCjamCool = false;
-      m_antiJamTimer.reset();
-      m_antiJamTimerCool.reset();
-    }
-    if (m_intakeCjam) {
 
-      if (m_intakeCjamCool && m_antiJamTimerCool.hasElapsed(Constants.Intake.antiJamCRollerTimeCool)) {
-      m_antiJamTimerCool.reset();
-      m_antiJamTimer.start();
-      setCRollerVelocity(m_intakeCsetpoint);
-      m_intakeCjamCool = false;
-
-      if (!m_intakeCjamCool && m_antiJamTimer.hasElapsed(Constants.Intake.antiJamCRollerTime)) {
-        m_antiJamTimer.reset();
-        m_antiJamTimerCool.start();
-        setCRollerVelocity(0);
-      m_intakeCjamCool = true;
-  
-      }
-
-
-
-    }
-
-
-    }
+    // }
     
 
     if (m_attackMode) {

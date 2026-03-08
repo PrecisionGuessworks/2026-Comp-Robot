@@ -15,6 +15,7 @@ public class BumpPass extends Command {
   private final HopperSubsystem m_hopper;
   private Timer m_timer = new Timer();
   private int loopCount = 0;
+  private boolean ShootReady = false;
 
   public BumpPass(
       ShooterSubsystem shooterSubsystem, HopperSubsystem hopperSubsystem) {
@@ -32,13 +33,14 @@ public class BumpPass extends Command {
     m_shooter.setShooterVelocity(Constants.Shooter.ShooterBumpPassVelocity);
     m_timer.restart();
     loopCount = 0;
+    ShootReady = m_shooter.getShooterVelocity()>200;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     
-    if(m_timer.get()>0.5){
+    if(m_timer.get()>0.5||ShootReady){
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
 

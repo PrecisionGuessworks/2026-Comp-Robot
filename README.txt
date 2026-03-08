@@ -107,10 +107,10 @@ Rumble:
 
 ----------------------- Operator:
 
-A:
+A: Prep Shooter
 B: Outtake  NOT IN CODE!!!
 X:
-Y:
+Y: Shoot Safe Override
 
 Left Bumper: Intake Enable Soft Stops / Zero.  UNTESTED!!!!
 Right Bumper: Stow Intake                      UNTESTED!!!!
