@@ -82,15 +82,15 @@ public class Constants {
         ShotVelocity = new InterpolatingDoubleTreeMap();
         ShotVelocity.put(0.5, 250.0);
         ShotVelocity.put(1.0, 275.0);
-        ShotVelocity.put(1.5, 300.0);
-        ShotVelocity.put(2.0, 325.0);
-        ShotVelocity.put(2.5, 350.0);
-        ShotVelocity.put(3.0, 370.0);
-        ShotVelocity.put(3.5, 390.0);
-        ShotVelocity.put(4.0, 410.0);
-        ShotVelocity.put(4.5, 435.0);
-        ShotVelocity.put(5.0, 460.0);
-        ShotVelocity.put(5.5, 475.0);
+        ShotVelocity.put(1.5, 320.0);
+        ShotVelocity.put(2.0, 345.0);
+        ShotVelocity.put(2.5, 385.0);
+        ShotVelocity.put(3.0, 390.0);
+        ShotVelocity.put(3.5, 410.0);
+        ShotVelocity.put(4.0, 450.0);
+        ShotVelocity.put(4.5, 460.0);
+        ShotVelocity.put(5.0, 470.0);
+        ShotVelocity.put(5.5, 875.0);
     }
     public static InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
@@ -100,8 +100,8 @@ public class Constants {
         ShotAngle.put(1.0, Units.degreesToRadians(10));
         ShotAngle.put(1.5, Units.degreesToRadians(12));
         ShotAngle.put(2.0, Units.degreesToRadians(15));
-        ShotAngle.put(2.5, Units.degreesToRadians(20));
-        ShotAngle.put(3.0, Units.degreesToRadians(27.2));
+        ShotAngle.put(2.5, Units.degreesToRadians(22));
+        ShotAngle.put(3.0, Units.degreesToRadians(26.5));
         ShotAngle.put(3.5, Units.degreesToRadians(30.5));
         ShotAngle.put(4.0, Units.degreesToRadians(33));
         ShotAngle.put(4.5, Units.degreesToRadians(36));
@@ -113,16 +113,16 @@ public class Constants {
     // Distance in meters , time for shot to score in seconds
     static {
         ShotTime = new InterpolatingDoubleTreeMap();
-        ShotTime.put(0.5, 1.2);
-        ShotTime.put(1.0, 1.2);
-        ShotTime.put(1.5, 1.3);
-        ShotTime.put(2.0, 1.43);
-        ShotTime.put(2.5, 1.44);
-        ShotTime.put(3.0, 1.44);
-        ShotTime.put(3.5, 1.45);
-        ShotTime.put(4.0, 1.5);
-        ShotTime.put(4.5, 1.5);
-        ShotTime.put(5.0, 1.5);
+        ShotTime.put(0.5, 1.0);
+        ShotTime.put(1.0, 1.0);
+        ShotTime.put(1.5, 1.0);
+        ShotTime.put(2.0, 1.0);
+        ShotTime.put(2.5, 1.0);
+        ShotTime.put(3.0, 1.0);
+        ShotTime.put(3.5, 1.0);
+        ShotTime.put(4.0, 1.1);
+        ShotTime.put(4.5, 1.1);
+        ShotTime.put(5.0, 1.1);
         ShotTime.put(5.5, 1.5);
     }
 
@@ -367,8 +367,8 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(12.5);
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.09); 
-    public static final double retractHomeSpeed = Units.inchesToMeters(0.09);
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.13); 
+    public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
@@ -387,7 +387,7 @@ public class Constants {
 
     public static final double holdRollerVelocity = 0;
 
-    public static final double ManualSpeed = 0.01; // increase to make manual control faster, decrease to make it slower
+    public static final double ManualSpeed = 0.03; // increase to make manual control faster, decrease to make it slower
 
     // For simulation only
     public static final double simCarriageMass = 3.0; // kg
