@@ -322,11 +322,12 @@ public class Constants {
     public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
     public static final MechanismRatio ABrollerRatio =
         new MechanismRatio(1, (1.0 / 1.0));
+    public static final boolean ABrollerMotorInvert = false;
 
     public static final CANDeviceID CrollerID = new CANDeviceID(34, kSuperStructureCanivoreName);
     public static final MechanismRatio CrollerRatio =
         new MechanismRatio(1, (1.0 / 1.0));
-    public static final boolean CrollerInvert = false;
+    public static final boolean CrollerMotorInvert = false;
     public static final MotorArrangementValue CrollerArrangement = MotorArrangementValue.NEO_JST;
 
 
@@ -367,7 +368,11 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(12.5);
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.13); 
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.13); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowPull = 16; // How many times to retract in when intake slow is called
+    public static final double retractSlowPush = 8; // How many times to extend out when intake slow is called after pullcount is done 
+
+
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps

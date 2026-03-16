@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStartBACKWARDS-Antimid-RT"
+            "pathName": "RStartBACKWARDS-Antimid-RT180"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT-RS"
+            "pathName": "RT180-RS"
           }
         },
         {
@@ -39,6 +39,12 @@
           "type": "path",
           "data": {
             "pathName": "RS-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-Run"
           }
         }
       ]

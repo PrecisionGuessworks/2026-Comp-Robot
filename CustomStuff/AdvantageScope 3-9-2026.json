@@ -1,10 +1,10 @@
 {
   "hubs": [
     {
-      "x": -7,
-      "y": -7,
-      "width": 1454,
-      "height": 926,
+      "x": 170,
+      "y": 155,
+      "width": 1100,
+      "height": 650,
       "state": {
         "sidebar": {
           "width": 394,
@@ -21,8 +21,6 @@
             "/Tunable/Talon FX (v6) 32 ID  32 /Slot 0",
             "/Log3/DS",
             "/Log3/DS/joystick0",
-            "/Tunable/Talon FX (v6) 50 ID  50 ",
-            "/Tunable/Talon FX (v6) 51 ID  51 ",
             "/Tunable/Talon FX (v6) 50 ID  50 /Slot 0",
             "/Log18",
             "/Log18/Robot",
@@ -31,8 +29,14 @@
             "/Robot/Tunable/Talon FX (v6) 31 ID  31 ",
             "/Robot/Hardware/ Talon FX (v6) 37 ID 37",
             "/Robot/SOTM",
-            "/Robot/Intake",
-            "/Tunable"
+            "/Tunable",
+            "/Tunable/Talon FX (v6) 40 ID  40 ",
+            "/Tunable/Talon FX (v6) 40 ID  40 /Slot 0",
+            "/Robot/3DViz",
+            "/Robot/Vision/ Limelight Measurement Timestamp",
+            "/Robot/SystemStats/PowerDistribution",
+            "/Robot/Shooter",
+            "/Phoenix6"
           ]
         },
         "tabs": {
@@ -75,7 +79,7 @@
                     "type": "stepped",
                     "logKey": "/Robot/Intake: Position",
                     "logType": "Number",
-                    "visible": false,
+                    "visible": true,
                     "options": {
                       "color": "#858584",
                       "size": "normal"
@@ -85,9 +89,39 @@
                     "type": "stepped",
                     "logKey": "/Robot/Intake: Target Position",
                     "logType": "Number",
-                    "visible": false,
+                    "visible": true,
                     "options": {
                       "color": "#3b875a",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "NT:/Robot/Intake/ Target Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#5f4528",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "NT:/Robot/Intake/ Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#2b66a2",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "NT:/Robot/Intake/ Target set Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#e5b31b",
                       "size": "normal"
                     }
                   }
@@ -137,9 +171,29 @@
                     "type": "stepped",
                     "logKey": "/Robot/Intake: C Roller Velocity",
                     "logType": "Number",
-                    "visible": true,
+                    "visible": false,
                     "options": {
                       "color": "#d993aa",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Shooter/ Current Velocity (rotations per sec)",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#af2437",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Shooter/ Target set Velocity (rotations per sec)",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#80588e",
                       "size": "normal"
                     }
                   }
@@ -161,6 +215,61 @@
               "controllerUUID": "jop0ohj0csfrd29nyefz95ya9a507uu5",
               "renderer": null,
               "controlsHeight": 201
+            },
+            {
+              "type": 1,
+              "title": "Line Graph",
+              "controller": {
+                "leftSources": [
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake/ Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#2b66a2",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake/ Target Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#e5b31b",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "stepped",
+                    "logKey": "/Robot/Intake/ Target set Position",
+                    "logType": "Number",
+                    "visible": true,
+                    "options": {
+                      "color": "#af2437",
+                      "size": "normal"
+                    }
+                  }
+                ],
+                "rightSources": [],
+                "discreteSources": [],
+                "leftLockedRange": null,
+                "rightLockedRange": null,
+                "leftUnitConversion": {
+                  "autoTarget": null,
+                  "preset": null
+                },
+                "rightUnitConversion": {
+                  "autoTarget": null,
+                  "preset": null
+                },
+                "leftFilter": 0,
+                "rightFilter": 0
+              },
+              "controllerUUID": "wk7lphgz4bn7r85atdr7t7sd0f7td4bq",
+              "renderer": null,
+              "controlsHeight": 200
             },
             {
               "type": 2,
@@ -259,6 +368,29 @@
                       "model": "2026 KitBot",
                       "color": "#00ff00"
                     }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/Robot/3DViz/ 1DriveBase",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Scope"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/Robot/3DViz/ 2IntakeViz",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/Robot/3DViz/ 3HoodViz",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {}
                   }
                 ],
                 "game": "FRC:2026 Field"
@@ -268,14 +400,14 @@
                 "cameraIndex": -1,
                 "orbitFov": 50,
                 "cameraPosition": [
-                  -3.2401386990450605,
-                  1.5547764371801231,
-                  -0.9569196199090011
+                  2.0999124401153946,
+                  13.438099227715515,
+                  0.5875816395241602
                 ],
                 "cameraTarget": [
-                  2.5187333485588392,
-                  0.11653285113757066,
-                  -1.6802862215628471
+                  2.099915972235044,
+                  -1.1918321103502045,
+                  0.5875958373426393
                 ]
               },
               "controlsHeight": 200

@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
     
     vision = new Vision();
     SignalLogger.enableAutoLogging(false); // Disable CTRE Signal Logger auto logging
+    SignalLogger.stop(); // Stop any existing logging sessions
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 1);
   LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName, 0.001);
         

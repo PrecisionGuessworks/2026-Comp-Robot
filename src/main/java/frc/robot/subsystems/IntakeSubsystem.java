@@ -27,7 +27,7 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.ABrollerID,
           Constants.Intake.ABrollerRatio,
           QuixTalonFX.makeDefaultConfig()
-              .setInverted(Constants.Intake.rollerMotorInvert)
+              .setInverted(Constants.Intake.ABrollerMotorInvert)
               .setSupplyCurrentLimit(30.0)
               .setStatorCurrentLimit(60.0)
               .setBrakeMode()
@@ -39,7 +39,7 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.CrollerRatio,
           Constants.Intake.CrollerArrangement,
           QuixTalonFXS.makeDefaultConfig()
-              .setInverted(Constants.Intake.rollerMotorInvert)
+              .setInverted(Constants.Intake.CrollerMotorInvert)
               .setSupplyCurrentLimit(40.0)
               .setStatorCurrentLimit(60.0)
               .setBrakeMode()
@@ -201,12 +201,38 @@ public class IntakeSubsystem extends SubsystemBase {
       }
   }
 
-  public void retractIntakeSlowShoot() {
+  // // OLD
+  // public void retractIntakeSlowShoot() {
+  //   if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
+  //   m_targetPosition -= Constants.Intake.retractSlowSpeed;
+  // setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
+  // setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+  // }
+  // }
+
+  private int m_currentcount = 0;
+  private boolean m_pull = true;
+
+    public void retractIntakeSlowShoot() {
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
-    m_targetPosition -= Constants.Intake.retractSlowSpeed;
-  setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
-  setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
-  }
+      setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
+      setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
+        if (m_pull) {
+          m_targetPosition -= Constants.Intake.retractSlowSpeed;
+          m_currentcount++;
+          if (m_currentcount >= Constants.Intake.retractSlowPull) {
+            m_pull = false;
+            m_currentcount = 0;
+          }
+        } else {
+          m_targetPosition += Constants.Intake.retractSlowSpeed;
+          m_currentcount++;
+          if (m_currentcount >= Constants.Intake.retractSlowPush) {
+            m_pull = true;
+            m_currentcount = 0;
+          }
+        }
+   }
   }
 
   public void retractIntakeSlowShootSTOP() {
@@ -269,6 +295,23 @@ public class IntakeSubsystem extends SubsystemBase {
       m_pastAttackMode = m_attackMode;
     }
 
+    
+    if (!m_softLimitsEnabled){
+      m_setPosition = m_targetPosition;
+    } else {
+      if (m_targetPosition <= Constants.Intake.minExtension) {
+        m_targetPosition = Constants.Intake.minExtension;
+      } else if (m_targetPosition >= Constants.Intake.maxExtension) {
+        m_targetPosition = Constants.Intake.maxExtension;
+      }
+      m_setPosition = m_targetPosition;
+
+    }
+
+
+    m_deployMotor.setMotionMagicPositionSetpoint(
+        Constants.Intake.deployPositionSlot, m_setPosition);
+
     // if (getCRollerVelocity() < 100 && m_intakeCsetpoint > 30 && !m_intakeCjam && m_antiJamTimerSpinup.hasElapsed(Constants.Intake.antiJamCRollerTimeSpinup)) {
     //   m_intakeCjam = true;
     //   m_antiJamTimerCool.start();
@@ -312,14 +355,6 @@ public class IntakeSubsystem extends SubsystemBase {
     }
     SmartDashboard.putString("Intake Mode", m_currentColor.toHexString());
 
-    if (!m_softLimitsEnabled){
-      m_setPosition = m_targetPosition;
-    } else if (m_targetPosition >= Constants.Intake.minExtension && m_targetPosition <= Constants.Intake.maxExtension) {
-      m_setPosition = m_targetPosition;
-    }
-
-    m_deployMotor.setMotionMagicPositionSetpoint(
-        Constants.Intake.deployPositionSlot, m_setPosition);
 
 
     DogLog.log("Intake/ Attack Mode", m_attackMode);

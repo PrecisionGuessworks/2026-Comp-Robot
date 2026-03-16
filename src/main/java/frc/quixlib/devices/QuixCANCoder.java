@@ -73,7 +73,7 @@ public class QuixCANCoder implements QuixAbsoluteEncoder {
     // m_velocityPublisher.set(getVelocity());
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Sensor Position", getPosition(),"rad");
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Absolute Position", getAbsPosition(),"rad");
-    DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Velocity", getVelocity(),"rad per sec" );
+    DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Velocity", getVelocity(),"rotations per sec" );
     }
 
 

@@ -236,12 +236,12 @@ public class ShooterSubsystem extends SubsystemBase {
     DogLog.log("Hood/ Target set Angle (deg)", Units.radiansToDegrees(m_hoodTargetAngle),"deg");
     // DogLog.log("Hood/ Current Velocity (deg per sec)", Units.radiansToDegrees(m_hoodMotor.getSensorVelocity()),"deg per sec");
 
-    DogLog.log("Shooter/ Current Velocity (rad per sec)", m_shooterMotor.getSensorVelocity(),"rad per sec");
-    // DogLog.log("Shooter/ Target Velocity (rad per sec)", m_shooterMotor.getClosedLoopReference(),"rad per sec");
-    DogLog.log("Shooter/ Target set Velocity (rad per sec)", shooterTargetVelocity,"rad per sec");
+    DogLog.log("Shooter/ Current Velocity (rotations per sec)", m_shooterMotor.getSensorVelocity(),"rotations per sec");
+    // DogLog.log("Shooter/ Target Velocity (rotations per sec)", m_shooterMotor.getClosedLoopReference(),"rotations per sec");
+    DogLog.log("Shooter/ Target set Velocity (rotations per sec)", shooterTargetVelocity,"rotations per sec");
 
-    DogLog.log("Indexer/ Current Velocity (rad per sec)", m_indexerMotor.getSensorVelocity(),"rad per sec");
-    DogLog.log("Indexer/ Target set Velocity (rad per sec)", indexerTargetVelocity,"rad per sec");
+    DogLog.log("Indexer/ Current Velocity (rotations per sec)", m_indexerMotor.getSensorVelocity(),"rotations per sec");
+    DogLog.log("Indexer/ Target set Velocity (rotations per sec)", indexerTargetVelocity,"rotations per sec");
     
 
     m_shooterMotor.logMotorState();

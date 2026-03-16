@@ -61,8 +61,8 @@ public void setHopperRollerVelocity(double velocity) {
           Constants.Hopper.rollerFeedforward.calculate(hoppersetTargetVelocity));
     }
 
-    DogLog.log("Hopper/ Current Velocity (rad per sec)", m_hopperMotor.getSensorVelocity(),"rad per sec");
-    DogLog.log("Hopper/ Target set Velocity (rad per sec)", hoppersetTargetVelocity,"rad per sec");
+    DogLog.log("Hopper/ Current Velocity (rotations per sec)", m_hopperMotor.getSensorVelocity(),"rotations per sec");
+    DogLog.log("Hopper/ Target set Velocity (rotations per sec)", hoppersetTargetVelocity,"rotations per sec");
     m_hopperMotor.logMotorState();
   }
 

@@ -494,10 +494,10 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     DogLog.log(name + ": Supply Current", getSupplyCurrent(),"Amps");
     DogLog.log(name + ": Stator Current", getStatorCurrent(),"Amps");
     DogLog.log(name + ": Closed Loop Reference", getClosedLoopReference(),"Rad");
-    DogLog.log(name + ": Closed Loop Reference Slope", getClosedLoopReferenceSlope(),"rad per sec");
+    DogLog.log(name + ": Closed Loop Reference Slope", getClosedLoopReferenceSlope(),"rotations per sec");
     DogLog.log(name + ": Raw Rotor Position", m_controller.getRotorPosition().getValueAsDouble(),"Radi");
     DogLog.log(name + ": Sensor Position", getSensorPosition(),"rad");
-    DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rad per sec");
+    DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rotations per sec");
     if (!DriverStation.isFMSAttached()){
     // updateTunerConstants();
     }

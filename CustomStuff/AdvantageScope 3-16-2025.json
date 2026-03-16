@@ -126,7 +126,7 @@
                 "rightSources": [
                   {
                     "type": "stepped",
-                    "logKey": "/Robot/Shooter: Target set Velocity (rad per sec)",
+                    "logKey": "/Robot/Shooter: Target set Velocity (rotations per sec)",
                     "logType": "Number",
                     "visible": false,
                     "options": {
@@ -136,7 +136,7 @@
                   },
                   {
                     "type": "stepped",
-                    "logKey": "/Robot/Shooter: Current Velocity (rad per sec)",
+                    "logKey": "/Robot/Shooter: Current Velocity (rotations per sec)",
                     "logType": "Number",
                     "visible": false,
                     "options": {
@@ -146,7 +146,7 @@
                   },
                   {
                     "type": "stepped",
-                    "logKey": "NT:/Robot/Shooter: Current Velocity (rad per sec)",
+                    "logKey": "NT:/Robot/Shooter: Current Velocity (rotations per sec)",
                     "logType": "Number",
                     "visible": false,
                     "options": {
@@ -156,7 +156,7 @@
                   },
                   {
                     "type": "stepped",
-                    "logKey": "NT:/Robot/Shooter: Target set Velocity (rad per sec)",
+                    "logKey": "NT:/Robot/Shooter: Target set Velocity (rotations per sec)",
                     "logType": "Number",
                     "visible": false,
                     "options": {
