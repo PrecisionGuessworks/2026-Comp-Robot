@@ -56,7 +56,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
 
     public static final class ShotCalc {
 
@@ -368,9 +368,12 @@ public class Constants {
     public static final double attackPosition = Units.inchesToMeters(12.5);
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.13); // How many inches per cycle. Should be ~ 50 a sec
-    public static final double retractSlowPull = 16; // How many times to retract in when intake slow is called
-    public static final double retractSlowPush = 8; // How many times to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.12); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.20); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
+    public static final double retractSlowPull = 18;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
+    public static final double retractSlowPush = 7;     // How many cycles to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowPushHold = 16;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);

@@ -53,8 +53,8 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.deployMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setBrakeMode()
-              .setSupplyCurrentLimit(20.0)
-              .setStatorCurrentLimit(50.0)
+              .setSupplyCurrentLimit(15.0)
+              .setStatorCurrentLimit(30.0)
               .setInverted(Constants.Intake.deployMotorInvert)
               .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
               .setMotionMagicConfig(
@@ -212,24 +212,50 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private int m_currentcount = 0;
   private boolean m_pull = true;
+  private boolean m_hold = false;
 
     public void retractIntakeSlowShoot() {
+    if (isAtPosition(Constants.Intake.maxExtension, Units.inchesToMeters(0.5))) {
+      m_pull = true;
+      m_hold = false;
+    }
+
+
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
       setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
       setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
         if (m_pull) {
-          m_targetPosition -= Constants.Intake.retractSlowSpeed;
-          m_currentcount++;
-          if (m_currentcount >= Constants.Intake.retractSlowPull) {
-            m_pull = false;
-            m_currentcount = 0;
+          if (!m_hold){
+            m_targetPosition -= Constants.Intake.retractSlowSpeed;
+            m_currentcount++;
+              if (m_currentcount >= Constants.Intake.retractSlowPull) {
+                m_hold = true;
+                m_currentcount = 0;
+              }
+          } else {
+            if (m_currentcount >= Constants.Intake.retractSlowPullHold) {
+              m_pull = false;
+              m_hold = false;
+              m_currentcount = 0;
+            }
+            m_currentcount++;
           }
+
         } else {
-          m_targetPosition += Constants.Intake.retractSlowSpeed;
-          m_currentcount++;
-          if (m_currentcount >= Constants.Intake.retractSlowPush) {
-            m_pull = true;
-            m_currentcount = 0;
+          if (!m_hold){
+            m_targetPosition += Constants.Intake.retractSlowPushSpeed;
+            m_currentcount++;
+              if (m_currentcount >= Constants.Intake.retractSlowPush) {
+                m_hold = true;
+                m_currentcount = 0;
+              }
+          } else {
+            if (m_currentcount >= Constants.Intake.retractSlowPushHold) {
+              m_pull = true;
+              m_hold = false;
+              m_currentcount = 0;
+            }
+            m_currentcount++;
           }
         }
    }
