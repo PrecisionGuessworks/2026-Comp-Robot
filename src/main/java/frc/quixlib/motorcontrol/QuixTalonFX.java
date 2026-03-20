@@ -133,6 +133,11 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
       NEUTRAL_MODE = NeutralModeValue.Brake;
       return this;
     }
+    public QuixTalonFXConfiguration setCoastMode() {
+      NEUTRAL_MODE = NeutralModeValue.Coast;
+      return this;
+    }
+
 
     public QuixTalonFXConfiguration setInverted(final boolean inverted) {
       INVERTED = inverted;

@@ -52,7 +52,7 @@ public class IntakeSubsystem extends SubsystemBase {
           Constants.Intake.deployMotorID,
           Constants.Intake.deployMotorRatio,
           QuixTalonFX.makeDefaultConfig()
-              .setBrakeMode()
+              .setCoastMode()
               .setSupplyCurrentLimit(15.0)
               .setStatorCurrentLimit(30.0)
               .setInverted(Constants.Intake.deployMotorInvert)
