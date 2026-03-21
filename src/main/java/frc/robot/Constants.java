@@ -80,14 +80,14 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 250.0);
-        ShotVelocity.put(1.0, 275.0);
-        ShotVelocity.put(1.5, 320.0);
-        ShotVelocity.put(2.0, 345.0);
-        ShotVelocity.put(2.5, 385.0);
+        ShotVelocity.put(0.5, 225.0);
+        ShotVelocity.put(1.0, 225.0);
+        ShotVelocity.put(1.5, 225.0);
+        ShotVelocity.put(2.0, 325.0);
+        ShotVelocity.put(2.5, 365.0);
         ShotVelocity.put(3.0, 390.0);
         ShotVelocity.put(3.5, 410.0);
-        ShotVelocity.put(4.0, 450.0);
+        ShotVelocity.put(4.0, 430.0);
         ShotVelocity.put(4.5, 460.0);
         ShotVelocity.put(5.0, 470.0);
         ShotVelocity.put(5.5, 875.0);
@@ -96,14 +96,14 @@ public class Constants {
     // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
-        ShotAngle.put(0.5, Units.degreesToRadians(8));
-        ShotAngle.put(1.0, Units.degreesToRadians(10));
-        ShotAngle.put(1.5, Units.degreesToRadians(12));
+        ShotAngle.put(0.5, Units.degreesToRadians(9));
+        ShotAngle.put(1.0, Units.degreesToRadians(9));
+        ShotAngle.put(1.5, Units.degreesToRadians(9));
         ShotAngle.put(2.0, Units.degreesToRadians(15));
         ShotAngle.put(2.5, Units.degreesToRadians(22));
         ShotAngle.put(3.0, Units.degreesToRadians(26.5));
         ShotAngle.put(3.5, Units.degreesToRadians(30.5));
-        ShotAngle.put(4.0, Units.degreesToRadians(33));
+        ShotAngle.put(4.0, Units.degreesToRadians(32));
         ShotAngle.put(4.5, Units.degreesToRadians(36));
         ShotAngle.put(5.0, Units.degreesToRadians(39));
         ShotAngle.put(5.5, Units.degreesToRadians(40));
@@ -266,7 +266,7 @@ public class Constants {
     // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
 
     public static final double hoodBumpAngle = Units.degreesToRadians(9); // REAL
-    public static final double ShooterBumpVelocity = 250.0; 
+    public static final double ShooterBumpVelocity = 225.0; 
     // public static final double hoodBumpAngle = Units.degreesToRadians(27.4); // 3.05
     // public static final double ShooterBumpVelocity = 370.0; 
 
@@ -322,7 +322,7 @@ public class Constants {
     public static final CANDeviceID ABrollerID = new CANDeviceID(33, kSuperStructureCanivoreName);
     public static final MechanismRatio ABrollerRatio =
         new MechanismRatio(1, (1.0 / 1.0));
-    public static final boolean ABrollerMotorInvert = false;
+    public static final boolean ABrollerMotorInvert = true;
 
     public static final CANDeviceID CrollerID = new CANDeviceID(34, kSuperStructureCanivoreName);
     public static final MechanismRatio CrollerRatio =
@@ -361,6 +361,7 @@ public class Constants {
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
+<<<<<<< Updated upstream
     public static final double maxExtension = Units.inchesToMeters(12.5);
     public static final double startingPosition = minExtension;
     public static final double intakeStow = Units.inchesToMeters(0.5);
@@ -374,6 +375,21 @@ public class Constants {
     public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
     public static final double retractSlowPush = 10;     // How many cycles to extend out when intake slow is called after pullcount is done 
     public static final double retractSlowPushHold = 36;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+=======
+    public static final double maxExtension = Units.inchesToMeters(12);
+    public static final double startingPosition = minExtension;
+    public static final double intakeStow = Units.inchesToMeters(0.5);
+
+    public static final double attackPosition = Units.inchesToMeters(11.5);
+    public static final double defPosition = Units.inchesToMeters(4.0);
+
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.16); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.25); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
+    public static final double retractSlowPull = 15;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
+    public static final double retractSlowPush = 7;     // How many cycles to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowPushHold = 10;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+>>>>>>> Stashed changes
 
 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
