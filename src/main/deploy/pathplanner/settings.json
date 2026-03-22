@@ -12,8 +12,8 @@
   "autoFolders": [
     "Center",
     "Left",
-    "Test",
-    "Right"
+    "Right",
+    "Anti"
   ],
   "defaultMaxVel": 4.25,
   "defaultMaxAccel": 4.0,

@@ -11,7 +11,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 6.0
+                  "waitTime": 3.0
                 }
               },
               {
@@ -26,25 +26,32 @@
         {
           "type": "path",
           "data": {
-            "pathName": "CStart-OutCLEAR"
+            "pathName": "CStart-Dep"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 4.0
+            "waitTime": 3.0
           }
         },
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "Out-RSCLEAR2"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Score"
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 6.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score"
+                }
+              }
+            ]
           }
         }
       ]

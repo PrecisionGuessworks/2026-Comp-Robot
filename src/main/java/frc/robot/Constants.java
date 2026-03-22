@@ -361,22 +361,8 @@ public class Constants {
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
-<<<<<<< Updated upstream
-    public static final double maxExtension = Units.inchesToMeters(12.5);
-    public static final double startingPosition = minExtension;
-    public static final double intakeStow = Units.inchesToMeters(0.5);
 
-    public static final double attackPosition = Units.inchesToMeters(12.4);
-    public static final double defPosition = Units.inchesToMeters(4.0);
-
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.11); // How many inches per cycle. Should be ~ 50 a sec
-    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 35;    // How many cycles to retract in when intake slow is called
-    public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
-    public static final double retractSlowPush = 10;     // How many cycles to extend out when intake slow is called after pullcount is done 
-    public static final double retractSlowPushHold = 36;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
-=======
-    public static final double maxExtension = Units.inchesToMeters(12);
+    public static final double maxExtension = Units.inchesToMeters(11.6);
     public static final double startingPosition = minExtension;
     public static final double intakeStow = Units.inchesToMeters(0.5);
 
@@ -389,8 +375,6 @@ public class Constants {
     public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
     public static final double retractSlowPush = 7;     // How many cycles to extend out when intake slow is called after pullcount is done 
     public static final double retractSlowPushHold = 10;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
->>>>>>> Stashed changes
-
 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
     public static final double retractHomeStatorCurrent = 10.0; // Amps

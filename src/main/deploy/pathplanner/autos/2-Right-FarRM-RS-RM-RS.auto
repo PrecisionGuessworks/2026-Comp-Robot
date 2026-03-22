@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStartBACKWARDS-Antimid-RT180"
+            "pathName": "RStart-FarMid-RT"
           }
         },
         {
@@ -21,15 +21,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 5.0
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Score"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 5.0
                 }
               }
             ]
@@ -44,13 +44,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT-Run"
+            "pathName": "RT-DeepMid-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-RS"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 5.0
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Anti",
+  "folder": "Right",
   "choreoAuto": false
 }

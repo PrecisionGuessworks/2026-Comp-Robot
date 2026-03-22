@@ -65,6 +65,7 @@ public class VizScore extends Command {
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
     m_shooter.setIndexerVelocity(0);
     m_hopper.setHopperRollerVelocity(0);
+    
     RobotContainer.intake.retractIntakeSlowShootSTOP();
   }
 
