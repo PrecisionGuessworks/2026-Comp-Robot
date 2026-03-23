@@ -29,7 +29,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 5.0
+                  "waitTime": 4.0
                 }
               }
             ]
@@ -44,13 +44,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT-DeepMid-RT"
+            "pathName": "RT-FarDeepMid-RT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT-RS"
+            "pathName": "RT180-RS"
           }
         },
         {
@@ -66,7 +66,7 @@
               {
                 "type": "wait",
                 "data": {
-                  "waitTime": 5.0
+                  "waitTime": 6.0
                 }
               }
             ]

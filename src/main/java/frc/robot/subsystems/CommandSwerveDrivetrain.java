@@ -14,6 +14,7 @@ import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
+import dev.doglog.DogLog;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -320,6 +321,18 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
             }
         });
+
+        // Pigeon2 gyro angle logging
+        String gyroName = "Pigeon2";
+        int gyroId = getPigeon2().getDeviceID();
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Acceleratio X",getPigeon2().getAccelerationX().getValueAsDouble());
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Acceleratio Y",getPigeon2().getAccelerationY().getValueAsDouble());
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Acceleratio Z",getPigeon2().getAccelerationZ().getValueAsDouble());
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Yaw",getPigeon2().getYaw().getValueAsDouble());
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Pitch",getPigeon2().getPitch().getValueAsDouble());
+        DogLog.log("Hardware: "+gyroName+" ID " + gyroId + ": Roll",getPigeon2().getRoll().getValueAsDouble());
+
+
     }
     }
 }

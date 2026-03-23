@@ -108,8 +108,8 @@ Rumble:
 ----------------------- Operator:
 
 A: Prep Shooter
-B: Outtake  NOT IN CODE!!!
-X:
+B: Outtake
+X: Hooper Outtake
 Y: Shoot Safe Override
 
 Left Bumper: Intake Enable Soft Stops / Zero.  UNTESTED!!!!
@@ -130,44 +130,3 @@ Left Back Button:
 Right Back Button:
 
 Rumble:
-
-
-
-
-
-
-
-
-
-
-
-
-
-------------------------------- Furture Controller Layouts --------------------------------------
-
-Driver:
-
-A: Climb
-B: Climb
-X: Climb
-Y: Climb
-
-Left Bumper: Bump Score
-Right Bumper: Score
-
-Left Trigger: Close Intake
-Right Trigger: Intake
-
-Back Button: Enable Climb Overide
-Start Button: Zero 
-
-Left Stick: Drive
-Right Stick: Rotate   If Climb Overide then manual movements
-
-D-Pad:
-
-Left Back Button:
-Right Back Button: Stow
-
-Rumble:
-

@@ -4,6 +4,7 @@ import dev.doglog.DogLog;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.quixlib.devices.QuixCANCoder;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.robot.Constants;
@@ -65,6 +67,12 @@ public class IntakeSubsystem extends SubsystemBase {
                   Constants.Intake.Expo_kA)
               .setReverseSoftLimit(Constants.Intake.minExtension)
               .setForwardSoftLimit(Constants.Intake.maxExtension));
+
+  private final QuixCANCoder m_deployEncoder =
+      new QuixCANCoder(
+          Constants.Intake.deployEncoderID,
+          Constants.Intake.deployEncoderRatio,
+          Constants.Intake.deployEncoderInvert);
 
 
   private double m_targetPosition = Constants.Intake.startingPosition; 
@@ -211,14 +219,15 @@ public class IntakeSubsystem extends SubsystemBase {
   // }
 
   private int m_currentcount = 0;
-  private boolean m_pull = true;
-  private boolean m_hold = false;
+  // private boolean m_pull = true;
+  // private boolean m_hold = false;
+    private boolean m_pull = false;
+  private boolean m_hold = true;
 
     public void retractIntakeSlowShoot() {
-    if (isAtPosition(Constants.Intake.maxExtension, Units.inchesToMeters(0.5))) {
-      m_pull = true;
-      m_hold = false;
-    }
+    // if (isAtPosition(Constants.Intake.maxExtension, Units.inchesToMeters(0.5))) {
+    //   m_pull = false;
+    // }
 
 
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
@@ -266,6 +275,9 @@ public class IntakeSubsystem extends SubsystemBase {
     setABRollerVelocity(0);
     setCRollerVelocity(0);
     m_targetPosition = Constants.Intake.defPosition;
+  m_currentcount = 0;
+      m_pull = false;
+      m_hold = true;
   }
   }
 
@@ -401,6 +413,7 @@ public class IntakeSubsystem extends SubsystemBase {
     m_ABrollerMotor.logMotorState();
     m_CrollerMotor.logMotorState();
     m_deployMotor.logMotorState();
+    m_deployEncoder.logSensorState();
     
     // m_deployFollower.logMotorState();
   }
@@ -417,7 +430,7 @@ public class IntakeSubsystem extends SubsystemBase {
           false,
           0);
 
-  static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
+  private static final DCMotor m_simMotor = DCMotor.getKrakenX60Foc(1);
   private static final FlywheelSim m_rollerSim =
       new FlywheelSim(
           LinearSystemId.createFlywheelSystem(
@@ -425,6 +438,7 @@ public class IntakeSubsystem extends SubsystemBase {
               Constants.Intake.simRollerMOI,
               Constants.Intake.rollerMotorRatio.reduction()),
           m_simMotor);
+
 
   @Override
   public void simulationPeriodic() {
@@ -437,8 +451,11 @@ public class IntakeSubsystem extends SubsystemBase {
         0.0,
         TimedRobot.kDefaultPeriod,
         Constants.Intake.deployMotorRatio);
-
-
+    // m_deployEncoder.setSimSensorVelocity(getDeployVelocity(), TimedRobot.kDefaultPeriod);
+    // double pastPos = 0;
+    // m_deployEncoder.setSimSensorVelocity((m_deployMotor.getSensorPosition() - pastPos)/TimedRobot.kDefaultPeriod, TimedRobot.kDefaultPeriod);
+    // pastPos = m_deployMotor.getSensorPosition();
+    m_deployEncoder.setSimSensorPosition(m_deployMotor.getSensorPosition()*Constants.Intake.deployMotorRatio.reduction());
     m_rollerSim.setInput(m_CrollerMotor.getPercentOutput() * RobotController.getBatteryVoltage());
     m_rollerSim.update(TimedRobot.kDefaultPeriod);
     m_CrollerMotor.setSimSensorVelocity(

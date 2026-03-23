@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.MotorArrangementValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import dev.doglog.DogLog;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -113,16 +114,16 @@ public class Constants {
     // Distance in meters , time for shot to score in seconds
     static {
         ShotTime = new InterpolatingDoubleTreeMap();
-        ShotTime.put(0.5, 1.0);
-        ShotTime.put(1.0, 1.0);
-        ShotTime.put(1.5, 1.0);
-        ShotTime.put(2.0, 1.0);
-        ShotTime.put(2.5, 1.0);
-        ShotTime.put(3.0, 1.0);
-        ShotTime.put(3.5, 1.0);
-        ShotTime.put(4.0, 1.1);
-        ShotTime.put(4.5, 1.1);
-        ShotTime.put(5.0, 1.1);
+        ShotTime.put(0.5, 1.1);
+        ShotTime.put(1.0, 1.1);
+        ShotTime.put(1.5, 1.2);
+        ShotTime.put(2.0, 1.3);
+        ShotTime.put(2.5, 1.3);
+        ShotTime.put(3.0, 1.4);
+        ShotTime.put(3.5, 1.4);
+        ShotTime.put(4.0, 1.5);
+        ShotTime.put(4.5, 1.5);
+        ShotTime.put(5.0, 1.5);
         ShotTime.put(5.5, 1.5);
     }
 
@@ -233,12 +234,12 @@ public class Constants {
 
     //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
-        new Constraints(4, 8); // rad/s and rad/s^2  8, 20.0
+        new Constraints(6, 12); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
     // public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
     // public static final double hoodExpo_kV = 6;    OLD!!!
-    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(8, 0.00, 0.15, 0.2, 0.2, 0.01, 0.12, GravityTypeValue.Arm_Cosine);
+    public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(9, 0.00, 0.15, 0.2, 0.2, 0.01, 0.12, GravityTypeValue.Arm_Cosine);
     public static final double hoodExpo_kV = 0;  // 6  
     public static final double hoodExpo_kA = 0;
   //  public static final int armCoralPositionPIDSlot = 1;
@@ -342,6 +343,7 @@ public class Constants {
 
 
     public static final CANDeviceID deployMotorID = new CANDeviceID(40, kSuperStructureCanivoreName);
+    public static final CANDeviceID deployEncoderID = new CANDeviceID(41, kSuperStructureCanivoreName);
     public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
     public static final double sprocketPitchDiameter = Units.inchesToMeters(1.714286);
     public static final MechanismRatio deployMotorRatio =
@@ -350,6 +352,10 @@ public class Constants {
             1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter) : // Sim
         new MechanismRatio(
            1, (25.0 / 1.0), Math.PI * sprocketPitchDiameter); // Real
+
+    public static final MechanismRatio deployEncoderRatio =
+        new MechanismRatio(1, (1.0), Math.PI * sprocketPitchDiameter);
+    public static final SensorDirectionValue deployEncoderInvert = SensorDirectionValue.Clockwise_Positive;
     public static final boolean deployMotorInvert = true;
     public static final PIDConfig deployPIDConfig = new PIDConfig(3.0, 0.00, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
@@ -371,7 +377,7 @@ public class Constants {
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.16); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.25); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 15;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPull = 18;    // How many cycles to retract in when intake slow is called
     public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
     public static final double retractSlowPush = 7;     // How many cycles to extend out when intake slow is called after pullcount is done 
     public static final double retractSlowPushHold = 10;// How many cycles to hold still after extending when intake slow is called, before allowing retract again

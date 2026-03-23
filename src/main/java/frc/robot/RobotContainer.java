@@ -27,7 +27,9 @@ import frc.robot.commands.Auto.AutoBumpScore;
 import frc.robot.commands.Auto.AutoBumpScoreAngle;
 import frc.robot.commands.Auto.AutoIntakeDeploy;
 import frc.robot.commands.Auto.AutoIntakeRoller;
+import frc.robot.commands.HooperOuttake;
 import frc.robot.commands.Intake;
+import frc.robot.commands.Outtake;
 import frc.robot.commands.Shoot.BumpPass;
 import frc.robot.commands.Shoot.BumpScore;
 import frc.robot.commands.Shoot.STOMAuto;
@@ -207,6 +209,8 @@ public class RobotContainer {
 
     operator.a().onTrue(Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocityBump)));
     operator.y().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = !shooter.isSafeOVERIDE));
+    operator.x().onTrue(new HooperOuttake(hopper, shooter));
+    operator.b().whileTrue(new Outtake(intake));
 
     }
 

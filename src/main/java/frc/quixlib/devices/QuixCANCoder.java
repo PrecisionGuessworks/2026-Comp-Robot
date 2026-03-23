@@ -1,5 +1,7 @@
 package frc.quixlib.devices;
 
+import java.io.Serial;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
@@ -74,6 +76,7 @@ public class QuixCANCoder implements QuixAbsoluteEncoder {
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Sensor Position", getPosition(),"rad");
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Absolute Position", getAbsPosition(),"rad");
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Velocity", getVelocity(),"rotations per sec" );
+    DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Magnet Health", m_cancoder.getMagnetHealth().toString());
     }
 
 
@@ -191,6 +194,13 @@ public class QuixCANCoder implements QuixAbsoluteEncoder {
     final double rotationsPerSecond = toNativeSensorVelocity(vel);
     m_simState.setVelocity(rotationsPerSecond);
     m_simState.addPosition(rotationsPerSecond * dt);
+    // System.out.println("CANCoder " + m_canID.deviceNumber + ": Simulated Position (rotations): " + rotationsPerSecond + ", Simulated Velocity (RPS): " + rotationsPerSecond * dt);
+  }
+
+  public void setSimSensorPosition(final double pos) {
+    final double rotations = toNativeSensorPosition(pos);
+    m_simState.addPosition(rotations);
+    // System.out.println("CANCoder " + m_canID.deviceNumber + ": Simulated Position (rotations): " + rotations);
   }
 
   
