@@ -108,8 +108,8 @@ Rumble:
 ----------------------- Operator:
 
 A: Prep Shooter
-B: Outtake
-X: Hooper Outtake
+B: Intake Outtake
+X: Conveyer/Indexer Outtake
 Y: Shoot Safe Override
 
 Left Bumper: Intake Enable Soft Stops / Zero.  UNTESTED!!!!
@@ -124,7 +124,7 @@ Start Button:
 Left Stick:
 Right Stick: Manually move intake UNTESTED!!!!
 
-D-Pad:
+D-Pad Up: Depot intake postion Overide
 
 Left Back Button:
 Right Back Button:

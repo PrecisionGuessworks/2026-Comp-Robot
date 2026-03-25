@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStart-MidSweepFar-RT"
+            "pathName": "RStart-AntimidMini-RT180"
           }
         },
         {
@@ -21,15 +21,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Score"
-                }
-              },
-              {
                 "type": "wait",
                 "data": {
                   "waitTime": 4.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score"
                 }
               }
             ]
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT-SweepMid-RT"
+            "pathName": "RT-DeepSweepMid-RT"
           }
         },
         {
@@ -58,15 +58,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "Score"
+                  "waitTime": 5.0
                 }
               },
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 6.0
+                  "name": "Score"
                 }
               }
             ]
@@ -76,6 +76,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Right",
+  "folder": "Anti",
   "choreoAuto": false
 }

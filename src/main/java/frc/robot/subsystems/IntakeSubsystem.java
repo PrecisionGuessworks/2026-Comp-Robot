@@ -320,14 +320,25 @@ public class IntakeSubsystem extends SubsystemBase {
     return getDepolyMotorCurrent() >= Constants.Intake.retractHomeStatorCurrent;
   }
 
+  private boolean LastDepot = false;
 
   @Override
   public void periodic() {
-
+   if (RobotContainer.operator.povUp().getAsBoolean() && !LastDepot) {
+      m_targetPosition = Constants.Intake.attackPosition - Constants.Intake.attackPositionDepot;
+      LastDepot = true;
+    } else if (!RobotContainer.operator.povUp().getAsBoolean() && LastDepot) {
+      m_targetPosition = Constants.Intake.attackPosition;
+      LastDepot = false;
+    }
 
     if (m_attackMode != m_pastAttackMode) {
       if (m_attackMode) {
-        m_targetPosition = Constants.Intake.attackPosition;
+        if (!RobotContainer.operator.povUp().getAsBoolean()) {
+          m_targetPosition = Constants.Intake.attackPosition;
+        } else {
+          m_targetPosition = Constants.Intake.attackPosition - Constants.Intake.attackPositionDepot;
+        }
       } else {
         m_targetPosition = Constants.Intake.defPosition;
       }

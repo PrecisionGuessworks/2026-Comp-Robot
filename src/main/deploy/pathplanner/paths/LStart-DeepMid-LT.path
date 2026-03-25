@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.485327380952381,
+        "x": 4.455,
         "y": 7.4151041666666675
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.483697916666666,
+        "x": 5.453370535714286,
         "y": 7.369427083333334
       },
       "isLocked": false,
@@ -63,7 +63,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5478260869565217,
-      "rotationDegrees": -40.60782524827676
+      "rotationDegrees": -95.24209825223376
     },
     {
       "waypointRelativePos": 1.0728260869565216,
@@ -96,8 +96,19 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "IntakeDeployDef",
+      "waypointRelativePos": 0.007792207792207787,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeDeployDef"
+        }
+      }
+    },
+    {
       "name": "IntakeDeploy",
-      "waypointRelativePos": 0.007874015748031496,
+      "waypointRelativePos": 0.3116883116883118,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -129,7 +140,7 @@
   "folder": "Left",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

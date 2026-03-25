@@ -373,6 +373,8 @@ public class Constants {
     public static final double intakeStow = Units.inchesToMeters(0.5);
 
     public static final double attackPosition = Units.inchesToMeters(11.5);
+    public static final double attackPositionDepot = Units.inchesToMeters(0.5); // How much to move back from attack position when D-Pad up is pressed for depot intake    
+
     public static final double defPosition = Units.inchesToMeters(4.0);
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.16); // How many inches per cycle. Should be ~ 50 a sec

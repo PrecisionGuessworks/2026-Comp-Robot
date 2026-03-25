@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class AutoIntakeDeploy extends Command {
+public class AutoIntakeDeployDepot extends Command {
   private final IntakeSubsystem m_intake;
   // private Timer m_placeTimer = new Timer();
 
-  public AutoIntakeDeploy(
+  public AutoIntakeDeployDepot(
       IntakeSubsystem intakeSubsystem) {
     m_intake = intakeSubsystem;
 
@@ -21,7 +21,7 @@ public class AutoIntakeDeploy extends Command {
   public void initialize() {
     // m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
     // m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
-    m_intake.setPosition(Constants.Intake.attackPosition);
+    m_intake.setPosition(Constants.Intake.attackPosition-Constants.Intake.attackPositionDepot);
 
   }
 

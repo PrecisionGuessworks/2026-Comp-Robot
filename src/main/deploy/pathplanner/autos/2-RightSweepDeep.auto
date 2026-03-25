@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStart-MidSweepFar-RT"
+            "pathName": "RStart-MidSweep-RT"
           }
         },
         {
@@ -44,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RT-SweepMid-RT"
+            "pathName": "RT-DeepSweepMid-RT"
           }
         },
         {

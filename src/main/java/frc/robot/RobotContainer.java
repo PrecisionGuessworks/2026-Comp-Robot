@@ -26,6 +26,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.Auto.AutoBumpScore;
 import frc.robot.commands.Auto.AutoBumpScoreAngle;
 import frc.robot.commands.Auto.AutoIntakeDeploy;
+import frc.robot.commands.Auto.AutoIntakeDeployDef;
+import frc.robot.commands.Auto.AutoIntakeDeployDepot;
 import frc.robot.commands.Auto.AutoIntakeRoller;
 import frc.robot.commands.HooperOuttake;
 import frc.robot.commands.Intake;
@@ -106,6 +108,8 @@ public class RobotContainer {
         robotCommands.put("BumpScoreAngle", new AutoBumpScoreAngle(shooter, hopper));
         robotCommands.put("ScoreWarmup", Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocity)));
         robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
+        robotCommands.put("IntakeDeployDepot", new AutoIntakeDeployDepot(intake));
+        robotCommands.put("IntakeDeployDef", new AutoIntakeDeployDef(intake));
         robotCommands.put("IntakeRoller", new AutoIntakeRoller(intake));
 
         // robotCommands.put("L4", Commands.runOnce(() -> RobotContainer.climber.setHeightLocation(4)));
@@ -198,7 +202,7 @@ public class RobotContainer {
     // operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> climber.toggleSoftLimitsEnabled()));
 
     operator.rightTrigger().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
-    operator.rightBumper().onTrue(Commands.runOnce(() -> intake.setPosition(Constants.Intake.intakeStow)));
+    operator.rightBumper().onTrue(Commands.parallel(Commands.runOnce(() -> intake.setPosition(Constants.Intake.intakeStow)),Commands.runOnce(() -> intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity))));
     operator.leftTrigger().whileTrue(Commands.run(() -> {
         double input = operator.getRightY();
         if (Math.abs(input) > Constants.Drive.DriveDeadband) {

@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.50357586512866,
+        "x": 4.46,
         "y": 0.6025643300798571
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.503575865128659,
+        "x": 5.460000000000008,
         "y": 0.6025643300798571
       },
       "isLocked": false,
@@ -63,7 +63,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5478260869565217,
-      "rotationDegrees": 28.657812588876784
+      "rotationDegrees": 89.39426165395412
     },
     {
       "waypointRelativePos": 1.0728260869565216,
@@ -96,8 +96,14 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
+      "name": "IntakeDeployDef",
+      "waypointRelativePos": 0.01,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
       "name": "IntakeDeploy",
-      "waypointRelativePos": 0.007874015748031496,
+      "waypointRelativePos": 0.3761904761904762,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -108,7 +114,7 @@
     },
     {
       "name": "IntakeRoller",
-      "waypointRelativePos": 1.0708661417322818,
+      "waypointRelativePos": 0.9545454545454546,
       "endWaypointRelativePos": 2.098425196850396,
       "command": null
     }
@@ -129,7 +135,7 @@
   "folder": "Right",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }

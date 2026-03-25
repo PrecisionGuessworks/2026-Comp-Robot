@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LStart-Antimid-LT"
+            "pathName": "RStart-AntimidMini-RT180"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "LT-LS"
+            "pathName": "RT180-RS"
           }
         },
         {
@@ -38,7 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LS-LT"
+            "pathName": "RS-RT"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RT-Run"
           }
         }
       ]
