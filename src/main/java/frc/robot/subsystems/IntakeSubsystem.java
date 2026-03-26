@@ -199,6 +199,10 @@ public class IntakeSubsystem extends SubsystemBase {
     m_attackMode = !m_attackMode;
     setIntakePosition();
   }
+  public void setIntakePosition(double position) {
+    m_targetPosition = position;
+  
+  }
 
   public void setIntakePosition() {
     if (m_attackMode) {

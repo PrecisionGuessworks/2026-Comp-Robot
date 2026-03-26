@@ -3,45 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.455,
-        "y": 7.4151041666666675
+        "x": 4.635409226190476,
+        "y": 7.45
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.453370535714286,
-        "y": 7.369427083333334
+        "x": 5.850644363723751,
+        "y": 7.45
       },
       "isLocked": false,
-      "linkedName": "LStart"
+      "linkedName": "LT"
     },
     {
       "anchor": {
-        "x": 7.826279761904761,
-        "y": 6.6320684523809526
+        "x": 7.845855654761905,
+        "y": 6.782150297619048
       },
       "prevControl": {
-        "x": 7.8197544642857135,
-        "y": 7.0170610119047625
+        "x": 7.8616408928783255,
+        "y": 7.234350942483544
       },
       "nextControl": {
-        "x": 7.833880239545458,
-        "y": 6.183640271579787
+        "x": 7.734925595238096,
+        "y": 3.6043303571428575
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.8067038690476185,
-        "y": 5.588020833333334
+        "x": 6.286309523809524,
+        "y": 5.529293154761905
       },
       "prevControl": {
-        "x": 7.923932444061964,
-        "y": 0.8747686818703393
+        "x": 6.430281830975371,
+        "y": 1.7448782235453661
       },
       "nextControl": {
-        "x": 7.765165577578387,
-        "y": 7.2580952295417305
+        "x": 6.24063244047619,
+        "y": 6.729947916666667
       },
       "isLocked": false,
       "linkedName": null
@@ -52,39 +52,51 @@
         "y": 7.45
       },
       "prevControl": {
-        "x": 6.21453125,
-        "y": 7.358645833333333
+        "x": 6.4542379750813375,
+        "y": 7.498287488908607
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "LT"
+      "linkedName": "LT180"
     }
   ],
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5478260869565217,
-      "rotationDegrees": -95.24209825223377
+      "rotationDegrees": -27.82456470402747
     },
     {
       "waypointRelativePos": 1.0728260869565216,
-      "rotationDegrees": -89.46790232578094
+      "rotationDegrees": -88.24233050778868
     },
     {
-      "waypointRelativePos": 2.2630434782608746,
-      "rotationDegrees": -85.23443174790425
+      "waypointRelativePos": 1.2801724137931023,
+      "rotationDegrees": -97.85892258223099
+    },
+    {
+      "waypointRelativePos": 1.7392241379310387,
+      "rotationDegrees": 104.78296575698769
+    },
+    {
+      "waypointRelativePos": 1.983502538071066,
+      "rotationDegrees": 99.63234100577571
+    },
+    {
+      "waypointRelativePos": 2.2956852791878175,
+      "rotationDegrees": 116.52974278873766
     },
     {
       "waypointRelativePos": 2.797826086956525,
-      "rotationDegrees": -12.276106285197049
+      "rotationDegrees": 168.32991429848832
     }
   ],
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 0.9803149606299218,
-      "maxWaypointRelativePos": 1.814960629921258,
+      "minWaypointRelativePos": 1.0428571428571436,
+      "maxWaypointRelativePos": 1.9380952380952372,
       "constraints": {
-        "maxVelocity": 1.0,
+        "maxVelocity": 2.0,
         "maxAcceleration": 4.0,
         "maxAngularVelocity": 300.0,
         "maxAngularAcceleration": 500.0,
@@ -96,19 +108,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDeployDef",
-      "waypointRelativePos": 0.007792207792207787,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeDeployDef"
-        }
-      }
-    },
-    {
       "name": "IntakeDeploy",
-      "waypointRelativePos": 0.3116883116883118,
+      "waypointRelativePos": 0.007874015748031496,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
@@ -134,13 +135,13 @@
   },
   "goalEndState": {
     "velocity": 3.0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "Left",
   "idealStartingState": {
-    "velocity": 0,
-    "rotation": -90.0
+    "velocity": 3.0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

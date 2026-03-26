@@ -8,11 +8,11 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.004084821428571,
-        "y": 7.456525297619047
+        "x": 2.971458333333333,
+        "y": 7.3498511904761905
       },
       "isLocked": false,
-      "linkedName": "LT"
+      "linkedName": "LT180"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 6.1687723214285715
       },
       "prevControl": {
-        "x": 2.7039211309523807,
-        "y": 7.81967261904762
+        "x": 2.65171875,
+        "y": 7.5978125
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,8 +30,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.2908921933085499,
-      "rotationDegrees": 7.302873993699247
+      "waypointRelativePos": 0.2553879310344827,
+      "rotationDegrees": -172.9882247590247
     }
   ],
   "constraintZones": [],
@@ -65,7 +65,7 @@
   "folder": "Left",
   "idealStartingState": {
     "velocity": 3.0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

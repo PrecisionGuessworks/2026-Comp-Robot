@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStart-AntimidMini-RT180"
+            "pathName": "LStart-MidSweepFar-LT180"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT180-RS"
+            "pathName": "LT180-LS"
           }
         },
         {
@@ -21,15 +21,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 4.0
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Score"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 4.0
                 }
               }
             ]
@@ -38,19 +38,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RS-RT"
+            "pathName": "LS-LT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT-DeepSweepMid-RT180"
+            "pathName": "LT-DeepSweepMid-LT180"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT180-RS"
+            "pathName": "LT180-LS"
           }
         },
         {
@@ -58,15 +58,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 5.0
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Score"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 6.0
                 }
               }
             ]
@@ -76,6 +76,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Anti",
+  "folder": "Left",
   "choreoAuto": false
 }

@@ -67,6 +67,7 @@ public class VizScore extends Command {
     m_hopper.setHopperRollerVelocity(0);
     
     RobotContainer.intake.retractIntakeSlowShootSTOP();
+    RobotContainer.intake.setIntakePosition(Constants.Intake.defPosition);
   }
 
   // Returns true when the command should end.
