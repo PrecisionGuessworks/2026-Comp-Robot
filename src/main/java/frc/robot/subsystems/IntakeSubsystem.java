@@ -274,7 +274,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
     setABRollerVelocity(0);
     setCRollerVelocity(0);
-    m_targetPosition = Constants.Intake.defPosition;
+    // m_targetPosition = Constants.Intake.defPosition;
   m_currentcount = 0;
       m_pull = false;
       m_hold = true;

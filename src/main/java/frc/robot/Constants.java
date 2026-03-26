@@ -57,7 +57,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
 
     public static final class ShotCalc {
 
@@ -81,33 +81,33 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 225.0);
-        ShotVelocity.put(1.0, 225.0);
-        ShotVelocity.put(1.5, 225.0);
-        ShotVelocity.put(2.0, 325.0);
-        ShotVelocity.put(2.5, 365.0);
-        ShotVelocity.put(3.0, 390.0);
-        ShotVelocity.put(3.5, 410.0);
-        ShotVelocity.put(4.0, 430.0);
-        ShotVelocity.put(4.5, 460.0);
+        ShotVelocity.put(0.5, 190.0);
+        ShotVelocity.put(1.0, 190.0);
+        ShotVelocity.put(1.5, 195.0);
+        ShotVelocity.put(2.0, 235.0);
+        ShotVelocity.put(2.5, 267.0);
+        ShotVelocity.put(3.0, 300.0);
+        ShotVelocity.put(3.5, 317.0);
+        ShotVelocity.put(4.0, 330.0);
+        ShotVelocity.put(4.5, 360.0);
         ShotVelocity.put(5.0, 470.0);
-        ShotVelocity.put(5.5, 875.0);
+        ShotVelocity.put(5.5, 475.0);
     }
     public static InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
         ShotAngle.put(0.5, Units.degreesToRadians(9));
-        ShotAngle.put(1.0, Units.degreesToRadians(9));
-        ShotAngle.put(1.5, Units.degreesToRadians(9));
-        ShotAngle.put(2.0, Units.degreesToRadians(15));
+        ShotAngle.put(1.0, Units.degreesToRadians(10));
+        ShotAngle.put(1.5, Units.degreesToRadians(12));
+        ShotAngle.put(2.0, Units.degreesToRadians(15.5));
         ShotAngle.put(2.5, Units.degreesToRadians(22));
-        ShotAngle.put(3.0, Units.degreesToRadians(26.5));
-        ShotAngle.put(3.5, Units.degreesToRadians(30.5));
-        ShotAngle.put(4.0, Units.degreesToRadians(32));
-        ShotAngle.put(4.5, Units.degreesToRadians(36));
-        ShotAngle.put(5.0, Units.degreesToRadians(39));
-        ShotAngle.put(5.5, Units.degreesToRadians(40));
+        ShotAngle.put(3.0, Units.degreesToRadians(25));
+        ShotAngle.put(3.5, Units.degreesToRadians(28));
+        ShotAngle.put(4.0, Units.degreesToRadians(29));
+        ShotAngle.put(4.5, Units.degreesToRadians(30));
+        ShotAngle.put(5.0, Units.degreesToRadians(31));
+        ShotAngle.put(5.5, Units.degreesToRadians(31));
     }
     // Used for sotm (Shoot on the move)
     public static InterpolatingDoubleTreeMap ShotTime;
@@ -248,7 +248,7 @@ public class Constants {
     public static final SimpleMotorFeedforward shooterFeedforward =
         new SimpleMotorFeedforward(0.001, 0.02);
     public static final int shooterVelocityPIDSlot = 0;
-    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.2, 0, 0);
+    public static final PIDConfig shooterVelocityPIDConfig = new PIDConfig(0.15,0,0);
 
     public static final SimpleMotorFeedforward indexerFeedforward =
         new SimpleMotorFeedforward(0.1, 0.02);
@@ -263,18 +263,18 @@ public class Constants {
     public static final double hoodCgOffset = Units.degreesToRadians(0);
     public static final double hoodStowAngle = Units.degreesToRadians(1);
     
-    public static final double hoodBumpPassAngle = Units.degreesToRadians(40);
+    
     // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
 
-    public static final double hoodBumpAngle = Units.degreesToRadians(9); // REAL
-    public static final double ShooterBumpVelocity = 225.0; 
+    public static final double hoodBumpAngle = Units.degreesToRadians(11); // REAL
+    public static final double ShooterBumpVelocity = 190.0; 
     // public static final double hoodBumpAngle = Units.degreesToRadians(27.4); // 3.05
     // public static final double ShooterBumpVelocity = 370.0; 
 
-
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(35);
     public static final double ShooterBumpPassVelocity = 475.0; 
     public static final double WarmupVelocity = 350.0;
-    public static final double WarmupVelocityBump = 250;
+    public static final double WarmupVelocityBump = 200;
 
     // AUTOS
     public static final double ShooterBumpVelocityAngle = 270.0;
@@ -377,12 +377,12 @@ public class Constants {
 
     public static final double defPosition = Units.inchesToMeters(4.0);
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.16); // How many inches per cycle. Should be ~ 50 a sec
-    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.25); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 18;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.18); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
+    public static final double retractSlowPull = 16;    // How many cycles to retract in when intake slow is called
     public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
-    public static final double retractSlowPush = 7;     // How many cycles to extend out when intake slow is called after pullcount is done 
-    public static final double retractSlowPushHold = 10;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+    public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowPushHold = 16;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
