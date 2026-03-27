@@ -209,8 +209,8 @@ public class RobotContainer {
          intake.setManualHeight(input);
         }
     }));
-    operator.leftBumper().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
-
+    operator.povDown().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
+    operator.leftBumper().whileTrue(new AutoIntakeDeploy(intake));
     operator.a().onTrue(Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocityBump)));
     operator.y().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = !shooter.isSafeOVERIDE));
     operator.x().onTrue(new HooperOuttake(hopper, shooter));

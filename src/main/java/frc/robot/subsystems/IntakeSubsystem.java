@@ -234,7 +234,7 @@ public class IntakeSubsystem extends SubsystemBase {
     // }
 
 
-    if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
+    if (!RobotContainer.driver.rightTrigger().getAsBoolean()||!RobotContainer.operator.leftBumper().getAsBoolean()) {
       setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
       setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
         if (m_pull) {
@@ -275,7 +275,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void retractIntakeSlowShootSTOP() {
-    if (!RobotContainer.driver.rightTrigger().getAsBoolean()) {
+    if (!RobotContainer.driver.rightTrigger().getAsBoolean()||!RobotContainer.operator.leftBumper().getAsBoolean()) {
     setABRollerVelocity(0);
     setCRollerVelocity(0);
     // m_targetPosition = Constants.Intake.defPosition;

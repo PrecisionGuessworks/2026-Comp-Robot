@@ -1,5 +1,8 @@
 Fix:
 
+- outtake does not Stops
+- Fic FOC for shooter
+
 - clean up
 
 - Find out why ratio in sim is not right
