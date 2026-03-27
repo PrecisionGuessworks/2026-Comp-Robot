@@ -173,7 +173,8 @@ public class ShooterSubsystem extends SubsystemBase {
       m_shooterMotor.setVelocitySetpoint(
           Constants.Shooter.shooterVelocityPIDSlot,
           velocity,
-          Constants.Shooter.shooterFeedforward.calculateWithVelocities(getShooterVelocity(),velocity));
+          Constants.Shooter.shooterFeedforward.calculateWithVelocities(getShooterVelocity(),velocity),
+          false);
     }
   }
 
