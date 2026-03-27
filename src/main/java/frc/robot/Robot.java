@@ -11,6 +11,7 @@ import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveDriveState;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import dev.doglog.DogLog;
@@ -56,7 +57,8 @@ public class Robot extends TimedRobot {
     SignalLogger.enableAutoLogging(false); // Disable CTRE Signal Logger auto logging
     SignalLogger.stop(); // Stop any existing logging sessions
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 1);
-  LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName, 0.001);
+    LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName, 0.001);
+    PathfindingCommand.warmupCommand().schedule();
         
   }
 
@@ -197,13 +199,13 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
+  
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     autoName = "";
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    
+    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
   }
 
   @Override

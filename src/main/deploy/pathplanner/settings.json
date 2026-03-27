@@ -15,8 +15,8 @@
     "Right",
     "Anti"
   ],
-  "defaultMaxVel": 4.25,
-  "defaultMaxAccel": 4.0,
+  "defaultMaxVel": 4.0,
+  "defaultMaxAccel": 3.6,
   "defaultMaxAngVel": 300.0,
   "defaultMaxAngAccel": 500.0,
   "defaultNominalVoltage": 12.1,
