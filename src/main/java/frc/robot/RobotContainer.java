@@ -70,6 +70,8 @@ public class RobotContainer {
     //         .withDeadband(Constants.Drive.SnapDriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband)
     //         .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
+    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+
     public final SwerveRequest.FieldCentricFacingAngle angle = new SwerveRequest.FieldCentricFacingAngle()
         .withDeadband(MaxSpeed * Constants.Drive.DriveDeadband).withRotationalDeadband(Constants.Drive.SnapRotationDeadband) // Add a deadband
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage) 
@@ -183,6 +185,8 @@ public class RobotContainer {
         driver.b().whileTrue(new MoveIntake(intake));
         driver.x().whileTrue(new MoveShooter(shooter));
         driver.y().whileTrue(new IntakeRoll(intake));
+
+        driver.rightStick().whileTrue(drivetrain.applyRequest(() -> brake));
         
         
         

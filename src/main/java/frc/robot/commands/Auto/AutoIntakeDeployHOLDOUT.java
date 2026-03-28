@@ -22,6 +22,7 @@ public class AutoIntakeDeployHOLDOUT extends Command {
     // m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
     // m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
     m_intake.setPosition(Constants.Intake.attackPosition);
+    m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
 
   }
 
@@ -38,6 +39,7 @@ public class AutoIntakeDeployHOLDOUT extends Command {
   public void end(boolean interrupted) {
     // m_intake.setABRollerVelocity(Constants.Intake.holdRollerVelocity);
     // m_intake.setCRollerVelocity(Constants.Intake.holdRollerVelocity);
+    m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
 
   }
 
