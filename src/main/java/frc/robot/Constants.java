@@ -66,7 +66,7 @@ public class Constants {
     // CHECK!
     public static final Pose2d targetpose =  DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
     new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
-    new Pose2d(12,4.05,new Rotation2d(0)); // Red
+    new Pose2d(11.9,4.05,new Rotation2d(0)); // Red
 
     public static final Pose2d upperPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
     new Pose2d(2.5,6,new Rotation2d(0)) : // Blue
@@ -81,17 +81,17 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 190.0);
-        ShotVelocity.put(1.0, 190.0);
-        ShotVelocity.put(1.5, 195.0);
-        ShotVelocity.put(2.0, 235.0);
-        ShotVelocity.put(2.5, 267.0);
-        ShotVelocity.put(3.0, 300.0);
-        ShotVelocity.put(3.5, 317.0);
-        ShotVelocity.put(4.0, 330.0);
-        ShotVelocity.put(4.5, 360.0);
-        ShotVelocity.put(5.0, 470.0);
-        ShotVelocity.put(5.5, 475.0);
+        ShotVelocity.put(0.5, 205.0);
+        ShotVelocity.put(1.0, 215.0);
+        ShotVelocity.put(1.5, 220.0);
+        ShotVelocity.put(2.0, 255.0);
+        ShotVelocity.put(2.5, 285.0);
+        ShotVelocity.put(3.0, 320.0);
+        ShotVelocity.put(3.5, 340.0);
+        ShotVelocity.put(4.0, 350.0);
+        ShotVelocity.put(4.5, 380.0);
+        ShotVelocity.put(5.0, 485.0);
+        ShotVelocity.put(5.5, 490.0);
     }
     public static InterpolatingDoubleTreeMap ShotAngle;
     // Distance in meters , Angle of Hood
@@ -183,7 +183,7 @@ public class Constants {
         public static final double DRotation = 0;
         
         // 0.0-1.0 of the max speed
-        public static final double MaxSpeedPercentage = 0.95; // Default 1.0
+        public static final double MaxSpeedPercentage = 0.85; // Default 1.0
         public static final double SlowSpeedPercentage = 0.15; // Default 0.15
         
         // Rotation per second max angular velocity
@@ -267,14 +267,14 @@ public class Constants {
     // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
 
     public static final double hoodBumpAngle = Units.degreesToRadians(11); // REAL
-    public static final double ShooterBumpVelocity = 190.0; 
+    public static final double ShooterBumpVelocity = 215.0; 
     // public static final double hoodBumpAngle = Units.degreesToRadians(27.4); // 3.05
     // public static final double ShooterBumpVelocity = 370.0; 
 
     public static final double hoodBumpPassAngle = Units.degreesToRadians(35);
     public static final double ShooterBumpPassVelocity = 475.0; 
     public static final double WarmupVelocity = 350.0;
-    public static final double WarmupVelocityBump = 200;
+    public static final double WarmupVelocityBump = 215;
 
     // AUTOS
     public static final double ShooterBumpVelocityAngle = 270.0;

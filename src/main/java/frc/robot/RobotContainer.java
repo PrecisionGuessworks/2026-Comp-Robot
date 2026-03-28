@@ -28,6 +28,7 @@ import frc.robot.commands.Auto.AutoBumpScoreAngle;
 import frc.robot.commands.Auto.AutoIntakeDeploy;
 import frc.robot.commands.Auto.AutoIntakeDeployDef;
 import frc.robot.commands.Auto.AutoIntakeDeployDepot;
+import frc.robot.commands.Auto.AutoIntakeDeployHOLDOUT;
 import frc.robot.commands.Auto.AutoIntakeRoller;
 import frc.robot.commands.HooperOuttake;
 import frc.robot.commands.Intake;
@@ -210,7 +211,7 @@ public class RobotContainer {
         }
     }));
     operator.povDown().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
-    operator.leftBumper().whileTrue(new AutoIntakeDeploy(intake));
+    operator.leftBumper().whileTrue(new AutoIntakeDeployHOLDOUT(intake));
     operator.a().onTrue(Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocityBump)));
     operator.y().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = !shooter.isSafeOVERIDE));
     operator.x().onTrue(new HooperOuttake(hopper, shooter));

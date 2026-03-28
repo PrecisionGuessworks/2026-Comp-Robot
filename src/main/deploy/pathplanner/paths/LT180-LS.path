@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.971458333333333,
-        "y": 7.3498511904761905
+        "x": 2.795216867469879,
+        "y": 7.378879518072289
       },
       "isLocked": false,
       "linkedName": "LT180"
@@ -20,8 +20,8 @@
         "y": 6.1687723214285715
       },
       "prevControl": {
-        "x": 2.65171875,
-        "y": 7.5978125
+        "x": 2.4455301204819277,
+        "y": 7.051048192771084
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,7 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.2553879310344827,
-      "rotationDegrees": -172.9882247590247
+      "rotationDegrees": -169.79642669572465
     }
   ],
   "constraintZones": [],
@@ -51,9 +51,9 @@
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
-    "maxAngularVelocity": 300.0,
-    "maxAngularAcceleration": 500.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 450.0,
     "nominalVoltage": 12.1,
     "unlimited": false
   },

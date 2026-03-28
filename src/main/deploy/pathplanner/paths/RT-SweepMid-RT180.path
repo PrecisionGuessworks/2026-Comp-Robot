@@ -109,8 +109,8 @@
   "constraintZones": [
     {
       "name": "Constraints Zone",
-      "minWaypointRelativePos": 1.1,
-      "maxWaypointRelativePos": 2.9,
+      "minWaypointRelativePos": 1.078983833718249,
+      "maxWaypointRelativePos": 3.185219399538095,
       "constraints": {
         "maxVelocity": 2.0,
         "maxAcceleration": 4.0,
@@ -137,15 +137,20 @@
     {
       "name": "IntakeRoller",
       "waypointRelativePos": 1.15,
-      "endWaypointRelativePos": 2.098425196850396,
-      "command": null
+      "endWaypointRelativePos": 3.259122401847521,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRoller"
+        }
+      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
-    "maxAngularVelocity": 300.0,
-    "maxAngularAcceleration": 500.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 450.0,
     "nominalVoltage": 12.1,
     "unlimited": false
   },

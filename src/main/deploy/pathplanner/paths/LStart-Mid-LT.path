@@ -36,12 +36,12 @@
         "y": 5.483616071428571
       },
       "prevControl": {
-        "x": 7.958838460986804,
-        "y": 3.5678578958691896
+        "x": 7.909385542168675,
+        "y": 3.576036144578313
       },
       "nextControl": {
-        "x": 7.698787980063893,
-        "y": 7.1498216494482865
+        "x": 7.741345249717468,
+        "y": 7.152365877001531
       },
       "isLocked": false,
       "linkedName": null
@@ -75,7 +75,7 @@
     },
     {
       "waypointRelativePos": 2.797826086956525,
-      "rotationDegrees": -12.276106285197049
+      "rotationDegrees": -1.3309895648075232
     }
   ],
   "constraintZones": [
@@ -121,14 +121,19 @@
       "name": "IntakeRoller",
       "waypointRelativePos": 1.0708661417322818,
       "endWaypointRelativePos": 2.098425196850396,
-      "command": null
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeRoller"
+        }
+      }
     }
   ],
   "globalConstraints": {
     "maxVelocity": 4.0,
-    "maxAcceleration": 3.6,
-    "maxAngularVelocity": 300.0,
-    "maxAngularAcceleration": 500.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 450.0,
     "nominalVoltage": 12.1,
     "unlimited": false
   },

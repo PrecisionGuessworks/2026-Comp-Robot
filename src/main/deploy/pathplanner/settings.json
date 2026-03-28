@@ -16,9 +16,9 @@
     "Anti"
   ],
   "defaultMaxVel": 4.0,
-  "defaultMaxAccel": 3.6,
-  "defaultMaxAngVel": 300.0,
-  "defaultMaxAngAccel": 500.0,
+  "defaultMaxAccel": 3.5,
+  "defaultMaxAngVel": 250.0,
+  "defaultMaxAngAccel": 450.0,
   "defaultNominalVoltage": 12.1,
   "robotMass": 68.0389,
   "robotMOI": 4.3102,
