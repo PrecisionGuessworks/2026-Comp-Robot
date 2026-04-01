@@ -28,18 +28,14 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.sim.TalonFXSSimState;
 
 import dev.doglog.DogLog;
-import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.units.measure.ImmutableAngle;
 import edu.wpi.first.units.measure.ImmutableAngularVelocity;
-import edu.wpi.first.wpilibj.Alert;
-import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.generated.Elastic;
 
 @SuppressWarnings("rawtypes")
 public class QuixTalonFXS implements QuixMotorControllerWithEncoder, AutoCloseable {

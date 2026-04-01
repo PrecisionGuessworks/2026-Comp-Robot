@@ -2,7 +2,6 @@ package frc.quixlib.motorcontrol;
 
 import java.util.function.Function;
 
-import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.configs.Slot2Configs;
@@ -26,18 +25,14 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.sim.TalonFXSimState;
 
 import dev.doglog.DogLog;
-import edu.wpi.first.networktables.DoubleSubscriber;
 import edu.wpi.first.units.measure.ImmutableAngle;
 import edu.wpi.first.units.measure.ImmutableAngularVelocity;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Alert;
-import edu.wpi.first.wpilibj.Alert.AlertType;
 import frc.quixlib.devices.CANDeviceID;
 import frc.quixlib.devices.QuixStatusSignal;
 import frc.quixlib.phoenix.PhoenixUtil;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.generated.Elastic;
 
 @SuppressWarnings("rawtypes")
 public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseable {

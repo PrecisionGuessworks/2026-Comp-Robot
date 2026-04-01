@@ -50,7 +50,9 @@ public class QuixCANCoder implements QuixAbsoluteEncoder {
     m_cancoder.hasResetOccurred();
 
     // SmartDashboard.putBoolean("CanCoder " + m_canID.deviceNumber + ": Configuration", setConfiguration());
+    if (Constants.LogHardware){
     DogLog.log("Hardware: CANCoder " + m_canID.deviceNumber + ": Configuration", setConfiguration());
+    }
     // m_positionPublisher =
     //     NetworkTableInstance.getDefault()
     //         .getDoubleTopic("CanCoder " + m_canID + ": Sensor Position")

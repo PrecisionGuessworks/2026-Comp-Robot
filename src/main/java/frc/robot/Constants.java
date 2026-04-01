@@ -183,14 +183,12 @@ public class Constants {
         public static final double DRotation = 0;
         
         // 0.0-1.0 of the max speed
-        public static final double MaxSpeedPercentage = 0.85; // Default 1.0
-        public static final double SlowSpeedPercentage = 0.15; // Default 0.15
+        public static final double MaxSpeedPercentage = 0.85; // Default 1.0, percentage of max speed for teleop driving
         
         // Rotation per second max angular velocity
-        public static final double MaxAngularRatePercentage = 0.72; // Default 0.75 
-        public static final double SnapMaxAngularRatePercentage = 0.75; // Default 0.5
-        public static final double SlowRotPercentage = 0.15; // Default 0.15
-
+        public static final double MaxAngularRatePercentage = 0.72; // Default 0.75, percentage of max rotation speed for teleop driving
+        public static final double SnapMaxAngularRatePercentage = 0.75; // Default 0.5, How fast to spin for SOTM
+  
         // Deadbands for the drive and rotation
         public static final double DriveDeadband = isSim ? 0.15 : 0.01; // Drive Deadband   Uses higher deadband in sim because my controller sucks
         public static final double RotationDeadband = isSim ? 0.15 : 0.01; // Rotation Deadband
@@ -232,18 +230,13 @@ public class Constants {
     public static final boolean indexerMotorInvert = false;
 
 
-    //public static final ArmFeedforward armFeedForward = new ArmFeedforward(3.0, 0.3, 0.6);
     public static final Constraints HoodConstraints =
         new Constraints(6, 12); // rad/s and rad/s^2  8, 20.0
     public static final double HoodMaxJerk = 0; // rad/s^3
     public static final int hoodPositionPIDSlot = 0;
-    // public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(7, 0.0001, 0.01, 0.1, 4.24, 0.01, 0.13, GravityTypeValue.Arm_Cosine);
-    // public static final double hoodExpo_kV = 6;    OLD!!!
     public static final PIDConfig hoodPositionPIDConfig = new PIDConfig(9, 0.00, 0.15, 0.2, 0.2, 0.01, 0.12, GravityTypeValue.Arm_Cosine);
     public static final double hoodExpo_kV = 0;  // 6  
     public static final double hoodExpo_kA = 0;
-  //  public static final int armCoralPositionPIDSlot = 1;
-  //  public static final PIDConfig armCoralPositionPIDConfig = new PIDConfig(2.0, 0, 0.1, 0, 0.12, 0.007, 0);
 
     public static final SimpleMotorFeedforward shooterFeedforward =
         new SimpleMotorFeedforward(0.001, 0.02);
@@ -254,33 +247,30 @@ public class Constants {
         new SimpleMotorFeedforward(0.1, 0.02);
     public static final int indexerVelocityPIDSlot = 0;
     public static final PIDConfig indexerVelocityPIDConfig = new PIDConfig(0.1, 0, 0);
-    // public static final int shooterPositionPIDSlot = 0;
-    // public static final PIDConfig shooterPositionPIDConfig = new PIDConfig(30.0, 0.0, 0.0);
 
     public static final double hoodMinAngle = Units.degreesToRadians(0.0);
     public static final double hoodMaxAngle = Units.degreesToRadians(81.0);
     public static final double hoodStartingAngle = Units.degreesToRadians(0);
-    public static final double hoodCgOffset = Units.degreesToRadians(0);
+    public static final double hoodCgOffset = Units.degreesToRadians(0); // Sim
     public static final double hoodStowAngle = Units.degreesToRadians(1);
     
-    
-    // public static final double hoodBumpPassAngle = Units.degreesToRadians(35); // TEST
-
-    public static final double hoodBumpAngle = Units.degreesToRadians(11); // REAL
+    // Bump Shot values
+    public static final double hoodBumpAngle = Units.degreesToRadians(11); 
     public static final double ShooterBumpVelocity = 215.0; 
-    // public static final double hoodBumpAngle = Units.degreesToRadians(27.4); // 3.05
-    // public static final double ShooterBumpVelocity = 370.0; 
-
+    
+    // Bump Pass values
     public static final double hoodBumpPassAngle = Units.degreesToRadians(35);
     public static final double ShooterBumpPassVelocity = 475.0; 
+
     public static final double WarmupVelocity = 350.0;
-    public static final double WarmupVelocityBump = 215;
+    public static final double WarmupVelocityBump = 215; // Warmup velocity for bump shot
+
 
     // AUTOS
     public static final double ShooterBumpVelocityAngle = 270.0;
-        public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
-            public static final double ShooterBumpVelocityAuto = 270.0;
-        public static final double hoodBumpAngleAuto = Units.degreesToRadians(7.5);
+    public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
+    public static final double ShooterBumpVelocityAuto = 270.0;
+    public static final double hoodBumpAngleAuto = Units.degreesToRadians(7.5);
 
     
 
@@ -311,7 +301,7 @@ public class Constants {
     public static final int rollerVelocitySlot = 0;
     
     public static final double hopperVelocity = 400;
-    public static final double hopperIntakeVelocity = 60;
+    public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
 
 
   }
@@ -340,8 +330,6 @@ public class Constants {
     public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
     public static final int rollerVelocitySlot = 0;
 
-
-
     public static final CANDeviceID deployMotorID = new CANDeviceID(40, kSuperStructureCanivoreName);
     public static final CANDeviceID deployEncoderID = new CANDeviceID(41, kSuperStructureCanivoreName);
     public static final MotorAlignmentValue followerInvert = MotorAlignmentValue.Opposed;
@@ -367,15 +355,13 @@ public class Constants {
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
-
     public static final double maxExtension = Units.inchesToMeters(11.6);
     public static final double startingPosition = minExtension;
     public static final double intakeStow = Units.inchesToMeters(0.5);
 
-    public static final double attackPosition = Units.inchesToMeters(11.5);
+    public static final double attackPosition = Units.inchesToMeters(11.5); // Intake depoly postion in Attack mode, PLZ make sure this is less than max extension
+    public static final double defPosition = Units.inchesToMeters(4.0);     // Intake depoly postion in Defense mode
     public static final double attackPositionDepot = Units.inchesToMeters(1); // How much to move back from attack position when D-Pad up is pressed for depot intake    
-
-    public static final double defPosition = Units.inchesToMeters(4.0);
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.18); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
@@ -384,24 +370,27 @@ public class Constants {
     public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
     public static final double retractSlowPushHold = 16;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
+    // Used for auto home. Currrently not used.
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
     public static final double retractHomeStatorCurrent = 10.0; // Amps
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
     public static final double intakeCRollerVelocity = 100;
+
+    // Used for anti-jam c intake, which not used
     public static final double antiJamCRollerVelocity = 25;
     public static final double antiJamCRollerTime = 0.1;
     public static final double antiJamCRollerTimeCool = 0.2;
     public static final double antiJamCRollerTimeSpinup = 1;
 
 
-    public static final double intakeABRollerVelocity = 60;
-    public static final double SlowCRollerVelocity = 15;
-    public static final double SlowABRollerVelocity = 25;
+    public static final double intakeABRollerVelocity = 60; // AB normal intake speed
+    public static final double SlowCRollerVelocity = 15;    // Intake speed for shooting
+    public static final double SlowABRollerVelocity = 25;   // Intake speed for shooting
     public static final double outtakeRollerVelocity = -100;
 
-    public static final double holdRollerVelocity = 0;
+    public static final double holdRollerVelocity = 0; // Velocity to hold the game piece in the intake without letting it fall out, should be slightly positive to hold the piece in if needed
 
     public static final double ManualSpeed = 0.03; // increase to make manual control faster, decrease to make it slower
 
@@ -564,25 +553,6 @@ public class Constants {
     public static final Transform3d elevatorCarriageToLauncherArmPivot =
         new Transform3d(0, 0, Units.inchesToMeters(16.0), new Rotation3d());
   }
-//   private final DoubleSubscriber ShotVelocitySubscriber1;
-//   private final DoubleSubscriber ShotVelocitySubscriber2;
-//   private final DoubleSubscriber ShotVelocitySubscriber3;
 
-//   public void updateTunables() {
-//     if (DriverStation.isFMSAttached()){
-//     // new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
-//     Elastic.Notification notification = new Elastic.Notification(Elastic.NotificationLevel.ERROR, "Tunables are still LIVE!!!", "FMS is attatched, Tunables updates will be ignored");
-//     Elastic.sendNotification(notification);
-//     Elastic.Notification notification2 = new Elastic.Notification(Elastic.NotificationLevel.WARNING, "I hope this is a practice match", "");
-//     Elastic.sendNotification(notification2);
-//     }
-
-//     ShotVelocitySubscriber1 = DogLog.tunable("ShotCalc /ShotVelocity",Constants.ShotCalc.ShotVelocity);
-//     for (Double key : Constants.ShotCalc.ShotVelocity.) {
-//         double value = Constants.ShotCalc.ShotVelocity.getInterpolated(key);
-//         ShotVelocitySubscriber.set(value, key);
-//     }
-
-//   }
 
 }

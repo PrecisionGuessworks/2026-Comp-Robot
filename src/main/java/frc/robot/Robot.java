@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.ctre.phoenix6.SignalLogger;
+import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrain.SwerveDriveState;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.commands.PathPlannerAuto;
@@ -15,7 +16,6 @@ import com.pathplanner.lib.commands.PathfindingCommand;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import dev.doglog.DogLog;
-import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -30,9 +30,7 @@ import frc.robot.generated.Elastic;
 import frc.robot.generated.LimelightHelpers;
 import frc.robot.generated.ShiftHelpers;
 import frc.robot.generated.Vision;
-import frc.robot.subsystems.Lights;
 import frc.robot.subsystems.Visualization;
-import com.ctre.phoenix6.Utils;
 
 
 public class Robot extends TimedRobot {

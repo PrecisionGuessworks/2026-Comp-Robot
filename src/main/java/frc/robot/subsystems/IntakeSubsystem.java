@@ -4,10 +4,8 @@ import dev.doglog.DogLog;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,7 +15,6 @@ import frc.quixlib.devices.QuixCANCoder;
 import frc.quixlib.motorcontrol.QuixTalonFX;
 import frc.quixlib.motorcontrol.QuixTalonFXS;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
@@ -423,6 +420,12 @@ public class IntakeSubsystem extends SubsystemBase {
     DogLog.log("Intake/ C Roller Velocity", getCRollerVelocity(),"Rad/s");
     DogLog.log("Intake/ C Roller Setpoint", m_intakeCsetpoint,"Rad/s");
     DogLog.log("Intake/ C Roller Target Velocity", m_CrollerMotor.getClosedLoopReference(),"Rad/s");
+
+    if (Constants.LogHardware){
+      DogLog.log("Intake/ Pulse/ Hold", m_hold);
+      DogLog.log("Intake/ Pulse/ Pull", m_pull);
+      DogLog.log("Intake/ Pulse/ Count", m_currentcount);
+    }
     
 
     m_ABrollerMotor.logMotorState();
