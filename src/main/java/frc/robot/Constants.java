@@ -57,7 +57,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
 
     public static final class ShotCalc {
 
@@ -345,13 +345,13 @@ public class Constants {
         new MechanismRatio(1, (1.0), Math.PI * sprocketPitchDiameter);
     public static final SensorDirectionValue deployEncoderInvert = SensorDirectionValue.Clockwise_Positive;
     public static final boolean deployMotorInvert = true;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(3.0, 0.00, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(4.0, 0.00, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
     public static final double Expo_kV = 0.0;
     public static final double Expo_kA = 0.0; 
 
-    public static final double deployMaxVelocity = 1.2; // m/s
-    public static final double deployMaxAcceleration = 2.0; // m/s^2
+    public static final double deployMaxVelocity = 1.4; // m/s
+    public static final double deployMaxAcceleration = 2.5; // m/s^2
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
@@ -365,10 +365,10 @@ public class Constants {
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.18); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 16;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPull = 20;    // How many cycles to retract in when intake slow is called
     public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
     public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
-    public static final double retractSlowPushHold = 16;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+    public static final double retractSlowPushHold = 20;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
     // Used for auto home. Currrently not used.
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);

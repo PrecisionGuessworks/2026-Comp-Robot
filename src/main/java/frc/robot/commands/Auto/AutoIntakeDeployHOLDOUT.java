@@ -30,6 +30,8 @@ public class AutoIntakeDeployHOLDOUT extends Command {
   @Override
   public void execute() {
      m_intake.setPosition(Constants.Intake.attackPosition);
+    m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
+
 
 
   }
