@@ -300,8 +300,11 @@ public class Constants {
     public static final PIDConfig rollerPIDConfig = new PIDConfig(0.1, 0, 0);
     public static final int rollerVelocitySlot = 0;
     
-    public static final double hopperVelocity = 400;
-    public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
+    // public static final double hopperVelocity = 400;
+    // public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
+
+        public static final double hopperVelocity = 100;
+    public static final double hopperIntakeVelocity = 10; // Hooper velocity when intaking, slowly puts all the balls to the back
 
 
   }
