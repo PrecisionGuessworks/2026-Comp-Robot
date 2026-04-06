@@ -58,6 +58,7 @@ public class Constants {
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
     public static final boolean LogHardware = isSim; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights
 
     public static final class ShotCalc {
 
@@ -487,8 +488,6 @@ public class Constants {
     public static final String LimeLightCamerName = "limelight-shooter"; // Front
     public static final boolean UseLimeLightCamera2 = true;
     public static final String LimeLightCamerName2 = "limelight-back"; // Back
-
-    public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot
 
 
     // public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(.8, .8, 9999999);

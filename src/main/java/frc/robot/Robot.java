@@ -79,9 +79,9 @@ public class Robot extends TimedRobot {
     Visualization.Update3DVisualization();
     Visualization.updateFuelViz();
     updateFeildTimers();
-    LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName, Constants.Vision.UseRewind);
+    LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName, Constants.UseRewind);
     if (Constants.Vision.UseLimeLightCamera2) {
-      LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName2, Constants.Vision.UseRewind);
+      LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName2, Constants.UseRewind);
     }
     
     // if (!DriverStation.isDSAttached()) {
@@ -245,7 +245,7 @@ public class Robot extends TimedRobot {
     // lights.setConnectedAlliance();
     }
 
-    if (Constants.Vision.UseRewind) {
+    if (Constants.UseRewind) {
       
        if (m_RewindTimer.hasElapsed(10)) {
         m_RewindTimer.reset();
@@ -305,10 +305,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopExit() {
 
-    if (Constants.Vision.UseRewind) {
+    if (Constants.UseRewind) {
       m_RewindTimer.start();
     }
-
 
   }
 
