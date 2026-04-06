@@ -21,6 +21,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
@@ -41,10 +42,13 @@ public class Robot extends TimedRobot {
   private String autoName, newAutoName;
 
   private final Field2d m_field = new Field2d();
+
+  private Timer m_RewindTimer = new Timer();
   
   Optional<Alliance> ally = DriverStation.getAlliance();
   Optional<Alliance> newAlly;
   private Vision vision;
+  private boolean UseLimeLightCamera2 = false; // Initialize as false or set to true as needed
 
   // public static final Lights lights = new Lights();
 
@@ -56,6 +60,10 @@ public class Robot extends TimedRobot {
     SignalLogger.stop(); // Stop any existing logging sessions
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 1);
     LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName, 0.001);
+    if (Constants.Vision.UseLimeLightCamera2) {
+      LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName2, 1);
+      LimelightHelpers.SetIMUAssistAlpha(Constants.Vision.LimeLightCamerName2, 0.001);
+    }
     PathfindingCommand.warmupCommand().schedule();
         
   }
@@ -71,6 +79,11 @@ public class Robot extends TimedRobot {
     Visualization.Update3DVisualization();
     Visualization.updateFuelViz();
     updateFeildTimers();
+    LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName, Constants.Vision.UseRewind);
+    if (Constants.Vision.UseLimeLightCamera2) {
+      LimelightHelpers.setRewindEnabled(Constants.Vision.LimeLightCamerName2, Constants.Vision.UseRewind);
+    }
+    
     // if (!DriverStation.isDSAttached()) {
     //   lights.setNotConnected();
     // }
@@ -87,6 +100,11 @@ public class Robot extends TimedRobot {
       
       // Get the pose estimate
       LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
+      LimelightHelpers.PoseEstimate limelightMeasurement2 = null;
+      if (Constants.Vision.UseLimeLightCamera2) {
+        LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName2, robotYaw, 0.0, 25.0, 0.0, 0.0, 0.0);
+        limelightMeasurement2 = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName2);
+      }
       // System.out.println(limelightMeasurement);
       // Add it to your pose estimator
       // RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs);
@@ -103,6 +121,7 @@ public class Robot extends TimedRobot {
       if (limelightMeasurement != null) {
       DogLog.log("Vision: Limelight Measurement", limelightMeasurement.pose.toString());
       DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
+
       if(limelightMeasurement.tagCount == 1 && limelightMeasurement.rawFiducials.length == 1)
       {
         if(limelightMeasurement.rawFiducials[0].ambiguity > .7)
@@ -125,6 +144,40 @@ public class Robot extends TimedRobot {
         RobotContainer.drivetrain.addVisionMeasurement(
           limelightMeasurement.pose,
           Utils.fpgaToCurrentTime(limelightMeasurement.timestampSeconds)
+      );
+      }
+    }
+    boolean doRejectUpdate2 = false;
+            if (limelightMeasurement2 != null) {
+      DogLog.log("Vision: Limelight Measurement", limelightMeasurement2.pose.toString());
+      DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
+      if (Constants.Vision.UseLimeLightCamera2) {
+        DogLog.log("Vision: Limelight Measurement 2", limelightMeasurement2.pose.toString());
+        DogLog.log("Vision: Limelight Measurement 2 Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName2));
+      }
+
+      if(limelightMeasurement2.tagCount == 1 && limelightMeasurement2.rawFiducials.length == 1)
+      {
+        if(limelightMeasurement2.rawFiducials[0].ambiguity > .7)
+        {
+          doRejectUpdate2 = true;
+        }
+        if(limelightMeasurement2.rawFiducials[0].distToCamera > 3)
+        {
+          doRejectUpdate2 = true;
+        }
+      }
+      if(limelightMeasurement2.tagCount == 0)
+      {
+        doRejectUpdate2 = true;
+      }
+
+      if(!doRejectUpdate2)
+      {
+        RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs.times(limelightMeasurement.rawFiducials[0].distToCamera/2));
+        RobotContainer.drivetrain.addVisionMeasurement(
+          limelightMeasurement2.pose,
+          Utils.fpgaToCurrentTime(limelightMeasurement2.timestampSeconds)
       );
       }
     }
@@ -191,7 +244,19 @@ public class Robot extends TimedRobot {
     if (DriverStation.isDSAttached()) {
     // lights.setConnectedAlliance();
     }
+
+    if (Constants.Vision.UseRewind) {
+      
+       if (m_RewindTimer.hasElapsed(10)) {
+        m_RewindTimer.reset();
+        LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName,205);
+        if (Constants.Vision.UseLimeLightCamera2) {
+         LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName2,205);
+        }
+      }
+    }
   }
+
   @Override
   public void disabledExit() {}
 
@@ -204,6 +269,9 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.schedule();
     }
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
+    if (Constants.Vision.UseLimeLightCamera2) {
+      LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName2, 4);
+    }
   }
 
   @Override
@@ -217,6 +285,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
+    if (Constants.Vision.UseLimeLightCamera2) {
+      LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName2, 4);
+    }
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -232,7 +303,14 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopExit() {}
+  public void teleopExit() {
+
+    if (Constants.Vision.UseRewind) {
+      m_RewindTimer.start();
+    }
+
+
+  }
 
   @Override
   public void testInit() {

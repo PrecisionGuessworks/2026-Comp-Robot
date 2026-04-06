@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RStart-MidSweepFar-RT180"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "RT180-RS"
+            "pathName": "CStart-Dep"
           }
         },
         {
@@ -21,15 +15,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "Score"
+                  "waitTime": 5.0
                 }
               },
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 4.0
+                  "name": "Score"
                 }
               }
             ]
@@ -38,7 +32,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RS-RT"
+            "pathName": "CS-RTClear"
           }
         },
         {
@@ -58,15 +52,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Score"
-                }
-              },
-              {
                 "type": "wait",
                 "data": {
                   "waitTime": 6.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Score"
                 }
               }
             ]
@@ -76,6 +70,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Right",
+  "folder": "Center",
   "choreoAuto": false
 }
