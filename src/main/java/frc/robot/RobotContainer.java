@@ -41,6 +41,7 @@ import frc.robot.commands.Shoot.ZoneScore;
 import frc.robot.commands.TestCommands.IntakeRoll;
 import frc.robot.commands.TestCommands.MoveIntake;
 import frc.robot.commands.TestCommands.MoveShooter;
+import frc.robot.commands.TestCommands.SpinShooter;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.HopperSubsystem;
@@ -181,8 +182,8 @@ public class RobotContainer {
         driver.a().onTrue(Commands.runOnce(() -> intake.flipAttackMode()));
         driver.b().whileTrue(new MoveIntake(intake));
         driver.x().whileTrue(new MoveShooter(shooter));
-        driver.y().whileTrue(new IntakeRoll(intake));
-
+        // driver.y().whileTrue(new IntakeRoll(intake));
+        driver.y().whileTrue(new SpinShooter(shooter));
         driver.rightStick().whileTrue(drivetrain.applyRequest(() -> brake));
         
         
