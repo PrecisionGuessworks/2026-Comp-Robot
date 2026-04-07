@@ -70,6 +70,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Center",
+  "folder": "Pair",
   "choreoAuto": false
 }

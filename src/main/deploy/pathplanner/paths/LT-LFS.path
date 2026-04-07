@@ -1,0 +1,71 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.635409226190476,
+        "y": 7.45
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.8826385542168675,
+        "y": 7.433518072289157
+      },
+      "isLocked": false,
+      "linkedName": "LT"
+    },
+    {
+      "anchor": {
+        "x": 1.470639880952381,
+        "y": 7.036636904761905
+      },
+      "prevControl": {
+        "x": 1.777328869047619,
+        "y": 7.62391369047619
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "LFS"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.2908921933085499,
+      "rotationDegrees": 0.5705035090744233
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "ScoreWarmup",
+      "waypointRelativePos": 0.07189542483660133,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScoreWarmup"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 450.0,
+    "nominalVoltage": 12.1,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -43.540550645007734
+  },
+  "reversed": false,
+  "folder": "Left",
+  "idealStartingState": {
+    "velocity": 3.0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

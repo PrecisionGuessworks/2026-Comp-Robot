@@ -10,10 +10,11 @@
     "Tests"
   ],
   "autoFolders": [
+    "Anti",
     "Center",
     "Left",
-    "Right",
-    "Anti"
+    "Pair",
+    "Right"
   ],
   "defaultMaxVel": 4.0,
   "defaultMaxAccel": 3.5,

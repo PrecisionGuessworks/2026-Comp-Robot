@@ -1,0 +1,71 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 4.6162466725820765,
+        "y": 0.6025643300798571
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.991034226190476,
+        "y": 0.6092187499999997
+      },
+      "isLocked": false,
+      "linkedName": "RT180"
+    },
+    {
+      "anchor": {
+        "x": 1.3401339285714287,
+        "y": 1.1247172619047625
+      },
+      "prevControl": {
+        "x": 1.7251264880952382,
+        "y": 0.6092187499999999
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "RFS"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3062499999999937,
+      "rotationDegrees": 176.8849517730588
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "ScoreWarmup",
+      "waypointRelativePos": 0.014285714285714285,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ScoreWarmup"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 4.0,
+    "maxAcceleration": 3.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 450.0,
+    "nominalVoltage": 12.1,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 41.60507645788172
+  },
+  "reversed": false,
+  "folder": "Right",
+  "idealStartingState": {
+    "velocity": 3.0,
+    "rotation": 179.9914149807913
+  },
+  "useDefaultConstraints": true
+}

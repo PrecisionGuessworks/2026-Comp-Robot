@@ -43,6 +43,8 @@ public class Constants {
     // - 1 intake deploy, 2 intake roller, 1 hopper
     // Climber 40-49
     // - 2 climber motors
+
+    // Current limits are under each of the subsystems.
     
 
 
@@ -64,7 +66,6 @@ public class Constants {
 
     public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
-    // CHECK!
     public static final Pose2d targetpose =  DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
     new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
     new Pose2d(11.9,4.05,new Rotation2d(0)); // Red
@@ -267,7 +268,7 @@ public class Constants {
     public static final double WarmupVelocityBump = 215; // Warmup velocity for bump shot
 
 
-    // AUTOS
+    // Auto Bump Values
     public static final double ShooterBumpVelocityAngle = 270.0;
     public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
     public static final double ShooterBumpVelocityAuto = 270.0;
@@ -279,7 +280,7 @@ public class Constants {
 
     public static final double outtakeVelocity = 1300.0; // rads/s
 
-     public static final double indexerVelocity = 500.0; // rads/s
+    public static final double indexerVelocity = 500.0; // rads/s
     public static final double ArmHeight = Units.inchesToMeters(12);
 
     // For simulation only
@@ -304,7 +305,7 @@ public class Constants {
     // public static final double hopperVelocity = 400;
     // public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
 
-        public static final double hopperVelocity = 100;
+        public static final double hopperVelocity = 125;
     public static final double hopperIntakeVelocity = 10; // Hooper velocity when intaking, slowly puts all the balls to the back
 
 
