@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.991034226190476,
-        "y": 0.6092187499999997
+        "x": 2.5538392857142855,
+        "y": 0.7658258928571433
       },
       "isLocked": false,
       "linkedName": "RT180"
@@ -20,8 +20,8 @@
         "y": 1.1247172619047625
       },
       "prevControl": {
-        "x": 1.7251264880952382,
-        "y": 0.6092187499999999
+        "x": 1.5815699404761903,
+        "y": 0.8963318452380953
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,8 +30,8 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.3062499999999937,
-      "rotationDegrees": 176.8849517730588
+      "waypointRelativePos": 0.27702702702702686,
+      "rotationDegrees": 167.59130400764334
     }
   ],
   "constraintZones": [],

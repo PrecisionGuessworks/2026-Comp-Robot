@@ -350,13 +350,17 @@ public class Constants {
         new MechanismRatio(1, (1.0), Math.PI * sprocketPitchDiameter);
     public static final SensorDirectionValue deployEncoderInvert = SensorDirectionValue.Clockwise_Positive;
     public static final boolean deployMotorInvert = true;
-    public static final PIDConfig deployPIDConfig = new PIDConfig(4.0, 0.00, 0.1, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
+    public static final PIDConfig deployPIDConfig = new PIDConfig(4.5, 0.00, 0.08, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
     public static final int deployPositionSlot = 0;
+
+    public static final PIDConfig deployPulsePIDConfig = new PIDConfig(7.0, 0.5, 0.005, 0.00, 0.00, 0.00, 0.00, GravityTypeValue.Elevator_Static);
+    public static final int deployPulsePositionSlot = 1;
+
     public static final double Expo_kV = 0.0;
     public static final double Expo_kA = 0.0; 
 
-    public static final double deployMaxVelocity = 1.4; // m/s
-    public static final double deployMaxAcceleration = 2.5; // m/s^2
+    public static final double deployMaxVelocity = 1.6; // m/s
+    public static final double deployMaxAcceleration = 3; // m/s^2
     public static final double deployMaxJerk = 5.0; // m/s^3
 
     public static final double minExtension = Units.inchesToMeters(0.0);
@@ -368,12 +372,12 @@ public class Constants {
     public static final double defPosition = Units.inchesToMeters(4.0);     // Intake depoly postion in Defense mode
     public static final double attackPositionDepot = Units.inchesToMeters(1); // How much to move back from attack position when D-Pad up is pressed for depot intake    
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.18); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.17); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 20;    // How many cycles to retract in when intake slow is called
-    public static final double retractSlowPullHold = 1; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
-    public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
-    public static final double retractSlowPushHold = 20;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+    public static final double retractSlowPull = 22;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPullHold = 8; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
+    public static final double retractSlowPush = 10;     // How many cycles to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowPushHold = 45;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
     // Used for auto home. Currrently not used.
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);

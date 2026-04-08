@@ -56,6 +56,7 @@ public class IntakeSubsystem extends SubsystemBase {
               .setStatorCurrentLimit(30.0)
               .setInverted(Constants.Intake.deployMotorInvert)
               .setPIDConfig(Constants.Intake.deployPositionSlot, Constants.Intake.deployPIDConfig)
+              .setPIDConfig(Constants.Intake.deployPulsePositionSlot, Constants.Intake.deployPulsePIDConfig)
               .setMotionMagicConfig(
                   Constants.Intake.deployMaxVelocity,
                   Constants.Intake.deployMaxAcceleration,
@@ -224,11 +225,14 @@ public class IntakeSubsystem extends SubsystemBase {
   // private boolean m_hold = false;
     private boolean m_pull = false;
   private boolean m_hold = true;
+  private boolean m_pulse = false;
 
     public void retractIntakeSlowShoot() {
     // if (isAtPosition(Constants.Intake.maxExtension, Units.inchesToMeters(0.5))) {
     //   m_pull = false;
     // }
+
+    m_pulse = true;
 
 
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()||!RobotContainer.operator.leftBumper().getAsBoolean()) {
@@ -279,6 +283,7 @@ public class IntakeSubsystem extends SubsystemBase {
   m_currentcount = 0;
       m_pull = false;
       m_hold = true;
+      m_pulse = false;
   }
   }
 
@@ -359,9 +364,19 @@ public class IntakeSubsystem extends SubsystemBase {
 
     }
 
-
-    m_deployMotor.setMotionMagicPositionSetpoint(
+    if (!m_pulse || RobotContainer.driver.rightTrigger().getAsBoolean()||RobotContainer.operator.leftBumper().getAsBoolean()) {
+      m_deployMotor.setMotionMagicPositionSetpoint(
         Constants.Intake.deployPositionSlot, m_setPosition);
+        // System.out.println(Constants.Intake.deployPositionSlot);
+    } else if (m_pulse){
+    m_deployMotor.setMotionMagicPositionSetpoint(
+        Constants.Intake.deployPulsePositionSlot, m_setPosition);
+        // System.out.println(Constants.Intake.deployPulsePositionSlot);
+    } else {
+      m_deployMotor.setMotionMagicPositionSetpoint(
+        Constants.Intake.deployPositionSlot, m_setPosition);
+        // System.out.println(Constants.Intake.deployPositionSlot);
+    }
 
     // if (getCRollerVelocity() < 100 && m_intakeCsetpoint > 30 && !m_intakeCjam && m_antiJamTimerSpinup.hasElapsed(Constants.Intake.antiJamCRollerTimeSpinup)) {
     //   m_intakeCjam = true;
