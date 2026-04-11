@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
       LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName);
       LimelightHelpers.PoseEstimate limelightMeasurement2 = null;
       if (Constants.Vision.UseLimeLightCamera2) {
-        LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName2, robotYaw, 0.0, 25.0, 0.0, 0.0, 0.0);
+        LimelightHelpers.SetRobotOrientation(Constants.Vision.LimeLightCamerName2, robotYaw, 0.0, 20.0, 0.0, 0.0, 0.0);
         limelightMeasurement2 = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Vision.LimeLightCamerName2);
       }
       // System.out.println(limelightMeasurement);
@@ -119,7 +119,7 @@ public class Robot extends TimedRobot {
       //  LimelightHelpers.PoseEstimate mt1 = LimelightHelpers.getBotPoseEstimate_wpiBlue("limelight");
       boolean doRejectUpdate = false;
       if (limelightMeasurement != null) {
-      DogLog.log("Vision: Limelight Measurement", limelightMeasurement.pose.toString());
+      DogLog.log("Vision: Limelight Measurement", limelightMeasurement.pose);
       DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
 
       if(limelightMeasurement.tagCount == 1 && limelightMeasurement.rawFiducials.length == 1)
@@ -149,12 +149,8 @@ public class Robot extends TimedRobot {
     }
     boolean doRejectUpdate2 = false;
             if (limelightMeasurement2 != null) {
-      DogLog.log("Vision: Limelight Measurement", limelightMeasurement2.pose.toString());
-      DogLog.log("Vision: Limelight Measurement Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName));
-      if (Constants.Vision.UseLimeLightCamera2) {
-        DogLog.log("Vision: Limelight Measurement 2", limelightMeasurement2.pose.toString());
+        DogLog.log("Vision: Limelight Measurement 2", limelightMeasurement2.pose);
         DogLog.log("Vision: Limelight Measurement 2 Timestamp", LimelightHelpers.getBotPose_wpiBlue(Constants.Vision.LimeLightCamerName2));
-      }
 
       if(limelightMeasurement2.tagCount == 1 && limelightMeasurement2.rawFiducials.length == 1)
       {
