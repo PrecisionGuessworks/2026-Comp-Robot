@@ -170,7 +170,7 @@ public class Robot extends TimedRobot {
 
       if(!doRejectUpdate2)
       {
-        RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs.times(limelightMeasurement.rawFiducials[0].distToCamera/2));
+        RobotContainer.drivetrain.setVisionMeasurementStdDevs(Constants.Vision.LLTagStdDevs.times(limelightMeasurement2.rawFiducials[0].distToCamera/2));
         RobotContainer.drivetrain.addVisionMeasurement(
           limelightMeasurement2.pose,
           Utils.fpgaToCurrentTime(limelightMeasurement2.timestampSeconds)
