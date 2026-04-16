@@ -215,8 +215,10 @@ public class RobotContainer {
     operator.povDown().and(operator.b()).whileTrue(Commands.runOnce(() -> intake.toggleSoftLimitsEnabled()));
     operator.leftBumper().whileTrue(new AutoIntakeDeployHOLDOUT(intake));
     operator.a().onTrue(Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocityBump)));
-    operator.y().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = !shooter.isSafeOVERIDE));
-    operator.x().onTrue(new HooperOuttake(hopper, shooter));
+    operator.a().onFalse(Commands.runOnce(() -> shooter.setShooterVelocity(0)));
+    operator.y().onTrue(Commands.runOnce(() -> shooter.isSafeOVERIDE = true));
+    operator.y().onFalse(Commands.runOnce(() -> shooter.isSafeOVERIDE = false));
+    operator.x().whileTrue(new HooperOuttake(hopper, shooter));
     operator.b().whileTrue(new Outtake(intake));
 
     }
