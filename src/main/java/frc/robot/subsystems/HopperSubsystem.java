@@ -14,8 +14,8 @@ private final QuixTalonFX m_hopperMotor =
           Constants.Hopper.hopperMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Hopper.hopperMotorInvert)
-              .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(80.0)
+              .setSupplyCurrentLimit(30.0)
+              .setStatorCurrentLimit(55.0)
               .setBrakeMode()
               .setPIDConfig(Constants.Hopper.rollerVelocitySlot, Constants.Hopper.rollerPIDConfig));
 private double hopperTargetVelocity = 0.0;

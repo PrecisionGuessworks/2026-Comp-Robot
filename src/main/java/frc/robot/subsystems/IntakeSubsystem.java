@@ -237,7 +237,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     if (!RobotContainer.driver.rightTrigger().getAsBoolean()||!RobotContainer.operator.leftBumper().getAsBoolean()) {
       setABRollerVelocity(Constants.Intake.SlowABRollerVelocity);
-      if (getPosition() < Constants.Intake.attackPosition - Units.inchesToMeters(2)) {
+      if (getPosition() > Constants.Intake.attackPosition - Units.inchesToMeters(2)) {
         setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
       } else {
         setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);

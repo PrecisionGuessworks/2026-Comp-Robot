@@ -59,7 +59,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = isSim; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
     public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights
 
     public static final class ShotCalc {
@@ -261,8 +261,8 @@ public class Constants {
     public static final double ShooterBumpVelocity = 215.0; 
     
     // Bump Pass values
-    public static final double hoodBumpPassAngle = Units.degreesToRadians(35);
-    public static final double ShooterBumpPassVelocity = 475.0; 
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(45);
+    public static final double ShooterBumpPassVelocity = 500.0; 
 
     public static final double WarmupVelocity = 350.0;
     public static final double WarmupVelocityBump = 215; // Warmup velocity for bump shot
@@ -305,7 +305,7 @@ public class Constants {
     // public static final double hopperVelocity = 400;
     // public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
 
-        public static final double hopperVelocity = 125;
+        public static final double hopperVelocity = 105;
     public static final double hopperIntakeVelocity = 10; // Hooper velocity when intaking, slowly puts all the balls to the back
 
 
@@ -372,12 +372,12 @@ public class Constants {
     public static final double defPosition = Units.inchesToMeters(4.0);     // Intake depoly postion in Defense mode
     public static final double attackPositionDepot = Units.inchesToMeters(1); // How much to move back from attack position when D-Pad up is pressed for depot intake    
 
-    public static final double retractSlowSpeed = Units.inchesToMeters(0.17); // How many inches per cycle. Should be ~ 50 a sec
-    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.24); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 22;    // How many cycles to retract in when intake slow is called
-    public static final double retractSlowPullHold = 8; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
-    public static final double retractSlowPush = 10;     // How many cycles to extend out when intake slow is called after pullcount is done 
-    public static final double retractSlowPushHold = 45;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
+    public static final double retractSlowSpeed = Units.inchesToMeters(0.26); // How many inches per cycle. Should be ~ 50 a sec
+    public static final double retractSlowPushSpeed = Units.inchesToMeters(0.4); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
+    public static final double retractSlowPull = 18;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPullHold = 2; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
+    public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
+    public static final double retractSlowPushHold = 20;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
 
     // Used for auto home. Currrently not used.
     public static final double retractHomeSpeed = Units.inchesToMeters(0.13);
