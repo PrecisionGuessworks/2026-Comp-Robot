@@ -59,7 +59,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
     public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights
 
     public static final class ShotCalc {
@@ -83,12 +83,12 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 195.0);
-        ShotVelocity.put(1.0, 200.0);
-        ShotVelocity.put(1.5, 210.0);
-        ShotVelocity.put(2.0, 245.0);
-        ShotVelocity.put(2.5, 275.0);
-        ShotVelocity.put(3.0, 315.0);
+        ShotVelocity.put(0.5, 185.0);
+        ShotVelocity.put(1.0, 190.0);
+        ShotVelocity.put(1.5, 200.0);
+        ShotVelocity.put(2.0, 225.0);
+        ShotVelocity.put(2.5, 260.0);
+        ShotVelocity.put(3.0, 300.0);
         ShotVelocity.put(3.5, 335.0);
         ShotVelocity.put(4.0, 345.0);
         ShotVelocity.put(4.5, 375.0);
@@ -99,12 +99,12 @@ public class Constants {
     // Distance in meters , Angle of Hood
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
-        ShotAngle.put(0.5, Units.degreesToRadians(9));
-        ShotAngle.put(1.0, Units.degreesToRadians(10));
-        ShotAngle.put(1.5, Units.degreesToRadians(12));
-        ShotAngle.put(2.0, Units.degreesToRadians(15.5));
-        ShotAngle.put(2.5, Units.degreesToRadians(22));
-        ShotAngle.put(3.0, Units.degreesToRadians(25));
+        ShotAngle.put(0.5, Units.degreesToRadians(10));
+        ShotAngle.put(1.0, Units.degreesToRadians(11));
+        ShotAngle.put(1.5, Units.degreesToRadians(13));
+        ShotAngle.put(2.0, Units.degreesToRadians(16.5));
+        ShotAngle.put(2.5, Units.degreesToRadians(24));
+        ShotAngle.put(3.0, Units.degreesToRadians(27));
         ShotAngle.put(3.5, Units.degreesToRadians(28));
         ShotAngle.put(4.0, Units.degreesToRadians(29));
         ShotAngle.put(4.5, Units.degreesToRadians(30));
@@ -261,7 +261,7 @@ public class Constants {
     public static final double ShooterBumpVelocity = 215.0; 
     
     // Bump Pass values
-    public static final double hoodBumpPassAngle = Units.degreesToRadians(45);
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(40);
     public static final double ShooterBumpPassVelocity = 500.0; 
 
     public static final double WarmupVelocity = 350.0;
