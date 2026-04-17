@@ -265,6 +265,7 @@ public class Constants {
     public static final double ShooterBumpPassVelocity = 500.0; 
 
     public static final double WarmupVelocity = 350.0;
+     public static final double WarmupVelocityFar = 400.0;
     public static final double WarmupVelocityBump = 215; // Warmup velocity for bump shot
 
 

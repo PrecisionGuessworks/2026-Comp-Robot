@@ -5,15 +5,34 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "RStart-AntimidMini-RT180"
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 3.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreAim"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT180-RS"
+            "pathName": "LStartPairAngle-LStart"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LStart-Mid-Bump-LS"
           }
         },
         {
@@ -29,7 +48,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "Score"
+                  "name": "ScoreAim"
                 }
               }
             ]
@@ -38,19 +57,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RS-RT"
+            "pathName": "LS-LT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "RT-Run"
+            "pathName": "LT-MidSweep-LT180"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Anti",
+  "folder": "Pair",
   "choreoAuto": false
 }

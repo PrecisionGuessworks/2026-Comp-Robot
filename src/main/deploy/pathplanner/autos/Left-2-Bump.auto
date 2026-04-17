@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LStart-AntimidMini-LT180"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LT180-LS"
+            "pathName": "LStart-Mid-Bump-LS"
           }
         },
         {
@@ -21,15 +15,15 @@
           "data": {
             "commands": [
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 5.0
+                  "name": "ScoreAim"
                 }
               },
               {
-                "type": "named",
+                "type": "wait",
                 "data": {
-                  "name": "Score"
+                  "waitTime": 4.0
                 }
               }
             ]
@@ -44,13 +38,32 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LT-Run"
+            "pathName": "LT-Mid-Bump-LS"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ScoreAim"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 8.0
+                }
+              }
+            ]
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "Anti",
+  "folder": "Left",
   "choreoAuto": false
 }

@@ -100,14 +100,21 @@ public class RobotContainer {
 
         //robotCommands.put("IntakePiece", new IntakeAlgae(intake,1).withTimeout(2.5));
         // robotCommands.put("StowArm", DrivetrainExtra.LogTime("StowAll", new StowAll(climber, shooter)));
-        robotCommands.put("STOMAuto", new STOMAuto(shooter));
+        robotCommands.put("STOMAuto", new STOMAuto(shooter,hopper));
         // robotCommands.put("ZoneScore", DrivetrainExtra.LogTime("ZoneScore", new ZoneScore(shooter,hopper)));
         // robotCommands.put("Score", DrivetrainExtra.LogTime("Score", new VizScore(shooter,hopper)));
         robotCommands.put("ZoneScore", new ZoneScore(shooter,hopper));
         robotCommands.put("Score", new VizScore(shooter,hopper));
+        robotCommands.put("ScoreAim", new ParallelCommandGroup(new STOMAuto(shooter, hopper),drivetrain.applyRequest(() ->
+        angle.withVelocityX(0)
+            .withVelocityY(0)
+            .withTargetDirection(SOTM.targetangle( ))
+            .withTargetRateFeedforward(SOTM.targetAngleFeeds())
+            )));
         robotCommands.put("BumpScore", new AutoBumpScore(shooter, hopper));
         robotCommands.put("BumpScoreAngle", new AutoBumpScoreAngle(shooter, hopper));
         robotCommands.put("ScoreWarmup", Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocity)));
+        robotCommands.put("ScoreWarmupFar", Commands.runOnce(() -> shooter.setShooterVelocity(Constants.Shooter.WarmupVelocityFar)));
         robotCommands.put("IntakeDeploy", new AutoIntakeDeploy(intake));
         robotCommands.put("IntakeDeployDepot", new AutoIntakeDeployDepot(intake));
         robotCommands.put("IntakeDeployDef", new AutoIntakeDeployDef(intake));
