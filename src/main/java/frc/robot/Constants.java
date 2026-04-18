@@ -89,9 +89,9 @@ public class Constants {
         ShotVelocity.put(2.0, 220.0);
         ShotVelocity.put(2.5, 255.0);
         ShotVelocity.put(3.0, 295.0);
-        ShotVelocity.put(3.5, 330.0);
-        ShotVelocity.put(4.0, 340.0);
-        ShotVelocity.put(4.5, 370.0);
+        ShotVelocity.put(3.5, 335.0);
+        ShotVelocity.put(4.0, 345.0);
+        ShotVelocity.put(4.5, 375.0);
         ShotVelocity.put(5.0, 480.0);
         ShotVelocity.put(5.5, 490.0);
     }
@@ -104,12 +104,12 @@ public class Constants {
         ShotAngle.put(1.5, Units.degreesToRadians(13));
         ShotAngle.put(2.0, Units.degreesToRadians(16.5));
         ShotAngle.put(2.5, Units.degreesToRadians(24));
-        ShotAngle.put(3.0, Units.degreesToRadians(27));
-        ShotAngle.put(3.5, Units.degreesToRadians(28));
-        ShotAngle.put(4.0, Units.degreesToRadians(29));
-        ShotAngle.put(4.5, Units.degreesToRadians(30));
-        ShotAngle.put(5.0, Units.degreesToRadians(31));
-        ShotAngle.put(5.5, Units.degreesToRadians(31));
+        ShotAngle.put(3.0, Units.degreesToRadians(28));
+        ShotAngle.put(3.5, Units.degreesToRadians(29));
+        ShotAngle.put(4.0, Units.degreesToRadians(30));
+        ShotAngle.put(4.5, Units.degreesToRadians(31));
+        ShotAngle.put(5.0, Units.degreesToRadians(32));
+        ShotAngle.put(5.5, Units.degreesToRadians(32));
     }
     // Used for sotm (Shoot on the move)
     public static InterpolatingDoubleTreeMap ShotTime;
