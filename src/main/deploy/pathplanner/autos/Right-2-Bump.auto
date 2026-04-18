@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LStart-Mid-Bump-LS"
+            "pathName": "RStart-Mid-Bump-RS"
           }
         },
         {
@@ -32,13 +32,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "LS-LT"
+            "pathName": "RS-RT"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "LT-Mid-Bump-LS"
+            "pathName": "RT-MidClose-Bump-RS"
           }
         },
         {
@@ -64,6 +64,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "Left",
+  "folder": "Right",
   "choreoAuto": false
 }

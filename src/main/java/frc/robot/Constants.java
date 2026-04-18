@@ -83,16 +83,16 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 185.0);
-        ShotVelocity.put(1.0, 190.0);
-        ShotVelocity.put(1.5, 200.0);
-        ShotVelocity.put(2.0, 225.0);
-        ShotVelocity.put(2.5, 260.0);
-        ShotVelocity.put(3.0, 300.0);
-        ShotVelocity.put(3.5, 335.0);
-        ShotVelocity.put(4.0, 345.0);
-        ShotVelocity.put(4.5, 375.0);
-        ShotVelocity.put(5.0, 485.0);
+        ShotVelocity.put(0.5, 180.0);
+        ShotVelocity.put(1.0, 185.0);
+        ShotVelocity.put(1.5, 195.0);
+        ShotVelocity.put(2.0, 220.0);
+        ShotVelocity.put(2.5, 255.0);
+        ShotVelocity.put(3.0, 295.0);
+        ShotVelocity.put(3.5, 330.0);
+        ShotVelocity.put(4.0, 340.0);
+        ShotVelocity.put(4.5, 370.0);
+        ShotVelocity.put(5.0, 480.0);
         ShotVelocity.put(5.5, 490.0);
     }
     public static InterpolatingDoubleTreeMap ShotAngle;
