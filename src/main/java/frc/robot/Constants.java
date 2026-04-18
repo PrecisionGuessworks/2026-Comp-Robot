@@ -270,10 +270,10 @@ public class Constants {
 
 
     // Auto Bump Values
-    public static final double ShooterBumpVelocityAngle = 270.0;
-    public static final double hoodBumpAngleAngle = Units.degreesToRadians(11);
-    public static final double ShooterBumpVelocityAuto = 270.0;
-    public static final double hoodBumpAngleAuto = Units.degreesToRadians(7.5);
+    public static final double ShooterBumpVelocityAngle = 180.0;
+    public static final double hoodBumpAngleAngle = Units.degreesToRadians(9);
+    public static final double ShooterBumpVelocityAuto = 180.0;
+    public static final double hoodBumpAngleAuto = Units.degreesToRadians(6.5);
 
     
 
@@ -308,7 +308,7 @@ public class Constants {
 
         public static final double hopperVelocity = 105;
     public static final double hopperIntakeVelocity = 10; // Hooper velocity when intaking, slowly puts all the balls to the back
-
+    public static final double hopperOuttakeVelocity = -25;
 
   }
 
@@ -371,7 +371,7 @@ public class Constants {
 
     public static final double attackPosition = Units.inchesToMeters(11.5); // Intake depoly postion in Attack mode, PLZ make sure this is less than max extension
     public static final double defPosition = Units.inchesToMeters(4.0);     // Intake depoly postion in Defense mode
-    public static final double attackPositionDepot = Units.inchesToMeters(1); // How much to move back from attack position when D-Pad up is pressed for depot intake    
+    public static final double attackPositionDepot = Units.inchesToMeters(0.001); // How much to move back from attack position when D-Pad up is pressed for depot intake    
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.26); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.4); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed

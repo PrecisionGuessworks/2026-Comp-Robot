@@ -26,8 +26,9 @@ public class HooperOuttake extends Command {
   public void initialize() {
 
     m_shooter.setIndexerVelocity(-Constants.Shooter.indexerVelocity);
-    m_hopper.setHopperRollerVelocity(-Constants.Hopper.hopperIntakeVelocity);
-
+    m_hopper.setHopperRollerCurrent(90, 45);
+    m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperOuttakeVelocity);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +43,7 @@ public class HooperOuttake extends Command {
   public void end(boolean interrupted) {
     m_hopper.setHopperRollerVelocity(0);
     m_shooter.setIndexerVelocity(0);
+    m_hopper.setHopperRollerCurrent(55, 30);
 
   }
 
