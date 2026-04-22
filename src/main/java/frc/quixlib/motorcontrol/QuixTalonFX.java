@@ -72,31 +72,31 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
   // private final DoublePublisher m_sensorPositionPublisher;
   // private final DoublePublisher m_sensorVelocityPublisher;
   
-  // private final DoubleSubscriber SupplyCurrentSubscriber;
-  // private final DoubleSubscriber StatorCurrentSubscriber;
-  // private final DoubleSubscriber MaxVelocitySubscriber;
-  // private final DoubleSubscriber MaxAccelerationSubscriber;
-  // private final DoubleSubscriber kP0Subscriber;
-  // private final DoubleSubscriber kI0Subscriber;
-  // private final DoubleSubscriber kD0Subscriber;
-  // private final DoubleSubscriber kS0Subscriber;
-  // private final DoubleSubscriber kV0Subscriber;
-  // private final DoubleSubscriber kA0Subscriber;
-  // private final DoubleSubscriber kG0Subscriber;
-  // private final DoubleSubscriber kP1Subscriber;
-  // private final DoubleSubscriber kI1Subscriber;
-  // private final DoubleSubscriber kD1Subscriber;
-  // private final DoubleSubscriber kS1Subscriber;
-  // private final DoubleSubscriber kV1Subscriber;
-  // private final DoubleSubscriber kA1Subscriber;
-  // private final DoubleSubscriber kG1Subscriber;
-  // private final DoubleSubscriber kP2Subscriber;
-  // private final DoubleSubscriber kI2Subscriber;
-  // private final DoubleSubscriber kD2Subscriber;
-  // private final DoubleSubscriber kS2Subscriber;
-  // private final DoubleSubscriber kV2Subscriber;
-  // private final DoubleSubscriber kA2Subscriber;
-  // private final DoubleSubscriber kG2Subscriber;
+  private final DoubleSubscriber SupplyCurrentSubscriber;
+  private final DoubleSubscriber StatorCurrentSubscriber;
+  private final DoubleSubscriber MaxVelocitySubscriber;
+  private final DoubleSubscriber MaxAccelerationSubscriber;
+  private final DoubleSubscriber kP0Subscriber;
+  private final DoubleSubscriber kI0Subscriber;
+  private final DoubleSubscriber kD0Subscriber;
+  private final DoubleSubscriber kS0Subscriber;
+  private final DoubleSubscriber kV0Subscriber;
+  private final DoubleSubscriber kA0Subscriber;
+  private final DoubleSubscriber kG0Subscriber;
+  private final DoubleSubscriber kP1Subscriber;
+  private final DoubleSubscriber kI1Subscriber;
+  private final DoubleSubscriber kD1Subscriber;
+  private final DoubleSubscriber kS1Subscriber;
+  private final DoubleSubscriber kV1Subscriber;
+  private final DoubleSubscriber kA1Subscriber;
+  private final DoubleSubscriber kG1Subscriber;
+  private final DoubleSubscriber kP2Subscriber;
+  private final DoubleSubscriber kI2Subscriber;
+  private final DoubleSubscriber kD2Subscriber;
+  private final DoubleSubscriber kS2Subscriber;
+  private final DoubleSubscriber kV2Subscriber;
+  private final DoubleSubscriber kA2Subscriber;
+  private final DoubleSubscriber kG2Subscriber;
   
 
 
@@ -317,35 +317,31 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     String name = m_controller.getDescription()+" ID  " + m_canID.deviceNumber +" ";
 
 
-
-
-
-
-    // SupplyCurrentSubscriber = DogLog.tunable(name+ "/Supply Current Limit",m_config.SUPPLY_CURRENT_LIMIT);
-    // StatorCurrentSubscriber = DogLog.tunable(name+ "/Stator Current Limit",m_config.STATOR_CURRENT_LIMIT);
-    // MaxVelocitySubscriber = DogLog.tunable(name+ "/Max Velocity",m_config.motionMagicCruiseVelocity);
-    // MaxAccelerationSubscriber = DogLog.tunable(name+ "/Max Acceleration",m_config.motionMagicAcceleration);
-    // kP0Subscriber = DogLog.tunable(name+ "/Slot 0/1 kP",m_config.slot0Config.kP);
-    // kI0Subscriber = DogLog.tunable(name+ "/Slot 0/2 kI",m_config.slot0Config.kI);
-    // kD0Subscriber = DogLog.tunable(name+ "/Slot 0/3 kD",m_config.slot0Config.kD);
-    // kS0Subscriber = DogLog.tunable(name+ "/Slot 0/4 kS",m_config.slot0Config.kS);
-    // kV0Subscriber = DogLog.tunable(name+ "/Slot 0/5 kV",m_config.slot0Config.kV);
-    // kA0Subscriber = DogLog.tunable(name+ "/Slot 0/6 kA",m_config.slot0Config.kA);
-    // kG0Subscriber = DogLog.tunable(name+ "/Slot 0/7 kG",m_config.slot0Config.kG);
-    // kP1Subscriber = DogLog.tunable(name+ "/Slot 1/1 kP",m_config.slot1Config.kP);
-    // kI1Subscriber = DogLog.tunable(name+ "/Slot 1/2 kI",m_config.slot1Config.kI);
-    // kD1Subscriber = DogLog.tunable(name+ "/Slot 1/3 kD",m_config.slot1Config.kD);
-    // kS1Subscriber = DogLog.tunable(name+ "/Slot 1/4 kS",m_config.slot1Config.kS);
-    // kV1Subscriber = DogLog.tunable(name+ "/Slot 1/5 kV",m_config.slot1Config.kV);
-    // kA1Subscriber = DogLog.tunable(name+ "/Slot 1/6 kA",m_config.slot1Config.kA);
-    // kG1Subscriber = DogLog.tunable(name+ "/Slot 1/7 kG",m_config.slot1Config.kG);
-    // kP2Subscriber = DogLog.tunable(name+ "/Slot 2/1 kP",m_config.slot2Config.kP);
-    // kI2Subscriber = DogLog.tunable(name+ "/Slot 2/2 kI",m_config.slot2Config.kI);
-    // kD2Subscriber = DogLog.tunable(name+ "/Slot 2/3 kD",m_config.slot2Config.kD);
-    // kS2Subscriber = DogLog.tunable(name+ "/Slot 2/4 kS",m_config.slot2Config.kS);
-    // kV2Subscriber = DogLog.tunable(name+ "/Slot 2/5 kV",m_config.slot2Config.kV);
-    // kA2Subscriber = DogLog.tunable(name+ "/Slot 2/6 kA",m_config.slot2Config.kA);
-    // kG2Subscriber = DogLog.tunable(name+ "/Slot 2/7 kG",m_config.slot2Config.kG);
+    SupplyCurrentSubscriber = DogLog.tunable(name+ "/Supply Current Limit",m_config.SUPPLY_CURRENT_LIMIT);
+    StatorCurrentSubscriber = DogLog.tunable(name+ "/Stator Current Limit",m_config.STATOR_CURRENT_LIMIT);
+    MaxVelocitySubscriber = DogLog.tunable(name+ "/Max Velocity",m_config.motionMagicCruiseVelocity);
+    MaxAccelerationSubscriber = DogLog.tunable(name+ "/Max Acceleration",m_config.motionMagicAcceleration);
+    kP0Subscriber = DogLog.tunable(name+ "/Slot 0/1 kP",m_config.slot0Config.kP);
+    kI0Subscriber = DogLog.tunable(name+ "/Slot 0/2 kI",m_config.slot0Config.kI);
+    kD0Subscriber = DogLog.tunable(name+ "/Slot 0/3 kD",m_config.slot0Config.kD);
+    kS0Subscriber = DogLog.tunable(name+ "/Slot 0/4 kS",m_config.slot0Config.kS);
+    kV0Subscriber = DogLog.tunable(name+ "/Slot 0/5 kV",m_config.slot0Config.kV);
+    kA0Subscriber = DogLog.tunable(name+ "/Slot 0/6 kA",m_config.slot0Config.kA);
+    kG0Subscriber = DogLog.tunable(name+ "/Slot 0/7 kG",m_config.slot0Config.kG);
+    kP1Subscriber = DogLog.tunable(name+ "/Slot 1/1 kP",m_config.slot1Config.kP);
+    kI1Subscriber = DogLog.tunable(name+ "/Slot 1/2 kI",m_config.slot1Config.kI);
+    kD1Subscriber = DogLog.tunable(name+ "/Slot 1/3 kD",m_config.slot1Config.kD);
+    kS1Subscriber = DogLog.tunable(name+ "/Slot 1/4 kS",m_config.slot1Config.kS);
+    kV1Subscriber = DogLog.tunable(name+ "/Slot 1/5 kV",m_config.slot1Config.kV);
+    kA1Subscriber = DogLog.tunable(name+ "/Slot 1/6 kA",m_config.slot1Config.kA);
+    kG1Subscriber = DogLog.tunable(name+ "/Slot 1/7 kG",m_config.slot1Config.kG);
+    kP2Subscriber = DogLog.tunable(name+ "/Slot 2/1 kP",m_config.slot2Config.kP);
+    kI2Subscriber = DogLog.tunable(name+ "/Slot 2/2 kI",m_config.slot2Config.kI);
+    kD2Subscriber = DogLog.tunable(name+ "/Slot 2/3 kD",m_config.slot2Config.kD);
+    kS2Subscriber = DogLog.tunable(name+ "/Slot 2/4 kS",m_config.slot2Config.kS);
+    kV2Subscriber = DogLog.tunable(name+ "/Slot 2/5 kV",m_config.slot2Config.kV);
+    kA2Subscriber = DogLog.tunable(name+ "/Slot 2/6 kA",m_config.slot2Config.kA);
+    kG2Subscriber = DogLog.tunable(name+ "/Slot 2/7 kG",m_config.slot2Config.kG);
 
 
 
@@ -500,129 +496,129 @@ public class QuixTalonFX implements QuixMotorControllerWithEncoder, AutoCloseabl
     DogLog.log(name + ": Raw Rotor Position", m_controller.getRotorPosition().getValueAsDouble(),"Radi");
     DogLog.log(name + ": Sensor Position", getSensorPosition(),"rad");
     DogLog.log(name + ": Sensor Velocity", getSensorVelocity(),"rotations per sec");
-    // if (!DriverStation.isFMSAttached()){
-    // updateTunerConstants();
-    // }
+    if (!DriverStation.isFMSAttached()){
+    updateTunerConstants();
+    }
     }
   }
 
-  // public void updateTunerConstants(){
-  //   if (DriverStation.isFMSAttached()){
-  //   // new Alert("Tunables are still LIVE and FMS is attatched!!! Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
-  //   }
-  //   if (DriverStation.isFMSAttached()){
-  //   // new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
-  //   Elastic.Notification notification = new Elastic.Notification(Elastic.NotificationLevel.ERROR, "Tunables are still LIVE!!!", "FMS is attatched, Tunables updates will be ignored");
-  //   Elastic.sendNotification(notification);
-  //   }
-  //   boolean updated = false;
-  //   String name = m_controller.getDescription()+" ID: " + m_canID.deviceNumber +" ";
-  //   if (SupplyCurrentSubscriber.get() != m_config.SUPPLY_CURRENT_LIMIT){
-  //     m_config.SUPPLY_CURRENT_LIMIT = SupplyCurrentSubscriber.getAsDouble();
-  //     System.out.println(name + ": Supply Current Limit Updated to "+m_config.SUPPLY_CURRENT_LIMIT);
-  //     updated = true;
-  //   } else if (StatorCurrentSubscriber.get() != m_config.STATOR_CURRENT_LIMIT){
-  //     m_config.STATOR_CURRENT_LIMIT = StatorCurrentSubscriber.getAsDouble();
-  //     System.out.println(name + ": Stator Current Limit Updated to "+m_config.STATOR_CURRENT_LIMIT);
-  //     updated = true;
-  //   } else if (MaxVelocitySubscriber.get() != m_config.motionMagicCruiseVelocity){
-  //     m_config.motionMagicCruiseVelocity = MaxVelocitySubscriber.getAsDouble();
-  //     System.out.println(name + ": Max Velocity Updated to "+m_config.motionMagicCruiseVelocity);
-  //     updated = true;
-  //   } else if (MaxAccelerationSubscriber.get() != m_config.motionMagicAcceleration){
-  //     m_config.motionMagicAcceleration = MaxAccelerationSubscriber.getAsDouble();
-  //     System.out.println(name + ": Max Acceleration Updated to "+m_config.motionMagicAcceleration);
-  //     updated = true;
-  //   } else if (kP0Subscriber.get() != m_config.slot0Config.kP){
-  //     m_config.slot0Config.kP = kP0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kP Slot 0 Updated to "+m_config.slot0Config.kP);
-  //     updated = true;
-  //   } else if (kI0Subscriber.get() != m_config.slot0Config.kI){
-  //     m_config.slot0Config.kI = kI0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kI Slot 0 Updated to "+m_config.slot0Config.kI);
-  //     updated = true;
-  //   } else if (kD0Subscriber.get() != m_config.slot0Config.kD){
-  //     m_config.slot0Config.kD = kD0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kD Slot 0 Updated to "+m_config.slot0Config.kD);
-  //     updated = true;
-  //   } else if (kS0Subscriber.get() != m_config.slot0Config.kS){
-  //     m_config.slot0Config.kS = kS0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kS Slot 0 Updated to "+m_config.slot0Config.kS);
-  //     updated = true;
-  //   } else if (kV0Subscriber.get() != m_config.slot0Config.kV){
-  //     m_config.slot0Config.kV = kV0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kV Slot 0 Updated to "+m_config.slot0Config.kV);
-  //     updated = true;
-  //   } else if (kA0Subscriber.get() != m_config.slot0Config.kA){
-  //     m_config.slot0Config.kA = kA0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kA Slot 0 Updated to "+m_config.slot0Config.kA);
-  //     updated = true;
-  //   } else if (kG0Subscriber.get() != m_config.slot0Config.kG){
-  //     m_config.slot0Config.kG = kG0Subscriber.getAsDouble();
-  //     System.out.println(name + ": kG Slot 0 Updated to "+m_config.slot0Config.kG);
-  //     updated = true;
-  //   } else if (kP1Subscriber.get() != m_config.slot1Config.kP){
-  //     m_config.slot1Config.kP = kP1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kP Slot 1 Updated to "+m_config.slot1Config.kP);
-  //     updated = true;
-  //   } else if (kI1Subscriber.get() != m_config.slot1Config.kI){
-  //     m_config.slot1Config.kI = kI1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kI Slot 1 Updated to "+m_config.slot1Config.kI);
-  //     updated = true;
-  //   } else if (kD1Subscriber.get() != m_config.slot1Config.kD){
-  //     m_config.slot1Config.kD = kD1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kD Slot 1 Updated to "+m_config.slot1Config.kD);
-  //     updated = true;
-  //   } else if (kS1Subscriber.get() != m_config.slot1Config.kS){
-  //     m_config.slot1Config.kS = kS1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kS Slot 1 Updated to "+m_config.slot1Config.kS);
-  //     updated = true;
-  //   } else if (kV1Subscriber.get() != m_config.slot1Config.kV){
-  //     m_config.slot1Config.kV = kV1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kV Slot 1 Updated to "+m_config.slot1Config.kV);
-  //     updated = true;
-  //   } else if (kA1Subscriber.get() != m_config.slot1Config.kA){
-  //     m_config.slot1Config.kA = kA1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kA Slot 1 Updated to "+m_config.slot1Config.kA);
-  //     updated = true;
-  //   } else if (kG1Subscriber.get() != m_config.slot1Config.kG){
-  //     m_config.slot1Config.kG = kG1Subscriber.getAsDouble();
-  //     System.out.println(name + ": kG Slot 1 Updated to "+m_config.slot1Config.kG);
-  //     updated = true;
-  //   } else if (kP2Subscriber.get() != m_config.slot2Config.kP){
-  //     m_config.slot2Config.kP = kP2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kP Slot 2 Updated to "+m_config.slot2Config.kP);
-  //     updated = true;
-  //   } else if (kI2Subscriber.get() != m_config.slot2Config.kI){
-  //     m_config.slot2Config.kI = kI2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kI Slot 2 Updated to "+m_config.slot2Config.kI);
-  //     updated = true;
-  //   } else if (kD2Subscriber.get() != m_config.slot2Config.kD){
-  //     m_config.slot2Config.kD = kD2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kD Slot 2 Updated to "+m_config.slot2Config.kD);
-  //     updated = true;
-  //   } else if (kS2Subscriber.get() != m_config.slot2Config.kS){
-  //     m_config.slot2Config.kS = kS2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kS Slot 2 Updated to "+m_config.slot2Config.kS);
-  //     updated = true;
-  //   } else if (kV2Subscriber.get() != m_config.slot2Config.kV){
-  //     m_config.slot2Config.kV = kV2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kV Slot 2 Updated to "+m_config.slot2Config.kV);
-  //     updated = true;
-  //   } else if (kA2Subscriber.get() != m_config.slot2Config.kA){
-  //     m_config.slot2Config.kA = kA2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kA Slot 2 Updated to "+m_config.slot2Config.kA);
-  //     updated = true;
-  //   } else if (kG2Subscriber.get() != m_config.slot2Config.kG){
-  //     m_config.slot2Config.kG = kG2Subscriber.getAsDouble();
-  //     System.out.println(name + ": kG Slot 2 Updated to "+m_config.slot2Config.kG);
-  //     updated = true;
-  //   }
-  //   if (updated){
-  //     setConfiguration(); 
-  //   }
+  public void updateTunerConstants(){
+    if (DriverStation.isFMSAttached()){
+    // new Alert("Tunables are still LIVE and FMS is attatched!!! Please comment them out in src/main/java/frc/quixlib/motorcontrol/QuixTalonFX.java", AlertType.kError).set(true);
+    }
+    if (DriverStation.isFMSAttached()){
+    // new Alert("FMS is attatched, Tunables updates will be ignored", AlertType.kWarning).set(true);
+    Elastic.Notification notification = new Elastic.Notification(Elastic.NotificationLevel.ERROR, "Tunables are still LIVE!!!", "FMS is attatched, Tunables updates will be ignored");
+    Elastic.sendNotification(notification);
+    }
+    boolean updated = false;
+    String name = m_controller.getDescription()+" ID: " + m_canID.deviceNumber +" ";
+    if (SupplyCurrentSubscriber.get() != m_config.SUPPLY_CURRENT_LIMIT){
+      m_config.SUPPLY_CURRENT_LIMIT = SupplyCurrentSubscriber.getAsDouble();
+      System.out.println(name + ": Supply Current Limit Updated to "+m_config.SUPPLY_CURRENT_LIMIT);
+      updated = true;
+    } else if (StatorCurrentSubscriber.get() != m_config.STATOR_CURRENT_LIMIT){
+      m_config.STATOR_CURRENT_LIMIT = StatorCurrentSubscriber.getAsDouble();
+      System.out.println(name + ": Stator Current Limit Updated to "+m_config.STATOR_CURRENT_LIMIT);
+      updated = true;
+    } else if (MaxVelocitySubscriber.get() != m_config.motionMagicCruiseVelocity){
+      m_config.motionMagicCruiseVelocity = MaxVelocitySubscriber.getAsDouble();
+      System.out.println(name + ": Max Velocity Updated to "+m_config.motionMagicCruiseVelocity);
+      updated = true;
+    } else if (MaxAccelerationSubscriber.get() != m_config.motionMagicAcceleration){
+      m_config.motionMagicAcceleration = MaxAccelerationSubscriber.getAsDouble();
+      System.out.println(name + ": Max Acceleration Updated to "+m_config.motionMagicAcceleration);
+      updated = true;
+    } else if (kP0Subscriber.get() != m_config.slot0Config.kP){
+      m_config.slot0Config.kP = kP0Subscriber.getAsDouble();
+      System.out.println(name + ": kP Slot 0 Updated to "+m_config.slot0Config.kP);
+      updated = true;
+    } else if (kI0Subscriber.get() != m_config.slot0Config.kI){
+      m_config.slot0Config.kI = kI0Subscriber.getAsDouble();
+      System.out.println(name + ": kI Slot 0 Updated to "+m_config.slot0Config.kI);
+      updated = true;
+    } else if (kD0Subscriber.get() != m_config.slot0Config.kD){
+      m_config.slot0Config.kD = kD0Subscriber.getAsDouble();
+      System.out.println(name + ": kD Slot 0 Updated to "+m_config.slot0Config.kD);
+      updated = true;
+    } else if (kS0Subscriber.get() != m_config.slot0Config.kS){
+      m_config.slot0Config.kS = kS0Subscriber.getAsDouble();
+      System.out.println(name + ": kS Slot 0 Updated to "+m_config.slot0Config.kS);
+      updated = true;
+    } else if (kV0Subscriber.get() != m_config.slot0Config.kV){
+      m_config.slot0Config.kV = kV0Subscriber.getAsDouble();
+      System.out.println(name + ": kV Slot 0 Updated to "+m_config.slot0Config.kV);
+      updated = true;
+    } else if (kA0Subscriber.get() != m_config.slot0Config.kA){
+      m_config.slot0Config.kA = kA0Subscriber.getAsDouble();
+      System.out.println(name + ": kA Slot 0 Updated to "+m_config.slot0Config.kA);
+      updated = true;
+    } else if (kG0Subscriber.get() != m_config.slot0Config.kG){
+      m_config.slot0Config.kG = kG0Subscriber.getAsDouble();
+      System.out.println(name + ": kG Slot 0 Updated to "+m_config.slot0Config.kG);
+      updated = true;
+    } else if (kP1Subscriber.get() != m_config.slot1Config.kP){
+      m_config.slot1Config.kP = kP1Subscriber.getAsDouble();
+      System.out.println(name + ": kP Slot 1 Updated to "+m_config.slot1Config.kP);
+      updated = true;
+    } else if (kI1Subscriber.get() != m_config.slot1Config.kI){
+      m_config.slot1Config.kI = kI1Subscriber.getAsDouble();
+      System.out.println(name + ": kI Slot 1 Updated to "+m_config.slot1Config.kI);
+      updated = true;
+    } else if (kD1Subscriber.get() != m_config.slot1Config.kD){
+      m_config.slot1Config.kD = kD1Subscriber.getAsDouble();
+      System.out.println(name + ": kD Slot 1 Updated to "+m_config.slot1Config.kD);
+      updated = true;
+    } else if (kS1Subscriber.get() != m_config.slot1Config.kS){
+      m_config.slot1Config.kS = kS1Subscriber.getAsDouble();
+      System.out.println(name + ": kS Slot 1 Updated to "+m_config.slot1Config.kS);
+      updated = true;
+    } else if (kV1Subscriber.get() != m_config.slot1Config.kV){
+      m_config.slot1Config.kV = kV1Subscriber.getAsDouble();
+      System.out.println(name + ": kV Slot 1 Updated to "+m_config.slot1Config.kV);
+      updated = true;
+    } else if (kA1Subscriber.get() != m_config.slot1Config.kA){
+      m_config.slot1Config.kA = kA1Subscriber.getAsDouble();
+      System.out.println(name + ": kA Slot 1 Updated to "+m_config.slot1Config.kA);
+      updated = true;
+    } else if (kG1Subscriber.get() != m_config.slot1Config.kG){
+      m_config.slot1Config.kG = kG1Subscriber.getAsDouble();
+      System.out.println(name + ": kG Slot 1 Updated to "+m_config.slot1Config.kG);
+      updated = true;
+    } else if (kP2Subscriber.get() != m_config.slot2Config.kP){
+      m_config.slot2Config.kP = kP2Subscriber.getAsDouble();
+      System.out.println(name + ": kP Slot 2 Updated to "+m_config.slot2Config.kP);
+      updated = true;
+    } else if (kI2Subscriber.get() != m_config.slot2Config.kI){
+      m_config.slot2Config.kI = kI2Subscriber.getAsDouble();
+      System.out.println(name + ": kI Slot 2 Updated to "+m_config.slot2Config.kI);
+      updated = true;
+    } else if (kD2Subscriber.get() != m_config.slot2Config.kD){
+      m_config.slot2Config.kD = kD2Subscriber.getAsDouble();
+      System.out.println(name + ": kD Slot 2 Updated to "+m_config.slot2Config.kD);
+      updated = true;
+    } else if (kS2Subscriber.get() != m_config.slot2Config.kS){
+      m_config.slot2Config.kS = kS2Subscriber.getAsDouble();
+      System.out.println(name + ": kS Slot 2 Updated to "+m_config.slot2Config.kS);
+      updated = true;
+    } else if (kV2Subscriber.get() != m_config.slot2Config.kV){
+      m_config.slot2Config.kV = kV2Subscriber.getAsDouble();
+      System.out.println(name + ": kV Slot 2 Updated to "+m_config.slot2Config.kV);
+      updated = true;
+    } else if (kA2Subscriber.get() != m_config.slot2Config.kA){
+      m_config.slot2Config.kA = kA2Subscriber.getAsDouble();
+      System.out.println(name + ": kA Slot 2 Updated to "+m_config.slot2Config.kA);
+      updated = true;
+    } else if (kG2Subscriber.get() != m_config.slot2Config.kG){
+      m_config.slot2Config.kG = kG2Subscriber.getAsDouble();
+      System.out.println(name + ": kG Slot 2 Updated to "+m_config.slot2Config.kG);
+      updated = true;
+    }
+    if (updated){
+      setConfiguration(); 
+    }
   
-  // }
+  }
 
 
 
