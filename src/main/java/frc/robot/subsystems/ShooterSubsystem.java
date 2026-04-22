@@ -142,6 +142,12 @@ public class ShooterSubsystem extends SubsystemBase {
   return false;
   }
 
+  public void setBumpWarmup() {
+    if (shooterTargetVelocity < Constants.Shooter.WarmupVelocityBump) {
+      setShooterVelocity(Constants.Shooter.WarmupVelocityBump);
+    }
+  }
+
   public boolean isShooterSafe() {
     Pose2d robotPose = RobotContainer.drivetrain.getState().Pose;
     ChassisSpeeds robotSpeeds = RobotContainer.drivetrain.getState().Speeds;
