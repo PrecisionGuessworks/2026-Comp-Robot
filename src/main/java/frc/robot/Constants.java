@@ -386,7 +386,7 @@ public class Constants {
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
-    public static final double intakeCRollerVelocity = 100;
+    public static final double intakeCRollerVelocity = 115;
 
     // Used for anti-jam c intake, which not used
     public static final double antiJamCRollerVelocity = 25;
@@ -397,7 +397,7 @@ public class Constants {
 
     public static final double intakeABRollerVelocity = 60; // AB normal intake speed
     public static final double SlowCRollerVelocity = 15;    // Intake speed for shooting
-    public static final double SlowABRollerVelocity = 25;   // Intake speed for shooting
+    public static final double SlowABRollerVelocity = 20;   // Intake speed for shooting
     public static final double outtakeRollerVelocity = -100;
 
     public static final double holdRollerVelocity = 0; // Velocity to hold the game piece in the intake without letting it fall out, should be slightly positive to hold the piece in if needed
