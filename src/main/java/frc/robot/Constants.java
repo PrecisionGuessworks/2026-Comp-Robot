@@ -386,7 +386,7 @@ public class Constants {
     public static final double retractHomeSupplyCurrent = 10.0; // Amps
     public static final double retractHomeCutoffVelocity = 0.01; // m/s, when to stop retracting in home command
 
-    public static final double intakeCRollerVelocity = 115;
+    public static final double intakeCRollerVelocity = 105;
 
     // Used for anti-jam c intake, which not used
     public static final double antiJamCRollerVelocity = 25;

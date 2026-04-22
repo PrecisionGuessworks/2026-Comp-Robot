@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreAim"
+                  "name": "Score"
                 }
               }
             ]
@@ -54,7 +54,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "ScoreAim"
+                  "name": "Score"
                 }
               }
             ]
