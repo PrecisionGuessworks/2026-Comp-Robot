@@ -27,6 +27,14 @@ public HopperSubsystem() {
 
 public void setHopperRollerVelocity(double velocity) {
     hopperTargetVelocity = velocity;
+    if (hoppersetTargetVelocity == 0.0) {
+      m_hopperMotor.setPercentOutput(0.0);
+    } else {
+      m_hopperMotor.setVelocitySetpoint(
+          Constants.Hopper.rollerVelocitySlot,
+          hoppersetTargetVelocity,
+          Constants.Hopper.rollerFeedforward.calculate(hoppersetTargetVelocity));
+    }
 
   }
 
@@ -45,21 +53,14 @@ public void setHopperRollerVelocity(double velocity) {
 
     @Override
   public void periodic() {
-    if (RobotContainer.driver.rightTrigger().getAsBoolean() && DriverStation.isTeleop()) {
-      hoppersetTargetVelocity = Constants.Hopper.hopperIntakeVelocity;
-    } else {
-      hoppersetTargetVelocity = hopperTargetVelocity;
-    }
+    // if (RobotContainer.driver.rightTrigger().getAsBoolean() && DriverStation.isTeleop()) {
+    //   hoppersetTargetVelocity = Constants.Hopper.hopperIntakeVelocity;
+    // } else {
+    //   hoppersetTargetVelocity = hopperTargetVelocity;
+    // }
 
     
-        if (hoppersetTargetVelocity == 0.0) {
-      m_hopperMotor.setPercentOutput(0.0);
-    } else {
-      m_hopperMotor.setVelocitySetpoint(
-          Constants.Hopper.rollerVelocitySlot,
-          hoppersetTargetVelocity,
-          Constants.Hopper.rollerFeedforward.calculate(hoppersetTargetVelocity));
-    }
+    
 
     DogLog.log("Hopper/ Current Velocity (rotations per sec)", m_hopperMotor.getSensorVelocity(),"rotations per sec");
     DogLog.log("Hopper/ Target set Velocity (rotations per sec)", hoppersetTargetVelocity,"rotations per sec");

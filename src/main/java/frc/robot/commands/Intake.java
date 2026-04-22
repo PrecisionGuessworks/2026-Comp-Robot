@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class Intake extends Command {
@@ -29,7 +30,9 @@ public class Intake extends Command {
       m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
       m_intake.setCRollerVelocity(Constants.Intake.SlowCRollerVelocity);
     }
-
+    if (!(RobotContainer.driver.leftBumper().getAsBoolean()||RobotContainer.operator.rightBumper().getAsBoolean()||RobotContainer.operator.leftTrigger().getAsBoolean())){
+    RobotContainer.hopper.setHopperRollerVelocity(Constants.Hopper.hopperIntakeVelocity);
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -55,6 +58,9 @@ public class Intake extends Command {
   public void end(boolean interrupted) {
     m_intake.setABRollerVelocity(Constants.Intake.holdRollerVelocity);
     m_intake.setCRollerVelocity(Constants.Intake.holdRollerVelocity);
+    if (!(RobotContainer.driver.leftBumper().getAsBoolean()||RobotContainer.operator.rightBumper().getAsBoolean()||RobotContainer.operator.leftTrigger().getAsBoolean())){
+    RobotContainer.hopper.setHopperRollerVelocity(0);
+    }
 
   }
 
