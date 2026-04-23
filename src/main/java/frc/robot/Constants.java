@@ -59,7 +59,7 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
     public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights
 
     public static final class ShotCalc {
@@ -83,14 +83,14 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 180.0);
-        ShotVelocity.put(1.0, 185.0);
-        ShotVelocity.put(1.5, 195.0);
-        ShotVelocity.put(2.0, 220.0);
-        ShotVelocity.put(2.5, 255.0);
-        ShotVelocity.put(3.0, 295.0);
-        ShotVelocity.put(3.5, 335.0);
-        ShotVelocity.put(4.0, 345.0);
+        ShotVelocity.put(0.5, 150.0);
+        ShotVelocity.put(1.0, 155.0);
+        ShotVelocity.put(1.5, 165.0);
+        ShotVelocity.put(2.0, 175.0);
+        ShotVelocity.put(2.5, 185.0);
+        ShotVelocity.put(3.0, 215.0);
+        ShotVelocity.put(3.5, 285.0);
+        ShotVelocity.put(4.0, 335.0);
         ShotVelocity.put(4.5, 375.0);
         ShotVelocity.put(5.0, 480.0);
         ShotVelocity.put(5.5, 490.0);
@@ -100,16 +100,16 @@ public class Constants {
     static {
         ShotAngle = new InterpolatingDoubleTreeMap();
         ShotAngle.put(0.5, Units.degreesToRadians(10));
-        ShotAngle.put(1.0, Units.degreesToRadians(11));
-        ShotAngle.put(1.5, Units.degreesToRadians(13));
-        ShotAngle.put(2.0, Units.degreesToRadians(16.5));
-        ShotAngle.put(2.5, Units.degreesToRadians(24));
-        ShotAngle.put(3.0, Units.degreesToRadians(28));
-        ShotAngle.put(3.5, Units.degreesToRadians(29));
-        ShotAngle.put(4.0, Units.degreesToRadians(30));
-        ShotAngle.put(4.5, Units.degreesToRadians(31));
-        ShotAngle.put(5.0, Units.degreesToRadians(32));
-        ShotAngle.put(5.5, Units.degreesToRadians(32));
+        ShotAngle.put(1.0, Units.degreesToRadians(12));
+        ShotAngle.put(1.5, Units.degreesToRadians(16));
+        ShotAngle.put(2.0, Units.degreesToRadians(24));
+        ShotAngle.put(2.5, Units.degreesToRadians(27));
+        ShotAngle.put(3.0, Units.degreesToRadians(29));
+        ShotAngle.put(3.5, Units.degreesToRadians(31));
+        ShotAngle.put(4.0, Units.degreesToRadians(34));
+        ShotAngle.put(4.5, Units.degreesToRadians(38));
+        ShotAngle.put(5.0, Units.degreesToRadians(40));
+        ShotAngle.put(5.5, Units.degreesToRadians(42));
     }
     // Used for sotm (Shoot on the move)
     public static InterpolatingDoubleTreeMap ShotTime;
@@ -261,7 +261,7 @@ public class Constants {
     public static final double ShooterBumpVelocity = 215.0; 
     
     // Bump Pass values
-    public static final double hoodBumpPassAngle = Units.degreesToRadians(40);
+    public static final double hoodBumpPassAngle = Units.degreesToRadians(45);
     public static final double ShooterBumpPassVelocity = 500.0; 
 
     public static final double WarmupVelocity = 350.0;
@@ -306,7 +306,7 @@ public class Constants {
     // public static final double hopperVelocity = 400;
     // public static final double hopperIntakeVelocity = 60; // Hooper velocity when intaking, slowly puts all the balls to the back
 
-        public static final double hopperVelocity = 105;
+        public static final double hopperVelocity = 70;
     public static final double hopperIntakeVelocity = 10; // Hooper velocity when intaking, slowly puts all the balls to the back
     public static final double hopperOuttakeVelocity = -25;
 

@@ -27,13 +27,13 @@ public HopperSubsystem() {
 
 public void setHopperRollerVelocity(double velocity) {
     hopperTargetVelocity = velocity;
-    if (hoppersetTargetVelocity == 0.0) {
+    if (hopperTargetVelocity == 0.0) {
       m_hopperMotor.setPercentOutput(0.0);
     } else {
       m_hopperMotor.setVelocitySetpoint(
           Constants.Hopper.rollerVelocitySlot,
-          hoppersetTargetVelocity,
-          Constants.Hopper.rollerFeedforward.calculate(hoppersetTargetVelocity));
+          hopperTargetVelocity,
+          Constants.Hopper.rollerFeedforward.calculate(hopperTargetVelocity));
     }
 
   }
