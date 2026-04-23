@@ -506,7 +506,7 @@ public class Constants {
             new Transform3d(new Translation3d(Units.inchesToMeters(13.311564), 0.0, Units.inchesToMeters(7.332072)), new Rotation3d(0, Math.toRadians(-20), 0));
 
     public static final AprilTagFieldLayout kTagLayout =
-            AprilTagFields.k2026RebuiltAndymark.loadAprilTagLayoutField();
+            AprilTagFields.k2026RebuiltWelded.loadAprilTagLayoutField();
 
     // Increase these numbers to trust your state estimate less.
 
