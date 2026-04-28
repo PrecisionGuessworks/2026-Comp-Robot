@@ -182,6 +182,13 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_CrollerMotor.getSensorVelocity();
   }
 
+  public double EncoderPosition() {
+    return -m_deployEncoder.getPosition();
+  }
+  public double RealEncoderPosition() {
+    return Constants.Intake.deployEncoderRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
+  }
+
 
 
   public void setAttackMode(boolean attackMode) {
@@ -439,6 +446,8 @@ public class IntakeSubsystem extends SubsystemBase {
     DogLog.log("Intake/ C Roller Velocity", getCRollerVelocity(),"Rad/s");
     DogLog.log("Intake/ C Roller Setpoint", m_intakeCsetpoint,"Rad/s");
     DogLog.log("Intake/ C Roller Target Velocity", m_CrollerMotor.getClosedLoopReference(),"Rad/s");
+
+    DogLog.log("Intake/ Real Encoder Position", Units.metersToInches(RealEncoderPosition()),"In");
 
     if (Constants.LogHardware){
       DogLog.log("Intake/ Pulse/ Hold", m_hold);

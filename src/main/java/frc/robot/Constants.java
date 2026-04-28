@@ -67,8 +67,8 @@ public class Constants {
     public static final double kAccelCompFactor = 0.01; // Factor for Compensating for Robot Acceleration when Shooting on the Move
 
     public static final Pose2d targetpose =  DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
-    new Pose2d(4.64,4.05,new Rotation2d(0)) : // Blue
-    new Pose2d(11.9,4.05,new Rotation2d(0)); // Red
+    new Pose2d(4.626,4.035,new Rotation2d(0)) : // Blue
+    new Pose2d(11.915,4.035,new Rotation2d(0)); // Red
 
     public static final Pose2d upperPassPose = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue ?
     new Pose2d(2.5,6,new Rotation2d(0)) : // Blue
@@ -176,13 +176,24 @@ public class Constants {
         // public static final double DRotation = 0.1;
 
 
+        // public static final double PTranslation = 10;
+        // public static final double ITranslation = 0;
+        // public static final double DTranslation = 0;
+
+        // public static final double PRotation = 4;
+        // public static final double IRotation = 0;
+        // public static final double DRotation = 0;
+
         public static final double PTranslation = 10;
-        public static final double ITranslation = 0;
-        public static final double DTranslation = 0;
+        public static final double ITranslation = 0.001;
+        public static final double DTranslation = 0.1;
 
         public static final double PRotation = 4;
-        public static final double IRotation = 0;
+        public static final double IRotation = 0.01;
         public static final double DRotation = 0;
+        
+
+        
         
         // 0.0-1.0 of the max speed
         public static final double MaxSpeedPercentage = 0.85; // Default 1.0, percentage of max speed for teleop driving
