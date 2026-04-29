@@ -407,6 +407,7 @@ public class Constants {
 
 
     public static final double intakeABRollerVelocity = 60; // AB normal intake speed
+    public static final double intakeABRollerAttackVelocity = 35; // AB attack intake speed
     public static final double SlowCRollerVelocity = 15;    // Intake speed for shooting
     public static final double SlowABRollerVelocity = 20;   // Intake speed for shooting
     public static final double outtakeRollerVelocity = -100;

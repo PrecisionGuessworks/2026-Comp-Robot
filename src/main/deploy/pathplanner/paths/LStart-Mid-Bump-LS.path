@@ -68,7 +68,7 @@
         "y": 6.25
       },
       "prevControl": {
-        "x": 3.6027752976190475,
+        "x": 3.602775297619048,
         "y": 5.349508928571429
       },
       "nextControl": null,
@@ -129,19 +129,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDeployDef",
-      "waypointRelativePos": 0.010389610389610174,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeDeployDef"
-        }
-      }
-    },
-    {
       "name": "IntakeDeploy",
-      "waypointRelativePos": 0.3492063492063494,
+      "waypointRelativePos": 0.21917808219178084,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",

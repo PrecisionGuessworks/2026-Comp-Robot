@@ -41,7 +41,7 @@ public class Intake extends Command {
 
     if (m_intake.getAttackMode() != m_lastAttackMode){
       if (m_intake.getAttackMode()){
-        m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);
+        m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerAttackVelocity);
         m_intake.setCRollerVelocity(Constants.Intake.intakeCRollerVelocity);
       } else {
         m_intake.setABRollerVelocity(Constants.Intake.intakeABRollerVelocity);

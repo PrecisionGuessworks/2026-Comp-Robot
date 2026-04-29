@@ -96,14 +96,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "IntakeDeployDef",
-      "waypointRelativePos": 0.01,
-      "endWaypointRelativePos": null,
-      "command": null
-    },
-    {
       "name": "IntakeDeploy",
-      "waypointRelativePos": 0.3761904761904762,
+      "waypointRelativePos": 0.22602739726027427,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
