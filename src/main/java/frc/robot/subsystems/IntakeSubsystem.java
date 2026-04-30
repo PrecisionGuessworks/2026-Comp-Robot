@@ -186,7 +186,7 @@ public class IntakeSubsystem extends SubsystemBase {
     return -m_deployEncoder.getPosition();
   }
   public double RealEncoderPosition() {
-    return Constants.Intake.deployEncoderRatio.sensorRadiansToMechanismPosition(m_deployMotor.getSensorPosition());
+    return -Constants.Intake.deployEncoderRatio.sensorRadiansToMechanismPosition(m_deployEncoder.getPosition());
   }
 
 
@@ -436,7 +436,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
     DogLog.log("Intake/ Attack Mode", m_attackMode);
     DogLog.log("Intake/ Position", Units.metersToInches(getPosition()),"In");
-    DogLog.log("Intake/ Target Position", Units.metersToInches(Constants.Intake.deployMotorRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
+    DogLog.log("Intake/ Target Position", Units.metersToInches(Constants.Intake.deployEncoderRatio.sensorRadiansToMechanismPosition(m_deployMotor.getClosedLoopReference())),"In");
     DogLog.log("Intake/ Target set Position", Units.metersToInches(m_targetPosition),"In");
 
     DogLog.log("Intake/ AB Roller Velocity", getABRollerVelocity(),"Rad/s");
