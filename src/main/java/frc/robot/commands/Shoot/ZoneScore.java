@@ -87,7 +87,7 @@ public class ZoneScore extends Command {
     if(m_timer.get()>0.5||ShootReady){
     m_shooter.setIndexerVelocity(Constants.Shooter.indexerVelocity);
     m_hopper.setHopperRollerVelocity(Constants.Hopper.hopperVelocity);
-    RobotContainer.intake.retractIntakeSlowShoot();
+    // RobotContainer.intake.retractIntakeSlowShoot();
     }
 
     
@@ -114,7 +114,7 @@ public class ZoneScore extends Command {
     // Robot.lights.setPreviousControl();
     m_shooter.setIndexerVelocity(0);
     m_hopper.setHopperRollerVelocity(0);
-    RobotContainer.intake.retractIntakeSlowShootSTOP();
+    // RobotContainer.intake.retractIntakeSlowShootSTOP();
   }
 
   // Returns true when the command should end.

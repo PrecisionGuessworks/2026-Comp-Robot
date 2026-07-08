@@ -59,8 +59,8 @@ public class Constants {
     public static final boolean SimFuel = isSim; // Set to true to enable fuel simulation
     public static final boolean DogLogEnabled = true; // Set to true to enable DogLog telemetry
     public static final boolean DogLogNetworkTables = true; // Set to true to enable DogLog over NetworkTables
-    public static final boolean LogHardware = true; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
-    public static final boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights
+    public static final boolean LogHardware = false; // Set to true to enable hardware logging in DogLog (Should be on unless low on ram/cpu)
+    public static boolean UseRewind = DriverStation.isFMSAttached(); // Records video for robot from the limelights DriverStation.isFMSAttached()
 
     public static final class ShotCalc {
 
@@ -83,15 +83,15 @@ public class Constants {
     // Distance in meters , velocity in rads per second
     static {
         ShotVelocity = new InterpolatingDoubleTreeMap();
-        ShotVelocity.put(0.5, 150.0);
-        ShotVelocity.put(1.0, 155.0);
-        ShotVelocity.put(1.5, 165.0);
-        ShotVelocity.put(2.0, 175.0);
-        ShotVelocity.put(2.5, 185.0);
-        ShotVelocity.put(3.0, 215.0);
-        ShotVelocity.put(3.5, 285.0);
-        ShotVelocity.put(4.0, 335.0);
-        ShotVelocity.put(4.5, 375.0);
+        ShotVelocity.put(0.5, 155.0);
+        ShotVelocity.put(1.0, 170.0);
+        ShotVelocity.put(1.5, 180.0);
+        ShotVelocity.put(2.0, 190.0);
+        ShotVelocity.put(2.5, 200.0);
+        ShotVelocity.put(3.0, 230.0);
+        ShotVelocity.put(3.5, 300.0);
+        ShotVelocity.put(4.0, 350.0);
+        ShotVelocity.put(4.5, 385.0);
         ShotVelocity.put(5.0, 480.0);
         ShotVelocity.put(5.5, 490.0);
     }
@@ -386,7 +386,7 @@ public class Constants {
 
     public static final double retractSlowSpeed = Units.inchesToMeters(0.26); // How many inches per cycle. Should be ~ 50 a sec
     public static final double retractSlowPushSpeed = Units.inchesToMeters(0.4); // How many inches per cycle when pushing out after retracting in slow mode, should be faster than retract slow speed
-    public static final double retractSlowPull = 18;    // How many cycles to retract in when intake slow is called
+    public static final double retractSlowPull = 20;    // How many cycles to retract in when intake slow is called
     public static final double retractSlowPullHold = 2; // How many cycles to hold still after retracting when intake slow is called, before pushing out again
     public static final double retractSlowPush = 8;     // How many cycles to extend out when intake slow is called after pullcount is done 
     public static final double retractSlowPushHold = 20;// How many cycles to hold still after extending when intake slow is called, before allowing retract again
@@ -509,7 +509,7 @@ public class Constants {
 
 
     // public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(.8, .8, 9999999);
-    public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(1, 1, 2);
+    public static final Matrix<N3, N1> LLTagStdDevs = VecBuilder.fill(1, 1, 3);
     
     public static final String kCameraName = "FrontCamera"; // Front
     
@@ -524,7 +524,7 @@ public class Constants {
 
     public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(4, 4, 8); // m, m, rad
     public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
-    public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.3, 0.3, Units.degreesToRadians(0.01));
+    public static final Matrix<N3, N1> ODOM_STD_DEV = VecBuilder.fill(0.3, 0.3, Units.degreesToRadians(0.1));
     
 }
   

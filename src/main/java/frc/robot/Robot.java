@@ -124,7 +124,7 @@ public class Robot extends TimedRobot {
 
       if(limelightMeasurement.tagCount == 1 && limelightMeasurement.rawFiducials.length == 1)
       {
-        if(limelightMeasurement.rawFiducials[0].ambiguity > .7)
+        if(limelightMeasurement.rawFiducials[0].ambiguity > .76)
         {
           doRejectUpdate = true;
         }
@@ -154,7 +154,7 @@ public class Robot extends TimedRobot {
 
       if(limelightMeasurement2.tagCount == 1 && limelightMeasurement2.rawFiducials.length == 1)
       {
-        if(limelightMeasurement2.rawFiducials[0].ambiguity > .7)
+        if(limelightMeasurement2.rawFiducials[0].ambiguity > .76)
         {
           doRejectUpdate2 = true;
         }
@@ -243,11 +243,11 @@ public class Robot extends TimedRobot {
 
     if (Constants.UseRewind) {
       
-       if (m_RewindTimer.hasElapsed(10)) {
+       if (m_RewindTimer.hasElapsed(0.5)) {
         m_RewindTimer.reset();
-        LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName,205);
+        LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName,165);
         if (Constants.Vision.UseLimeLightCamera2) {
-         LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName2,205);
+         LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName2,165);
         }
       }
     }
@@ -276,14 +276,21 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void autonomousExit() {}
+  public void autonomousExit() {
+        if (Constants.UseRewind) {
+        LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName,21);
+        if (Constants.Vision.UseLimeLightCamera2) {
+         LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName2,21);
+        }
+    }
+  }
 
   @Override
   public void teleopInit() {
-    LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
-    if (Constants.Vision.UseLimeLightCamera2) {
-      LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName2, 4);
-    }
+    // LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName, 4);
+    // if (Constants.Vision.UseLimeLightCamera2) {
+    //   LimelightHelpers.SetIMUMode(Constants.Vision.LimeLightCamerName2, 4);
+    // }
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -301,8 +308,14 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopExit() {
 
+    // if (Constants.UseRewind) {
+    //   m_RewindTimer.start();
+    // }
     if (Constants.UseRewind) {
-      m_RewindTimer.start();
+        LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName,165);
+        if (Constants.Vision.UseLimeLightCamera2) {
+         LimelightHelpers.triggerRewindCapture(Constants.Vision.LimeLightCamerName2,165);
+        }
     }
 
   }

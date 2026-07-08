@@ -50,7 +50,7 @@ public class BumpScore extends Command {
     }
     }
     loopCount++;
-    RobotContainer.intake.retractIntakeSlowShoot();
+    // RobotContainer.intake.retractIntakeSlowShoot();
   }
 
   // Called once the command ends or is interrupted.
@@ -60,7 +60,7 @@ public class BumpScore extends Command {
     m_shooter.setHoodAngle(Constants.Shooter.hoodStowAngle);
     m_shooter.setIndexerVelocity(0);
     m_hopper.setHopperRollerVelocity(0);
-    RobotContainer.intake.retractIntakeSlowShootSTOP();
+    // RobotContainer.intake.retractIntakeSlowShootSTOP();
   }
 
   // Returns true when the command should end.
