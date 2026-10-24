@@ -56,8 +56,8 @@ public class ShooterSubsystem extends SubsystemBase {
           Constants.Shooter.indexerMotorRatio,
           QuixTalonFX.makeDefaultConfig()
               .setInverted(Constants.Shooter.indexerMotorInvert)
-              .setSupplyCurrentLimit(40.0)
-              .setStatorCurrentLimit(80.0)
+              .setSupplyCurrentLimit(65.0)
+              .setStatorCurrentLimit(120.0)
               .setPIDConfig(Constants.Shooter.indexerVelocityPIDSlot, Constants.Shooter.indexerVelocityPIDConfig));
 
   private final QuixTalonFX m_hoodMotor =

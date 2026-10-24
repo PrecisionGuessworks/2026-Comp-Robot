@@ -43,7 +43,7 @@ public class HooperOuttake extends Command {
   public void end(boolean interrupted) {
     m_hopper.setHopperRollerVelocity(0);
     m_shooter.setIndexerVelocity(0);
-    m_hopper.setHopperRollerCurrent(55, 30);
+    m_hopper.setHopperRollerCurrent(65, 35);
 
   }
 

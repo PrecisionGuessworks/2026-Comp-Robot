@@ -45,9 +45,9 @@ Rumble:
 
 ----------------------- Operator:
 
-A: Prep Shooter
+X: Prep Shooter
 B: Intake Outtake
-X: Conveyer/Indexer Outtake
+A: Conveyer/Indexer Outtake
 Y: Shoot Safe Override
 
 Left Bumper: Intake Enable Soft Stops / Zero.  UNTESTED!!!!
